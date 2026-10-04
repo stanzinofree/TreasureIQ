@@ -1543,11 +1543,11 @@ export default function Chat() {
       <div className="chat__log" aria-live="polite" ref={logRef}>
         {messages.length === 0 && (
           <div className="chat__empty" aria-labelledby="chat-welcome-title">
-            <p className="chat__empty-eyebrow">ASSISTENTE CIVICO · TIQ</p>
-            <h2 id="chat-welcome-title">Da dove partiamo?</h2>
+            {/* The page hero already says what the service is; this block
+                only gets the first question going, so it stays small. */}
+            <h2 id="chat-welcome-title">Prova con una domanda</h2>
             <p className="chat__empty-copy">
-              Scrivi una situazione concreta. Ti aiuto a trovare il servizio
-              giusto, nel comune giusto, con la fonte sempre in vista.
+              Puoi nominare il comune nella domanda o sceglierlo qui sopra.
             </p>
             <div className="chat__suggestions" aria-label="Domande suggerite">
               {[

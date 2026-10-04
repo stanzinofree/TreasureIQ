@@ -6723,204 +6723,311 @@ a {
 }
 
 /* -------------------------------------------------------------------------
-   Civic playful refresh
+   Launch pass: sober, warm, readable
 
-   Evidence-first content stays intact; this layer makes the product warmer,
-   younger and more tactile without changing component or API contracts.
+   Replaces the "civic playful" layer (gradients, blobs, violet/coral wash).
+   Flat paper, deep-green ink, one highlighter yellow used as a fill under
+   dark text, violet kept for links and focus. Evidence styling from earlier
+   layers (state bar on the assistant bubble, source chips) is left to show
+   through: provenance must stay the loudest thing in an answer.
 */
+/* Earlier layers still reference the playful tokens; point them at the
+   sober palette instead of leaving them undefined. */
 :root {
-  --accent-violet: #b26bf5;
-  --accent-violet-wash: #f3e8ff;
-  --accent-coral: #ee5968;
-  --accent-yellow: #ffe747;
-  --accent-teal: #4ad5e8;
-  --ink-shadow: rgba(26, 51, 0, 0.12);
+  --accent-violet: var(--sumi);
+  --accent-violet-wash: var(--paper-sunken);
+  --accent-coral: var(--shu);
+  --accent-yellow: var(--yamabuki);
+  --accent-teal: var(--ai-vivid-deep);
+  --ink-shadow: rgba(26, 51, 0, 0.08);
 }
 
 body {
-  background-image: radial-gradient(
-    circle at 1px 1px,
-    rgba(26, 51, 0, 0.035) 1px,
-    transparent 0
-  );
-  background-size: 24px 24px;
+  background-image: none;
 }
 
+/* Masthead: full-bleed, flat, one row on desktop. */
 .masthead {
   background: var(--paper);
-  background: color-mix(in srgb, var(--paper) 94%, white);
-  border-bottom-color: transparent;
+  border-bottom: 1px solid var(--kasumi);
 }
 
 .masthead__inner {
-  margin-top: var(--ma-2);
-  padding: var(--ma-2) var(--ma-4);
-  border: 1px solid var(--kasumi);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.86);
-  box-shadow: 0 2px 10px rgba(26, 51, 0, 0.05);
+  flex-wrap: nowrap;
+  gap: var(--ma-6);
+  padding: var(--ma-2) var(--ma-6);
 }
 
-.wordmark {
-  letter-spacing: -0.03em;
+.nav {
+  flex-wrap: nowrap;
+  gap: var(--ma-6);
 }
 
-.wordmark__iq {
-  color: var(--accent-violet);
+.nav a,
+.nav-tecnica > summary {
+  color: var(--sumi-soft);
+  font-size: 0.94rem;
 }
 
 .nav a:hover,
 .nav a[aria-current="page"] {
-  border-bottom-color: var(--accent-violet);
+  color: var(--sumi);
+  border-bottom-color: var(--yamabuki);
 }
 
-.status-pill {
-  background: var(--accent-violet-wash);
-  border-color: #dab2ff;
-  color: var(--ai-deep);
-}
-
-.hero-band {
+/* Technical area: native <details>, so it opens with Enter/Space, closes
+   with a second toggle and needs no script. Pushed to the far end of the nav
+   so it reads as secondary. */
+.nav-tecnica {
   position: relative;
-  overflow: hidden;
-  margin-inline: calc(-1 * var(--ma-4));
-  padding: clamp(3rem, 8vw, 6rem) var(--ma-6) clamp(2.5rem, 6vw, 4.5rem);
-  background:
-    radial-gradient(circle at 82% 18%, rgba(247, 136, 210, 0.5), transparent 27%),
-    radial-gradient(circle at 14% 90%, rgba(74, 213, 232, 0.38), transparent 25%),
-    linear-gradient(135deg, #1a3300 0%, #33205b 58%, #b05278 100%);
-  color: var(--paper);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 0 10px 24px rgba(26, 51, 0, 0.14);
+  margin-left: auto;
 }
 
-.hero-band::before {
-  content: "CITTADINI · DATI · OPPORTUNITÀ";
-  position: absolute;
-  top: 18px;
-  left: 24px;
-  padding: 6px 10px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.14);
-  color: rgba(255, 253, 247, 0.86);
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-}
-
-.hero-band::after {
-  content: "";
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  right: 8%;
-  bottom: -100px;
-  border-radius: 50%;
-  background: var(--accent-yellow);
-  opacity: 0.9;
-  transform: rotate(-12deg);
-}
-
-.hero-band__inner {
-  position: relative;
-  z-index: 1;
-  max-width: 860px;
-}
-
-.hero-band .hero-claim,
-.hero-band .hero-eyebrow {
+.nav-tecnica > summary {
   display: inline-flex;
   align-items: center;
-  padding: 6px 12px;
-  border-radius: 9999px;
-  background: var(--accent-yellow);
-  color: var(--accent-yellow);
-  color: var(--sumi);
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: none;
+  gap: var(--ma-1);
+  list-style: none;
+  cursor: pointer;
+  padding: var(--ma-1) var(--ma-2);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
 }
 
-.hero-band h1 {
-  color: #fffdf7;
-  font-size: clamp(2.5rem, 6.5vw, 4.5rem);
-  letter-spacing: -0.04em;
-}
-
-.hero-band .lede {
-  color: rgba(255, 253, 247, 0.86);
-  max-width: 720px;
-}
-
-.workspace__main:has(.bubble) .hero-band {
-  border-radius: 16px;
-  min-height: 150px;
-  padding: 2.6rem var(--ma-6) var(--ma-5);
-}
-
-.workspace__main:has(.bubble) .hero-band::before {
-  top: 12px;
-  left: 20px;
-}
-
-.workspace__main:has(.bubble) .hero-band::after {
-  width: 120px;
-  height: 120px;
-  right: 3%;
-  bottom: -76px;
-}
-
-.workspace__main:has(.bubble) .hero-band h1 {
-  max-width: 760px;
-  margin-inline: auto;
-  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
-}
-
-.bubble--user {
-  background: var(--accent-violet-wash);
-  border: 1px solid #dab2ff;
-  box-shadow: none;
-}
-
-.bubble--assistant {
-  border: 1px solid var(--kasumi);
-  border-left: 6px solid var(--accent-teal);
-  border-radius: 16px;
-  box-shadow: 0 3px 12px var(--ink-shadow);
-}
-
-.bubble.bubble--assistant::before {
+.nav-tecnica > summary::-webkit-details-marker {
   display: none;
 }
 
-.bubble--assistant:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 7px 20px rgba(26, 51, 0, 0.14);
+.nav-tecnica > summary::after {
+  content: "";
+  width: 0.45em;
+  height: 0.45em;
+  margin-left: 2px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
 }
 
-.chat__hint {
-  padding: var(--ma-3) var(--ma-4);
+.nav-tecnica[open] > summary::after {
+  transform: translateY(1px) rotate(-135deg);
+}
+
+.nav-tecnica > summary:hover,
+.nav-tecnica[open] > summary {
+  color: var(--sumi);
+  background: var(--paper-sunken);
+}
+
+.nav-tecnica__menu {
+  position: absolute;
+  top: calc(100% + var(--ma-2));
+  right: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--ma-1);
+  min-width: 15rem;
+  padding: var(--ma-3);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  box-shadow: var(--elev-2);
+}
+
+.nav-tecnica__menu a {
+  padding: var(--ma-2);
+  border-bottom: 0;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.nav-tecnica__menu a:hover {
+  background: var(--paper-sunken);
+}
+
+.nav-tecnica__menu .status-pill {
+  justify-content: flex-start;
+  margin-bottom: var(--ma-2);
+  padding: var(--ma-2) var(--ma-3);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--sumi);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+/* Hero: a welcome, not a billboard. Left-aligned like the conversation it
+   introduces, and short enough that the examples and the composer sit in the
+   first desktop screen. */
+.hero-band {
+  margin: 0;
+  padding: clamp(1.5rem, 4vw, 3rem) 0 var(--ma-6);
+  background: none;
+  color: var(--sumi);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.hero-band::before,
+.hero-band::after {
+  content: none;
+}
+
+.hero-band__inner {
+  max-width: 46rem;
+  margin: 0;
+  text-align: left;
+}
+
+.hero-band h1 {
+  color: var(--sumi);
+  font-size: clamp(1.9rem, 4.2vw, 2.9rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+/* Highlighter stroke: a flat fill under ink (yellow is never text). An inset
+   shadow rather than a gradient, cloned per line when the phrase wraps. */
+.hero-band__evidenza {
+  box-shadow: inset 0 -0.36em 0 var(--yamabuki);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding-inline: 0.08em;
+}
+
+.hero-band .lede {
+  margin: var(--ma-4) 0 0;
+  color: var(--sumi-soft);
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
+  max-width: 40rem;
+}
+
+.hero-band__limiti {
+  margin-top: var(--ma-3);
+  padding-left: var(--ma-3);
+  border-left: 3px solid var(--kasumi);
+  /* sumi-soft, not sumi-faint: faint measured 4.02:1 on paper at this size,
+     under AA 4.5:1. */
+  color: var(--sumi-soft);
+  font-size: 0.88rem;
+}
+
+/* Once the conversation starts the welcome steps aside completely: the
+   question and its answer are the page. */
+.workspace__main:has(.bubble) .hero-band {
+  display: none;
+}
+
+/* Comune chooser: left-aligned under the hero, quiet buttons. */
+.locate {
+  justify-content: flex-start;
+}
+
+.locate__button {
+  background: var(--paper-raised);
+  color: var(--sumi);
+  border: 1px solid var(--sumi);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.66);
+}
+
+.locate__button:hover {
+  background: var(--paper-sunken);
+}
+
+.locate__button--secondario {
+  border-color: var(--kasumi);
   color: var(--sumi-soft);
 }
 
+.locate .scelta-comune {
+  justify-content: flex-start;
+}
+
+.locate .scelta-comune__esiti {
+  left: 0;
+  transform: none;
+}
+
+/* Welcome block: examples only, flat. */
+.chat__empty {
+  overflow: visible;
+  padding: var(--ma-6) 0 0;
+  border: 0;
+  border-top: 1px solid var(--kasumi);
+  border-radius: 0;
+  background: none;
+  text-align: left;
+}
+
+.chat__empty::after {
+  content: none;
+}
+
+.chat__empty h2 {
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.chat__empty-copy {
+  margin: var(--ma-1) 0 0;
+  font-size: 0.94rem;
+}
+
+.chat__suggestions {
+  justify-content: flex-start;
+  margin-top: var(--ma-4);
+}
+
+.chat__suggestion {
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  text-align: left;
+}
+
+.chat__suggestion:hover,
+.chat__suggestion:focus-visible {
+  border-color: var(--sumi);
+  background: var(--paper-raised);
+  transform: none;
+}
+
+.chat__log {
+  padding-inline: 0;
+}
+
+/* Bubbles: user on a sunken tint, assistant keeps the earlier evidence frame
+   (ink border + state bar). No hover lift: an answer is not a button. */
+.bubble--user {
+  background: var(--paper-sunken);
+  border: 1px solid var(--kasumi);
+  box-shadow: none;
+}
+
+.bubble--assistant:hover {
+  transform: none;
+}
+
+/* Composer: solid surface, no blur. */
 .chat__form {
   background: var(--paper);
-  background: color-mix(in srgb, var(--paper) 92%, transparent);
-  backdrop-filter: blur(8px);
-  border-top: 1px solid rgba(216, 216, 202, 0.8);
+  border-top: 1px solid var(--kasumi);
 }
 
 .chat__row {
   padding: var(--ma-2);
-  border: 1px solid var(--kasumi);
-  border-radius: 16px;
+  border: 1.5px solid var(--sumi);
+  border-radius: var(--radius);
   background: var(--paper-raised);
-  box-shadow: 0 4px 14px rgba(26, 51, 0, 0.08);
+  box-shadow: none;
+}
+
+.chat__row:focus-within {
+  outline: 3px solid var(--ai);
+  outline-offset: 2px;
 }
 
 .chat__input {
@@ -6930,63 +7037,98 @@ body {
 }
 
 .chat__input:focus-visible {
-  border-color: transparent;
-  outline-offset: -2px;
+  outline: none;
 }
 
 .button {
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   background: var(--sumi);
   color: var(--paper);
-  box-shadow: 0 2px 0 rgba(26, 51, 0, 0.18);
+  box-shadow: none;
 }
 
 .button:hover {
-  background: #315500;
+  background: #2d4f0e;
 }
 
-.locate__button {
-  background: var(--accent-teal);
-  color: var(--sumi);
-}
-
-.locate__button--secondario {
-  background: var(--paper-raised);
+.conversation-cookie-banner {
   border-color: var(--kasumi);
+  background: var(--paper-raised);
 }
 
-.tiq-card,
-.card-comune.tiq-card {
-  border-radius: 16px;
-  box-shadow: var(--shadow-rest);
+/* Panel: flat card on desktop. */
+.pannello {
+  background: var(--paper-raised);
+  box-shadow: none;
 }
 
-.civica__cta,
-.tiq-cta {
-  border-radius: 12px;
-  background: var(--accent-coral);
-  border-color: var(--accent-coral);
-  color: #fffdf7;
+.pannello__indice a:hover,
+.pannello__indice a:focus-visible {
+  background: var(--paper-sunken);
+  color: var(--sumi);
+  transform: none;
 }
 
-.civica__cta:hover,
-.tiq-cta:hover {
-  background: #d84556;
+/* Narrow screens. `.workspace:has(.pannello)` (0,2,0) outranked the
+   single-column rule in the 1024px block (0,1,0), so the two-track grid
+   survived on phones and squeezed contacts to one character per line. Repeat
+   the selector here so the media query wins. */
+@media (max-width: 1024px) {
+  .workspace,
+  .workspace:has(.pannello) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Before the first question the panel confirms the chosen comune, so it
+     stays on top; once there is an answer, the conversation comes first and
+     the comune card follows it. */
+  .workspace:has(.bubble) .pannello {
+    order: 2;
+  }
+
+  .pannello {
+    padding: var(--ma-4);
+    border: 1px solid var(--kasumi);
+    border-radius: var(--radius);
+  }
+}
+
+@media (max-width: 760px) {
+  .masthead__inner {
+    flex-wrap: wrap;
+    row-gap: var(--ma-1);
+    padding: var(--ma-2) var(--ma-4);
+  }
+
+  /* The old six-link row scrolled sideways (overflow-x: auto), which also
+     clipped the technical menu hanging below it. Three items fit, so the
+     row no longer scrolls and the dropdown can escape it. */
+  .nav {
+    order: 3;
+    flex-basis: 100%;
+    gap: var(--ma-4);
+    overflow: visible;
+    margin: 0;
+    padding-inline: 0;
+  }
+
+  .nav-tecnica__menu {
+    right: 0;
+    max-width: calc(100vw - 2 * var(--ma-4));
+  }
 }
 
 @media (max-width: 640px) {
-  .hero-band {
-    margin-inline: calc(-1 * var(--ma-4));
-    border-radius: 0 0 24px 24px;
+  .hero-band h1 {
+    font-size: 1.7rem;
   }
 
-  .hero-band::before {
-    left: 16px;
-    font-size: 0.56rem;
+  .chat__suggestion {
+    width: 100%;
+    justify-content: space-between;
   }
 
-  .masthead__inner,
-  .chat__row {
-    border-radius: 12px;
+  .bubble--user {
+    max-width: 92%;
   }
 }

@@ -37,7 +37,7 @@ def _args(cat: Path, **over) -> argparse.Namespace:
     base = dict(
         canary=False, per_piattaforma=2, limit=None, max_per_run=None,
         piattaforma=None, delay=0.0,
-        checkpoint=None, resume=False, dry_run=False,
+        checkpoint=None, resume=False, retry_vuoti=False, dry_run=False,
         catalog=cat, db=Path("/nonexistent/storico.db"),
     )
     base.update(over)
@@ -150,6 +150,33 @@ def test_resume_salta_completati(tmp_path, monkeypatch):
     assert set(fatti2).isdisjoint(fatti1)               # never re-fetch a completed comune
     assert set(fatti1) | set(fatti2) == set(congelata)  # together finish the frozen selection
     assert len(fatti2) == 3
+
+
+def test_retry_vuoti_riapre_solo_i_vuoti_e_salva_prima_del_fetch(tmp_path, monkeypatch):
+    cat = _scena(tmp_path)
+    cp = tmp_path / "bootstrap.json"
+    selezione = ["000000", "000001", "000002"]
+    registro_cli._bootstrap_salva_checkpoint(
+        cp, avviato_il="2026-10-04T00:00:00+00:00", selezione=selezione,
+        arruolati={"000000"}, vuoti={"000001"}, errori=[], totale_candidati=3,
+    )
+    visti = []
+
+    def scan(istat):
+        visti.append(istat)
+        # La riapertura e' gia' durevole prima del primo fetch.
+        assert json.loads(cp.read_text("utf-8"))["vuoti"] == []
+        return "ok", f"{istat} — ok"
+
+    monkeypatch.setattr(registro_cli, "_scansiona_uno", scan)
+    rc = registro_cli.cmd_bootstrap(_args(cat, checkpoint=cp, resume=True,
+                                           retry_vuoti=True, max_per_run=1))
+    assert rc == registro_cli.BOOTSTRAP_OK
+    assert visti == ["000001"]
+    dati = json.loads(cp.read_text("utf-8"))
+    assert dati["arruolati"] == ["000000", "000001"]
+    assert dati["vuoti"] == []
+    assert "000002" in dati["selezione"]
 
 
 def test_resume_canary_dopo_stop_usa_selezione_congelata(tmp_path, monkeypatch):

@@ -26,7 +26,6 @@ già pronta e non deve dipendere da questa lettura.
 
 from __future__ import annotations
 
-import json
 import logging
 import os
 import re
@@ -34,14 +33,20 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from treasureiq.alberatura import _decodifica_bytes
-from treasureiq.connettore import Responsabile
+from treasureiq.connettore import PersonaUfficio, Responsabile
 from treasureiq.ingest.censimento import estrai_orari_da_testo
 from treasureiq.ingest.host_guard import fetch_guardato, host_senza_www
 from treasureiq.orari_schema import OrarioSettimanale, estrai_orario_strutturato
-from treasureiq.ufficio_estrattori import estrai_indirizzo, estrai_responsabile
+from treasureiq.ufficio_estrattori import (
+    estrai_indirizzo,
+    estrai_persone,
+    estrai_recapiti,
+    estrai_responsabile,
+    persone_ispezionate,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -61,7 +66,15 @@ GIORNI_VALIDITA = 6
 #: 2 = `pagina_letta` (Ramo 1, Slice 2): distingue una pagina davvero raggiunta
 #:     da una fetch fallita — le voci v1 non hanno il bit, vanno rilette una volta
 #:     perché un `False` stantio direbbe «mai ispezionata» dove invece lo era.
-VERSIONE_ESTRATTORI = 2
+#: 3 = persone, recapiti diretti e sede dalla scheda WordPress AgID.
+#: 4 = secondo markup WordPress AgID per le persone (es. Albano Laziale).
+#: 5 = prova esplicita che la sezione persone è stata ispezionata.
+#: 6 = elenco persone OpenWeb e PeopleWeb vendor OpenWeb.NET.
+#: 7 = elenco persone OpenPA e Municipium.
+#: 8 = elenco persone Drupal e Magnolia.
+#: 9 = responsabile singolare solo dove la scheda lo indica senza ambiguità.
+#: 10 = ruolo Magnolia dalla sezione esplicita con lo stesso link persona.
+VERSIONE_ESTRATTORI = 10
 
 #: Tetto sui byte scaricati dalla pagina dell'ufficio (guardia, non un dato).
 MAX_BYTES_PAGINA = 2_000_000
@@ -93,6 +106,10 @@ class OrariUfficio(BaseModel):
     #: resta sempre `None` (mai pubblicata dai portali).
     indirizzo: str | None = None
     responsabile: Responsabile | None = None
+    persone: list[PersonaUfficio] = Field(default_factory=list)
+    persone_ispezionate: bool = False
+    telefoni: list[str] = Field(default_factory=list)
+    email: list[str] = Field(default_factory=list)
     #: La pagina-dettaglio è stata DAVVERO raggiunta e parsata (Slice 2). Falso
     #: quando la fetch è fallita (rete/SSRF/timeout): la voce esiste comunque —
     #: con tutti i campi `None` — ma non è mai stata ispezionata. È il segnale che
@@ -197,6 +214,10 @@ def leggi_orari_ufficio(
     schema: OrarioSettimanale | None = None
     indirizzo: str | None = None
     responsabile: Responsabile | None = None
+    persone: list[PersonaUfficio] = []
+    persone_verificate = False
+    telefoni: list[str] = []
+    email: list[str] = []
     pagina_letta = False
     try:
         esito = fetch_guardato(
@@ -221,6 +242,11 @@ def leggi_orari_ufficio(
             # leggono indirizzo e responsabile dallo stesso HTML già scaricato.
             indirizzo = estrai_indirizzo(pagina, piattaforma=piattaforma)
             responsabile = estrai_responsabile(pagina, piattaforma=piattaforma)
+            persone = estrai_persone(pagina, piattaforma=piattaforma, url=url)
+            persone_verificate = persone_ispezionate(
+                pagina, piattaforma=piattaforma, persone=persone
+            )
+            telefoni, email = estrai_recapiti(pagina, piattaforma=piattaforma)
     except Exception:  # noqa: BLE001 — risorsa muta: esito negativo, mai un crash
         logger.info("lettura orari-ufficio fallita: %s", url)
 
@@ -232,6 +258,10 @@ def leggi_orari_ufficio(
         orario_schema=schema,
         indirizzo=indirizzo,
         responsabile=responsabile,
+        persone=persone,
+        persone_ispezionate=persone_verificate,
+        telefoni=telefoni,
+        email=email,
         pagina_letta=pagina_letta,
         versione=VERSIONE_ESTRATTORI,
         letto_il=datetime.now(timezone.utc).isoformat(),

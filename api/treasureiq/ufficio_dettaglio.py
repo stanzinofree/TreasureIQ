@@ -50,6 +50,7 @@ class UfficioArricchito:
     #: `False` — URP di ripiego, famiglia senza estrattore, fetch fallita — vuol
     #: dire «mai verificato», e a valle il campo resta semplicemente nascosto.
     responsabile_ispezionato: bool = False
+    persone_ispezionate: bool = False
 
 
 def arricchisci_ufficio(
@@ -94,6 +95,12 @@ def arricchisci_ufficio(
         aggiornamento["indirizzo"] = letto.indirizzo
     if letto is not None and letto.responsabile is not None:
         aggiornamento["responsabile"] = letto.responsabile
+    if letto is not None and letto.persone:
+        aggiornamento["persone"] = letto.persone
+    if letto is not None and letto.telefoni:
+        aggiornamento["telefoni"] = letto.telefoni
+    if letto is not None and letto.email:
+        aggiornamento["email"] = letto.email
 
     # Segnale onesto (Slice 2): il responsabile è «verificato assente» solo se la
     # pagina è stata davvero raggiunta E la famiglia ha un estrattore responsabile.
@@ -104,10 +111,20 @@ def arricchisci_ufficio(
         and letto.pagina_letta
         and (piattaforma or "") in _RESP_PER_FAMIGLIA
     )
+    persone_ispezionate = (
+        letto is not None
+        and letto.pagina_letta
+        and letto.persone_ispezionate
+        and piattaforma in {
+            "wordpress_agid", "openweb", "peopleweb", "openpa", "municipium",
+            "drupal", "magnolia",
+        }
+    )
 
     arricchito = ufficio.model_copy(update=aggiornamento)
     return UfficioArricchito(
         ufficio=arricchito,
         orari_fonte=fonte,
         responsabile_ispezionato=responsabile_ispezionato,
+        persone_ispezionate=persone_ispezionate,
     )

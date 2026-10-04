@@ -13,6 +13,7 @@ from types import SimpleNamespace
 import pytest
 
 import treasureiq.connettore as connettore_mod
+from treasureiq import registro_cli
 from treasureiq.catalog import recognition_adapter as recognition_adapter_mod
 from treasureiq.connettore import (
     AmministrazioneTrasparente,
@@ -70,6 +71,34 @@ class _SondaFinta:
 
     def risposta(self, url: str) -> _RispostaFinta:
         return _RispostaFinta(headers={"server": "municipium"}, text="<html></html>")
+
+
+def test_bootstrap_puo_ritentare_un_errore_di_lettura(monkeypatch):
+    class SondaGuasta(_SondaFinta):
+        def risposta(self, url: str) -> _RispostaFinta:
+            raise TimeoutError("portale temporaneamente lento")
+
+    monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda _codice: _comune())
+    monkeypatch.setattr(connettore_mod, "_Sonda", SondaGuasta)
+
+    # Il chiamante ordinario continua a degradare a None; il bootstrap puo'
+    # conservare l'errore come ritentabile invece di archiviarlo come vuoto.
+    assert leggi_connettore(ISTAT, usa_cache=False) is None
+    with pytest.raises(TimeoutError, match="temporaneamente lento"):
+        leggi_connettore(ISTAT, usa_cache=False, segnala_errore=True)
+
+
+def test_scansione_bootstrap_classifica_errore_ritentabile(monkeypatch):
+    monkeypatch.setattr(registro_cli, "comune_per_codice", lambda _istat: None)
+
+    def lettura_guasta(_istat, **kwargs):
+        assert kwargs == {"usa_cache": False, "segnala_errore": True}
+        raise TimeoutError("portale temporaneamente lento")
+
+    monkeypatch.setattr(registro_cli, "leggi_connettore", lettura_guasta)
+    stato, riga = registro_cli._scansiona_uno("007017")
+    assert stato == "errore"
+    assert "temporaneamente lento" in riga
 
 
 # --- Estensione Ramo 1: indirizzo + responsabile (additivi) -----------
@@ -398,12 +427,11 @@ def test_dispatcher_piattaforma_non_municipium_ritorna_none(
     monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
     monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
     monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
-    # DRUPAL: nessun connettore la legge (a differenza di WORDPRESS_GENERICO,
-    # ora instradata su `wordpress_agid.leggi_wordpress_agid`, D-09).
+    # Una piattaforma senza lettore resta un miss esplicito.
     monkeypatch.setattr(
         recognition_adapter_mod, "firma_da_registro",
         lambda **_kw: Firma(
-            piattaforma=Piattaforma.DRUPAL, prova="drupal"
+            piattaforma=Piattaforma.JOOMLA, prova="joomla"
         ),
     )
 

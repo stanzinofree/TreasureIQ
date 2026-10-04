@@ -198,10 +198,38 @@ export default function RispostaCivica({
           <h4>Ufficio competente</h4>
           <p className="civica__ufficio">{office.nome}</p>
 
+          {office.persone && office.persone.length > 0 && (
+            <div className="civica__persone">
+              <span className="civica__responsabile-label">Persone indicate dal Comune</span>
+              <ul>
+                {office.persone.map((persona) => (
+                  <li key={persona.url ?? persona.nome}>
+                    {persona.url ? (
+                      <a href={persona.url}>{persona.nome}</a>
+                    ) : (
+                      <span>{persona.nome}</span>
+                    )}
+                    {persona.ruolo && <span> — {persona.ruolo}</span>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {office.persone_ispezionate && !office.persone?.length && (
+            <p className="civica__responsabile civica__responsabile--assente">
+              <span className="civica__responsabile-label">Persone</span>
+              <span className="civica__responsabile-assente">
+                non indicate nella scheda dell’ufficio
+              </span>
+            </p>
+          )}
+
           {/* Chi risponde dell'ufficio (accountability, Ramo 1). Best-effort:
               solo dove la scheda lo pubblica, mai inferito (D-07). `email`
               personale non è quasi mai pubblicata → di norma nome + ruolo. */}
-          {office.responsabile && (
+          {office.responsabile && !office.persone?.some(
+            (persona) => persona.nome === office.responsabile?.nome
+          ) && (
             <p className="civica__responsabile">
               <span className="civica__responsabile-label">Responsabile</span>
               <span className="civica__responsabile-nome">

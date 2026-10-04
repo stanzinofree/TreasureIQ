@@ -5058,6 +5058,16 @@ a {
   color: var(--sumi-faint);
 }
 
+.civica__persone {
+  margin: 0 0 var(--ma-2);
+  font-size: 0.9rem;
+}
+
+.civica__persone ul {
+  margin: var(--ma-2) 0 0;
+  padding-left: 1.25rem;
+}
+
 .civica__responsabile-nome {
   font-weight: 600;
 }

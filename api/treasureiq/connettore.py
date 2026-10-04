@@ -55,6 +55,18 @@ class Responsabile(BaseModel):
     email: str | None = None
 
 
+class PersonaUfficio(BaseModel):
+    """Persona associata all'ufficio, col ruolo verbatim pubblicato dal Comune.
+
+    L'ordine della pagina non implica gerarchia: più «Referente» restano più
+    persone, senza scegliere un responsabile principale.
+    """
+
+    nome: str = Field(min_length=1)
+    ruolo: str | None = None
+    url: str | None = None
+
+
 class UfficioConnettore(BaseModel):
     """Un ufficio letto dal connettore, coi suoi recapiti verbatim (D-07:
     nessuna cifra passa da un LLM). `source_typed` distingue un recapito
@@ -75,6 +87,7 @@ class UfficioConnettore(BaseModel):
     letto_il: str
     indirizzo: str | None = None
     responsabile: Responsabile | None = None
+    persone: list[PersonaUfficio] = Field(default_factory=list)
 
 
 class BandoAT(BaseModel):
@@ -278,6 +291,8 @@ PIATTAFORME_REFRESH: frozenset[str] = frozenset(
         Piattaforma.COMUNIBOOTSTRAPITALIA.value,
         Piattaforma.COMWEB.value,
         Piattaforma.OPENPA.value,
+        Piattaforma.DRUPAL.value,
+        Piattaforma.MAGNOLIA.value,
     }
 )
 
@@ -336,6 +351,10 @@ def refresh_dati_connettore(
             elif piattaforma == Piattaforma.OPENPA.value:
                 from treasureiq.openpa import leggi_openpa
                 esito = leggi_openpa(comune, sonda)
+            elif piattaforma in {Piattaforma.DRUPAL.value, Piattaforma.MAGNOLIA.value}:
+                from treasureiq.portali_uffici import leggi_drupal, leggi_magnolia
+                lettore = leggi_drupal if piattaforma == Piattaforma.DRUPAL.value else leggi_magnolia
+                esito = lettore(comune, sonda, timeout=timeout)
             else:
                 logger.info("refresh dati non supportato per piattaforma %s", piattaforma)
                 return precedente
@@ -407,13 +426,15 @@ def _in_check_store(result: object) -> None:
 
 
 def leggi_connettore(
-    codice_istat: str, *, usa_cache: bool = True, timeout: float = 8.0
+    codice_istat: str, *, usa_cache: bool = True, timeout: float = 8.0,
+    segnala_errore: bool = False,
 ) -> EsitoConnettore | None:
     """Il connettore di un comune, letto dal vivo o servito dallo store.
 
     `None` se il comune non è noto o non ha sito, o se la piattaforma non ha
-    (ancora) un connettore che sa leggerla — deferred, non un guasto: WP,
-    Halley, AgID aggiungeranno la loro entry senza toccare questa firma.
+    (ancora) un connettore che sa leggerla — deferred, non un guasto. Il
+    bootstrap usa `segnala_errore` per distinguere un guasto di lettura da un
+    esito davvero vuoto e ritentarlo nel checkpoint.
     """
     if usa_cache:
         cache = _da_store(codice_istat)
@@ -523,10 +544,16 @@ def leggi_connettore(
                     logger.info("connettore OpenPA non ancora disponibile")
                     return None
                 esito = leggi_openpa(comune, sonda)
+            elif firma.piattaforma in (Piattaforma.DRUPAL, Piattaforma.MAGNOLIA):
+                from treasureiq.portali_uffici import leggi_drupal, leggi_magnolia
+                lettore = leggi_drupal if firma.piattaforma == Piattaforma.DRUPAL else leggi_magnolia
+                esito = lettore(comune, sonda, timeout=timeout, home_html=risposta.text)
             else:
                 return None
-    except Exception:  # noqa: BLE001 — portale muto: esito assente, mai un crash
-        logger.warning("connettore illeggibile per %s", codice_istat)
+    except Exception:  # noqa: BLE001 — lettura normale degrada; bootstrap ritenta
+        logger.warning("connettore illeggibile per %s", codice_istat, exc_info=True)
+        if segnala_errore:
+            raise
         return None
 
     if esito is None:

@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from treasureiq.api import to_info_out
 from treasureiq.chat.respond import InfoAnswer, OfficeAnswer
-from treasureiq.connettore import Responsabile
+from treasureiq.connettore import PersonaUfficio, Responsabile
 
 
 def _info(office: OfficeAnswer) -> InfoAnswer:
@@ -63,6 +63,18 @@ def test_office_out_absent_fields_are_none_not_invented():
     assert out.office is not None
     assert out.office.indirizzo is None
     assert out.office.responsabile is None
+    assert out.office.persone_ispezionate is False
+
+
+def test_office_out_carries_verified_absence_of_people():
+    office = OfficeAnswer(
+        nome="Ufficio prova", telefono=None, email=None, orari=None,
+        persone_ispezionate=True,
+    )
+    out = to_info_out(_info(office))
+    assert out.office is not None
+    assert out.office.persone == []
+    assert out.office.persone_ispezionate is True
 
 
 def test_office_out_carries_responsabile_ispezionato_true():
@@ -93,3 +105,20 @@ def test_office_out_responsabile_ispezionato_defaults_false():
 
     assert out.office is not None
     assert out.office.responsabile_ispezionato is False
+
+
+def test_office_out_carries_all_people_without_promoting_a_lead():
+    office = OfficeAnswer(
+        nome="Anagrafe", telefono=None, email=None, orari=None,
+        persone=[
+            PersonaUfficio(nome="Emiliano Armini", ruolo="Referente", url="https://comune.example.it/emiliano"),
+            PersonaUfficio(nome="Simonetta Caramignoli", ruolo="Referente", url="https://comune.example.it/simonetta"),
+        ],
+    )
+    out = to_info_out(_info(office))
+    assert out.office is not None
+    assert [(p.nome, p.ruolo) for p in out.office.persone] == [
+        ("Emiliano Armini", "Referente"),
+        ("Simonetta Caramignoli", "Referente"),
+    ]
+    assert out.office.responsabile is None

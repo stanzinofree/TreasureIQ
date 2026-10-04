@@ -73,6 +73,24 @@ def test_pagina_con_orari_estrae_e_mette_in_cache(
     assert len(chiamate) == 1
 
 
+def test_scheda_wordpress_persone_e_recapiti_nella_cache(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(ou, "LIVE_DIR", tmp_path)
+    pagina = (Path(__file__).parent / "fixtures" / "wordpress_agid_poggio_mirteto_anagrafe.html").read_text()
+    chiamate: list[str] = []
+    monkeypatch.setattr(ou, "fetch_guardato", _stub_fetch(pagina, chiamate=chiamate))
+    url = "https://comune.poggiomirteto.ri.it/amministrazione/unita_organizzativa/anagrafe/"
+    prima = ou.leggi_orari_ufficio(codice_istat="057051", url=url, piattaforma="wordpress_agid")
+    seconda = ou.leggi_orari_ufficio(codice_istat="057051", url=url, piattaforma="wordpress_agid")
+    assert prima is not None and seconda is not None
+    assert [p.nome for p in seconda.persone] == ["Emiliano Armini", "Simonetta Caramignoli"]
+    assert seconda.telefoni == ["+390765545209", "+390765545230"]
+    assert seconda.email == ["anagrafe.statocivile@comune.poggiomirteto.ri.it"]
+    assert seconda.indirizzo == "Piazza Martiri della Libertà n. 40"
+    assert seconda.persone_ispezionate is True
+    assert len(chiamate) == 1
+
 def test_pagina_senza_orari_cache_negativa(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -87,6 +105,20 @@ def test_pagina_senza_orari_cache_negativa(
     # Anche il negativo va in cache: non si ri-sonda il comune a ogni domanda.
     ou.leggi_orari_ufficio(codice_istat="058003", url=URL_UFFICIO)
     assert len(chiamate) == 1
+
+
+def test_pagina_wordpress_senza_persone_verifica_assenza(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(ou, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(ou, "fetch_guardato", _stub_fetch("<html></html>", chiamate=[]))
+    voce = ou.leggi_orari_ufficio(
+        codice_istat="058003", url=URL_UFFICIO, piattaforma="wordpress_agid"
+    )
+    assert voce is not None
+    assert voce.pagina_letta is True
+    assert voce.persone == []
+    assert voce.persone_ispezionate is True
 
 
 def test_pagina_irraggiungibile_degrada_a_none(
@@ -161,7 +193,7 @@ def test_cache_versione_vecchia_rilegge(
 
 def test_office_da_ufficio_nominato_sostituisce_urp(monkeypatch: pytest.MonkeyPatch) -> None:
     import treasureiq.chat.respond as respond
-    from treasureiq.connettore import EsitoConnettore, UfficioConnettore
+    from treasureiq.connettore import EsitoConnettore, PersonaUfficio, UfficioConnettore
     from treasureiq.chat.intent import Topic
 
     ufficio = UfficioConnettore(
@@ -205,6 +237,13 @@ def test_office_da_ufficio_nominato_sostituisce_urp(monkeypatch: pytest.MonkeyPa
             url=url,
             orari="lunedì 9:00-12:00",
             orario_schema=schema,
+            persone=[
+                PersonaUfficio(nome="Emiliano Armini", ruolo="Referente"),
+                PersonaUfficio(nome="Simonetta Caramignoli", ruolo="Referente"),
+            ],
+            telefoni=["+390765545209", "+390765545230"],
+            pagina_letta=True,
+            persone_ispezionate=True,
             letto_il="2026-08-12T00:00:00+00:00",
         ),
     )
@@ -222,7 +261,12 @@ def test_office_da_ufficio_nominato_sostituisce_urp(monkeypatch: pytest.MonkeyPa
     # Card: forma normalizzata; fonte: citazione verbatim affiancata (D-07).
     assert office.office.orari == "Lunedì: 9:00–12:00"
     assert office.office.orari_fonte == "lunedì 9:00-12:00"
-    assert office.office.telefono == "06 12345"
+    assert office.office.telefono == "+390765545209, +390765545230"
+    assert [p.nome for p in office.office.persone] == [
+        "Emiliano Armini", "Simonetta Caramignoli",
+    ]
+    assert office.office.persone_ispezionate is True
+    assert office.office.responsabile is None
     assert office.data_batches
     assert office.query_plan is not None
 

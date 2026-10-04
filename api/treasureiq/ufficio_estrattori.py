@@ -28,8 +28,9 @@ from __future__ import annotations
 
 import html
 import re
+from urllib.parse import urljoin, urlsplit
 
-from treasureiq.connettore import Responsabile
+from treasureiq.connettore import PersonaUfficio, Responsabile
 
 _RE_TAG = re.compile(r"<[^>]+>")
 
@@ -109,10 +110,10 @@ def _resp_openpa(pagina: str) -> Responsabile | None:
     blocco = _inner(pagina, "responsabile")
     if not blocco:
         return None
-    mnome = re.search(r"<h3[^>]*card-title[^>]*>(.*?)</h3>", blocco, re.I | re.S)
-    if mnome is None:
+    nomi = re.findall(r"<h3[^>]*card-title[^>]*>(.*?)</h3>", blocco, re.I | re.S)
+    if len(nomi) != 1:
         return None
-    nome = _testo(mnome.group(1))
+    nome = _testo(nomi[0])
     if not nome:
         return None
     mruolo = re.search(r"<li[^>]*>(.*?)</li>", blocco, re.I | re.S)
@@ -124,15 +125,20 @@ def _resp_openweb(pagina: str) -> Responsabile | None:
     blocco = _inner(pagina, "persone")
     if not blocco:
         return None
-    manchor = re.search(r"<a[^>]*card-title[^>]*>(.*?)</a>", blocco, re.I | re.S)
-    if manchor is None:
+    responsabili = [
+        (nome, ruolo)
+        for nome, ruolo in re.findall(
+            r"<a[^>]*card-title[^>]*>(.*?)</a>\s*"
+            r"<small[^>]*descrizione_breve[^>]*>(.*?)</small>",
+            blocco, re.I | re.S,
+        )
+        if re.search(r"\bresponsabil[ei]\b", _testo(ruolo), re.I)
+    ]
+    if len(responsabili) != 1:
         return None
-    nome = _testo(manchor.group(1))
-    if not nome:
-        return None
-    mruolo = re.search(r"<small[^>]*descrizione_breve[^>]*>(.*?)</small>", blocco, re.I | re.S)
-    ruolo = _testo(mruolo.group(1)) if mruolo else ""
-    return Responsabile(nome=nome, ruolo=ruolo or None)
+    nome, ruolo = responsabili[0]
+    nome = _testo(nome)
+    return Responsabile(nome=nome, ruolo=_testo(ruolo)) if nome else None
 
 
 def _resp_peopleweb(pagina: str) -> Responsabile | None:
@@ -144,40 +150,21 @@ def _resp_peopleweb(pagina: str) -> Responsabile | None:
         nome = _testo(manchor.group(1)) if manchor else _testo(blocco)
         if nome:
             return Responsabile(nome=nome, ruolo=None)
-    # Vendor Siscom: id-etichetta, valore nel div fratello. Il responsabile
-    # dell'ufficio (`#resp`) prima del dirigente d'area (`#dirigente`).
-    for elem_id, etichetta in (("resp", "Responsabile"), ("dirigente", "Dirigente")):
-        fin = _finestra(pagina, elem_id, 800)
-        if not fin:
-            continue
+    # Vendor Siscom: solo il campo responsabile dell'ufficio (`#resp`).
+    # Il dirigente d'area non va promosso a responsabile di questo ufficio.
+    fin = _finestra(pagina, "resp", 800)
+    if fin:
         m = re.search(r"chip-label[^>]*>(.*?)</span>", fin, re.I | re.S)
-        if m is None:
-            continue
-        nome = _testo(m.group(1))
+        nome = _testo(m.group(1)) if m else ""
         if nome:
-            return Responsabile(nome=nome, ruolo=etichetta)
+            return Responsabile(nome=nome, ruolo="Responsabile")
     return None
-
-
-def _resp_municipium(pagina: str) -> Responsabile | None:
-    testata = re.search(r"Persone che compongono la struttura\s*</h2>", pagina, re.I)
-    if testata is None:
-        return None
-    frag = pagina[testata.end():testata.end() + 2000]
-    manchor = re.search(r'<a[^>]*href="[^"]*/person/[^"]*"[^>]*>(.*?)</a>', frag, re.I | re.S)
-    if manchor is None:
-        return None
-    nome = _testo(manchor.group(1))
-    if not nome:
-        return None
-    return Responsabile(nome=nome, ruolo=None)
 
 
 _RESP_PER_FAMIGLIA = {
     "openpa": _resp_openpa,
     "openweb": _resp_openweb,
     "peopleweb": _resp_peopleweb,
-    "municipium": _resp_municipium,
 }
 
 
@@ -189,6 +176,184 @@ def estrai_responsabile(pagina: str, *, piattaforma: str | None) -> Responsabile
     `Responsabile` non esiste)."""
     estrattore = _RESP_PER_FAMIGLIA.get(piattaforma or "")
     return estrattore(pagina) if estrattore else None
+
+
+def estrai_persone(
+    pagina: str, *, piattaforma: str | None, url: str
+) -> list[PersonaUfficio]:
+    """Persone delle schede note, col ruolo della pagina e senza gerarchie."""
+    persone: list[PersonaUfficio] = []
+    visti: set[str] = set()
+
+    def aggiungi(href: str, nome_html: str, ruolo_html: str | None) -> None:
+        persona_url = urljoin(url, html.unescape(href))
+        if (urlsplit(persona_url).scheme not in {"http", "https"}
+                or (urlsplit(persona_url).hostname or "").removeprefix("www.")
+                != (urlsplit(url).hostname or "").removeprefix("www.")):
+            return
+        nome = _testo(nome_html)
+        if not nome or persona_url in visti:
+            return
+        visti.add(persona_url)
+        persone.append(PersonaUfficio(
+            nome=nome, ruolo=_testo(ruolo_html or "") or None, url=persona_url,
+        ))
+
+    if piattaforma == "wordpress_agid":
+        blocco = _inner(pagina, "persone") or ""
+        for titolo, ruolo_html in re.findall(
+            r"<h4\b[^>]*>(.*?)</h4>(.*?)(?=</div>)", blocco, re.I | re.S
+        ):
+            anchor = re.search(
+                r'<a\b[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
+                titolo, re.I | re.S,
+            )
+            if anchor:
+                aggiungi(anchor.group(1), anchor.group(2), ruolo_html)
+    elif piattaforma == "openweb":
+        blocco = _inner(pagina, "persone") or ""
+        for match in re.finditer(
+            r'<a\b(?=[^>]*\bcard-title\b)[^>]*href=["\']([^"\']+)["\'][^>]*>'
+            r'(.*?)</a>\s*<small\b[^>]*\bdescrizione_breve\b[^>]*>(.*?)</small>',
+            blocco, re.I | re.S,
+        ):
+            aggiungi(match.group(1), match.group(2), match.group(3))
+    elif piattaforma == "peopleweb":
+        # Vendor OpenWeb.NET: sezioni distinte, ruolo esplicito nell'etichetta.
+        # Siscom non usa questi id: rimane senza elenco, senza inferire assenze.
+        for elem_id, ruolo in (
+            ("ContentPlaceHolder1_card_responsabile", "Responsabile"),
+            ("ContentPlaceHolder1_card_personale", "Personale"),
+        ):
+            blocco = _inner(pagina, elem_id) or ""
+            for href, nome in re.findall(
+                r'<a\b[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
+                blocco, re.I | re.S,
+            ):
+                aggiungi(href, nome, ruolo)
+    elif piattaforma == "openpa":
+        blocco = _inner(pagina, "persone_che_compongono_la_struttura") or ""
+        for card in re.split(r"<div\s+data-object_id=", blocco, flags=re.I)[1:]:
+            nome = re.search(r"<h3\b[^>]*card-title[^>]*>(.*?)</h3>", card, re.I | re.S)
+            ruolo = re.search(r"<li\b[^>]*>(.*?)</li>", card, re.I | re.S)
+            link = re.search(
+                r'<a\b[^>]*class=["\'][^"\']*read-more[^"\']*["\'][^>]*href=["\']([^"\']+)',
+                card, re.I | re.S,
+            )
+            if nome and link:
+                aggiungi(link.group(1), nome.group(1), ruolo.group(1) if ruolo else None)
+    elif piattaforma == "municipium":
+        testata = re.search(r"Persone che compongono la struttura\s*</h2>", pagina, re.I)
+        if testata:
+            blocco = pagina[testata.end():testata.end() + 20_000]
+            blocco = re.split(r"<h2\b", blocco, maxsplit=1, flags=re.I)[0]
+            for link in re.finditer(
+                r'<a\b[^>]*href=["\']([^"\']*/person/[^"\']+)["\'][^>]*class=["\'][^"\']*custom-link-reference[^"\']*["\'][^>]*>'
+                r'\s*<p\b[^>]*card-title[^>]*>(.*?)</p>',
+                blocco, re.I | re.S,
+            ):
+                aggiungi(link.group(1), link.group(2), None)
+    elif piattaforma == "magnolia":
+        blocco = _inner(pagina, "_ufficio_persone") or ""
+        responsabile = re.search(
+            r'<h5\b[^>]*>\s*Responsabile\s*</h5>.{0,4000}?'
+            r'href=["\']([^"\']*/personale/Persona-[^"\']+)',
+            pagina, re.I | re.S,
+        )
+        for match in re.finditer(
+            r"<h5\b[^>]*card-title[^>]*>(.*?)</h5>"
+            r'.*?<a\b[^>]*class=["\'][^"\']*read-more[^"\']*["\'][^>]*'
+            r'href=["\']([^"\']*/personale/Persona-[^"\']+)',
+            blocco, re.I | re.S,
+        ):
+            ruolo = (
+                "Responsabile"
+                if responsabile and urljoin(url, responsabile.group(1)) == urljoin(url, match.group(2))
+                else None
+            )
+            aggiungi(match.group(2), match.group(1), ruolo)
+    elif piattaforma == "drupal":
+        blocco_match = re.search(
+            r"field--name-field-view-persone\b.*?(?=field--name-field-view-reference\b|</main>)",
+            pagina, re.I | re.S,
+        )
+        blocco = blocco_match.group(0) if blocco_match else ""
+        for match in re.finditer(
+            r'<h3\b[^>]*card-title[^>]*>\s*<a\b[^>]*href=["\']([^"\']+)["\'][^>]*>'
+            r'(.*?)</a></h3>.*?field--name-field-descrizione-breve[^>]*>(.*?)</div>',
+            blocco, re.I | re.S,
+        ):
+            aggiungi(match.group(1), match.group(2), match.group(3))
+    return persone
+
+
+def persone_ispezionate(
+    pagina: str, *, piattaforma: str | None, persone: list[PersonaUfficio]
+) -> bool:
+    """Assenza dichiarabile solo se nessuna scheda persona è rimasta illeggibile."""
+    if piattaforma in {"wordpress_agid", "openweb"}:
+        blocco = _inner(pagina, "persone")
+    elif piattaforma == "openpa":
+        blocco = _inner(pagina, "persone_che_compongono_la_struttura")
+    elif piattaforma == "municipium":
+        testata = re.search(r"Persone che compongono la struttura\s*</h2>", pagina, re.I)
+        if testata is None:
+            return False
+        blocco = pagina[testata.end():testata.end() + 20_000]
+        blocco = re.split(r"<h2\b", blocco, maxsplit=1, flags=re.I)[0]
+        return bool(persone) or re.search(r"/person/", blocco, re.I) is None
+    elif piattaforma == "magnolia":
+        blocco = _inner(pagina, "_ufficio_persone")
+        if blocco is None:
+            return False
+        return bool(persone) or re.search(r"/personale/Persona-", blocco, re.I) is None
+    elif piattaforma == "drupal":
+        blocco_match = re.search(
+            r"field--name-field-view-persone\b.*?(?=field--name-field-view-reference\b|</main>)",
+            pagina, re.I | re.S,
+        )
+        if blocco_match is None:
+            return False
+        blocco = blocco_match.group(0)
+        return bool(persone) or re.search(r"/personale-amministrativo/", blocco, re.I) is None
+    elif piattaforma == "peopleweb":
+        blocchi = [
+            _inner(pagina, elem_id)
+            for elem_id in (
+                "ContentPlaceHolder1_card_responsabile",
+                "ContentPlaceHolder1_card_personale",
+            )
+        ]
+        if not any(blocco is not None for blocco in blocchi):
+            return False
+        blocco = " ".join(b or "" for b in blocchi)
+    else:
+        return False
+    if blocco is None:
+        return True
+    return bool(persone) or re.search(r"<a\b[^>]*href=", blocco, re.I) is None
+
+
+def estrai_recapiti(
+    pagina: str, *, piattaforma: str | None
+) -> tuple[list[str], list[str]]:
+    """Recapiti diretti nel solo blocco `#contatti` della scheda WordPress."""
+    if piattaforma != "wordpress_agid":
+        return [], []
+    blocco = _inner(pagina, "contatti")
+    if not blocco:
+        return [], []
+    telefoni = [
+        _testo(valore)
+        for valore in re.findall(r"<p\b[^>]*>\s*Tel\.?\s*([^<]+)</p>", blocco, re.I)
+    ]
+    telefoni = list(dict.fromkeys(v for v in telefoni if re.fullmatch(r"\+?[\d\s().-]{6,}", v)))
+    email = [
+        html.unescape(valore).strip()
+        for valore in re.findall(r'href=["\']mailto:([^"\']+)["\']', blocco, re.I)
+    ]
+    email = list(dict.fromkeys(v for v in email if "@" in v))
+    return telefoni, email
 
 
 # --------------------------------------------------------------------------- #
@@ -232,11 +397,21 @@ def _ind_municipium(pagina: str) -> str | None:
     return _testo(m.group(1)) or None
 
 
+def _ind_wordpress_agid(pagina: str) -> str | None:
+    blocco = _inner(pagina, "sede-principale")
+    if not blocco:
+        return None
+    testo = re.search(r'<div\b[^>]*class=["\'][^"\']*card-text[^"\']*["\'][^>]*>\s*<p>(.*?)</p>',
+                      blocco, re.I | re.S)
+    return _testo(testo.group(1)) if testo else _indirizzo_civico(blocco)
+
+
 _IND_PER_FAMIGLIA = {
     "openpa": _ind_openpa,
     "openweb": _ind_openweb,
     "peopleweb": _ind_peopleweb,
     "municipium": _ind_municipium,
+    "wordpress_agid": _ind_wordpress_agid,
 }
 
 

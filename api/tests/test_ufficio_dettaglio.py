@@ -13,7 +13,7 @@ ancora `None` finché non arrivano gli estrattori per famiglia.
 from __future__ import annotations
 
 import treasureiq.ufficio_dettaglio as ud
-from treasureiq.connettore import Responsabile, UfficioConnettore
+from treasureiq.connettore import PersonaUfficio, Responsabile, UfficioConnettore
 from treasureiq.orari_schema import Fascia, OrarioSettimanale, RigaOrario
 from treasureiq.orari_ufficio import OrariUfficio
 
@@ -37,7 +37,8 @@ def _ufficio(*, url: str = URL_UFFICIO, orari: str | None = None) -> UfficioConn
 
 
 def _voce(
-    *, orari, schema=None, indirizzo=None, responsabile=None, pagina_letta=True
+    *, orari, schema=None, indirizzo=None, responsabile=None,
+    pagina_letta=True, persone_ispezionate=False,
 ) -> OrariUfficio:
     return OrariUfficio(
         codice_istat="058003",
@@ -48,6 +49,7 @@ def _voce(
         indirizzo=indirizzo,
         responsabile=responsabile,
         pagina_letta=pagina_letta,
+        persone_ispezionate=persone_ispezionate,
         letto_il="2026-08-12T00:00:00+00:00",
     )
 
@@ -148,6 +150,54 @@ def test_indirizzo_e_responsabile_letti_entrano_nella_copia(monkeypatch) -> None
     assert arr.ufficio.indirizzo == "Piazza Roma, 1 - 00041 Albano Laziale (RM)"
     assert arr.ufficio.responsabile == resp
     assert arr.ufficio.responsabile.email is None
+
+
+def test_persone_e_recapiti_della_scheda_entrano_nella_copia(monkeypatch) -> None:
+    persona = PersonaUfficio(nome="Emiliano Armini", ruolo="Referente")
+    monkeypatch.setattr(
+        ud, "leggi_orari_ufficio",
+        lambda *, codice_istat, url, piattaforma=None: OrariUfficio(
+            codice_istat=codice_istat, slug="anagrafe", url=url, orari=None,
+            persone=[persona], telefoni=["+390765545209"],
+            email=["anagrafe@comune.poggiomirteto.ri.it"],
+            letto_il="2026-08-12T00:00:00+00:00", pagina_letta=True,
+            persone_ispezionate=True,
+        ),
+    )
+    arr = ud.arricchisci_ufficio(codice_istat="057051", ufficio=_ufficio(), piattaforma="wordpress_agid")
+    assert arr.ufficio.persone == [persona]
+    assert arr.persone_ispezionate is True
+    assert arr.ufficio.telefoni == ["+390765545209"]
+    assert arr.ufficio.email == ["anagrafe@comune.poggiomirteto.ri.it"]
+    assert arr.ufficio.responsabile is None
+
+
+def test_persone_assenti_solo_dopo_lettura_supportata(monkeypatch) -> None:
+    monkeypatch.setattr(
+        ud, "leggi_orari_ufficio",
+        lambda *, codice_istat, url, piattaforma=None: _voce(
+            orari=None, pagina_letta=True,
+            persone_ispezionate=(piattaforma == "wordpress_agid"),
+        ),
+    )
+    arr = ud.arricchisci_ufficio(codice_istat="058003", ufficio=_ufficio(), piattaforma="wordpress_agid")
+    assert arr.persone_ispezionate is True
+    assert arr.ufficio.persone == []
+    arr_senza_estrattore = ud.arricchisci_ufficio(
+        codice_istat="058003", ufficio=_ufficio(), piattaforma="openpa"
+    )
+    assert arr_senza_estrattore.persone_ispezionate is False
+
+    monkeypatch.setattr(
+        ud, "leggi_orari_ufficio",
+        lambda *, codice_istat, url, piattaforma=None: _voce(
+            orari=None, pagina_letta=False,
+        ),
+    )
+    arr_fetch_fallita = ud.arricchisci_ufficio(
+        codice_istat="058003", ufficio=_ufficio(), piattaforma="wordpress_agid"
+    )
+    assert arr_fetch_fallita.persone_ispezionate is False
 
 
 def test_campi_additivi_assenti_non_sovrascrivono(monkeypatch) -> None:

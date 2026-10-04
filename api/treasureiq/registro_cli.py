@@ -73,6 +73,8 @@ _LEGGIBILI = {
     # openpa.py), rotte AgID + argomenti confermate su comuni reali.
     "comweb",
     "openpa",
+    "drupal",
+    "magnolia",
 }
 
 
@@ -132,7 +134,7 @@ def _scansiona_uno(istat: str) -> tuple[str, str]:
     comune = comune_per_codice(istat)
     nome = comune.nome if comune else istat
     try:
-        esito = leggi_connettore(istat, usa_cache=False)
+        esito = leggi_connettore(istat, usa_cache=False, segnala_errore=True)
     except Exception as exc:  # noqa: BLE001 — un comune che eccepisce non ferma il batch
         return "errore", f"{istat} {nome} — errore: {exc}"
     if esito is None:
@@ -371,6 +373,9 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
     if args.max_per_run is not None and args.checkpoint is None:
         print("errore: --max-per-run richiede --checkpoint.", file=sys.stderr)
         return 2
+    if args.retry_vuoti and (not args.resume or args.checkpoint is None):
+        print("errore: --retry-vuoti richiede --resume e --checkpoint.", file=sys.stderr)
+        return 2
     if args.per_piattaforma < 1:
         print("errore: --per-piattaforma deve essere >= 1.", file=sys.stderr)
         return 2
@@ -410,6 +415,21 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
         if avviato_prec:
             avviato_il = avviato_prec
         resuming = True
+        if args.retry_vuoti:
+            # Un nuovo lettore o un guasto transitorio risolto puo' recuperare
+            # esiti gia' terminali. La selezione resta congelata e gli
+            # arruolati non vengono toccati.
+            vuoti.clear()
+            if not args.dry_run:
+                _bootstrap_salva_checkpoint(
+                    args.checkpoint,
+                    avviato_il=avviato_il,
+                    selezione=selezione,
+                    arruolati=arruolati,
+                    vuoti=vuoti,
+                    errori=errori,
+                    totale_candidati=totale_candidati,
+                )
     elif args.resume and args.checkpoint is not None:
         # --resume but nothing to resume from: refuse rather than start a fresh
         # run under a resume flag (the operator expected an existing ledger).
@@ -757,6 +777,9 @@ def _build_parser() -> argparse.ArgumentParser:
                            "Il file gemello .stop, se creato, ferma il lotto.")
     boot.add_argument("--resume", action="store_true",
                       help="Riprende un checkpoint esistente saltando i comuni gia' completati.")
+    boot.add_argument("--retry-vuoti", action="store_true",
+                      help="Con --resume, riapre una volta gli esiti vuoti del checkpoint "
+                           "per un nuovo tentativo; non tocca gli arruolati.")
     boot.add_argument("--dry-run", action="store_true",
                       help="Stampa la selezione senza alcun fetch ne' scrittura.")
     boot.add_argument("--catalog", type=Path, default=DATA_DIR / "catalog",

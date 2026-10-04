@@ -1188,6 +1188,10 @@ a {
    full-width heading trades one misalignment for another. */
 .stack {
   display: grid;
+  /* minmax(0, 1fr), not the implicit auto track: an auto column grows to
+     its children's min-content, so a wide table inside `.tabella-scorrevole`
+     widened the whole page on phones instead of scrolling in its box. */
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--ma-6);
   /* Allargato da 940px: a 940 il testo finiva la riga a meta' schermo e
      lasciava una fascia vuota larga quanto il testo stesso, che legge come
@@ -1775,6 +1779,7 @@ a {
 /* /monitoraggio — three groups (Fonti · Sistemi · Stato dati interni). */
 .systems {
   display: grid;
+  grid-template-columns: minmax(0, 1fr); /* same reason as `.stack` */
   gap: var(--ma-8);
 }
 

@@ -227,7 +227,9 @@ export default function RispostaCivica({
           {/* Chi risponde dell'ufficio (accountability, Ramo 1). Best-effort:
               solo dove la scheda lo pubblica, mai inferito (D-07). `email`
               personale non è quasi mai pubblicata → di norma nome + ruolo. */}
-          {office.responsabile && (
+          {office.responsabile && !office.persone?.some(
+            (persona) => persona.nome === office.responsabile?.nome
+          ) && (
             <p className="civica__responsabile">
               <span className="civica__responsabile-label">Responsabile</span>
               <span className="civica__responsabile-nome">

@@ -172,11 +172,12 @@ def test_persone_e_recapiti_della_scheda_entrano_nella_copia(monkeypatch) -> Non
     assert arr.ufficio.responsabile is None
 
 
-def test_persone_assenti_solo_dopo_lettura_wordpress(monkeypatch) -> None:
+def test_persone_assenti_solo_dopo_lettura_supportata(monkeypatch) -> None:
     monkeypatch.setattr(
         ud, "leggi_orari_ufficio",
         lambda *, codice_istat, url, piattaforma=None: _voce(
-            orari=None, pagina_letta=True, persone_ispezionate=True,
+            orari=None, pagina_letta=True,
+            persone_ispezionate=(piattaforma == "wordpress_agid"),
         ),
     )
     arr = ud.arricchisci_ufficio(codice_istat="058003", ufficio=_ufficio(), piattaforma="wordpress_agid")

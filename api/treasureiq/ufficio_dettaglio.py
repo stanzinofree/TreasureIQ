@@ -115,7 +115,10 @@ def arricchisci_ufficio(
         letto is not None
         and letto.pagina_letta
         and letto.persone_ispezionate
-        and piattaforma == "wordpress_agid"
+        and piattaforma in {
+            "wordpress_agid", "openweb", "peopleweb", "openpa", "municipium",
+            "drupal", "magnolia",
+        }
     )
 
     arricchito = ufficio.model_copy(update=aggiornamento)

@@ -57,3 +57,21 @@ WordPress differisce da Poggio Mirteto; l'estrattore ora legge entrambe le
 forme. Se una scheda WordPress è stata letta e non contiene persone, la card
 lo dice in modo circoscritto alla scheda. Se una sezione contiene link persona
 che l'estrattore non sa interpretare, non dichiara l'assenza.
+
+## Estensione delle persone nelle altre famiglie
+
+La lettura della singola scheda ufficio supporta ora anche:
+
+| Famiglia | Scheda verificata | Forma del dato |
+|---|---|---|
+| OpenWeb | Collegno | nome, ruolo e link nella sezione `#persone` |
+| PeopleWeb, vendor OpenWeb.NET | Airasca | responsabile e personale in sezioni distinte, con le etichette pubblicate |
+| OpenPA | Storo | tutte le card della sezione persone, con ruolo e link |
+| Municipium | Pomezia | nome e link; ruolo assente nella scheda |
+| Drupal | Fiesole | nome, descrizione dell'incarico e link |
+| Magnolia | Farini | nome e link; ruolo dalla sezione «Responsabile» solo se il link coincide |
+
+Il dialetto Siscom della famiglia PeopleWeb resta senza elenco: la scheda
+campione non espone una lista equivalente. Queste letture avvengono alla domanda
+sull'ufficio, usando l'HTML già scaricato per gli orari; il bootstrap conserva
+solo nome e URL degli uffici.

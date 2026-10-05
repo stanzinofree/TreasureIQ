@@ -26,7 +26,6 @@ già pronta e non deve dipendere da questa lettura.
 
 from __future__ import annotations
 
-import json
 import logging
 import os
 import re
@@ -70,7 +69,12 @@ GIORNI_VALIDITA = 6
 #: 3 = persone, recapiti diretti e sede dalla scheda WordPress AgID.
 #: 4 = secondo markup WordPress AgID per le persone (es. Albano Laziale).
 #: 5 = prova esplicita che la sezione persone è stata ispezionata.
-VERSIONE_ESTRATTORI = 5
+#: 6 = elenco persone OpenWeb e PeopleWeb vendor OpenWeb.NET.
+#: 7 = elenco persone OpenPA e Municipium.
+#: 8 = elenco persone Drupal e Magnolia.
+#: 9 = responsabile singolare solo dove la scheda lo indica senza ambiguità.
+#: 10 = ruolo Magnolia dalla sezione esplicita con lo stesso link persona.
+VERSIONE_ESTRATTORI = 10
 
 #: Tetto sui byte scaricati dalla pagina dell'ufficio (guardia, non un dato).
 MAX_BYTES_PAGINA = 2_000_000

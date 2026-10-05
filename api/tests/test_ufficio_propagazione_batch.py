@@ -103,7 +103,7 @@ def test_campi_letti_dal_vivo_entrano_nel_batch_trasportato(
 
     async def _live(*, codice_istat, ufficio, piattaforma=None):
         assert piattaforma == "wordpress_agid"  # la piattaforma è inoltrata
-        return arricchito, "lunedì 9-12", True
+        return arricchito, "lunedì 9-12", True, False
 
     monkeypatch.setattr(R, "_orari_ufficio_live", _live)
 
@@ -139,7 +139,7 @@ def test_batch_trasportato_senza_lettura_resta_onesto(
     _monkeypatch_infra(monkeypatch, esito)
 
     async def _live(*, codice_istat, ufficio, piattaforma=None):
-        return _ufficio_catalogo(), None, False  # nessun arricchimento
+        return _ufficio_catalogo(), None, False, False  # nessun arricchimento
 
     monkeypatch.setattr(R, "_orari_ufficio_live", _live)
 
@@ -184,7 +184,7 @@ def test_office_answer_ramo_connettore_porta_indirizzo_e_responsabile(
     )
 
     async def _live(*, codice_istat, ufficio, piattaforma=None):
-        return arricchito, "lunedì 9-12", True
+        return arricchito, "lunedì 9-12", True, False
 
     monkeypatch.setattr(R, "_orari_ufficio_live", _live)
 
@@ -217,7 +217,7 @@ def test_office_answer_ramo_connettore_onesto_senza_lettura(
     _monkeypatch_infra(monkeypatch, esito)
 
     async def _live(*, codice_istat, ufficio, piattaforma=None):
-        return _ufficio_catalogo(), None, False
+        return _ufficio_catalogo(), None, False, False
 
     monkeypatch.setattr(R, "_orari_ufficio_live", _live)
 
@@ -253,7 +253,7 @@ def test_office_answer_ramo_connettore_ispezionato_ma_assente(
 
     async def _live(*, codice_istat, ufficio, piattaforma=None):
         # Pagina letta (fonte orari presente) ma nessun responsabile pubblicato.
-        return _ufficio_catalogo().model_copy(update={"orari": "Lun 9-12"}), None, True
+        return _ufficio_catalogo().model_copy(update={"orari": "Lun 9-12"}), None, True, False
 
     monkeypatch.setattr(R, "_orari_ufficio_live", _live)
 

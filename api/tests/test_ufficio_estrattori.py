@@ -50,6 +50,26 @@ def test_responsabile_openweb_nome_e_ruolo() -> None:
     assert resp.email is None
 
 
+def test_openweb_non_promuove_un_referente_a_responsabile() -> None:
+    pagina = (
+        '<section id="persone"><a class="card-title" href="/persona/mario">Mario Rossi</a>'
+        '<small class="descrizione_breve">Referente</small></section>'
+    )
+    assert estrai_responsabile(pagina, piattaforma="openweb") is None
+
+
+def test_openweb_due_responsabili_non_ne_sceglie_uno() -> None:
+    pagina = (
+        '<section id="persone">'
+        '<a class="card-title" href="/persona/mario">Mario Rossi</a>'
+        '<small class="descrizione_breve">Responsabile</small>'
+        '<a class="card-title" href="/persona/anna">Anna Bianchi</a>'
+        '<small class="descrizione_breve">Responsabile</small>'
+        '</section>'
+    )
+    assert estrai_responsabile(pagina, piattaforma="openweb") is None
+
+
 def test_responsabile_peopleweb_openweb_net_solo_nome() -> None:
     # Vendor OpenWeb.NET: la card espone il nome, non un ruolo strutturato.
     resp = estrai_responsabile(_pagina("peopleweb_airasca"), piattaforma="peopleweb")
@@ -69,12 +89,9 @@ def test_responsabile_peopleweb_siscom_preferisce_resp_su_dirigente() -> None:
     assert resp.email is None
 
 
-def test_responsabile_municipium_nome_senza_ruolo() -> None:
+def test_municipium_non_promuove_la_prima_persona_a_responsabile() -> None:
     resp = estrai_responsabile(_municipium(), piattaforma="municipium")
-    assert resp is not None
-    assert resp.nome == "Angelo Pizzoli"
-    assert resp.ruolo is None
-    assert resp.email is None
+    assert resp is None
 
 
 def test_responsabile_piattaforma_sconosciuta_none() -> None:
@@ -157,6 +174,84 @@ def test_wordpress_agid_albano_persone_con_ruolo_in_testo_libero() -> None:
         "– demografici – Simona Polizzano"
     )
     assert persone[0].url == "https://comune.albanolaziale.rm.it/persona_pubblica/simona-polizzano/"
+
+
+def test_openweb_collegno_persone_con_ruolo_verbatim() -> None:
+    pagina = _pagina("openweb_collegno")
+    url = "https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/anagrafe/"
+    persone = estrai_persone(pagina, piattaforma="openweb", url=url)
+    assert [(p.nome, p.ruolo) for p in persone] == [
+        ("Enza Augelli", "Responsabile Servizi Demografici e Generali"),
+    ]
+    assert persone[0].url == "https://www.comune.collegno.to.it/persona_pubblica/enza-augelli/"
+    assert persone_ispezionate(pagina, piattaforma="openweb", persone=persone) is True
+
+
+def test_peopleweb_airasca_elenca_responsabile_e_personale() -> None:
+    pagina = _pagina("peopleweb_airasca")
+    url = "https://www.comune.airasca.to.it/amministrazione/unita_organizzativa/anagrafe/"
+    persone = estrai_persone(pagina, piattaforma="peopleweb", url=url)
+    assert [(p.nome, p.ruolo) for p in persone] == [
+        ("GRIOTTO Laura", "Responsabile"),
+        ("CALÌ Maria Assunta", "Personale"),
+        ("GRECO Filomena", "Personale"),
+    ]
+    assert persone_ispezionate(pagina, piattaforma="peopleweb", persone=persone) is True
+    siscom = _pagina("peopleweb_andrate")
+    assert estrai_persone(siscom, piattaforma="peopleweb", url=url) == []
+    assert persone_ispezionate(siscom, piattaforma="peopleweb", persone=[]) is False
+
+
+def test_openpa_storo_elenca_tutto_il_personale() -> None:
+    pagina = _pagina("openpa_storo")
+    url = "https://www.comune.storo.tn.it/Amministrazione/Uffici/Anagrafe"
+    persone = estrai_persone(pagina, piattaforma="openpa", url=url)
+    assert [(p.nome, p.ruolo) for p in persone] == [
+        ("Benedetta Moneghini", "Responsabile"),
+        ("Giuliana Bondoni", "Dipendente"),
+        ("Cristina Radoani", "Dipendente"),
+        ("Sara Serioli", "Dipendente"),
+        ("Sonia Zanetti", "Dipendente"),
+    ]
+    assert all(p.url and p.url.startswith("https://www.comune.storo.tn.it/") for p in persone)
+    assert persone_ispezionate(pagina, piattaforma="openpa", persone=persone) is True
+
+
+def test_municipium_pomezia_persona_senza_ruolo_inventato() -> None:
+    pagina = _municipium()
+    url = "https://www.comune.pomezia.rm.it/it/organization/ufficio-demografici"
+    persone = estrai_persone(pagina, piattaforma="municipium", url=url)
+    assert [(p.nome, p.ruolo, p.url) for p in persone] == [
+        ("Angelo Pizzoli", None, "https://www.comune.pomezia.rm.it/it/person/pizzoli-angelo"),
+    ]
+    assert persone_ispezionate(pagina, piattaforma="municipium", persone=persone) is True
+
+
+def test_magnolia_farini_ruolo_da_sezione_esplicita() -> None:
+    pagina = (FIX / "magnolia_farini_ufficio_persone.html").read_text("utf-8")
+    url = "https://www.comune.farini.pc.it/home/amministrazione/uffici/Ufficio-1.html"
+    persone = estrai_persone(pagina, piattaforma="magnolia", url=url)
+    assert [(p.nome, p.ruolo, p.url) for p in persone] == [
+        (
+            "Dott.ssa Lorenzoni Anna", "Responsabile",
+            "https://www.comune.farini.pc.it/home/amministrazione/personale/Persona-2.html",
+        ),
+    ]
+    assert persone_ispezionate(pagina, piattaforma="magnolia", persone=persone) is True
+
+
+def test_drupal_fiesole_persona_con_ruolo_verbatim() -> None:
+    pagina = (FIX / "drupal_fiesole_ufficio_persone.html").read_text("utf-8")
+    url = "https://www.comune.fiesole.fi.it/amministrazione/uffici/servizi-demografici-e-relazioni-con-il-pubblico"
+    persone = estrai_persone(pagina, piattaforma="drupal", url=url)
+    assert [(p.nome, p.ruolo, p.url) for p in persone] == [
+        (
+            "Mirella Maestrelli",
+            "Responsabile Servizi Demografici e Relazioni con il Pubblico",
+            "https://www.comune.fiesole.fi.it/amministrazione/personale-amministrativo/mirella-maestrelli",
+        ),
+    ]
+    assert persone_ispezionate(pagina, piattaforma="drupal", persone=persone) is True
 
 
 def test_persone_assenti_e_link_fuori_host_non_inventano_referenti() -> None:

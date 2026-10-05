@@ -31,8 +31,10 @@ import sqlite3
 import sys
 import time
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+import httpx
 
 from treasureiq.catalog import SnapshotStore, persist_shadow_snapshots
 from treasureiq.connettore import leggi_connettore
@@ -74,6 +76,10 @@ _LEGGIBILI = {
     "comweb",
     "openpa",
 }
+
+
+RETE_BACKOFF_DAYS = 14
+_RETE_BACKOFF_FILENAME = "_bootstrap_backoff_rete.json"
 
 
 def _comuni_coperti() -> list[str]:
@@ -132,7 +138,9 @@ def _scansiona_uno(istat: str) -> tuple[str, str]:
     comune = comune_per_codice(istat)
     nome = comune.nome if comune else istat
     try:
-        esito = leggi_connettore(istat, usa_cache=False)
+        esito = leggi_connettore(istat, usa_cache=False, rilancia_errori=True)
+    except (httpx.ConnectError, httpx.ConnectTimeout) as exc:
+        return "rete_non_raggiungibile", f"{istat} {nome} — rete non raggiungibile: {exc}"
     except Exception as exc:  # noqa: BLE001 — un comune che eccepisce non ferma il batch
         return "errore", f"{istat} {nome} — errore: {exc}"
     if esito is None:
@@ -189,6 +197,7 @@ def _esegui_registro(
         "ok": 0,
         "vuoto": 0,
         "errore": 0,
+        "rete_non_raggiungibile": 0,
         "con_logo": 0,
         "shadow_ok": 0,
         "shadow_skipped": 0,
@@ -239,7 +248,7 @@ def cmd_scan(args: argparse.Namespace) -> int:
     print(
         f"scansionati {len(comuni)} · con-record {contatori['ok']} · "
         f"con-logo {contatori['con_logo']} · vuoti {contatori['vuoto']} · "
-        f"errori {contatori['errore']}",
+        f"errori {contatori['errore']} · rete non raggiungibile {contatori['rete_non_raggiungibile']}",
         file=sys.stderr,
     )
     return 0
@@ -273,6 +282,73 @@ def _bootstrap_stop_path(checkpoint: Path) -> Path:
     return checkpoint.with_suffix(".stop")
 
 
+def _bootstrap_rete_backoff_path() -> Path:
+    return LIVE_DIR / _RETE_BACKOFF_FILENAME
+
+
+def _parse_iso_utc(valore: object) -> datetime | None:
+    if not isinstance(valore, str):
+        return None
+    try:
+        letto = datetime.fromisoformat(valore.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return letto if letto.tzinfo is not None else None
+
+
+def _carica_backoff_rete() -> dict[str, dict]:
+    """Read the global network-backoff ledger, ignoring a corrupt entry safely."""
+    try:
+        dati = json.loads(_bootstrap_rete_backoff_path().read_text("utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    comuni = dati.get("comuni") if isinstance(dati, dict) else None
+    if not isinstance(comuni, dict):
+        return {}
+    return {
+        codice: valore for codice, valore in comuni.items()
+        if isinstance(codice, str) and isinstance(valore, dict)
+    }
+
+
+def _salva_backoff_rete(comuni: dict[str, dict]) -> None:
+    percorso = _bootstrap_rete_backoff_path()
+    percorso.parent.mkdir(parents=True, exist_ok=True)
+    provvisorio = percorso.with_suffix(percorso.suffix + ".tmp")
+    provvisorio.write_text(
+        json.dumps({"comuni": comuni}, ensure_ascii=False, indent=2), "utf-8"
+    )
+    provvisorio.replace(percorso)
+
+
+def _backoff_rete_attivi(ora: datetime | None = None) -> set[str]:
+    ora = ora or datetime.now(timezone.utc)
+    return {
+        codice
+        for codice, dettaglio in _carica_backoff_rete().items()
+        if (prossimo := _parse_iso_utc(dettaglio.get("prossimo_tentativo_il"))) is not None
+        and prossimo > ora
+    }
+
+
+def _segnala_rete_non_raggiungibile(istat: str) -> None:
+    ora = datetime.now(timezone.utc)
+    comuni = _carica_backoff_rete()
+    comuni[istat] = {
+        "segnalato_il": ora.isoformat(),
+        "prossimo_tentativo_il": (ora + timedelta(days=RETE_BACKOFF_DAYS)).isoformat(),
+        "azione": "controllo_manuale",
+    }
+    _salva_backoff_rete(comuni)
+
+
+def _rimuovi_backoff_rete(istat: str) -> None:
+    comuni = _carica_backoff_rete()
+    if istat in comuni:
+        comuni.pop(istat)
+        _salva_backoff_rete(comuni)
+
+
 class _CheckpointInvalido(ValueError):
     """A checkpoint file exists but is corrupt or structurally invalid.
 
@@ -292,8 +368,8 @@ def _lista_stringhe(dati: dict, chiave: str) -> list[str]:
 
 def _bootstrap_carica_checkpoint(
     checkpoint: Path,
-) -> tuple[list[str], set[str], set[str], list[str], str | None, int]:
-    """Return ``(selezione, arruolati, vuoti, errori, avviato_il, totale)``.
+) -> tuple[list[str], set[str], set[str], list[str], set[str], str | None, int]:
+    """Return ``(selezione, arruolati, vuoti, errori, rete, avviato_il, totale)``.
 
     Three disjoint outcome categories, never merged:
       * ``arruolati`` — an ``ok`` read that wrote a data-live record; the only
@@ -319,13 +395,14 @@ def _bootstrap_carica_checkpoint(
     arruolati = set(_lista_stringhe(dati, "arruolati"))
     vuoti = set(_lista_stringhe(dati, "vuoti"))
     errori = list(dict.fromkeys(_lista_stringhe(dati, "errori")))  # dedup, keep order
+    rete_non_raggiungibile = set(_lista_stringhe(dati, "rete_non_raggiungibile"))
     avviato = dati.get("avviato_il")
     if not isinstance(avviato, str):
         avviato = None
     totale = dati.get("totale_candidati")
     if not isinstance(totale, int) or totale < 0:
         totale = len(selezione)
-    return selezione, arruolati, vuoti, errori, avviato, totale
+    return selezione, arruolati, vuoti, errori, rete_non_raggiungibile, avviato, totale
 
 
 def _bootstrap_salva_checkpoint(
@@ -336,6 +413,7 @@ def _bootstrap_salva_checkpoint(
     arruolati: set[str],
     vuoti: set[str],
     errori: list[str],
+    rete_non_raggiungibile: set[str],
     totale_candidati: int,
 ) -> None:
     payload = {
@@ -351,6 +429,7 @@ def _bootstrap_salva_checkpoint(
         "arruolati": sorted(arruolati),
         "vuoti": sorted(vuoti),
         "errori": sorted(errori),
+        "rete_non_raggiungibile": sorted(rete_non_raggiungibile),
     }
     checkpoint.parent.mkdir(parents=True, exist_ok=True)
     provvisorio = checkpoint.with_suffix(checkpoint.suffix + ".tmp")
@@ -381,6 +460,7 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
     arruolati: set[str] = set()
     vuoti: set[str] = set()
     errori: list[str] = []
+    rete_non_raggiungibile: set[str] = set()
     selezione: list[str]
     totale_candidati: int
     resuming = False
@@ -397,7 +477,7 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
             )
             return 2
         try:
-            selezione, arruolati, vuoti, errori, avviato_prec, totale_candidati = (
+            selezione, arruolati, vuoti, errori, rete_non_raggiungibile, avviato_prec, totale_candidati = (
                 _bootstrap_carica_checkpoint(args.checkpoint)
             )
         except _CheckpointInvalido as exc:
@@ -424,7 +504,10 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
         # Fresh run: compute the selection ONCE and freeze it in the checkpoint.
         coda = set(_comuni_da_censimento(args.db))
         gia_init = _connettore_inizializzati()
-        candidati = bootstrap_sel.seleziona(catalog_dir, coda, gia_init)
+        candidati = [
+            candidato for candidato in bootstrap_sel.seleziona(catalog_dir, coda, gia_init)
+            if candidato[0] not in _backoff_rete_attivi()
+        ]
         if args.piattaforma:
             candidati = [c for c in candidati if c[1] == args.piattaforma]
         totale_candidati = len(candidati)
@@ -436,9 +519,12 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
             selezione = bootstrap_sel.lotto(candidati, args.limit)
 
     # Skip terminal outcomes: arruolati (record written) and vuoti (successful
-    # read, no record — terminal for now, out of the refresh). Errored comuni
-    # are NOT skipped, so a --resume retries them.
-    da_fare = [c for c in selezione if c not in arruolati and c not in vuoti]
+    # read, no record — terminal for now, out of the refresh). Generic errors
+    # are retried on --resume; connection failures wait for their long backoff.
+    da_fare = [
+        c for c in selezione
+        if c not in arruolati and c not in vuoti and c not in rete_non_raggiungibile
+    ]
     da_fare_run = da_fare[:args.max_per_run]
 
     plat_map = bootstrap_sel.mappa_eleggibili(catalog_dir)
@@ -446,6 +532,7 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
     print(
         f"bootstrap: candidati totali {totale_candidati} · selezione {len(selezione)} · "
         f"arruolati {len(arruolati)} · vuoti {len(vuoti)} · errori {len(errori)} · "
+        f"rete non raggiungibile {len(rete_non_raggiungibile)} · "
         f"da fare {len(da_fare)} · piattaforme {dict(conteggio_piattaforme)}"
         + (" · RESUME" if resuming else ""),
         file=sys.stderr,
@@ -471,6 +558,7 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
             arruolati=arruolati,
             vuoti=vuoti,
             errori=errori,
+            rete_non_raggiungibile=rete_non_raggiungibile,
             totale_candidati=totale_candidati,
         )
 
@@ -489,13 +577,22 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
             arruolati.add(istat)
             vuoti.discard(istat)
             errori = [e for e in errori if e != istat]
+            rete_non_raggiungibile.discard(istat)
+            _rimuovi_backoff_rete(istat)
             ok_run += 1
         elif stato == "vuoto":
             # Successful read but NO record: terminal for now, out of the refresh
             # and never counted as initialised. NOT arruolato.
             vuoti.add(istat)
             errori = [e for e in errori if e != istat]
+            rete_non_raggiungibile.discard(istat)
+            _rimuovi_backoff_rete(istat)
             vuoti_run += 1
+        elif stato == "rete_non_raggiungibile":
+            rete_non_raggiungibile.add(istat)
+            errori = [e for e in errori if e != istat]
+            _segnala_rete_non_raggiungibile(istat)
+            err_run += 1
         else:  # "errore": keep OUT of arruolati/vuoti so --resume retries it
             err_run += 1
             if istat not in errori:
@@ -508,6 +605,7 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
                 arruolati=arruolati,
                 vuoti=vuoti,
                 errori=errori,
+                rete_non_raggiungibile=rete_non_raggiungibile,
                 totale_candidati=totale_candidati,
             )
         if args.delay and indice < len(da_fare_run) - 1:
@@ -516,13 +614,13 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
     print(
         f"bootstrap fatto: arruolati +{ok_run} (tot {len(arruolati)}) · "
         f"vuoti +{vuoti_run} (tot {len(vuoti)}) · errori-run {err_run} · "
-        f"errori-cumulativi {len(errori)}"
+        f"errori-cumulativi {len(errori)} · rete non raggiungibile {len(rete_non_raggiungibile)}"
         + (" · FERMATO" if fermato else ""),
         file=sys.stderr,
     )
     if fermato:
         return BOOTSTRAP_STOP
-    return BOOTSTRAP_ERRORI if errori else BOOTSTRAP_OK
+    return BOOTSTRAP_ERRORI if errori or rete_non_raggiungibile else BOOTSTRAP_OK
 
 
 def _anagrafe_comuni() -> dict[str, MunicipalityRecord]:

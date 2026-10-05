@@ -343,6 +343,44 @@ def test_vuoto_non_arruolato_e_terminale(tmp_path, monkeypatch):
     assert fetched == []  # nothing left to do: arruolati + vuoti cover the selection
 
 
+def test_rete_non_raggiungibile_va_in_backoff_e_non_viene_riprovata_subito(tmp_path, monkeypatch):
+    """Un timeout di connessione è un controllo manuale, non un retry immediato."""
+    cat = _scena(tmp_path)
+    cp_primo = tmp_path / "bootstrap-primo.json"
+    cp_secondo = tmp_path / "bootstrap-secondo.json"
+    live = tmp_path / "live"
+    monkeypatch.setattr(registro_cli, "LIVE_DIR", live)
+
+    def fake_coda(_db):
+        return sorted(p.stem for p in cat.glob("*.json"))
+
+    monkeypatch.setattr(registro_cli, "_comuni_da_censimento", fake_coda)
+    monkeypatch.setattr(registro_cli, "_connettore_inizializzati", lambda: set())
+    primo = registro_cli.bootstrap_sel.lotto(
+        registro_cli.bootstrap_sel.seleziona(cat, set(fake_coda(None)), set()), 2
+    )[0]
+
+    def rete_ko(istat):
+        return (
+            "rete_non_raggiungibile" if istat == primo else "ok",
+            f"{istat} — rete non raggiungibile",
+        )
+
+    monkeypatch.setattr(registro_cli, "_scansiona_uno", rete_ko)
+    assert registro_cli.cmd_bootstrap(_args(cat, limit=2, checkpoint=cp_primo)) == registro_cli.BOOTSTRAP_ERRORI
+    assert json.loads(cp_primo.read_text("utf-8"))["rete_non_raggiungibile"] == [primo]
+
+    riprovati: list[str] = []
+
+    def ok(istat):
+        riprovati.append(istat)
+        return "ok", f"{istat} — ok"
+
+    monkeypatch.setattr(registro_cli, "_scansiona_uno", ok)
+    assert registro_cli.cmd_bootstrap(_args(cat, limit=2, checkpoint=cp_secondo)) == registro_cli.BOOTSTRAP_OK
+    assert primo not in riprovati
+
+
 def test_checkpoint_esistente_senza_resume_rifiuta(tmp_path, _stub):
     cat = _scena(tmp_path)
     cp = tmp_path / "bootstrap.json"

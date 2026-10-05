@@ -237,6 +237,20 @@ def test_live_dir_assente_non_rompe(tmp_path: Path) -> None:
     assert r.refresh.mai_inizializzati == r.refresh.eleggibili
 
 
+def test_refresh_segnala_i_portali_in_backoff_per_controllo_manuale(tmp_path: Path) -> None:
+    paths = _scena(tmp_path)
+    _scrivi(
+        paths["live"] / "_bootstrap_backoff_rete.json",
+        {
+            "comuni": {
+                "007017": {"prossimo_tentativo_il": "2099-01-01T00:00:00+00:00"},
+                "007025": {"prossimo_tentativo_il": "2099-01-01T00:00:00+00:00"},
+            }
+        },
+    )
+    assert _build(paths).refresh.rete_non_raggiungibile == 2
+
+
 # --- adherence synthesis: recognition fused with census coverage -------
 
 

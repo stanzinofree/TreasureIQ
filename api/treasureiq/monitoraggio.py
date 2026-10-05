@@ -86,6 +86,7 @@ class RefreshOperativoOut(BaseModel):
     inizializzati: int  # eligible AND initialised (intersection, not file count)
     mai_inizializzati: int
     fuori_perimetro: int  # data-live records outside the eligible set (demo, pilot)
+    rete_non_raggiungibile: int  # active bootstrap backoffs requiring manual review
     ultimo_refresh: str | None
     worker_stato: str  # "attivo" | "fermo" | "sconosciuto"
     sidecar_aggiornato_il: str | None
@@ -304,6 +305,23 @@ def _refresh(live_dir: Path, eleggibili_codici: frozenset[str]) -> RefreshOperat
             if letto and (ultimo is None or letto > ultimo):
                 ultimo = letto
 
+    rete_non_raggiungibile = 0
+    backoff_path = live_dir / "_bootstrap_backoff_rete.json"
+    try:
+        backoff = json.loads(backoff_path.read_text("utf-8"))
+    except (OSError, json.JSONDecodeError):
+        backoff = {}
+    comuni_backoff = backoff.get("comuni") if isinstance(backoff, dict) else None
+    if isinstance(comuni_backoff, dict):
+        ora = datetime.now(timezone.utc)
+        rete_non_raggiungibile = sum(
+            1
+            for dettaglio in comuni_backoff.values()
+            if isinstance(dettaglio, dict)
+            and (prossimo := _parse_iso(dettaglio.get("prossimo_tentativo_il"))) is not None
+            and prossimo > ora
+        )
+
     sidecar: dict | None = None
     sidecar_path = live_dir / "_worker_status.json"
     if sidecar_path.exists():
@@ -325,6 +343,7 @@ def _refresh(live_dir: Path, eleggibili_codici: frozenset[str]) -> RefreshOperat
         inizializzati=inizializzati,
         mai_inizializzati=max(0, eleggibili - inizializzati),
         fuori_perimetro=fuori_perimetro,
+        rete_non_raggiungibile=rete_non_raggiungibile,
         ultimo_refresh=ultimo.isoformat() if ultimo else None,
         worker_stato=_stato_worker(sidecar, aggiornato),
         sidecar_aggiornato_il=aggiornato.isoformat() if aggiornato else None,

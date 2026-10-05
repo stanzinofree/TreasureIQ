@@ -207,6 +207,7 @@ export default async function Monitoraggio() {
               <Tessera value={n(refresh.inizializzati)} label="inizializzati / refreshabili" />
               <Tessera value={n(refresh.mai_inizializzati)} label="eleggibili mai inizializzati" />
               <Tessera value={n(refresh.eleggibili)} label="totale eleggibili" />
+              <Tessera value={n(refresh.rete_non_raggiungibile)} label="portali da controllare a mano" />
             </div>
             <p className="status-row__meta">
               Il refresh rilegge solo i comuni che hanno già un record connettore:
@@ -220,6 +221,13 @@ export default async function Monitoraggio() {
                   Altri {n(refresh.fuori_perimetro)} record già presenti sono
                   fuori dal perimetro eleggibile (demo e pilot) e non contano fra
                   gli inizializzati.
+                </>
+              )}
+              {refresh.rete_non_raggiungibile > 0 && (
+                <>
+                  {" "}
+                  {n(refresh.rete_non_raggiungibile)} portali non raggiungibili
+                  sono in backoff di rete e richiedono un controllo manuale.
                 </>
               )}
             </p>

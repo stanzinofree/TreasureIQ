@@ -407,7 +407,11 @@ def _in_check_store(result: object) -> None:
 
 
 def leggi_connettore(
-    codice_istat: str, *, usa_cache: bool = True, timeout: float = 8.0
+    codice_istat: str,
+    *,
+    usa_cache: bool = True,
+    timeout: float = 8.0,
+    rilancia_errori: bool = False,
 ) -> EsitoConnettore | None:
     """Il connettore di un comune, letto dal vivo o servito dallo store.
 
@@ -527,6 +531,8 @@ def leggi_connettore(
                 return None
     except Exception:  # noqa: BLE001 — portale muto: esito assente, mai un crash
         logger.warning("connettore illeggibile per %s", codice_istat)
+        if rilancia_errori:
+            raise
         return None
 
     if esito is None:

@@ -30,7 +30,10 @@ _ANCHOR = re.compile(r"<a\b([^>]*)>(.*?)</a>", re.I | re.S)
 _ATTR = re.compile(r"([\w:-]+)\s*=\s*([\"'])(.*?)\2", re.I | re.S)
 _TAG = re.compile(r"<[^>]+>")
 _MAX_BYTES = 2_000_000
-_MAX_PAGINE = 10
+# Rimini dichiara 15 pagine nell'indice Uffici. Il crawler segue soltanto il
+# link ``rel=next`` pubblicato dal portale, quindi un cap di 20 mantiene un
+# limite difensivo senza troncare una paginazione esplicitamente dichiarata.
+_MAX_PAGINE = 20
 _MAX_VOCI = 200
 
 

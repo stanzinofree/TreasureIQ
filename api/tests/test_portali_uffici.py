@@ -99,6 +99,33 @@ def test_pagina_successiva_muta_non_salva_snapshot_parziale(monkeypatch):
         P.leggi_drupal(_comune("www.comune.prova.it"), home_html=home)
 
 
+def test_drupal_indice_con_quindici_pagine_dichiarate(monkeypatch):
+    """Rimini dichiara 15 pagine (0..14): il cap non deve troncarle."""
+    base = "https://www.comune.prova.it"
+    pagine = {}
+    for pagina in range(15):
+        prossimo = (
+            f'<a href="?page={pagina + 1}" rel="next">Pagina successiva</a>'
+            if pagina < 14
+            else ""
+        )
+        pagine[f"{base}/amministrazione/uffici" + (f"?page={pagina}" if pagina else "")] = (
+            f'<a href="/amministrazione/uffici/ufficio-{pagina}">Ufficio {pagina}</a>{prossimo}'
+        )
+    monkeypatch.setattr(P, "fetch_guardato", _fetch(pagine, []))
+
+    uffici = P._leggi_indice(
+        base + "/amministrazione/uffici",
+        base=base,
+        famiglia="drupal",
+        sezione="uffici",
+        timeout=8,
+    )
+
+    assert len(uffici) == 15
+    assert uffici[-1][0] == "Ufficio 14"
+
+
 def test_home_non_dichiara_indici_ne_at_resta_vuota(monkeypatch):
     monkeypatch.setattr(P, "fetch_guardato", _fetch({}, []))
     esito = P.leggi_drupal(_comune("www.comune.prova.it"), home_html="<html></html>")

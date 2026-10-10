@@ -534,6 +534,15 @@ def leggi_connettore(
                     logger.info("connettore WordPress-AgID non ancora disponibile")
                     return None
                 esito = leggi_wordpress_agid(comune, sonda)
+            elif firma.piattaforma == Piattaforma.IGNOTA:
+                from treasureiq.mappa_connettore import mappa_connettore
+
+                mappa = mappa_connettore(codice_istat)
+                if mappa is None or not mappa.uffici.esposto:
+                    return None
+                from treasureiq.wordpress_agid import leggi_wordpress_agid
+
+                esito = leggi_wordpress_agid(comune, sonda)
             elif firma.piattaforma == Piattaforma.COMUNIBOOTSTRAPITALIA:
                 from treasureiq.portali_uffici import leggi_comunibootstrapitalia
                 esito = leggi_comunibootstrapitalia(comune, sonda, home_html=risposta.text)

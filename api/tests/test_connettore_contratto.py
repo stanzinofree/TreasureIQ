@@ -254,6 +254,28 @@ def test_esito_vuoto_non_persistito_dal_dispatcher(monkeypatch: pytest.MonkeyPat
     assert not (tmp_path / "connettore" / f"{ISTAT}.json").exists()
 
 
+def test_dispatcher_ignoto_con_api_uffici_legge_wordpress_agid(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
+    monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
+    monkeypatch.setattr(
+        recognition_adapter_mod,
+        "firma_da_registro",
+        lambda **_kw: Firma(piattaforma=Piattaforma.IGNOTA, prova=None),
+    )
+    fake_mappa = types.ModuleType("treasureiq.mappa_connettore")
+    fake_mappa.mappa_connettore = lambda codice: SimpleNamespace(
+        uffici=SimpleNamespace(esposto=True)
+    )
+    fake_wordpress = types.ModuleType("treasureiq.wordpress_agid")
+    fake_wordpress.leggi_wordpress_agid = lambda comune, sonda: _esito()
+    monkeypatch.setitem(sys.modules, "treasureiq.mappa_connettore", fake_mappa)
+    monkeypatch.setitem(sys.modules, "treasureiq.wordpress_agid", fake_wordpress)
+
+    assert leggi_connettore(ISTAT, usa_cache=False) is not None
+
+
 def test_home_comweb_con_link_siscom_va_al_lettore_comweb(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:

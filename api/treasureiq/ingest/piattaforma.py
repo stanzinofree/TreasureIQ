@@ -207,7 +207,7 @@ _HEADER_SPIA: tuple[tuple[str, re.Pattern[str], Piattaforma], ...] = (
 #: nessun tag e poi caricare i propri asset dal dominio del fornitore: quella
 #: e' una firma involontaria, quindi affidabile.
 _HOST_PRODOTTO: tuple[tuple[re.Pattern[str], Piattaforma], ...] = (
-    (re.compile(r"municipiumapp\.it|\bmunicipium\b", re.I), Piattaforma.MUNICIPIUM),
+    (re.compile(r"municipiumapp\.it", re.I), Piattaforma.MUNICIPIUM),
     #: SaaS AT indipendente dal CMS di base (WP a Peveragno, Municipium a
     #: Chieri/Grugliasco): confermata cross-famiglia su 3 campioni.
     (re.compile(r"trasparenza-valutazione-merito\.it", re.I), Piattaforma.JCITYGOV),

@@ -67,6 +67,7 @@ def test_drupal_unita_e_paginazione_senza_confondere_aree(monkeypatch):
         base + "/amministrazione/uffici": '''
           <a href="/unita-organizzativa/ufficio-tributi" data-element="service-area">
             <span>Ufficio Tributi</span></a>
+          <a href="/amministrazione/unita-organizzativa/ufficio-protocollo">Ufficio Protocollo</a>
           <a href="?page=1" rel="next">Pagina successiva</a>
         ''',
         base + "/amministrazione/uffici?page=1": '''
@@ -75,14 +76,15 @@ def test_drupal_unita_e_paginazione_senza_confondere_aree(monkeypatch):
         ''',
         base + "/amministrazione/aree-amministrative": '''
           <a href="/unita-organizzativa/settore-tecnico">Settore tecnico</a>
+          <a href="/amministrazione/unita-organizzativa/settore-affari-generali">Affari generali</a>
           <a href="/amministrazione/settore-finanze">Settore Finanze</a>
         ''',
     }
     chiamate = []
     monkeypatch.setattr(P, "fetch_guardato", _fetch(pagine, chiamate))
     esito = P.leggi_drupal(_comune("www.comune.prova.it"), home_html=home)
-    assert [u.nome for u in esito.uffici] == ["Ufficio Tributi", "Ufficio Anagrafe"]
-    assert [a.nome for a in esito.aree_amministrative] == ["Settore tecnico", "Settore Finanze"]
+    assert [u.nome for u in esito.uffici] == ["Ufficio Tributi", "Ufficio Protocollo", "Ufficio Anagrafe"]
+    assert [a.nome for a in esito.aree_amministrative] == ["Settore tecnico", "Affari generali", "Settore Finanze"]
     assert esito.amministrazione_trasparente.indice_url == "https://attuale.example/at"
     assert len(chiamate) == 3
 
@@ -132,3 +134,17 @@ def test_home_non_dichiara_indici_ne_at_resta_vuota(monkeypatch):
     assert esito.uffici == []
     assert esito.aree_amministrative == []
     assert esito.amministrazione_trasparente is None
+
+
+def test_comunibootstrapitalia_riusa_lettore_indici_drupal(monkeypatch):
+    base = "https://www.comune.prova.it"
+    home = '<a href="/amministrazione/uffici">Uffici</a>'
+    pagine = {
+        base + "/amministrazione/uffici": (
+            '<a href="/amministrazione/unita-organizzativa/ufficio-protocollo">Ufficio Protocollo</a>'
+        )
+    }
+    monkeypatch.setattr(P, "fetch_guardato", _fetch(pagine, []))
+    esito = P.leggi_comunibootstrapitalia(_comune("www.comune.prova.it"), home_html=home)
+    assert esito.piattaforma == "comunibootstrapitalia"
+    assert [u.nome for u in esito.uffici] == ["Ufficio Protocollo"]

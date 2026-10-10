@@ -121,10 +121,10 @@ def _scheda(path: str, famiglia: str, sezione: str) -> bool:
         ))
     if sezione == "uffici":
         return bool(re.fullmatch(
-            r"/(?:unita-organizzativa|amministrazione/uffici)/[^/]+", path
+            r"/(?:amministrazione/)?unita-organizzativa/[^/]+|/amministrazione/uffici/[^/]+", path
         ) or re.fullmatch(r"/amministrazione/ufficio-[^/]+", path))
     return bool(re.fullmatch(
-        r"/(?:unita-organizzativa|amministrazione/aree-amministrative)/[^/]+", path
+        r"/(?:amministrazione/)?unita-organizzativa/[^/]+|/amministrazione/aree-amministrative/[^/]+", path
     ) or re.fullmatch(r"/amministrazione/(?:settore|area|dipartimento)-[^/]+", path))
 
 
@@ -165,12 +165,13 @@ def _leggi_indice(
 
 
 def _leggi_portale(
-    comune: ComuneNoto, famiglia: str, *, timeout: float, home_html: str | None
+    comune: ComuneNoto, famiglia: str, *, timeout: float, home_html: str | None,
+    piattaforma: str | None = None,
 ) -> EsitoConnettore:
     base = _base_con_schema(comune.sito)
     letto_il = datetime.now(timezone.utc).isoformat()
     if base is None:
-        return EsitoConnettore(codice_istat=comune.codice_istat, piattaforma=famiglia, letto_il=letto_il)
+        return EsitoConnettore(codice_istat=comune.codice_istat, piattaforma=piattaforma or famiglia, letto_il=letto_il)
     if home_html is None:
         home_html, base = _pagina(base, _host(base), timeout)
     home_links = _link(home_html)
@@ -184,7 +185,7 @@ def _leggi_portale(
     )
     return EsitoConnettore(
         codice_istat=comune.codice_istat,
-        piattaforma=famiglia,
+        piattaforma=piattaforma or famiglia,
         letto_il=letto_il,
         uffici=[
             UfficioConnettore(
@@ -207,3 +208,11 @@ def leggi_magnolia(comune: ComuneNoto, _sonda=None, *, timeout: float = 8.0,
 def leggi_drupal(comune: ComuneNoto, _sonda=None, *, timeout: float = 8.0,
                  home_html: str | None = None) -> EsitoConnettore:
     return _leggi_portale(comune, "drupal", timeout=timeout, home_html=home_html)
+
+
+def leggi_comunibootstrapitalia(comune: ComuneNoto, _sonda=None, *, timeout: float = 8.0,
+                                home_html: str | None = None) -> EsitoConnettore:
+    return _leggi_portale(
+        comune, "drupal", timeout=timeout, home_html=home_html,
+        piattaforma="comunibootstrapitalia",
+    )

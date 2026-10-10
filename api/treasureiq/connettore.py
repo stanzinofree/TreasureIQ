@@ -25,7 +25,7 @@ from pathlib import Path
 from pydantic import BaseModel, Field
 
 from treasureiq.ingest.censimento import _Sonda, scopri_pagina_at
-from treasureiq.ingest.piattaforma import Piattaforma
+from treasureiq.ingest.piattaforma import Piattaforma, da_impronta, impronta_grezza
 from treasureiq.mappa_connettore import _base_con_schema
 from treasureiq.sonda_live import LIVE_DIR, comune_per_codice
 
@@ -485,6 +485,11 @@ def leggi_connettore(
                 source_id=codice_istat,
                 entrypoint_url=base,
             )
+            if firma.piattaforma is Piattaforma.IGNOTA:
+                firma = da_impronta(
+                    impronta=impronta_grezza(headers=dict(risposta.headers), html=risposta.text),
+                    regione=comune.regione,
+                ) or firma
             if firma.piattaforma == Piattaforma.MUNICIPIUM:
                 try:
                     from treasureiq.municipium import leggi_municipium
@@ -522,7 +527,6 @@ def leggi_connettore(
             elif firma.piattaforma in (
                 Piattaforma.WP_DESIGN_COMUNI,
                 Piattaforma.WORDPRESS_GENERICO,
-                Piattaforma.COMUNIBOOTSTRAPITALIA,
             ):
                 try:
                     from treasureiq.wordpress_agid import leggi_wordpress_agid
@@ -530,6 +534,9 @@ def leggi_connettore(
                     logger.info("connettore WordPress-AgID non ancora disponibile")
                     return None
                 esito = leggi_wordpress_agid(comune, sonda)
+            elif firma.piattaforma == Piattaforma.COMUNIBOOTSTRAPITALIA:
+                from treasureiq.portali_uffici import leggi_comunibootstrapitalia
+                esito = leggi_comunibootstrapitalia(comune, sonda, home_html=risposta.text)
             elif firma.piattaforma == Piattaforma.COMWEB:
                 try:
                     from treasureiq.comweb import leggi_comweb

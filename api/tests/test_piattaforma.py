@@ -268,6 +268,14 @@ def test_municipium_riconosciuto_dall_host_degli_asset():
     assert "municipium" in (esito.prova or "").lower()
 
 
+def test_testo_municipium_non_ruba_openpa():
+    html = (
+        '<p>Servizi erogati tramite Municipium</p>'
+        '<img src="https://flyimg.opencityitalia.it/logo.png">'
+    )
+    assert firma(html).piattaforma is Piattaforma.OPENPA
+
+
 def test_classifica_risposta_ritorna_scattate_ordinate_per_score():
     """La batteria non butta via i runner-up: un generator dichiarato che
     perde solo contro l'header è un segnale diverso da nessun runner-up."""

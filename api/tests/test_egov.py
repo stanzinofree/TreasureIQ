@@ -413,6 +413,23 @@ def test_leggi_uffici_egov_indice_reale_marino(monkeypatch: pytest.MonkeyPatch) 
     assert sonda.richieste == 1
 
 
+def test_leggi_uffici_hgate_accetta_en_senza_g(monkeypatch: pytest.MonkeyPatch) -> None:
+    pagina_uffici = _leggi_fixture("egov_uffici_marino.html")
+    uffici_url = _BASE_MARINO + "/EG0/EGSCHTST24.HBL?en=e1234&MESSA=PUBBLICA"
+    stream = _StreamFinto(200, uffici_url, {}, [pagina_uffici.encode("utf-8")])
+    monkeypatch.setattr(egov_mod.httpx, "Client", lambda **kwargs: _ClientFinto(stream, **kwargs))
+
+    uffici = egov_mod._leggi_uffici_egov(
+        "<a href='/EG0/EGSCHTST24.HBL?en=e1234&MESSA=PUBBLICA'>Uffici</a>",
+        _BASE_MARINO,
+        HOST,
+        _SondaFinta(),
+        8.0,
+    )
+
+    assert len(uffici) >= 1
+
+
 def test_leggi_uffici_egov_senza_en_eg_ritorna_vuoto() -> None:
     """Markup senza `en=eg###`: nessun indice costruibile — `[]` onesto,
     zero fetch (nessuna sonda passata: se venisse chiamata il test

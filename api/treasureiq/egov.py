@@ -97,7 +97,7 @@ _RE_ARG_URL = re.compile(r"/EG0/EGS\w+\.HBL\?(?:[^\"'&]*&)*ARG=\d+", re.IGNORECA
 
 #: L'id `en=eg###` del comune (176 per Marino) — letto dalla pagina, mai
 #: hardcoded, per costruire l'URL noto della mappa del sito.
-_RE_EN_EG = re.compile(r"\ben=eg(\d{1,4})\b")
+_RE_EN_EG = re.compile(r"\ben=(e(?:g(?:t)?)?\d{1,4})\b")
 
 #: L'indice statico degli uffici (`EGSCHTST24.HBL?en=eg###`, codice
 #: funzione uniforme sulla famiglia — verificato Marino+Olevano): ogni
@@ -229,7 +229,7 @@ def _area_mappa(pagina: str, base: str, host_comune: str) -> AreaAmministrativa 
     trovato = _RE_EN_EG.search(pagina)
     if trovato is None:
         return None
-    url = urljoin(base, f"/EG0/EGSMISTMSIT.HBL?en=eg{trovato.group(1)}&FUNZ=1")
+    url = urljoin(base, f"/EG0/EGSMISTMSIT.HBL?en={trovato.group(1)}&FUNZ=1")
     if not _stesso_host(url, host_comune):
         return None
     return AreaAmministrativa(nome="Mappa del sito", url=url)
@@ -246,7 +246,7 @@ def _leggi_uffici_egov(
     trovato = _RE_EN_EG.search(pagina_home)
     if trovato is None:
         return []
-    indice_url = urljoin(base, f"/EG0/EGSCHTST24.HBL?en=eg{trovato.group(1)}&MESSA=PUBBLICA")
+    indice_url = urljoin(base, f"/EG0/EGSCHTST24.HBL?en={trovato.group(1)}&MESSA=PUBBLICA")
     letto = _fetch(indice_url, host_comune, timeout, sonda)
     if letto is None:
         return []

@@ -430,6 +430,12 @@ def test_leggi_uffici_hgate_accetta_en_senza_g(monkeypatch: pytest.MonkeyPatch) 
     assert len(uffici) >= 1
 
 
+def test_hgate_accetta_en_con_gt() -> None:
+    trovato = egov_mod._RE_EN_EG.search("https://x/EG0/EGSCHTST24.HBL?en=egt67&MESSA=PUBBLICA")
+    assert trovato is not None
+    assert trovato.group(1) == "egt67"
+
+
 def test_leggi_uffici_egov_senza_en_eg_ritorna_vuoto() -> None:
     """Markup senza `en=eg###`: nessun indice costruibile — `[]` onesto,
     zero fetch (nessuna sonda passata: se venisse chiamata il test

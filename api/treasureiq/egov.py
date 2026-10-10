@@ -97,7 +97,7 @@ _RE_ARG_URL = re.compile(r"/EG0/EGS\w+\.HBL\?(?:[^\"'&]*&)*ARG=\d+", re.IGNORECA
 
 #: L'id `en=eg###` del comune (176 per Marino) — letto dalla pagina, mai
 #: hardcoded, per costruire l'URL noto della mappa del sito.
-_RE_EN_EG = re.compile(r"\ben=(e(?:g)?\d{1,4})\b")
+_RE_EN_EG = re.compile(r"\ben=(e(?:g(?:t)?)?\d{1,4})\b")
 
 #: L'indice statico degli uffici (`EGSCHTST24.HBL?en=eg###`, codice
 #: funzione uniforme sulla famiglia — verificato Marino+Olevano): ogni

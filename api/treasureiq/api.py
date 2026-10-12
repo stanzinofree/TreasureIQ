@@ -484,6 +484,25 @@ def load_opportunities(codice_istat: str) -> tuple[Opportunity, ...]:
     return tuple(Opportunity.model_validate(item) for item in raw) + load_curated_opportunities()
 
 
+def legacy_seed_fallback_enabled() -> bool:
+    """Whether chat may use the temporary municipal opportunity snapshots.
+
+    Live services, offices and notices have their own rails and are unaffected.
+    This gate makes their cutover observable and reversible before the MVP data
+    can be removed from the repository.
+    """
+    return os.environ.get("TREASUREIQ_LEGACY_SEED_FALLBACK", "1").strip().lower() not in {
+        "0", "false", "no", "off"
+    }
+
+
+def records_per_chat(codice_istat: str | None) -> list[Opportunity]:
+    """Return municipal opportunity snapshots only while their fallback is on."""
+    if not codice_istat or not legacy_seed_fallback_enabled() or codice_istat not in COMUNI:
+        return []
+    return list(load_opportunities(codice_istat))
+
+
 # --------------------------------------------------------------------------
 # Session
 # --------------------------------------------------------------------------
@@ -3017,7 +3036,7 @@ async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
     nominato = _comune_nominato(message)
     if nominato is not None:
         comune_istat = nominato.codice_istat
-        comune_coperto = comune_istat in COMUNI
+        comune_coperto = legacy_seed_fallback_enabled() and comune_istat in COMUNI
     else:
         # Un comune scelto esplicitamente (tap sulla tendina) decide quali
         # record si guardano, e se non ne abbiamo non se ne guardano affatto.
@@ -3033,12 +3052,10 @@ async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
         # invece di far passare le agevolazioni di un territorio per quelle di
         # chi non ne ha indicato nessuno (R-9).
         comune_istat = body.comune_istat if body.comune_istat in COMUNI else None
-        comune_coperto = body.comune_istat is None or body.comune_istat in COMUNI
-    records = (
-        list(load_opportunities(comune_istat))
-        if comune_istat and comune_coperto
-        else []
-    )
+        comune_coperto = body.comune_istat is None or (
+            legacy_seed_fallback_enabled() and body.comune_istat in COMUNI
+        )
+    records = records_per_chat(comune_istat)
 
     # Ciclo11/A8: il cittadino puo' chiedere di togliere un filtro letto dal
     # testo ma che non lo riguarda ("non sono io, e' mia madre"). Solo

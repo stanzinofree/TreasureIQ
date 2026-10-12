@@ -75,6 +75,7 @@ _LEGGIBILI = {
     "openpa",
     "drupal",
     "magnolia",
+    "agenda_smart",
 }
 
 

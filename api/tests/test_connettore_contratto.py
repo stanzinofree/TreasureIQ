@@ -460,6 +460,30 @@ def test_dispatcher_piattaforma_non_municipium_ritorna_none(
     assert leggi_connettore(ISTAT, usa_cache=False) is None
 
 
+def test_dispatcher_agenda_smart_usa_il_lettore_dedicato(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda _codice: _comune())
+    monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
+    monkeypatch.setattr(
+        recognition_adapter_mod,
+        "firma_da_registro",
+        lambda **_kw: Firma(piattaforma=Piattaforma.AGENDA_SMART, prova="agenda_smart"),
+    )
+    esito_agenda = _esito().model_copy(
+        update={"piattaforma": Piattaforma.AGENDA_SMART.value}
+    )
+    fake_mod = types.ModuleType("treasureiq.agenda_smart")
+    fake_mod.leggi_agenda_smart = lambda comune, sonda: esito_agenda
+    monkeypatch.setitem(sys.modules, "treasureiq.agenda_smart", fake_mod)
+
+    esito = leggi_connettore(ISTAT, usa_cache=False)
+
+    assert esito is not None
+    assert esito.piattaforma == Piattaforma.AGENDA_SMART.value
+
+
 def test_dispatcher_hgate_usa_il_lettore_egov(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
     monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())

@@ -293,6 +293,7 @@ PIATTAFORME_REFRESH: frozenset[str] = frozenset(
         Piattaforma.OPENPA.value,
         Piattaforma.DRUPAL.value,
         Piattaforma.MAGNOLIA.value,
+        Piattaforma.AGENDA_SMART.value,
     }
 )
 
@@ -355,6 +356,9 @@ def refresh_dati_connettore(
                 from treasureiq.portali_uffici import leggi_drupal, leggi_magnolia
                 lettore = leggi_drupal if piattaforma == Piattaforma.DRUPAL.value else leggi_magnolia
                 esito = lettore(comune, sonda, timeout=timeout)
+            elif piattaforma == Piattaforma.AGENDA_SMART.value:
+                from treasureiq.agenda_smart import leggi_agenda_smart
+                esito = leggi_agenda_smart(comune, sonda)
             else:
                 logger.info("refresh dati non supportato per piattaforma %s", piattaforma)
                 return precedente
@@ -564,6 +568,9 @@ def leggi_connettore(
                 from treasureiq.portali_uffici import leggi_drupal, leggi_magnolia
                 lettore = leggi_drupal if firma.piattaforma == Piattaforma.DRUPAL else leggi_magnolia
                 esito = lettore(comune, sonda, timeout=timeout, home_html=risposta.text)
+            elif firma.piattaforma == Piattaforma.AGENDA_SMART:
+                from treasureiq.agenda_smart import leggi_agenda_smart
+                esito = leggi_agenda_smart(comune, sonda)
             else:
                 return None
     except Exception:  # noqa: BLE001 — lettura normale degrada; bootstrap ritenta

@@ -19,6 +19,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -33,11 +35,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:ristorazione.scolastica;iscrizione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2154",
-   "fetched_at": "2026-08-05T16:07:48.112606Z",
+   "fetched_at": "2026-10-12T19:00:57.833026Z",
    "raw_hash": "d0f7ff3461cb54ed"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -69,6 +72,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -83,11 +88,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:rimborso.errato.versamento;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2153",
-   "fetched_at": "2026-08-05T16:07:48.112967Z",
+   "fetched_at": "2026-10-12T19:00:57.833590Z",
    "raw_hash": "699e92502121b6ef"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -119,6 +125,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -133,11 +141,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:rateizzazione.pagamento.tributi;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2152",
-   "fetched_at": "2026-08-05T16:07:48.113177Z",
+   "fetched_at": "2026-10-12T19:00:57.833877Z",
    "raw_hash": "a60908a3c095dc7c"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -169,6 +178,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -183,11 +194,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:iscrizione.anagrafica;attestato;cittadini.comunitari;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2151",
-   "fetched_at": "2026-08-05T16:07:48.113388Z",
+   "fetched_at": "2026-10-12T19:00:57.834075Z",
    "raw_hash": "634d555c2dfccd68"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -219,6 +231,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -233,11 +247,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:soggiorno.permanente;attestato;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2150",
-   "fetched_at": "2026-08-05T16:07:48.113581Z",
+   "fetched_at": "2026-10-12T19:00:57.834239Z",
    "raw_hash": "5e7b42c287112a86"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -269,6 +284,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -283,11 +300,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:cambio.abitazione.residenza;dichiarazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2149",
-   "fetched_at": "2026-08-05T16:07:48.113753Z",
+   "fetched_at": "2026-10-12T19:00:57.834385Z",
    "raw_hash": "7466c1c4d2152912"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -319,6 +337,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -333,11 +353,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:liste.elettorali;consultazione.copia;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2148",
-   "fetched_at": "2026-08-05T16:07:48.113905Z",
+   "fetched_at": "2026-10-12T19:00:57.834537Z",
    "raw_hash": "969afd57c98738f4"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -369,6 +390,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -383,11 +406,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:convivenza.fatto;costituzione;dichiarazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2147",
-   "fetched_at": "2026-08-05T16:07:48.114080Z",
+   "fetched_at": "2026-10-12T19:00:57.834697Z",
    "raw_hash": "70fe34196c6e2247"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -419,6 +443,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -433,11 +459,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:convivenza.fatto;cessazione;dichiarazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2146",
-   "fetched_at": "2026-08-05T16:07:48.114230Z",
+   "fetched_at": "2026-10-12T19:00:57.834845Z",
    "raw_hash": "643686acad4a161b"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -469,6 +496,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -483,11 +512,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:albo.giudici.popolari;iscrizione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2145",
-   "fetched_at": "2026-08-05T16:07:48.114383Z",
+   "fetched_at": "2026-10-12T19:00:57.835136Z",
    "raw_hash": "a842712ff1499176"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -519,6 +549,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -533,11 +565,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:albo.presidenti.seggio;iscrizione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2144",
-   "fetched_at": "2026-08-05T16:07:48.114537Z",
+   "fetched_at": "2026-10-12T19:00:57.835427Z",
    "raw_hash": "cc6d8f515035d12c"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -569,6 +602,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -583,11 +618,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:albo.scrutatori;iscrizione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2143",
-   "fetched_at": "2026-08-05T16:07:48.114689Z",
+   "fetched_at": "2026-10-12T19:00:57.835711Z",
    "raw_hash": "230c172ddcf35582"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -619,6 +655,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -633,11 +671,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:albo.scrutatori;cancellazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2142",
-   "fetched_at": "2026-08-05T16:07:48.114849Z",
+   "fetched_at": "2026-10-12T19:00:57.836044Z",
    "raw_hash": "adc7365d66b42b97"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -669,6 +708,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -683,11 +724,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:unione.civile;costituzione;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2141",
-   "fetched_at": "2026-08-05T16:07:48.115007Z",
+   "fetched_at": "2026-10-12T19:00:57.836206Z",
    "raw_hash": "8dac927efb34f444"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -719,6 +761,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -733,11 +777,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:informazioni.incidenti;rilascio;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2140",
-   "fetched_at": "2026-08-05T16:07:48.115174Z",
+   "fetched_at": "2026-10-12T19:00:57.836352Z",
    "raw_hash": "2e77e1f57865ff7d"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -769,6 +814,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -783,11 +830,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:opere.depositi.cantieri.stradali;autorizzazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2139",
-   "fetched_at": "2026-08-05T16:07:48.115340Z",
+   "fetched_at": "2026-10-12T19:00:57.836509Z",
    "raw_hash": "2c3e891a7796418f"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -819,6 +867,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -833,11 +883,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:opere.depositi.cantieri.stradali;inizio.lavori",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2138",
-   "fetched_at": "2026-08-05T16:07:48.115479Z",
+   "fetched_at": "2026-10-12T19:00:57.836665Z",
    "raw_hash": "c9d7060de12bc604"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -869,6 +920,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -883,11 +936,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:opere.depositi.cantieri.stradali;fine.lavori",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2137",
-   "fetched_at": "2026-08-05T16:07:48.115615Z",
+   "fetched_at": "2026-10-12T19:00:57.836809Z",
    "raw_hash": "229c6ffd0493ddd6"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -919,6 +973,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -933,11 +989,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:numerazione.civica;assegnazione;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2136",
-   "fetched_at": "2026-08-05T16:07:48.115756Z",
+   "fetched_at": "2026-10-12T19:00:57.836947Z",
    "raw_hash": "5d2db2c5d904a577"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -969,6 +1026,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -983,11 +1042,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:asilo.nido;iscrizione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2135",
-   "fetched_at": "2026-08-05T16:07:48.115889Z",
+   "fetched_at": "2026-10-12T19:00:57.837222Z",
    "raw_hash": "84df75c95d843eef"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1019,6 +1079,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1033,11 +1095,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:accesso.documentale;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2134",
-   "fetched_at": "2026-08-05T16:07:48.116026Z",
+   "fetched_at": "2026-10-12T19:00:57.837452Z",
    "raw_hash": "e2ddc1240c5af5ee"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1069,6 +1132,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1083,11 +1148,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:accesso.civico;semplice",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2133",
-   "fetched_at": "2026-08-05T16:07:48.116171Z",
+   "fetched_at": "2026-10-12T19:00:57.837605Z",
    "raw_hash": "770fca31a0041f8b"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1119,6 +1185,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1133,11 +1201,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:accesso.civico;generalizzato",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2132",
-   "fetched_at": "2026-08-05T16:07:48.116300Z",
+   "fetched_at": "2026-10-12T19:00:57.837879Z",
    "raw_hash": "e2f5cdd879d7c717"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1169,6 +1238,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1183,11 +1254,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:accesso.civico;riesame.domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2131",
-   "fetched_at": "2026-08-05T16:07:48.116438Z",
+   "fetched_at": "2026-10-12T19:00:57.838848Z",
    "raw_hash": "a941f489338f09e6"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1219,6 +1291,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1233,11 +1307,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:diritto.voto;domicilio;dichiarazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2130",
-   "fetched_at": "2026-08-05T16:07:48.116614Z",
+   "fetched_at": "2026-10-12T19:00:57.839332Z",
    "raw_hash": "4f02318da8dcde8d"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1269,6 +1344,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1283,11 +1360,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:servizio.prestato.presso.ente;attestato;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2129",
-   "fetched_at": "2026-08-05T16:07:48.116773Z",
+   "fetched_at": "2026-10-12T19:00:57.839754Z",
    "raw_hash": "d7620308de96c0b2"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1319,6 +1397,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1333,11 +1413,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:esercizio.potere.sostitutivo;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2128",
-   "fetched_at": "2026-08-05T16:07:48.116935Z",
+   "fetched_at": "2026-10-12T19:00:57.840057Z",
    "raw_hash": "3f4adb50cf725337"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1369,6 +1450,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1383,11 +1466,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:dati.personali;esercizio.diritti.protezione;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2127",
-   "fetched_at": "2026-08-05T16:07:48.117093Z",
+   "fetched_at": "2026-10-12T19:00:57.840313Z",
    "raw_hash": "2773eb33c6c09c34"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1419,6 +1503,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1433,11 +1519,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.malvagna.me.it/t/servizio/rilascio-della-tessera-elettorale/",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2125",
-   "fetched_at": "2026-08-05T16:07:48.117250Z",
+   "fetched_at": "2026-10-12T19:00:57.840601Z",
    "raw_hash": "c5428a7548055714"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1469,6 +1556,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1483,11 +1572,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:compensazione.crediti.debiti;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2124",
-   "fetched_at": "2026-08-05T16:07:48.117405Z",
+   "fetched_at": "2026-10-12T19:00:57.840925Z",
    "raw_hash": "6a0cbef27982b1fd"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1519,6 +1609,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1533,11 +1625,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:albo.giudici.popolari;cancellazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2123",
-   "fetched_at": "2026-08-05T16:07:48.117549Z",
+   "fetched_at": "2026-10-12T19:00:57.841215Z",
    "raw_hash": "18fe11b4d07deabf"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1569,6 +1662,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1583,11 +1678,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:carta.identita;elettronica;maggiorenni;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2122",
-   "fetched_at": "2026-08-05T16:07:48.117659Z",
+   "fetched_at": "2026-10-12T19:00:57.841440Z",
    "raw_hash": "197438f7e9e10977"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1619,6 +1715,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1633,11 +1731,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:carta.identita;elettronica;minorenni;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2121",
-   "fetched_at": "2026-08-05T16:07:48.117769Z",
+   "fetched_at": "2026-10-12T19:00:57.841588Z",
    "raw_hash": "bab91d5a0097749e"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1669,6 +1768,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1683,11 +1784,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:carta.identita;elettronica;delegato;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2120",
-   "fetched_at": "2026-08-05T16:07:48.117877Z",
+   "fetched_at": "2026-10-12T19:00:57.841753Z",
    "raw_hash": "f12378ff148ba561"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1719,6 +1821,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1733,11 +1837,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:trasporto.ceneri.resti;estero;autorizzazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2118",
-   "fetched_at": "2026-08-05T16:07:48.118014Z",
+   "fetched_at": "2026-10-12T19:00:57.841904Z",
    "raw_hash": "6f4b34b6391fa044"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1769,6 +1874,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1783,11 +1890,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:fermo.amministrativo.sequestro.veicolo;cambio.custodia;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2117",
-   "fetched_at": "2026-08-05T16:07:48.118172Z",
+   "fetched_at": "2026-10-12T19:00:57.842088Z",
    "raw_hash": "06be2aca053f9bc1"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1819,6 +1927,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1833,11 +1943,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:pubblicazione.matrimonio",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2116",
-   "fetched_at": "2026-08-05T16:07:48.118345Z",
+   "fetched_at": "2026-10-12T19:00:57.842238Z",
    "raw_hash": "757f473ec8ef8c29"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1869,6 +1980,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1883,11 +1996,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:riversamento.pagamento.tributi;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2115",
-   "fetched_at": "2026-08-05T16:07:48.118492Z",
+   "fetched_at": "2026-10-12T19:00:57.842389Z",
    "raw_hash": "2e731c0a889cd9c5"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1919,6 +2033,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1933,11 +2049,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:occupazione.suolo.pubblico;attivita.elettorali.referendarie;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2114",
-   "fetched_at": "2026-08-05T16:07:48.118677Z",
+   "fetched_at": "2026-10-12T19:00:57.842582Z",
    "raw_hash": "3ab450b95d9dfe1f"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1969,6 +2086,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1983,11 +2102,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:viabilita;modifica;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2113",
-   "fetched_at": "2026-08-05T16:07:48.118823Z",
+   "fetched_at": "2026-10-12T19:00:57.842761Z",
    "raw_hash": "bfa7d5fff50579ae"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2019,6 +2139,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2033,11 +2155,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Asanzioni%3Bamministrative.violazioni.ordinanze.regolamenti%3Brateizzazione%3Bdomanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2112",
-   "fetched_at": "2026-08-05T16:07:48.119017Z",
+   "fetched_at": "2026-10-12T19:00:57.842948Z",
    "raw_hash": "ea0268b113a178e3"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2069,6 +2192,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2083,11 +2208,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Acarico.scarico.merci%3Brealizzazione.area%3Bdomanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2111",
-   "fetched_at": "2026-08-05T16:07:48.119208Z",
+   "fetched_at": "2026-10-12T19:00:57.843153Z",
    "raw_hash": "dd4563a9a82715bb"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2119,6 +2245,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2133,11 +2261,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Apagamento.tributi%3Bdiscarico.cartella.esattoriale%3Bdomanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2110",
-   "fetched_at": "2026-08-05T16:07:48.119403Z",
+   "fetched_at": "2026-10-12T19:00:57.843368Z",
    "raw_hash": "de931f341f19b894"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2169,6 +2298,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2183,11 +2314,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Ariconciliazione.coniugi%3Bdomanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2109",
-   "fetched_at": "2026-08-05T16:07:48.119545Z",
+   "fetched_at": "2026-10-12T19:00:57.843565Z",
    "raw_hash": "cccdc3e9240b8a05"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2219,6 +2351,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2233,11 +2367,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:occupazione.suolo.pubblico;attivita.benefiche;nuova.occupazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2108",
-   "fetched_at": "2026-08-05T16:07:48.119711Z",
+   "fetched_at": "2026-10-12T19:00:57.843767Z",
    "raw_hash": "48b5a577dcc27287"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2269,6 +2404,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2283,11 +2420,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aaccedere.atti.consiglieri.comunali",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2107",
-   "fetched_at": "2026-08-05T16:07:48.119859Z",
+   "fetched_at": "2026-10-12T19:00:57.844086Z",
    "raw_hash": "7a9343111b956e24"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2319,6 +2457,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2333,11 +2473,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aveicoli.disabili%3Bcircolazione.sosta%3Btemporaneo%3Brilascio%3Bdomanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2106",
-   "fetched_at": "2026-08-05T16:07:48.120003Z",
+   "fetched_at": "2026-10-12T19:00:57.844276Z",
    "raw_hash": "04734a74412df197"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2369,6 +2510,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2383,11 +2526,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aoccupazione.suolo.pubblico%3Bcantieri.traslochi%3Bnuova",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2105",
-   "fetched_at": "2026-08-05T16:07:48.120168Z",
+   "fetched_at": "2026-10-12T19:00:57.844481Z",
    "raw_hash": "2ecadf0cc290fe94"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2419,6 +2563,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2433,11 +2579,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aanimali%3Bsegnalare.presunto.maltrattamento%3Bsegnalazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2104",
-   "fetched_at": "2026-08-05T16:07:48.120318Z",
+   "fetched_at": "2026-10-12T19:00:57.844681Z",
    "raw_hash": "9cc282426c28d0aa"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2469,6 +2616,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2483,11 +2632,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aesumazione.estumulazione%3Bautorizzazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2102",
-   "fetched_at": "2026-08-05T16:07:48.120471Z",
+   "fetched_at": "2026-10-12T19:00:57.844886Z",
    "raw_hash": "9bbcad8d11e8de61"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2519,6 +2669,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2533,11 +2685,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Ainumazione.tumulazione%3Bautorizzazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2101",
-   "fetched_at": "2026-08-05T16:07:48.120618Z",
+   "fetched_at": "2026-10-12T19:00:57.845093Z",
    "raw_hash": "b5bdd09066ac1cf0"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2569,6 +2722,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2583,11 +2738,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Atrasporto.ceneri.resti%3Bterritorio.italiano%3Bautorizzazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2100",
-   "fetched_at": "2026-08-05T16:07:48.120762Z",
+   "fetched_at": "2026-10-12T19:00:57.845282Z",
    "raw_hash": "411ef778de010a3a"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2619,6 +2775,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2633,11 +2791,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Agenerale%3Bmodifica.domicilio",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2098",
-   "fetched_at": "2026-08-05T16:07:48.120901Z",
+   "fetched_at": "2026-10-12T19:00:57.845477Z",
    "raw_hash": "42622d80790466e7"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2669,6 +2828,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2683,11 +2844,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aviolazione.norme.materia.ambientale%3Bsegnalazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2097",
-   "fetched_at": "2026-08-05T16:07:48.121036Z",
+   "fetched_at": "2026-10-12T19:00:57.845654Z",
    "raw_hash": "c2fea189678ec9dd"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2719,6 +2881,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2733,11 +2897,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Asegnalazione.carcassa.animale",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2096",
-   "fetched_at": "2026-08-05T16:07:48.121183Z",
+   "fetched_at": "2026-10-12T19:00:57.845813Z",
    "raw_hash": "12c7daa07d74e653"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2769,6 +2934,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2783,11 +2950,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aimpianto.termico%3Bmessa.norma%3Bcomunicazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2095",
-   "fetched_at": "2026-08-05T16:07:48.121378Z",
+   "fetched_at": "2026-10-12T19:00:57.846000Z",
    "raw_hash": "a70efe4c697399d9"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2819,6 +2987,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2833,11 +3003,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aabbattere.alberi%3Bautorizzazione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2094",
-   "fetched_at": "2026-08-05T16:07:48.121635Z",
+   "fetched_at": "2026-10-12T19:00:57.846174Z",
    "raw_hash": "9efa18ddb7b97112"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2869,7 +3040,7 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
-   "sesso": "f",
+   "sesso": null,
    "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
@@ -2885,11 +3056,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aparcheggi.rosa.contrassegno",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2093",
-   "fetched_at": "2026-08-05T16:07:48.121789Z",
+   "fetched_at": "2026-10-12T19:00:57.846320Z",
    "raw_hash": "bf44d07032665548"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2921,6 +3093,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2935,11 +3109,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aaccesso.civico%3Bgeneralizzato%3Bopposizione",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2092",
-   "fetched_at": "2026-08-05T16:07:48.121923Z",
+   "fetched_at": "2026-10-12T19:00:57.846526Z",
    "raw_hash": "1ad5f1dae63b1c8a"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2971,6 +3146,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2985,11 +3162,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aaccesso.civico%3Bgeneralizzato%3Bopposizione%3Briesame",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2091",
-   "fetched_at": "2026-08-05T16:07:48.122041Z",
+   "fetched_at": "2026-10-12T19:00:57.846767Z",
    "raw_hash": "7ec895f83801d7a6"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3021,6 +3199,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3035,11 +3215,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Avidimazione.registro.volontari.terzo.settore%3Bdomanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2090",
-   "fetched_at": "2026-08-05T16:07:48.122140Z",
+   "fetched_at": "2026-10-12T19:00:57.847004Z",
    "raw_hash": "831e95b6f1558aa3"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3071,6 +3252,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3085,11 +3268,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Anumerazione.civica%3Bverifica%3Bdomanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2089",
-   "fetched_at": "2026-08-05T16:07:48.122217Z",
+   "fetched_at": "2026-10-12T19:00:57.847358Z",
    "raw_hash": "f896135f33c74e21"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3121,6 +3305,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3135,11 +3321,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Acarta.identita%3Belettronica%3Bpin.puk%3Bdomanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2088",
-   "fetched_at": "2026-08-05T16:07:48.122272Z",
+   "fetched_at": "2026-10-12T19:00:57.847651Z",
    "raw_hash": "eaddf599ddbfc45c"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3171,6 +3358,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3185,11 +3374,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Anumerazione.civica%3Bmodifica%3Bdomanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2087",
-   "fetched_at": "2026-08-05T16:07:48.122393Z",
+   "fetched_at": "2026-10-12T19:00:57.847868Z",
    "raw_hash": "8cbab348d7c29857"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3221,6 +3411,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3235,11 +3427,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Anumerazione.civica%3Bsoppressione%3Bdomanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2085",
-   "fetched_at": "2026-08-05T16:07:48.122469Z",
+   "fetched_at": "2026-10-12T19:00:57.848320Z",
    "raw_hash": "80d264d29e040424"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3271,6 +3464,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3285,11 +3480,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aagevolazioni.scolastiche",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2084",
-   "fetched_at": "2026-08-05T16:07:48.122526Z",
+   "fetched_at": "2026-10-12T19:00:57.848537Z",
    "raw_hash": "cb29df5a1e489da7"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3321,7 +3517,7 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
-   "sesso": "f",
+   "sesso": null,
    "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
@@ -3337,11 +3533,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aparcheggi.rosa.contrassegno%3Brinnovo",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2083",
-   "fetched_at": "2026-08-05T16:07:48.122603Z",
+   "fetched_at": "2026-10-12T19:00:57.848802Z",
    "raw_hash": "7035ec5276f91d5a"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3373,6 +3570,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3387,11 +3586,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aaccedere.servizi.anpr",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2082",
-   "fetched_at": "2026-08-05T16:07:48.122740Z",
+   "fetched_at": "2026-10-12T19:00:57.849137Z",
    "raw_hash": "770738ea620b7785"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3423,6 +3623,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3437,11 +3639,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3Ac_c347%3Aaccedere.servizi.suap",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2078",
-   "fetched_at": "2026-08-05T16:07:48.122873Z",
+   "fetched_at": "2026-10-12T19:00:57.849340Z",
    "raw_hash": "fb1a0159534deb9e"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3473,6 +3676,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3487,11 +3692,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:c_c347:accedere.servizi.sue",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2076",
-   "fetched_at": "2026-08-05T16:07:48.122985Z",
+   "fetched_at": "2026-10-12T19:00:57.849529Z",
    "raw_hash": "6a631dafaf2bc8e3"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3523,6 +3729,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3537,11 +3745,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.malvagna.me.it/t/servizio/prenota-appuntamento/",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2035",
-   "fetched_at": "2026-08-05T16:07:48.123043Z",
+   "fetched_at": "2026-10-12T19:00:57.849644Z",
    "raw_hash": "f59081a45b2d1c63"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3573,6 +3782,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3587,11 +3798,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.malvagna.me.it/t/servizio/cambio-di-residenza/",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2033",
-   "fetched_at": "2026-08-05T16:07:48.123100Z",
+   "fetched_at": "2026-10-12T19:00:57.849765Z",
    "raw_hash": "0b20f8e93957f99b"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3623,6 +3835,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3637,11 +3851,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.malvagna.me.it/t/servizio/pagopa/",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2032",
-   "fetched_at": "2026-08-05T16:07:48.123148Z",
+   "fetched_at": "2026-10-12T19:00:57.849858Z",
    "raw_hash": "b1660c1cedcb2c71"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3673,6 +3888,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3687,11 +3904,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.malvagna.me.it/t/servizio/segnalazioni-disservizi/",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2017",
-   "fetched_at": "2026-08-05T16:07:48.123208Z",
+   "fetched_at": "2026-10-12T19:00:57.850014Z",
    "raw_hash": "a4a5b4695bad09a0"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3723,6 +3941,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3737,11 +3957,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:passo.carrabile;autorizzazione;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2011",
-   "fetched_at": "2026-08-05T16:07:48.123242Z",
+   "fetched_at": "2026-10-12T19:00:57.850090Z",
    "raw_hash": "6226236beb36a02c"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3773,6 +3994,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3787,11 +4010,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Apubblicazione.matrimonio?source=701",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2010",
-   "fetched_at": "2026-08-05T16:07:48.123267Z",
+   "fetched_at": "2026-10-12T19:00:57.850149Z",
    "raw_hash": "abfd94ae4b29c8e1"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3823,6 +4047,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3837,11 +4063,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aaccesso.documentale%3Bdomanda?source=27",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2009",
-   "fetched_at": "2026-08-05T16:07:48.123295Z",
+   "fetched_at": "2026-10-12T19:00:57.850208Z",
    "raw_hash": "5869aad201d15100"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3873,6 +4100,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3887,11 +4116,12 @@
    "connector": "wp_rest",
    "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:veicoli.disabili;circolazione.sosta;rilascio;domanda",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2008",
-   "fetched_at": "2026-08-05T16:07:48.123363Z",
+   "fetched_at": "2026-10-12T19:00:57.850354Z",
    "raw_hash": "c25d9cc660af549c"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3923,6 +4153,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3937,11 +4169,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.malvagna.me.it/t/servizio/imu/",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/1989",
-   "fetched_at": "2026-08-05T16:07:48.123429Z",
+   "fetched_at": "2026-10-12T19:00:57.850492Z",
    "raw_hash": "97ba431f3b93beef"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3973,6 +4206,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3987,11 +4222,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.malvagna.me.it/t/servizio/ricevimento-pubblico/",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/1971",
-   "fetched_at": "2026-08-05T16:07:48.123460Z",
+   "fetched_at": "2026-10-12T19:00:57.850569Z",
    "raw_hash": "76394498bca79a2f"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -4023,6 +4259,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -4037,11 +4275,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.malvagna.me.it/t/servizio/prenotazioni/",
    "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/482",
-   "fetched_at": "2026-08-05T16:07:48.123499Z",
+   "fetched_at": "2026-10-12T19:00:57.850669Z",
    "raw_hash": "6f346b3e84f8d957"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],

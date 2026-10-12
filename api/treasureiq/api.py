@@ -280,6 +280,12 @@ COMUNI = {
         "seed": "ariccia_058009.json",
         "datasets_on_dati_gov": 0,
     },
+    "058043": {
+        "nome": "Genzano di Roma",
+        "ente": "Comune di Genzano di Roma",
+        "seed": "genzano_058043.json",
+        "datasets_on_dati_gov": 0,
+    },
     "046017": {
         # Citta' d'arte con 287 servizi pubblicati: il catalogo piu' ampio fra i comuni letti.
         # Misurato il 5 agosto 2026: 287 servizi via `/wp-json/wp/v2/servizi`,

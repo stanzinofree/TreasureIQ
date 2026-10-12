@@ -19,6 +19,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -33,11 +35,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/richiedere-permesso-per-passo-carrabile/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1770",
-   "fetched_at": "2026-08-05T16:06:39.402401Z",
+   "fetched_at": "2026-10-12T19:00:32.853126Z",
    "raw_hash": "8103425ce48606d4"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -69,6 +72,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -83,11 +88,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/richiedere-permesso-per-parcheggio-invalidi/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1769",
-   "fetched_at": "2026-08-05T16:06:39.402909Z",
+   "fetched_at": "2026-10-12T19:00:32.853581Z",
    "raw_hash": "7f75c2c31a753121"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -119,6 +125,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -133,11 +141,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/richiedere-permesso-di-accesso-ad-area-ztl/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1767",
-   "fetched_at": "2026-08-05T16:06:39.403066Z",
+   "fetched_at": "2026-10-12T19:00:32.853701Z",
    "raw_hash": "8048bf88dbdc6dd0"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -169,6 +178,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -183,11 +194,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/richiesta-di-accesso-agli-atti/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1766",
-   "fetched_at": "2026-08-05T16:06:39.403263Z",
+   "fetched_at": "2026-10-12T19:00:32.853873Z",
    "raw_hash": "585af130b19ecac1"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -219,6 +231,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -233,11 +247,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/comunicazione-delle-attivita-di-locazione-breve/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1752",
-   "fetched_at": "2026-08-05T16:06:39.405641Z",
+   "fetched_at": "2026-10-12T19:00:32.856880Z",
    "raw_hash": "bb1296a704a7ae41"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -269,6 +284,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -283,11 +300,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/canone-unico-patrimoniale/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1713",
-   "fetched_at": "2026-08-05T16:06:39.405931Z",
+   "fetched_at": "2026-10-12T19:00:32.857413Z",
    "raw_hash": "2603e3519a56529d"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -319,6 +337,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -333,11 +353,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/tari/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1712",
-   "fetched_at": "2026-08-05T16:06:39.406126Z",
+   "fetched_at": "2026-10-12T19:00:32.857766Z",
    "raw_hash": "882719f1c98db464"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -369,6 +390,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -383,11 +406,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/consultare-la-tua-situazione-contributiva-imu/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1703",
-   "fetched_at": "2026-08-05T16:06:39.406401Z",
+   "fetched_at": "2026-10-12T19:00:32.858127Z",
    "raw_hash": "550fdd4a8a7bf2bb"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -419,6 +443,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -433,11 +459,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/imposta-di-soggiorno/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1693",
-   "fetched_at": "2026-08-05T16:06:39.406566Z",
+   "fetched_at": "2026-10-12T19:00:32.858274Z",
    "raw_hash": "92ebcd18a0e7c3d6"
   },
   "confidence": "declared",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [],
   "recovery_level": null,
   "pdfs_linked": null,
@@ -467,6 +494,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -481,11 +510,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/pagamenti-con-pagopa/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1690",
-   "fetched_at": "2026-08-05T16:06:39.406690Z",
+   "fetched_at": "2026-10-12T19:00:32.858394Z",
    "raw_hash": "81fc1e050f49f07b"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -517,6 +547,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -531,11 +563,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/identita-spid-in-comune/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1689",
-   "fetched_at": "2026-08-05T16:06:39.406844Z",
+   "fetched_at": "2026-10-12T19:00:32.858557Z",
    "raw_hash": "c59fb1c96c57a8cf"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -567,6 +600,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -581,11 +616,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/iscrizione-al-forum-della-societa-civile/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1684",
-   "fetched_at": "2026-08-05T16:06:39.406987Z",
+   "fetched_at": "2026-10-12T19:00:32.858664Z",
    "raw_hash": "864c83661b674b74"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -617,6 +653,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -631,11 +669,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/anagrafe-online-accesso-alla-banca-dati-anagrafe/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1658",
-   "fetched_at": "2026-08-05T16:06:39.407258Z",
+   "fetched_at": "2026-10-12T19:00:32.858848Z",
    "raw_hash": "f6125fb62866baed"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -667,6 +706,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -681,11 +722,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/cittadini-stranieri-non-comunitari-iscrizione-anagrafica/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1623",
-   "fetched_at": "2026-08-05T16:06:39.407426Z",
+   "fetched_at": "2026-10-12T19:00:32.858990Z",
    "raw_hash": "39501b0ab31a9c4d"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -717,6 +759,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -731,11 +775,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/cittadini-dellunione-europea-iscrizione-anagrafica/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1622",
-   "fetched_at": "2026-08-05T16:06:39.409110Z",
+   "fetched_at": "2026-10-12T19:00:32.860629Z",
    "raw_hash": "8ae9b7c8e7a8fe2d"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -767,6 +812,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -781,11 +828,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/cancellazioni-anagrafiche/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1621",
-   "fetched_at": "2026-08-05T16:06:39.409323Z",
+   "fetched_at": "2026-10-12T19:00:32.860895Z",
    "raw_hash": "e99dfd3af463c989"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -817,6 +865,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -831,11 +881,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/iscrizione-anagrafica-per-nascita/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1620",
-   "fetched_at": "2026-08-05T16:06:39.409427Z",
+   "fetched_at": "2026-10-12T19:00:32.861027Z",
    "raw_hash": "59b601efd1997801"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -867,6 +918,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -881,11 +934,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/cambio-di-residenza/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1619",
-   "fetched_at": "2026-08-05T16:06:39.409971Z",
-   "raw_hash": "759c7b09cd03f4d4"
+   "fetched_at": "2026-10-12T19:00:32.861650Z",
+   "raw_hash": "893f6c0dff195e8a"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -917,6 +971,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -931,11 +987,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/rilascio-certificati-anagrafici-2/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1618",
-   "fetched_at": "2026-08-05T16:06:39.410146Z",
+   "fetched_at": "2026-10-12T19:00:32.861869Z",
    "raw_hash": "05f800a9890be92d"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -967,6 +1024,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -981,11 +1040,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/rilascio-certificati-anagrafici/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1617",
-   "fetched_at": "2026-08-05T16:06:39.410234Z",
+   "fetched_at": "2026-10-12T19:00:32.861990Z",
    "raw_hash": "3a2405cdd0732e29"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1017,6 +1077,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1031,11 +1093,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/carta-didentita-elettronica-cie/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1598",
-   "fetched_at": "2026-08-05T16:06:39.411269Z",
-   "raw_hash": "9a49ee5fdd7db871"
+   "fetched_at": "2026-10-12T19:00:32.862855Z",
+   "raw_hash": "9bdfd43920d4bf9c"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1067,6 +1130,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1081,11 +1146,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/autorizzazione-alloccupazione-temporanea-di-area-demaniale-marittima/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1591",
-   "fetched_at": "2026-08-05T16:06:39.412225Z",
+   "fetched_at": "2026-10-12T19:00:32.865750Z",
    "raw_hash": "fb54a1db3d868bab"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1117,6 +1183,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1131,11 +1199,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/richieste-o-modifiche-concessioni-demanio-marittimo/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1590",
-   "fetched_at": "2026-08-05T16:06:39.412418Z",
+   "fetched_at": "2026-10-12T19:00:32.866570Z",
    "raw_hash": "227d56f84899089b"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1167,6 +1236,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1181,11 +1252,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/leva/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1589",
-   "fetched_at": "2026-08-05T16:06:39.412533Z",
+   "fetched_at": "2026-10-12T19:00:32.867349Z",
    "raw_hash": "7fb7379de984f668"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1217,6 +1289,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1231,11 +1305,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/giudici-popolari/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1588",
-   "fetched_at": "2026-08-05T16:06:39.412636Z",
+   "fetched_at": "2026-10-12T19:00:32.867638Z",
    "raw_hash": "90c77bc4aaeeb1b0"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1267,6 +1342,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1281,11 +1358,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/elezioni-voto-dei-cittadini-dellunione-europea-residenti-in-italia/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1587",
-   "fetched_at": "2026-08-05T16:06:39.412887Z",
+   "fetched_at": "2026-10-12T19:00:32.867998Z",
    "raw_hash": "10108289ad777c40"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1317,6 +1395,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1331,11 +1411,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/voto-a-domicilio-per-elettori-affetti-da-infermita-ed-intrasportabili/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1586",
-   "fetched_at": "2026-08-05T16:06:39.414181Z",
+   "fetched_at": "2026-10-12T19:00:32.869271Z",
    "raw_hash": "60b1ec341e8b72ad"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1367,6 +1448,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1381,11 +1464,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/elezioni-e-voto-assistito/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1585",
-   "fetched_at": "2026-08-05T16:06:39.414784Z",
+   "fetched_at": "2026-10-12T19:00:32.869947Z",
    "raw_hash": "0f95bfac2324cc53"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1417,6 +1501,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1431,11 +1517,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/iscrizione-allalbo-presidenti-di-seggio-elettorale-e-il-segretario-di-seggio-elettorale/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1583",
-   "fetched_at": "2026-08-05T16:06:39.414914Z",
+   "fetched_at": "2026-10-12T19:00:32.870144Z",
    "raw_hash": "606cb856e653b10d"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1467,6 +1554,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1481,11 +1570,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/certificazione-di-iscrizione-alle-liste-elettorali/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1582",
-   "fetched_at": "2026-08-05T16:06:39.415197Z",
+   "fetched_at": "2026-10-12T19:00:32.870470Z",
    "raw_hash": "662ace5a6fcd667e"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1517,6 +1607,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1531,11 +1623,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/tessera-elettorale/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1581",
-   "fetched_at": "2026-08-05T16:06:39.415370Z",
+   "fetched_at": "2026-10-12T19:00:32.870679Z",
    "raw_hash": "17487c32cf6a3977"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1567,6 +1660,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1581,11 +1676,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/le-liste-elettorali/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1580",
-   "fetched_at": "2026-08-05T16:06:39.415519Z",
+   "fetched_at": "2026-10-12T19:00:32.870873Z",
    "raw_hash": "54f44cda1e6bab8e"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1617,6 +1713,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1631,11 +1729,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/denuncia-di-morte/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1579",
-   "fetched_at": "2026-08-05T16:06:39.415855Z",
+   "fetched_at": "2026-10-12T19:00:32.871260Z",
    "raw_hash": "b01f201512b24e8f"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1667,6 +1766,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1681,11 +1782,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/acquisizione-della-cittadinanza-italiana-stato-civile/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1578",
-   "fetched_at": "2026-08-05T16:06:39.416012Z",
+   "fetched_at": "2026-10-12T19:00:32.871438Z",
    "raw_hash": "af50b9e27d2609c3"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1717,6 +1819,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1731,11 +1835,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/matrimonio-e-unioni-civili/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1575",
-   "fetched_at": "2026-08-05T16:06:39.416112Z",
+   "fetched_at": "2026-10-12T19:00:32.871649Z",
    "raw_hash": "2023b8888db94f82"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1767,6 +1872,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1781,11 +1888,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/pubblicazioni-di-matrimonio/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1574",
-   "fetched_at": "2026-08-05T16:06:39.416743Z",
+   "fetched_at": "2026-10-12T19:00:32.873744Z",
    "raw_hash": "9a0b2685fa7d935d"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1817,6 +1925,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1831,11 +1941,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/dichiarazione-di-nascita/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1573",
-   "fetched_at": "2026-08-05T16:06:39.416970Z",
+   "fetched_at": "2026-10-12T19:00:32.874292Z",
    "raw_hash": "2372119c12732c3b"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1867,6 +1978,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1881,11 +1994,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/cambio-di-nome-e-o-di-cognome/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1571",
-   "fetched_at": "2026-08-05T16:06:39.417242Z",
+   "fetched_at": "2026-10-12T19:00:32.874654Z",
    "raw_hash": "22991d395b3ac26f"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1917,6 +2031,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1931,11 +2047,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/segnalazione-certificata-di-inizio-attivita-edilizia-scia-alternativa-al-permesso-di-costruire-pdc/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1545",
-   "fetched_at": "2026-08-05T16:06:39.417394Z",
+   "fetched_at": "2026-10-12T19:00:32.874839Z",
    "raw_hash": "17872d4c5aea2b46"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -1967,6 +2084,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -1981,11 +2100,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/rilascio-dellattestazione-di-idoneita-abitativa/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1544",
-   "fetched_at": "2026-08-05T16:06:39.417519Z",
+   "fetched_at": "2026-10-12T19:00:32.875074Z",
    "raw_hash": "2115ff186c5a66ac"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2017,6 +2137,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2031,11 +2153,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/rilascio-del-permesso-di-costruire-pdc/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1543",
-   "fetched_at": "2026-08-05T16:06:39.417624Z",
+   "fetched_at": "2026-10-12T19:00:32.875339Z",
    "raw_hash": "fdbf75803e59f5f1"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2067,6 +2190,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2081,11 +2206,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/rilascio-del-parere-preventivo-in-ambito-edilizio/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1542",
-   "fetched_at": "2026-08-05T16:06:39.417788Z",
+   "fetched_at": "2026-10-12T19:00:32.875560Z",
    "raw_hash": "c5d206e38237731c"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2117,6 +2243,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2131,11 +2259,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/rilascio-del-certificato-di-destinazione-urbanistica-cdu/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1541",
-   "fetched_at": "2026-08-05T16:06:39.418103Z",
+   "fetched_at": "2026-10-12T19:00:32.875934Z",
    "raw_hash": "032bd7f763758bab"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2167,6 +2296,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2181,11 +2312,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/fine-dei-lavori-edilizi/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1540",
-   "fetched_at": "2026-08-05T16:06:39.418208Z",
+   "fetched_at": "2026-10-12T19:00:32.876334Z",
    "raw_hash": "5ec9e4cedea925ef"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2217,6 +2349,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2231,11 +2365,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/domanda-di-proroga-per-linizio-o-la-fine-dei-lavori-edilizi-relativi-a-un-permesso-di-costruire/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1539",
-   "fetched_at": "2026-08-05T16:06:39.418360Z",
+   "fetched_at": "2026-10-12T19:00:32.876486Z",
    "raw_hash": "8f921bd49f450021"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2267,6 +2402,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2281,11 +2418,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/deposito-dellatto-di-aggiornamento-catastale-frazionamento/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1538",
-   "fetched_at": "2026-08-05T16:06:39.418497Z",
+   "fetched_at": "2026-10-12T19:00:32.876624Z",
    "raw_hash": "bdb949b98a905a79"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2317,6 +2455,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2331,11 +2471,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/comunicazione-di-inizio-lavori-cil/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1537",
-   "fetched_at": "2026-08-05T16:06:39.418627Z",
+   "fetched_at": "2026-10-12T19:00:32.876774Z",
    "raw_hash": "8495192f02fe9ef6"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2367,6 +2508,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2381,11 +2524,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/segnalazione-certificata-di-agibilita/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1536",
-   "fetched_at": "2026-08-05T16:06:39.418749Z",
+   "fetched_at": "2026-10-12T19:00:32.876913Z",
    "raw_hash": "aa9cb3d279ac4f56"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2417,6 +2561,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2431,11 +2577,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/accertamento-di-compatibilita-paesaggistica/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1535",
-   "fetched_at": "2026-08-05T16:06:39.418864Z",
+   "fetched_at": "2026-10-12T19:00:32.877049Z",
    "raw_hash": "ee9a3878868ac56f"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2467,6 +2614,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2481,11 +2630,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/accesso-ai-servizi-del-suet/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1534",
-   "fetched_at": "2026-08-05T16:06:39.418961Z",
+   "fetched_at": "2026-10-12T19:00:32.877153Z",
    "raw_hash": "b628b255819d8374"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2517,6 +2667,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2531,11 +2683,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/segnalazione-certificata-di-inizio-attivita-scia/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1533",
-   "fetched_at": "2026-08-05T16:06:39.419078Z",
+   "fetched_at": "2026-10-12T19:00:32.877283Z",
    "raw_hash": "27c030aa595b471f"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2567,6 +2720,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2581,11 +2736,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/cila-comunicazione-di-inizio-lavori-asseverata/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1532",
-   "fetched_at": "2026-08-05T16:06:39.419196Z",
+   "fetched_at": "2026-10-12T19:00:32.877410Z",
    "raw_hash": "8c8eadcca2433818"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2617,6 +2773,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2631,11 +2789,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/autorizzazioni-ambientali/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1518",
-   "fetched_at": "2026-08-05T16:06:39.419464Z",
+   "fetched_at": "2026-10-12T19:00:32.877699Z",
    "raw_hash": "32ab1267c5ee907e"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2667,6 +2826,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2681,11 +2842,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/esposizione-a-radioattivita-naturale-gas-radon/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1517",
-   "fetched_at": "2026-08-05T16:06:39.419575Z",
+   "fetched_at": "2026-10-12T19:00:32.877810Z",
    "raw_hash": "9bce98561650f538"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2717,6 +2879,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2731,11 +2895,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/classificazione-di-industria-insalubre/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1516",
-   "fetched_at": "2026-08-05T16:06:39.419706Z",
+   "fetched_at": "2026-10-12T19:00:32.877960Z",
    "raw_hash": "b8dd605bcbbfbef5"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2767,6 +2932,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2781,11 +2948,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/accesso-ai-servizi-del-suap-sportello-unico-attivita-produttive/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1515",
-   "fetched_at": "2026-08-05T16:06:39.419878Z",
+   "fetched_at": "2026-10-12T19:00:32.878121Z",
    "raw_hash": "b5c3f2abe28c9090"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2817,6 +2985,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2831,11 +3001,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/accesso-ai-servizi-dellanpr/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1514",
-   "fetched_at": "2026-08-05T16:06:39.420038Z",
+   "fetched_at": "2026-10-12T19:00:32.878250Z",
    "raw_hash": "a042415a9c4a2684"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2867,6 +3038,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2881,11 +3054,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/segnalazione-di-presunta-violazione-delle-norme-ambientali/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1508",
-   "fetched_at": "2026-08-05T16:06:39.420187Z",
+   "fetched_at": "2026-10-12T19:00:32.878366Z",
    "raw_hash": "3b66e0b98512cb1e"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2917,6 +3091,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2931,11 +3107,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/segnalazione-presenza-di-cani-randagi-e-animali-selvatici/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1507",
-   "fetched_at": "2026-08-05T16:06:39.420353Z",
+   "fetched_at": "2026-10-12T19:00:32.878502Z",
    "raw_hash": "26a1b3d51ae50d3e"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -2967,6 +3144,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -2981,11 +3160,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/locazione-immobili-comunali-con-destinazione-commerciale/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1506",
-   "fetched_at": "2026-08-05T16:06:39.420472Z",
+   "fetched_at": "2026-10-12T19:00:32.878616Z",
    "raw_hash": "c716b67f60da31df"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3017,6 +3197,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3031,11 +3213,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/concessione-contributi-sostenibilita-ambientale/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1505",
-   "fetched_at": "2026-08-05T16:06:39.420575Z",
+   "fetched_at": "2026-10-12T19:00:32.878709Z",
    "raw_hash": "35711452262bf071"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3067,6 +3250,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3081,11 +3266,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/autorizzazioni-paesaggistiche/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1504",
-   "fetched_at": "2026-08-05T16:06:39.420888Z",
+   "fetched_at": "2026-10-12T19:00:32.879017Z",
    "raw_hash": "5c33c4480c0c8105"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3117,6 +3303,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3131,11 +3319,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/assegnazione-di-un-alloggio-e-box-auto/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1503",
-   "fetched_at": "2026-08-05T16:06:39.421023Z",
+   "fetched_at": "2026-10-12T19:00:32.879137Z",
    "raw_hash": "434a4b3c99211bf5"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3167,6 +3356,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3181,11 +3372,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/richiesta-allacciamento-alla-rete-irrigua-delle-acque-depurate/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1502",
-   "fetched_at": "2026-08-05T16:06:39.421247Z",
+   "fetched_at": "2026-10-12T19:00:32.879350Z",
    "raw_hash": "def86c86b93c3f5c"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3217,6 +3409,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3231,11 +3425,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/servizi-di-igiene-urbana/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1499",
-   "fetched_at": "2026-08-05T16:06:39.421408Z",
+   "fetched_at": "2026-10-12T19:00:32.879503Z",
    "raw_hash": "0037d093443f003e"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3267,6 +3462,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3281,11 +3478,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/concessione-del-patrocinio/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1492",
-   "fetched_at": "2026-08-05T16:06:39.421520Z",
+   "fetched_at": "2026-10-12T19:00:32.879606Z",
    "raw_hash": "b39fd8b463ea19ec"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3317,6 +3515,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3331,11 +3531,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/concessione-di-un-contributo-economico-per-lorganizzazione-di-manifestazioni-eventi-o-iniziative/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1491",
-   "fetched_at": "2026-08-05T16:06:39.421812Z",
+   "fetched_at": "2026-10-12T19:00:32.879881Z",
    "raw_hash": "6352b3a20cf69c6d"
   },
   "confidence": "declared",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [],
   "recovery_level": null,
   "pdfs_linked": null,
@@ -3365,6 +3566,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3379,11 +3582,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/concessione-uso-impianti-sportivi-e-palestre-scolastiche-comunali/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1490",
-   "fetched_at": "2026-08-05T16:06:39.421932Z",
+   "fetched_at": "2026-10-12T19:00:32.880081Z",
    "raw_hash": "5ffa01f928a43c79"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3415,6 +3619,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [
     "Richiesta attestazione ISEE (soglia non pubblicata)"
@@ -3431,11 +3637,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/esonero-quota-di-iscrizione-del-servizio-di-mensa-scolastica/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1448",
-   "fetched_at": "2026-08-05T16:06:39.422043Z",
+   "fetched_at": "2026-10-12T19:00:32.880208Z",
    "raw_hash": "f6b7641b5cb94fe8"
   },
   "confidence": "extracted",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
@@ -3468,6 +3675,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3482,11 +3691,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/servizio-mensa-scolastica-iscrizione-al-servizio/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1441",
-   "fetched_at": "2026-08-05T16:06:39.422381Z",
+   "fetched_at": "2026-10-12T19:00:32.881407Z",
    "raw_hash": "ed9233c715b80445"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3518,6 +3728,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3532,11 +3744,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/concessione-in-uso-sala-mostre-biblioteca/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1469",
-   "fetched_at": "2026-08-05T16:06:39.422583Z",
+   "fetched_at": "2026-10-12T19:00:32.881743Z",
    "raw_hash": "5cccde7f4bcb8e24"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3568,6 +3781,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3582,11 +3797,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/prestito-interbibliotecario/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1468",
-   "fetched_at": "2026-08-05T16:06:39.422741Z",
+   "fetched_at": "2026-10-12T19:00:32.882032Z",
    "raw_hash": "4982d7e58c3889ea"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3618,6 +3834,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3632,11 +3850,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/attivita-di-lettura/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1467",
-   "fetched_at": "2026-08-05T16:06:39.422863Z",
+   "fetched_at": "2026-10-12T19:00:32.882169Z",
    "raw_hash": "afdf100e73c2ee9d"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3668,6 +3887,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3682,11 +3903,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/consultazione-in-sede-biblioteca/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1466",
-   "fetched_at": "2026-08-05T16:06:39.423022Z",
+   "fetched_at": "2026-10-12T19:00:32.882271Z",
    "raw_hash": "060c486ac8f3ffcb"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3718,6 +3940,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3732,11 +3956,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/emeroteca-biblioteca/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1465",
-   "fetched_at": "2026-08-05T16:06:39.423173Z",
+   "fetched_at": "2026-10-12T19:00:32.882355Z",
    "raw_hash": "dee6925644677200"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3768,6 +3993,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3782,11 +4009,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/postazioni-informatiche-biblioteca/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1464",
-   "fetched_at": "2026-08-05T16:06:39.423327Z",
+   "fetched_at": "2026-10-12T19:00:32.882451Z",
    "raw_hash": "0b44f2073bba82d0"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3818,6 +4046,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3832,11 +4062,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/prestito-libri/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1463",
-   "fetched_at": "2026-08-05T16:06:39.423478Z",
+   "fetched_at": "2026-10-12T19:00:32.882538Z",
    "raw_hash": "e943c911d65621c1"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3868,6 +4099,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3882,11 +4115,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/visite-guidate/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1462",
-   "fetched_at": "2026-08-05T16:06:39.423588Z",
+   "fetched_at": "2026-10-12T19:00:32.882652Z",
    "raw_hash": "04790b4d4b9257b9"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -3918,6 +4152,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [
     "Richiesta attestazione ISEE (soglia non pubblicata)"
@@ -3934,11 +4170,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/piscina-comunale/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1451",
-   "fetched_at": "2026-08-05T16:06:39.423704Z",
+   "fetched_at": "2026-10-12T19:00:32.882813Z",
    "raw_hash": "88993fabc8e66375"
   },
   "confidence": "extracted",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
@@ -3971,6 +4208,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [
     "Richiesta attestazione ISEE (soglia non pubblicata)"
@@ -3987,11 +4226,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/esonero-costo-del-trasporto-scolastico/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1450",
-   "fetched_at": "2026-08-05T16:06:39.423799Z",
+   "fetched_at": "2026-10-12T19:00:32.882938Z",
    "raw_hash": "44a26b2480c26110"
   },
   "confidence": "extracted",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
@@ -4024,6 +4264,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -4038,11 +4280,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/bonus-disagio-fisico/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1447",
-   "fetched_at": "2026-08-05T16:06:39.423894Z",
+   "fetched_at": "2026-10-12T19:00:32.883015Z",
    "raw_hash": "787585fcbc740169"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -4074,6 +4317,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -4088,11 +4333,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/assegno-di-maternita/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1446",
-   "fetched_at": "2026-08-05T16:06:39.423983Z",
+   "fetched_at": "2026-10-12T19:00:32.883069Z",
    "raw_hash": "734fcc452c43c0ac"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -4124,6 +4370,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [
     "Richiesta attestazione ISEE (soglia non pubblicata)"
@@ -4140,11 +4388,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/assistenza-economica-straordinaria/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1444",
-   "fetched_at": "2026-08-05T16:06:39.424091Z",
+   "fetched_at": "2026-10-12T19:00:32.883138Z",
    "raw_hash": "feaf6ab5b44224c4"
   },
   "confidence": "extracted",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
@@ -4177,6 +4426,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [
     "Richiesta attestazione ISEE (soglia non pubblicata)"
@@ -4193,11 +4444,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/taxi-sociale/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1443",
-   "fetched_at": "2026-08-05T16:06:39.424203Z",
+   "fetched_at": "2026-10-12T19:00:32.883199Z",
    "raw_hash": "1004180e74efd73e"
   },
   "confidence": "extracted",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
@@ -4230,6 +4482,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -4244,11 +4498,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/trasporto-scolastico-iscrizione-al-servizio/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1435",
-   "fetched_at": "2026-08-05T16:06:39.424365Z",
-   "raw_hash": "18117e07113680b6"
+   "fetched_at": "2026-10-12T19:00:32.883281Z",
+   "raw_hash": "5251a9868cc09f81"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -4280,6 +4535,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -4294,11 +4551,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/cedole-librarie-per-genitori/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1434",
-   "fetched_at": "2026-08-05T16:06:39.424665Z",
+   "fetched_at": "2026-10-12T19:00:32.883429Z",
    "raw_hash": "f502da25e3c73213"
   },
   "confidence": "inferred",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
   ],
@@ -4330,6 +4588,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [
     "Richiesta attestazione ISEE (soglia non pubblicata)"
@@ -4346,11 +4606,12 @@
    "connector": "wp_rest",
    "url": "https://www.comune.ostuni.br.it/servizio/il-comune-eroga-ai-genitori-di-ragazzi-che-frequentano-le-scuole-di-secondo-grado-contributi-a-rimborso-totale-o-parziale-per-lacquisto-di-libri-di-testo-scolastici/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1431",
-   "fetched_at": "2026-08-05T16:06:39.424912Z",
+   "fetched_at": "2026-10-12T19:00:32.883509Z",
    "raw_hash": "9750734ad06ef49f"
   },
   "confidence": "extracted",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
@@ -4367,8 +4628,8 @@
   "spec_version": "0.1.0",
   "id": "wp_pages:074012:3277",
   "title": "Garante dei diritti delle persone con disabilità.",
-  "summary": "SERVIZI: TARIFFA TARI: AGEVOLAZIONE 10% PER FAMIGLIE CON PRESENZA DI PERSONE CON DISABILITA’ AL 100% | ESENZIONE DAL PAGAMENTO DEL CANONE DI PASSI CARRABILI, RAMPE E SIMILI DESTINATI A SOGGETTI PORTATORI DI HANDICAP | RICHIESTA CONTRASSEGNO UNIFICATO DISABILI EUROPEO (CUDE) | RICHIESTA DI ACCESSO AD AREA ZTL PERSONE CON DISABILITA' | SERVIZIO DI TAXI SOCIALE | FREQUENZA GRATUITA DELLA PISCINA COMU",
-  "body": "SERVIZI: TARIFFA TARI: AGEVOLAZIONE 10% PER FAMIGLIE CON PRESENZA DI PERSONE CON DISABILITA’ AL 100% | ESENZIONE DAL PAGAMENTO DEL CANONE DI PASSI CARRABILI, RAMPE E SIMILI DESTINATI A SOGGETTI PORTATORI DI HANDICAP | RICHIESTA CONTRASSEGNO UNIFICATO DISABILI EUROPEO (CUDE) | RICHIESTA DI ACCESSO AD AREA ZTL PERSONE CON DISABILITA' | SERVIZIO DI TAXI SOCIALE | FREQUENZA GRATUITA DELLA PISCINA COMUNALE A PERSONE CON INVALIDITA’ DEL 100% | LE AGEVOLAZIONI FISCALI DELLA AGENZIA DELLE ENTRATE PER LE PERSONE CON DISABILITA’ | RELAZIONI SEMESTRALI: RELAZIONE SEMESTRE 12/08/2026 – 28/02/2026 | DOCUMENTI D’INTERESSE: CONVENZIONE ONU DEI DIRITTI DELLE PERSONE CON DISABILITA’ | DECRETO DI NOMINA DEL GARANTE PER I DIRITTI DELLE PERSONE CON DISABILITA’ | REGOLAMENTO COMUNALE DEL GARANTE PER I DIRITTI DELLE PERSONE CON DISABILITA’ | L. 67/2006 LEGGE ANTIDISCRIMINAZIONE | AVVISI: Regione Puglia e ARPAL Puglia – Avviso Pubblico per la formazione dell’Elenco degli Assistenti Familiari – LINK",
+  "summary": "SERVIZI: TARIFFA TARI: AGEVOLAZIONE 10% PER FAMIGLIE CON PRESENZA DI PERSONE CON DISABILITA’ AL 100% | ESENZIONE DAL PAGAMENTO DEL CANONE DI PASSI CARRABILI, RAMPE E SIMILI DESTINATI A SOGGETTI PORTATORI DI HANDICAP | RICHIESTA CONTRASSEGNO UNIFICATO DISABILI EUROPEO (CUDE) | RICHIESTA DI ACCESSO AD AREA ZTL PERSONE CON DISABILITA’ | SERVIZIO DI TAXI SOCIALE | FREQUENZA GRATUITA DELLA PISCINA COMU",
+  "body": "SERVIZI: TARIFFA TARI: AGEVOLAZIONE 10% PER FAMIGLIE CON PRESENZA DI PERSONE CON DISABILITA’ AL 100% | ESENZIONE DAL PAGAMENTO DEL CANONE DI PASSI CARRABILI, RAMPE E SIMILI DESTINATI A SOGGETTI PORTATORI DI HANDICAP | RICHIESTA CONTRASSEGNO UNIFICATO DISABILI EUROPEO (CUDE) | RICHIESTA DI ACCESSO AD AREA ZTL PERSONE CON DISABILITA’ | SERVIZIO DI TAXI SOCIALE | FREQUENZA GRATUITA DELLA PISCINA COMUNALE A PERSONE CON INVALIDITA’ DEL 100% | LE AGEVOLAZIONI FISCALI DELLA AGENZIA DELLE ENTRATE PER LE PERSONE CON DISABILITA’ | SERVIZIO DI CONSEGNA A DOMICILIO DEI SACCHETTI PER I CITTADINI CON DISABILITA’ | RELAZIONI SEMESTRALI: RELAZIONE SEMESTRE 12/08/2026 – 28/02/2026 | DOCUMENTI D’INTERESSE: CONVENZIONE ONU DEI DIRITTI DELLE PERSONE CON DISABILITA’ | DECRETO DI NOMINA DEL GARANTE PER I DIRITTI DELLE PERSONE CON DISABILITA’ | REGOLAMENTO COMUNALE DEL GARANTE PER I DIRITTI DELLE PERSONE CON DISABILITA’ | L. 67/2006 LEGGE ANTIDISCRIMINAZIONE | AVVISI: Regione Puglia e ARPAL Puglia – Avviso Pubblico per la formazione dell’Elenco degli Assistenti Familiari – LINK",
   "kind": "agevolazione",
   "targets": [
    "tutti"
@@ -4382,7 +4643,9 @@
    "residenza_comuni": [],
    "nucleo_min": null,
    "figli_minori_required": null,
-   "disabilita_required": true,
+   "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -4397,33 +4660,32 @@
    "connector": "wp_pages",
    "url": "https://www.comune.ostuni.br.it/garante-dei-diritti-delle-persone-con-disabilita/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/pages/3277",
-   "fetched_at": "2026-08-05T16:07:15.123167Z",
-   "raw_hash": "15b4a4658bf3ad21"
+   "fetched_at": "2026-10-12T19:00:42.201262Z",
+   "raw_hash": "54db2ed252fc2267"
   },
   "confidence": "extracted",
   "livello": "comunale",
+  "regione": null,
   "extraction_notes": [
-   "Allegato PDF illeggibile (parsing fallito): https://www.lavoro.gov.it/temi-e-priorita/disabilita-e-non-autosufficienza/focus-on/Convenzione-ONU/Documents/Convenzione%20ONU.pdf (No module named 'pypdf')",
-   "Allegato PDF illeggibile (parsing fallito): https://dgegovpa.it/Ostuni/albo/dati/20250012C.PDF (No module named 'pypdf')",
-   "Non è chiaro se le agevolazioni sono accessibili solo a chi ha un certificato di disabilità o se la disabilità deve essere dichiarata in un certo modo.",
-   "Fonte per 'disabilita_required': pagina web https://www.comune.ostuni.br.it/garante-dei-diritti-delle-persone-con-disabilita/ — \"AGEVOLAZIONE 10% PER FAMIGLIE CON PRESENZA DI PERSONE CON DISABILITA’ AL 100%\""
+   "Allegato PDF ignorato (rediretto fuori host): https://www.lavoro.gov.it/temi-e-priorita/disabilita-e-non-autosufficienza/focus-on/Convenzione-ONU/Documents/Convenzione%20ONU.pdf -> https://www.lavoro.gov.it/temi-e-priorita/disabilita-e-non-autosufficienza/focus-on/Convenzione-ONU/Documents/Convenzione%20ONU.pdf",
+   "Allegato PDF ignorato (rediretto fuori host): https://dgegovpa.it/Ostuni/albo/dati/20250012C.PDF -> https://dgegovpa.it/Ostuni/albo/dati/20250012C.PDF"
   ],
-  "recovery_level": "L2_estratto",
+  "recovery_level": "L1_manuale",
   "pdfs_linked": 2,
   "pdfs_opened": 0,
   "pdfs_skipped": [
    {
     "url": "https://www.lavoro.gov.it/temi-e-priorita/disabilita-e-non-autosufficienza/focus-on/Convenzione-ONU/Documents/Convenzione%20ONU.pdf",
-    "reason": "parsing fallito: No module named 'pypdf'"
+    "reason": "rediretto fuori host"
    },
    {
     "url": "https://dgegovpa.it/Ostuni/albo/dati/20250012C.PDF",
-    "reason": "parsing fallito: No module named 'pypdf'"
+    "reason": "rediretto fuori host"
    }
   ],
-  "chars_processed": 990,
-  "extraction_seconds": 32.92108958296012,
-  "requirements_recovered": 1
+  "chars_processed": 1071,
+  "extraction_seconds": 6.921468467975501,
+  "requirements_recovered": 0
  },
  {
   "spec_version": "0.1.0",
@@ -4445,6 +4707,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -4459,22 +4723,77 @@
    "connector": "wp_pages",
    "url": "https://www.comune.ostuni.br.it/pagina-di-prova/",
    "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/pages/1714",
-   "fetched_at": "2026-08-05T16:07:47.113811Z",
-   "raw_hash": "a5d092116245c668"
+   "fetched_at": "2026-10-12T19:00:49.741397Z",
+   "raw_hash": "a16d1954028e952b"
   },
   "confidence": "extracted",
   "livello": "comunale",
-  "extraction_notes": [
-   "Il testo non descrive alcun requisito di accesso, ma informazioni relative alla notifica digitale di atti di accertamento/rimborso IMU e TARI, nonché orari di ricevimento e contatti per diversi servizi tributari.",
-   "Valore per 'figli_minori_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
-   "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo."
-  ],
+  "regione": null,
+  "extraction_notes": [],
   "recovery_level": "L1_manuale",
   "pdfs_linked": 0,
   "pdfs_opened": 0,
   "pdfs_skipped": [],
   "chars_processed": 3711,
-  "extraction_seconds": 31.989165916107595,
+  "extraction_seconds": 7.538786342018284,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_pages:074012:3965",
+  "title": "PREVISIONE, PREVENZIONE E CONTRASTO DEL RISCHIO INCENDI BOSCHIVI E DI INTERFACCIA URBANO RURALE",
+  "summary": "Progetto: PREVISIONE, PREVENZIONE E CONTRASTO DEL RISCHIO INCENDI BOSCHIVI E DI INTERFACCIA URBANO RURALE Programma Operativo Complementare (POC) POR Puglia 2014-2020 | Asse V – Azione 5.2: Interventi per la riduzione del rischio incendi e rischio sismico | Sub-azione 5.2.a: Integrazione e sviluppo sistemi di prevenzione, anche attraverso reti digitali interoperabili di coordinamento operativo vel",
+  "body": "Progetto: PREVISIONE, PREVENZIONE E CONTRASTO DEL RISCHIO INCENDI BOSCHIVI E DI INTERFACCIA URBANO RURALE Programma Operativo Complementare (POC) POR Puglia 2014-2020 | Asse V – Azione 5.2: Interventi per la riduzione del rischio incendi e rischio sismico | Sub-azione 5.2.a: Integrazione e sviluppo sistemi di prevenzione, anche attraverso reti digitali interoperabili di coordinamento operativo veloce | Dati Identificativi dell’Intervento Beneficiario / Ente Realizzatore: COMUNE DI OSTUNI | Soggetto Finanziatore: REGIONE PUGLIA – Dipartimento di Protezione Civile e Gestione delle Emergenze (Sezione Protezione Civile) | Codice Unico di Progetto (CUP): F11J24000200002 | Importo Finanziato: € 71.211,92 (totale copertura finanziaria a carico della Regione Puglia) | Riferimenti Normativi e Regionali: D.G.R. n. 1519/2022; A.D. Sezione Protezione Civile n. 540/2022, n. 291/2023 e n. 12/2024; Disciplinare sottoscritto il 26/02/2024 . | Descrizione del Progetto Il Comune di Ostuni ha completato la realizzazione del progetto volto a potenziare la capacità di risposta, prevenzione e contrasto agli incendi boschivi e di interfaccia urbano-rurale sul proprio territorio comunale . Le dotazioni e il sistema di monitoraggio integrato sono operativi e pienamente funzionanti . | L’intervento ha previsto l’acquisizione di dotazioni tecnologiche avanzate e la redazione di uno strumento pianificatorio specifico : | 1. Dotazioni Tecnologiche Acquistate N. 2 Droni Professionali con Camera Termica (DJI Mavic 3 Enterprise / Mavic 3T): | Equipaggiati con sensore termico per voli anche notturni, zoom digitale fino a 28x, zoom ibrido 56x e autonomia di volo di circa 40 minuti . | Impiegati dalle associazioni di volontariato convenzionate su 5 piani di volo dedicati al monitoraggio della scarpata collinare, della fascia costiera e dell’area di Villa Specchia in direzione Carovigno . | Inclusa la formazione professionale abilitante per 4 operatori piloti . | N. 1 Telecamera Termica ad Alta Portata: | Installata in modo permanente nella zona collinare della scarpata murgiana (Località Agnano / Scategna) . | Capace di rilevare variazioni termiche e focolai ad una distanza fino a 3.500 metri grazie ad algoritmi basati su deep learning e rilevazione automatica dell’incendio . | Sala Operativa di Monitoraggio e Rilevamento: | Allestita con postazione informatica fissa (PC i5, monitor 27″, NVR per la gestione del flusso video e archiviazione dati) presso la sede dell’Associazione Volontari “SER Ostuni” di Protezione Civile . | Le immagini e gli allarmi registrati vengono inviati in tempo reale alla Centrale Operativa Comunale (C.O.C.) e integrati con il sistema SINAPSI (Sistema INtegrato di Analisi, Previsione, Sorveglianza e Informazione) della Regione Puglia . | 2. Piano di Prevenzione e Gestione del Rischio Elaborazione del “Piano di Prevenzione e contrasto del rischio incendi boschivi e di interfaccia urbano-rurale” , redatto da un tecnico specializzato in tutela ambientale e acquisito dagli uffici comunali . | Il piano include la relazione tecnica integrata con la cartografia analitica dei modelli di combustibile vegetale e l’analisi del cono visivo e di copertura della termocamera . | Documenti da Consultare",
+  "kind": "agevolazione",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "sesso": null,
+   "disabilita_nucleo_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2026-10-01",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_pages",
+   "url": "https://www.comune.ostuni.br.it/previsione-prevenzione-e-contrasto-del-rischio-incendi-boschivi-e-di-interfaccia-urbano-rurale/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/pages/3965",
+   "fetched_at": "2026-10-12T19:00:57.173075Z",
+   "raw_hash": "d372d2cf7900dac9"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "regione": null,
+  "extraction_notes": [
+   "Allegato PDF ignorato (troppo grande, 3619115 byte, oltre il limite di 2097152 byte): https://www.comune.ostuni.br.it/wp-content/uploads/2026/10/INFORMAZIONE-ILLUSTRATIVADI-ATTUAZIONE-DEL-PROGETTO-di-Protezione-Civile.pdf"
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 1,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [
+   {
+    "url": "https://www.comune.ostuni.br.it/wp-content/uploads/2026/10/INFORMAZIONE-ILLUSTRATIVADI-ATTUAZIONE-DEL-PROGETTO-di-Protezione-Civile.pdf",
+    "reason": "3619115 byte, oltre il limite di 2097152 byte"
+   }
+  ],
+  "chars_processed": 3236,
+  "extraction_seconds": 7.42852606397355,
   "requirements_recovered": 0
  }
 ]

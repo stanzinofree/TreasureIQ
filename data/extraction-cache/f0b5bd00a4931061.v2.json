@@ -1,0 +1,18 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": null,
+ "disabilita_required": null,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [],
+ "quotes": [],
+ "deadline_iso": null,
+ "notes": [
+  "Il testo non specifica se la residenza nel comune è richiesta, ma dichiara che si entra muniti di documento d’identità e CF per dimostrare la titolarità dell’utenza in base a cui si conferisce ed essere registrati per tracciare ingressi e conferimenti presso il centro. Questo suggerisce che la residenza nel comune è implicita nel sistema di registrazione, ma non è esplicitamente dichiarato come requisito di accesso."
+ ]
+}

@@ -988,8 +988,7 @@
   "nome": "Ivrea",
   "provincia": "TO",
   "regione": "Piemonte",
-  "sito": "www.comune.ivrea.to.it",
-  "codice_ipa": "C_E379"
+  "sito": "www.comune.ivrea.to.it"
  },
  {
   "codice_istat": "001126",
@@ -3108,8 +3107,7 @@
   "nome": "Vercelli",
   "provincia": "VC",
   "regione": "Piemonte",
-  "sito": "www.comune.vercelli.it",
-  "codice_ipa": "C_L750"
+  "sito": "www.comune.vercelli.it"
  },
  {
   "codice_istat": "002163",
@@ -3124,8 +3122,7 @@
   "nome": "Villata",
   "provincia": "VC",
   "regione": "Piemonte",
-  "sito": "www.comune.villata.vc.it",
-  "codice_ipa": "C_M028"
+  "sito": "www.comune.villata.vc.it"
  },
  {
   "codice_istat": "002166",
@@ -6260,8 +6257,7 @@
   "nome": "Grana Monferrato",
   "provincia": "AT",
   "regione": "Piemonte",
-  "sito": "www.comune.grana.at.it/",
-  "codice_ipa": "C_E134"
+  "sito": "www.comune.grana.at.it/"
  },
  {
   "codice_istat": "005057",
@@ -7604,8 +7600,7 @@
   "nome": "Mornese",
   "provincia": "AL",
   "regione": "Piemonte",
-  "sito": "www.comune.mornese.al.it",
-  "codice_ipa": "C_F737"
+  "sito": "www.comune.mornese.al.it"
  },
  {
   "codice_istat": "006112",
@@ -11107,8 +11102,7 @@
   "nome": "Cadrezzate con Osmate",
   "provincia": "VA",
   "regione": "Lombardia",
-  "sito": null,
-  "codice_ipa": "C_M425"
+  "sito": null
  },
  {
   "codice_istat": "012144",
@@ -12059,8 +12053,7 @@
   "nome": "San Fermo della Battaglia",
   "provincia": "CO",
   "regione": "Lombardia",
-  "sito": "www.comune.sanfermodellabattaglia.co.it",
-  "codice_ipa": "C_H840"
+  "sito": "www.comune.sanfermodellabattaglia.co.it"
  },
  {
   "codice_istat": "013207",
@@ -12971,8 +12964,7 @@
   "nome": "Basiano",
   "provincia": "MI",
   "regione": "Lombardia",
-  "sito": "www.unione.basianomasate.mi.it",
-  "codice_ipa": "C_A697"
+  "sito": "www.unione.basianomasate.mi.it"
  },
  {
   "codice_istat": "015015",
@@ -13435,16 +13427,14 @@
   "nome": "Marcallo con Casone",
   "provincia": "MI",
   "regione": "Lombardia",
-  "sito": "comune.marcalloconcasone.mi.it",
-  "codice_ipa": "C_E921"
+  "sito": "comune.marcalloconcasone.mi.it"
  },
  {
   "codice_istat": "015136",
   "nome": "Masate",
   "provincia": "MI",
   "regione": "Lombardia",
-  "sito": "www.unione.basianomasate.mi.it",
-  "codice_ipa": "C_A697"
+  "sito": "www.unione.basianomasate.mi.it"
  },
  {
   "codice_istat": "015139",
@@ -15491,8 +15481,7 @@
   "nome": "Seriate",
   "provincia": "BG",
   "regione": "Lombardia",
-  "sito": "www.comune.seriate.bg.it",
-  "codice_ipa": "4ZKKQNKQ"
+  "sito": "www.comune.seriate.bg.it"
  },
  {
   "codice_istat": "016199",
@@ -19386,8 +19375,7 @@
   "nome": "Gadesco-Pieve Delmona",
   "provincia": "CR",
   "regione": "Lombardia",
-  "sito": "https://www.unionedelmona.cr.it/",
-  "codice_ipa": "C_D841"
+  "sito": "https://www.unionedelmona.cr.it/"
  },
  {
   "codice_istat": "019047",
@@ -19563,7 +19551,7 @@
   "provincia": "CR",
   "regione": "Lombardia",
   "sito": "https://www.unionedelmona.cr.it/",
-  "codice_ipa": "C_D841"
+  "codice_ipa": "C_G469"
  },
  {
   "codice_istat": "019069",
@@ -20170,8 +20158,7 @@
   "nome": "Medole",
   "provincia": "MN",
   "regione": "Lombardia",
-  "sito": "www.comune.medole.mn.it",
-  "codice_ipa": "C_F086"
+  "sito": "www.comune.medole.mn.it"
  },
  {
   "codice_istat": "020035",
@@ -21810,8 +21797,7 @@
   "nome": "Lesmo",
   "provincia": "MB",
   "regione": "Lombardia",
-  "sito": "www.comune.lesmo.mb.it",
-  "codice_ipa": "C_E550"
+  "sito": "www.comune.lesmo.mb.it"
  },
  {
   "codice_istat": "108027",
@@ -22329,16 +22315,14 @@
   "nome": "Glorenza",
   "provincia": "BZ",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.glorenza.bz.it",
-  "codice_ipa": "AMUCDG"
+  "sito": "www.comune.glorenza.bz.it"
  },
  {
   "codice_istat": "021037",
   "nome": "Laces",
   "provincia": "BZ",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.gemeinde.latsch.bz.it",
-  "codice_ipa": "ASBUCC"
+  "sito": "www.gemeinde.latsch.bz.it"
  },
  {
   "codice_istat": "021038",
@@ -22417,8 +22401,7 @@
   "nome": "Marebbe",
   "provincia": "BZ",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.marebbe.bz.it",
-  "codice_ipa": "ASBUCM"
+  "sito": "www.comune.marebbe.bz.it"
  },
  {
   "codice_istat": "021048",
@@ -22457,8 +22440,7 @@
   "nome": "Monguelfo-Tesido",
   "provincia": "BZ",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.monguelfo-tesido.bz.it",
-  "codice_ipa": "ASBUCMP"
+  "sito": "www.comune.monguelfo-tesido.bz.it"
  },
  {
   "codice_istat": "021053",
@@ -22585,8 +22567,7 @@
   "nome": "Predoi",
   "provincia": "BZ",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.prettau.it",
-  "codice_ipa": "ABUCP"
+  "sito": "www.prettau.it"
  },
  {
   "codice_istat": "021069",
@@ -22625,8 +22606,7 @@
   "nome": "Rifiano",
   "provincia": "BZ",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": null,
-  "codice_ipa": "C_B364"
+  "sito": null
  },
  {
   "codice_istat": "021074",
@@ -22769,32 +22749,28 @@
   "nome": "Silandro",
   "provincia": "BZ",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.silandro.it",
-  "codice_ipa": "ASBUCVEZ"
+  "sito": "www.silandro.it"
  },
  {
   "codice_istat": "021094",
   "nome": "Sluderno",
   "provincia": "BZ",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.sluderno.bz.it",
-  "codice_ipa": "ASBEU"
+  "sito": "www.comune.sluderno.bz.it"
  },
  {
   "codice_istat": "021095",
   "nome": "Stelvio",
   "provincia": "BZ",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.stelvio.bz.it",
-  "codice_ipa": "ASBUCST"
+  "sito": "www.comune.stelvio.bz.it"
  },
  {
   "codice_istat": "021096",
   "nome": "Terento",
   "provincia": "BZ",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.terento.bz.it",
-  "codice_ipa": "C_L106"
+  "sito": "www.comune.terento.bz.it"
  },
  {
   "codice_istat": "021097",
@@ -22897,8 +22873,7 @@
   "nome": "Valle di Casies",
   "provincia": "BZ",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.gsies.eu",
-  "codice_ipa": "ASBUCCD"
+  "sito": "www.gsies.eu"
  },
  {
   "codice_istat": "021110",
@@ -22929,8 +22904,7 @@
   "nome": "Villabassa",
   "provincia": "BZ",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.niederdorf.eu",
-  "codice_ipa": "ASBUCBZ"
+  "sito": "www.niederdorf.eu"
  },
  {
   "codice_istat": "021114",
@@ -23121,8 +23095,7 @@
   "nome": "Caldes",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.caldes.tn.it",
-  "codice_ipa": "ASBUCCV"
+  "sito": "www.comune.caldes.tn.it"
  },
  {
   "codice_istat": "022034",
@@ -23169,8 +23142,7 @@
   "nome": "Canazei",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.canazei.tn.it",
-  "codice_ipa": "ASBUCA"
+  "sito": "www.comune.canazei.tn.it"
  },
  {
   "codice_istat": "022040",
@@ -23313,8 +23285,7 @@
   "nome": "Commezzadura",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.commezzadura.tn.it",
-  "codice_ipa": "ASUCALM"
+  "sito": "www.comune.commezzadura.tn.it"
  },
  {
   "codice_istat": "022068",
@@ -23481,16 +23452,14 @@
   "nome": "Livo",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.livo.tn.it",
-  "codice_ipa": "ADP"
+  "sito": "www.comune.livo.tn.it"
  },
  {
   "codice_istat": "022108",
   "nome": "Lona-Lases",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.lonalases.tn.it",
-  "codice_ipa": "ASUCLAS"
+  "sito": "www.comune.lonalases.tn.it"
  },
  {
   "codice_istat": "022109",
@@ -23505,8 +23474,7 @@
   "nome": "Malé",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.male.tn.it",
-  "codice_ipa": "ASUCB"
+  "sito": "www.comune.male.tn.it"
  },
  {
   "codice_istat": "022112",
@@ -23657,16 +23625,14 @@
   "nome": "Peio",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.peio.tn.it",
-  "codice_ipa": "ASCEL"
+  "sito": "www.comune.peio.tn.it"
  },
  {
   "codice_istat": "022137",
   "nome": "Pellizzano",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.pellizzano.tn.it",
-  "codice_ipa": "ASBUCCL"
+  "sito": "www.comune.pellizzano.tn.it"
  },
  {
   "codice_istat": "022138",
@@ -23681,8 +23647,7 @@
   "nome": "Pergine Valsugana",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.pergine.tn.it",
-  "codice_ipa": "ASBUCPV"
+  "sito": "www.comune.pergine.tn.it"
  },
  {
   "codice_istat": "022142",
@@ -23793,8 +23758,7 @@
   "nome": "Rumo",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.rumo.tn.it",
-  "codice_ipa": "ASDUCMA"
+  "sito": "www.comune.rumo.tn.it"
  },
  {
   "codice_istat": "022164",
@@ -24001,8 +23965,7 @@
   "nome": "Ton",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.ton.tn.it",
-  "codice_ipa": "ASUCMV"
+  "sito": "www.comune.ton.tn.it"
  },
  {
   "codice_istat": "022202",
@@ -24057,8 +24020,7 @@
   "nome": "Vignola-Falesina",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "http://www.comune.vignola-falesina.tn.it",
-  "codice_ipa": "ASBUCVPV"
+  "sito": "http://www.comune.vignola-falesina.tn.it"
  },
  {
   "codice_istat": "022222",
@@ -24105,8 +24067,7 @@
   "nome": "Predaia",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.predaia.tn.it",
-  "codice_ipa": "ASBUCTR"
+  "sito": "www.comune.predaia.tn.it"
  },
  {
   "codice_istat": "022231",
@@ -24129,8 +24090,7 @@
   "nome": "Dimaro Folgarida",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": "www.comune.dimarofolgarida.tn.it",
-  "codice_ipa": "ASDIM"
+  "sito": "www.comune.dimarofolgarida.tn.it"
  },
  {
   "codice_istat": "022234",
@@ -24265,8 +24225,7 @@
   "nome": "San Giovanni di Fassa",
   "provincia": "TN",
   "regione": "Trentino-Alto Adige/Südtirol",
-  "sito": null,
-  "codice_ipa": "APSPV"
+  "sito": null
  },
  {
   "codice_istat": "022251",
@@ -24857,8 +24816,7 @@
   "nome": "San Giovanni Ilarione",
   "provincia": "VR",
   "regione": "Veneto",
-  "sito": "www.comune.sangiovanniilarione.vr.it/",
-  "codice_ipa": "C_H916"
+  "sito": "www.comune.sangiovanniilarione.vr.it/"
  },
  {
   "codice_istat": "023071",
@@ -25855,8 +25813,7 @@
   "nome": "Valdagno",
   "provincia": "VI",
   "regione": "Veneto",
-  "sito": "www.comune.valdagno.vi.it",
-  "codice_ipa": "C_L551"
+  "sito": "www.comune.valdagno.vi.it"
  },
  {
   "codice_istat": "024112",
@@ -27255,8 +27212,7 @@
   "nome": "Caorle",
   "provincia": "VE",
   "regione": "Veneto",
-  "sito": "www.comune.caorle.ve.it",
-  "codice_ipa": "C_B642"
+  "sito": "www.comune.caorle.ve.it"
  },
  {
   "codice_istat": "027006",
@@ -31071,8 +31027,7 @@
   "nome": "Andora",
   "provincia": "SV",
   "regione": "Liguria",
-  "sito": "www.comune.andora.sv.it",
-  "codice_ipa": "C_A278"
+  "sito": "www.comune.andora.sv.it"
  },
  {
   "codice_istat": "009007",
@@ -31383,8 +31338,7 @@
   "nome": "Ortovero",
   "provincia": "SV",
   "regione": "Liguria",
-  "sito": "www.comune.ortovero.sv.it",
-  "codice_ipa": "C_G144"
+  "sito": "www.comune.ortovero.sv.it"
  },
  {
   "codice_istat": "009046",
@@ -32455,8 +32409,7 @@
   "nome": "Castell'Arquato",
   "provincia": "PC",
   "regione": "Emilia-Romagna",
-  "sito": "www.comune.castellarquato.pc.it",
-  "codice_ipa": "C_C145"
+  "sito": "www.comune.castellarquato.pc.it"
  },
  {
   "codice_istat": "033013",
@@ -32935,8 +32888,7 @@
   "nome": "Palanzano",
   "provincia": "PR",
   "regione": "Emilia-Romagna",
-  "sito": "www.comune.palanzano.pr.it",
-  "codice_ipa": "C_G255"
+  "sito": "www.comune.palanzano.pr.it"
  },
  {
   "codice_istat": "034027",
@@ -34703,8 +34655,7 @@
   "nome": "Portico e San Benedetto",
   "provincia": "FC",
   "regione": "Emilia-Romagna",
-  "sito": "www.comune.portico-e-san-benedetto.fc.it",
-  "codice_ipa": "ASCB"
+  "sito": "www.comune.portico-e-san-benedetto.fc.it"
  },
  {
   "codice_istat": "040032",
@@ -36335,8 +36286,7 @@
   "nome": "Casciana Terme Lari",
   "provincia": "PI",
   "regione": "Toscana",
-  "sito": null,
-  "codice_ipa": "C_E4557"
+  "sito": null
  },
  {
   "codice_istat": "050041",
@@ -36799,8 +36749,7 @@
   "nome": "Poggibonsi",
   "provincia": "SI",
   "regione": "Toscana",
-  "sito": "www.comune.poggibonsi.si.it",
-  "codice_ipa": "C_G752"
+  "sito": "www.comune.poggibonsi.si.it"
  },
  {
   "codice_istat": "052023",
@@ -37135,8 +37084,7 @@
   "nome": "Semproniano",
   "provincia": "GR",
   "regione": "Toscana",
-  "sito": "www.comune.semproniano.gr.it",
-  "codice_ipa": "C_I601"
+  "sito": "www.comune.semproniano.gr.it"
  },
  {
   "codice_istat": "100001",
@@ -38455,8 +38403,7 @@
   "nome": "Fabriano",
   "provincia": "AN",
   "regione": "Marche",
-  "sito": "www.comune.fabriano.an.it",
-  "codice_ipa": "AGRIC"
+  "sito": "www.comune.fabriano.an.it"
  },
  {
   "codice_istat": "042018",
@@ -38487,8 +38434,7 @@
   "nome": "Jesi",
   "provincia": "AN",
   "regione": "Marche",
-  "sito": "www.comune.jesi.an.it",
-  "codice_ipa": "2BLS82OD"
+  "sito": "www.comune.jesi.an.it"
  },
  {
   "codice_istat": "042022",
@@ -39335,8 +39281,7 @@
   "nome": "Montemonaco",
   "provincia": "AP",
   "regione": "Marche",
-  "sito": null,
-  "codice_ipa": "C_F570"
+  "sito": null
  },
  {
   "codice_istat": "044045",
@@ -39695,8 +39640,7 @@
   "nome": "Santa Vittoria in Matenano",
   "provincia": "FM",
   "regione": "Marche",
-  "sito": "www.svittoria.it",
-  "codice_ipa": "C_I315"
+  "sito": "www.svittoria.it"
  },
  {
   "codice_istat": "109037",
@@ -40087,8 +40031,7 @@
   "nome": "Ronciglione",
   "provincia": "VT",
   "regione": "Lazio",
-  "sito": "www.comune.ronciglione.vt.it",
-  "codice_ipa": "C_H534"
+  "sito": "www.comune.ronciglione.vt.it"
  },
  {
   "codice_istat": "056046",
@@ -40975,8 +40918,7 @@
   "nome": "Castel Madama",
   "provincia": "RM",
   "regione": "Lazio",
-  "sito": "www.halleyweb.com/c058023/hh/index.php?jvs=0&acc=1",
-  "codice_ipa": "C_C203"
+  "sito": "www.halleyweb.com/c058023/hh/index.php?jvs=0&acc=1"
  },
  {
   "codice_istat": "058024",
@@ -41519,8 +41461,7 @@
   "nome": "Roma",
   "provincia": "RM",
   "regione": "Lazio",
-  "sito": null,
-  "codice_ipa": "020CP5T6"
+  "sito": null
  },
  {
   "codice_istat": "058092",
@@ -42359,8 +42300,7 @@
   "nome": "Guarcino",
   "provincia": "FR",
   "regione": "Lazio",
-  "sito": "www.comune.guarcino.fr.it",
-  "codice_ipa": "C_E236"
+  "sito": "www.comune.guarcino.fr.it"
  },
  {
   "codice_istat": "060043",
@@ -42495,8 +42435,7 @@
   "nome": "Rocca d'Arce",
   "provincia": "FR",
   "regione": "Lazio",
-  "sito": "https://www.halleyweb.com/c060059/hh",
-  "codice_ipa": "C_C203"
+  "sito": "https://www.halleyweb.com/c060059/hh"
  },
  {
   "codice_istat": "060060",
@@ -44727,8 +44666,7 @@
   "nome": "Lanciano",
   "provincia": "CH",
   "regione": "Abruzzo",
-  "sito": "www.comune.lanciano.ch.it",
-  "codice_ipa": "C_E435"
+  "sito": "www.comune.lanciano.ch.it"
  },
  {
   "codice_istat": "069047",
@@ -44759,8 +44697,7 @@
   "nome": "Miglianico",
   "provincia": "CH",
   "regione": "Abruzzo",
-  "sito": "www.miglianico.gov.it",
-  "codice_ipa": "C_F196"
+  "sito": "www.miglianico.gov.it"
  },
  {
   "codice_istat": "069051",
@@ -46664,7 +46601,7 @@
   "provincia": "CE",
   "regione": "Campania",
   "sito": "www.comune.maddaloni.caserta.it",
-  "codice_ipa": "C_E791"
+  "codice_ipa": "XO5GKXJH"
  },
  {
   "codice_istat": "061049",
@@ -47264,7 +47201,7 @@
   "provincia": "BN",
   "regione": "Campania",
   "sito": "https://halleyweb.com/c062019/hh/index.php",
-  "codice_ipa": "C_C203"
+  "codice_ipa": "C_C280"
  },
  {
   "codice_istat": "062020",
@@ -48287,8 +48224,7 @@
   "nome": "San Paolo Bel Sito",
   "provincia": "NA",
   "regione": "Campania",
-  "sito": "http://www.halleyweb.com/c063069/hh/index.php",
-  "codice_ipa": "C_C203"
+  "sito": "http://www.halleyweb.com/c063069/hh/index.php"
  },
  {
   "codice_istat": "063070",
@@ -49431,8 +49367,7 @@
   "nome": "Agropoli",
   "provincia": "SA",
   "regione": "Campania",
-  "sito": "www.comune.agropoli.sa.it",
-  "codice_ipa": "C_A091"
+  "sito": "www.comune.agropoli.sa.it"
  },
  {
   "codice_istat": "065003",
@@ -49535,8 +49470,7 @@
   "nome": "Bellosguardo",
   "provincia": "SA",
   "regione": "Campania",
-  "sito": "www.comune.bellosguardo.sa.it",
-  "codice_ipa": "C_A756"
+  "sito": "www.comune.bellosguardo.sa.it"
  },
  {
   "codice_istat": "065016",
@@ -49575,8 +49509,7 @@
   "nome": "Calvanico",
   "provincia": "SA",
   "regione": "Campania",
-  "sito": "www.comune.calvanico.sa.it",
-  "codice_ipa": "C_B437"
+  "sito": "www.comune.calvanico.sa.it"
  },
  {
   "codice_istat": "065021",
@@ -49615,8 +49548,7 @@
   "nome": "Capaccio Paestum",
   "provincia": "SA",
   "regione": "Campania",
-  "sito": "https://www.comune.capaccio.sa.it",
-  "codice_ipa": "C_B644"
+  "sito": "https://www.comune.capaccio.sa.it"
  },
  {
   "codice_istat": "065026",
@@ -50135,8 +50067,7 @@
   "nome": "Pellezzano",
   "provincia": "SA",
   "regione": "Campania",
-  "sito": "www.comune.pellezzano.sa.it",
-  "codice_ipa": "C_G426"
+  "sito": "www.comune.pellezzano.sa.it"
  },
  {
   "codice_istat": "065091",
@@ -50839,8 +50770,7 @@
   "nome": "Cerignola",
   "provincia": "FG",
   "regione": "Puglia",
-  "sito": "www.comune.cerignola.fg.it",
-  "codice_ipa": "C_C514"
+  "sito": "www.comune.cerignola.fg.it"
  },
  {
   "codice_istat": "071021",
@@ -51343,8 +51273,7 @@
   "nome": "Modugno",
   "provincia": "BA",
   "regione": "Puglia",
-  "sito": "www.comune.modugno.ba.it",
-  "codice_ipa": "C_F262"
+  "sito": "www.comune.modugno.ba.it"
  },
  {
   "codice_istat": "072028",
@@ -51591,8 +51520,7 @@
   "nome": "Manduria",
   "provincia": "TA",
   "regione": "Puglia",
-  "sito": "www.comune.manduria.ta.it",
-  "codice_ipa": "C_E882"
+  "sito": "www.comune.manduria.ta.it"
  },
  {
   "codice_istat": "073013",
@@ -51807,8 +51735,7 @@
   "nome": "Mesagne",
   "provincia": "BR",
   "regione": "Puglia",
-  "sito": "www.comune.mesagne.br.it",
-  "codice_ipa": "C_F152"
+  "sito": "www.comune.mesagne.br.it"
  },
  {
   "codice_istat": "074011",
@@ -51839,8 +51766,7 @@
   "nome": "San Michele Salentino",
   "provincia": "BR",
   "regione": "Puglia",
-  "sito": "www.comune.sanmichelesalentino.br.it",
-  "codice_ipa": "C_I045"
+  "sito": "www.comune.sanmichelesalentino.br.it"
  },
  {
   "codice_istat": "074015",
@@ -52655,8 +52581,7 @@
   "nome": "Presicce-Acquarica",
   "provincia": "LE",
   "regione": "Puglia",
-  "sito": null,
-  "codice_ipa": "C_M428"
+  "sito": null
  },
  {
   "codice_istat": "110001",
@@ -52855,8 +52780,7 @@
   "nome": "Calvello",
   "provincia": "PZ",
   "regione": "Basilicata",
-  "sito": "www.comune.calvello.pz.it",
-  "codice_ipa": "C_B440"
+  "sito": "www.comune.calvello.pz.it"
  },
  {
   "codice_istat": "076016",
@@ -53695,8 +53619,7 @@
   "nome": "Pisticci",
   "provincia": "MT",
   "regione": "Basilicata",
-  "sito": "www.comunedipisticci.it",
-  "codice_ipa": "C_G712"
+  "sito": "www.comunedipisticci.it"
  },
  {
   "codice_istat": "077021",
@@ -57502,8 +57425,7 @@
   "nome": "Gangi",
   "provincia": "PA",
   "regione": "Sicilia",
-  "sito": "www.comune.gangi.pa.it",
-  "codice_ipa": "ATSMS"
+  "sito": "www.comune.gangi.pa.it"
  },
  {
   "codice_istat": "082037",
@@ -57606,8 +57528,7 @@
   "nome": "Monreale",
   "provincia": "PA",
   "regione": "Sicilia",
-  "sito": "www.comune.monreale.pa.it",
-  "codice_ipa": "C_F377"
+  "sito": "www.comune.monreale.pa.it"
  },
  {
   "codice_istat": "082050",
@@ -58199,7 +58120,7 @@
   "provincia": "ME",
   "regione": "Sicilia",
   "sito": "www.comunelipari.it",
-  "codice_ipa": "C_E606"
+  "codice_ipa": "NR29S1BJ"
  },
  {
   "codice_istat": "083042",
@@ -58957,8 +58878,7 @@
   "nome": "Porto Empedocle",
   "provincia": "AG",
   "regione": "Sicilia",
-  "sito": "www.comune.portoempedocle.ag.it",
-  "codice_ipa": "C_F299"
+  "sito": "www.comune.portoempedocle.ag.it"
  },
  {
   "codice_istat": "084029",
@@ -59341,8 +59261,7 @@
   "nome": "Leonforte",
   "provincia": "EN",
   "regione": "Sicilia",
-  "sito": "www.comune.leonforte.en.it",
-  "codice_ipa": "C_E536"
+  "sito": "www.comune.leonforte.en.it"
  },
  {
   "codice_istat": "086012",
@@ -59461,8 +59380,7 @@
   "nome": "Adrano",
   "provincia": "CT",
   "regione": "Sicilia",
-  "sito": "www.comune.adrano.ct.it",
-  "codice_ipa": "C_A056"
+  "sito": "www.comune.adrano.ct.it"
  },
  {
   "codice_istat": "087007",
@@ -59869,16 +59787,14 @@
   "nome": "Maniace",
   "provincia": "CT",
   "regione": "Sicilia",
-  "sito": "www.comune.maniace.ct.it/",
-  "codice_ipa": "C_M283"
+  "sito": "www.comune.maniace.ct.it/"
  },
  {
   "codice_istat": "087058",
   "nome": "Ragalna",
   "provincia": "CT",
   "regione": "Sicilia",
-  "sito": "www.comune.ragalna.ct-egov.it/",
-  "codice_ipa": "C_M287"
+  "sito": "www.comune.ragalna.ct-egov.it/"
  },
  {
   "codice_istat": "088001",
@@ -60597,8 +60513,7 @@
   "nome": "Ploaghe",
   "provincia": "SS",
   "regione": "Sardegna",
-  "sito": "www.comune.ploaghe.ss.it",
-  "codice_ipa": "C_G740"
+  "sito": "www.comune.ploaghe.ss.it"
  },
  {
   "codice_istat": "090058",
@@ -60821,8 +60736,7 @@
   "nome": "Sant'Antonio di Gallura",
   "provincia": "SS",
   "regione": "Sardegna",
-  "sito": "www.comune.santantoniodigallura.ot.it",
-  "codice_ipa": "C_M276"
+  "sito": "www.comune.santantoniodigallura.ot.it"
  },
  {
   "codice_istat": "090086",
@@ -62428,8 +62342,7 @@
   "nome": "Domusnovas",
   "provincia": "SU",
   "regione": "Sardegna",
-  "sito": "www.comune.domusnovas.su.it",
-  "codice_ipa": "C_D334"
+  "sito": "www.comune.domusnovas.su.it"
  },
  {
   "codice_istat": "111017",
@@ -62468,8 +62381,7 @@
   "nome": "Fluminimaggiore",
   "provincia": "SU",
   "regione": "Sardegna",
-  "sito": "www.comune.fluminimaggiore.su.it",
-  "codice_ipa": "C_D639"
+  "sito": "www.comune.fluminimaggiore.su.it"
  },
  {
   "codice_istat": "111022",
@@ -62516,8 +62428,7 @@
   "nome": "Gesturi",
   "provincia": "SU",
   "regione": "Sardegna",
-  "sito": "www.comune.gesturi.su.it",
-  "codice_ipa": "C_D997"
+  "sito": "www.comune.gesturi.su.it"
  },
  {
   "codice_istat": "111028",
@@ -62892,8 +62803,7 @@
   "nome": "Selegas",
   "provincia": "SU",
   "regione": "Sardegna",
-  "sito": "www.comune.selegas.su.it",
-  "codice_ipa": "C_I582"
+  "sito": "www.comune.selegas.su.it"
  },
  {
   "codice_istat": "111075",
@@ -62948,8 +62858,7 @@
   "nome": "Seui",
   "provincia": "SU",
   "regione": "Sardegna",
-  "sito": "comune.seui.og.it",
-  "codice_ipa": "C_I706"
+  "sito": "comune.seui.og.it"
  },
  {
   "codice_istat": "111082",
@@ -63068,8 +62977,7 @@
   "nome": "Villacidro",
   "provincia": "SU",
   "regione": "Sardegna",
-  "sito": "www.comune.villacidro.vs.it",
-  "codice_ipa": "C_L924"
+  "sito": "www.comune.villacidro.vs.it"
  },
  {
   "codice_istat": "111097",

@@ -122,32 +122,40 @@ def arricchisci_comuni(comuni: list[dict], righe: list[dict]) -> tuple[int, int]
     valle un codice assente e un codice vuoto si comportano diversamente, e
     solo il primo dice la verità.
     """
-    per_host: dict[str, str] = {}
-    per_nome: dict[tuple[str, str], str] = {}
+    per_host: dict[str, set[str]] = {}
+    per_nome: dict[tuple[str, str], set[str]] = {}
     for riga in righe:
         codice = (riga.get("cod_amm") or "").strip().upper()
         if not codice:
             continue
         host = _host(riga.get("sito_istituzionale"))
         if host:
-            per_host.setdefault(host, codice)
+            per_host.setdefault(host, set()).add(codice)
         chiave = (
             (riga.get("Comune") or "").strip().casefold(),
             (riga.get("Provincia") or "").strip().casefold(),
         )
         if chiave[0]:
-            per_nome.setdefault(chiave, codice)
+            per_nome.setdefault(chiave, set()).add(codice)
 
     agganciati = 0
     for comune in comuni:
-        codice = per_host.get(_host(comune.get("sito")) or "")
+        codice: str | None = None
+        candidati_host = per_host.get(_host(comune.get("sito")) or "", set())
+        if len(candidati_host) == 1:
+            codice = next(iter(candidati_host))
         if codice is None:
-            codice = per_nome.get(
-                (comune.get("nome", "").strip().casefold(), comune.get("provincia", "").strip().casefold())
+            candidati_nome = per_nome.get(
+                (comune.get("nome", "").strip().casefold(), comune.get("provincia", "").strip().casefold()),
+                set(),
             )
-        if codice:
+            if len(candidati_nome) == 1:
+                codice = next(iter(candidati_nome))
+        if codice is not None:
             comune["codice_ipa"] = codice
             agganciati += 1
+        else:
+            comune.pop("codice_ipa", None)
     return agganciati, len(comuni) - agganciati
 
 

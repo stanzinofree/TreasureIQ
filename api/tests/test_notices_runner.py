@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from treasureiq.catalog.notices import NoticeSnapshot
@@ -22,3 +23,20 @@ def test_runner_checkpoints_and_resumes(tmp_path: Path) -> None:
     assert seen == ["001001", "058003"]
     assert report["coverage"] == {"coperto_senza_bandi": 2}
     assert resumed["completed"] == 2
+
+
+def test_runner_queues_reachable_unhandled_source_for_review(tmp_path: Path) -> None:
+    store = NoticeStore(tmp_path / "notices")
+    checkpoint = tmp_path / "checkpoint.json"
+
+    report = run(
+        ["001001"],
+        store=store,
+        checkpoint=checkpoint,
+        producer=lambda code: NoticeSnapshot(source_id=code, coverage_status="non_coperto"),
+        reviewer=lambda _code: [{"label": "Bandi", "url": "https://example.test/at", "type": "concorso"}],
+    )
+
+    assert report["review"] == 1
+    review = json.loads((tmp_path / "review.json").read_text("utf-8"))
+    assert review["001001"]["reason"] == "rami_at_non_supportati"

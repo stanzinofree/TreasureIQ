@@ -86,7 +86,7 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley"]
+    vendor: Literal["wp", "halley", "bootstrap_italia"]
 
 
 class _CacheAlberatura(BaseModel):
@@ -518,6 +518,27 @@ def _estrai_halley(sonda: _Sonda, ramo: RamoAT) -> list[BandoScoperto]:
     return _bandi_da_listing_halley(pagina, host_listing, ramo.tipo)
 
 
+_BOOTSTRAP_EMPTY_RE = re.compile(r"nessun\s+(?:bando|avviso).*?(?:pubblicazione|presente)", re.I | re.S)
+
+
+def _estrai_bootstrap_italia(sonda: _Sonda, ramo: RamoAT) -> tuple[list[BandoScoperto], bool]:
+    """Recognise an explicit empty Bootstrap Italia listing.
+
+    A non-empty page is deliberately left unsupported: returning an empty list
+    there would turn unknown content into "no notice published".
+    """
+    try:
+        risposta = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return [], False
+    if risposta.status_code != 200:
+        return [], False
+    pagina = _decodifica(risposta)
+    if "bootstrap-italia" not in pagina or not _BOOTSTRAP_EMPTY_RE.search(pagina):
+        return [], False
+    return [], True
+
+
 def _ramo_gestito(ramo: RamoAT) -> bool:
     """`True` se `ramo.url` porta la firma di un vendor con estrattore reale
     (wp o halley). Un ramo scoperto ma di vendor non gestito (openweb,
@@ -588,9 +609,6 @@ def estrai_bandi(codice_istat: str, *, timeout: float = 8.0) -> list[BandoScoper
     rami = scopri_rami(codice_istat, timeout=timeout)
     if rami is None:
         return None
-    if not any(_ramo_gestito(ramo) for ramo in rami):
-        return None
-
     comune = comune_per_codice(codice_istat)
     if comune is None or not comune.sito:
         return None
@@ -599,9 +617,19 @@ def estrai_bandi(codice_istat: str, *, timeout: float = 8.0) -> list[BandoScoper
         return None
 
     risultati: list[BandoScoperto] = []
+    coperto = False
     with _Sonda(timeout=timeout) as sonda:
         for ramo in rami:
-            risultati.extend(_estrai_ramo(sonda, base, ramo))
+            if _ramo_gestito(ramo):
+                coperto = True
+                risultati.extend(_estrai_ramo(sonda, base, ramo))
+            else:
+                bootstrap, gestito = _estrai_bootstrap_italia(sonda, ramo)
+                coperto = coperto or gestito
+                risultati.extend(bootstrap)
+
+    if not coperto:
+        return None
 
     if risultati:
         _in_cache(codice_istat, risultati)

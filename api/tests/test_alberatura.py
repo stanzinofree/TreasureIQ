@@ -19,6 +19,7 @@ from treasureiq.alberatura import (
     _da_cache,
     _decodifica,
     _estrai_wp,
+    _estrai_bootstrap_italia,
     _in_cache,
     _rami_da_pagina,
     _rami_wp,
@@ -166,6 +167,17 @@ def test_bandi_da_listing_halley_scarta_dettaglio_fuori_host() -> None:
     )
     trovati = _bandi_da_listing_halley(pagina, "web.comune.benevento.it", "concorso")
     assert trovati == []
+
+
+def test_bootstrap_italia_empty_listing_is_covered_not_unknown() -> None:
+    ramo = RamoAT("Bandi di concorso", "https://example.test/bandi", "concorso")
+    pagina = b'<link href="/bootstrap-italia.css"><p>Nessun bando di concorso in pubblicazione</p>'
+    sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
+
+    bandi, covered = _estrai_bootstrap_italia(sonda, ramo)
+
+    assert bandi == []
+    assert covered is True
 
 
 def test_decodifica_charset_dichiarato() -> None:

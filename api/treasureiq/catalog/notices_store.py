@@ -49,9 +49,11 @@ class NoticeStore:
         return snapshot
 
 
-def produce(codice_istat: str, *, store: NoticeStore, usa_cache: bool = True) -> NoticeSnapshot:
-    """Read one comune through the existing live ladder and persist its result."""
-    snapshot = snapshot_da_bandi_live(bandi_arricchiti(codice_istat, usa_cache=usa_cache))
+def produce(codice_istat: str, *, store: NoticeStore) -> NoticeSnapshot:
+    """Read one comune without LLM enrichment and persist its canonical notices."""
+    snapshot = snapshot_da_bandi_live(
+        bandi_arricchiti(codice_istat, usa_cache=False, estrai_requisiti=False)
+    )
     store.save(snapshot)
     return snapshot
 
@@ -60,13 +62,11 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Produci uno snapshot nazionale avvisi")
     parser.add_argument("--istat", required=True)
     parser.add_argument("--output", type=Path, default=Path("data-live/notices"))
-    parser.add_argument("--no-source-cache", action="store_true")
     args = parser.parse_args(argv)
 
     snapshot = produce(
         args.istat,
         store=NoticeStore(args.output),
-        usa_cache=not args.no_source_cache,
     )
     print(json.dumps({
         "istat": snapshot.source_id,

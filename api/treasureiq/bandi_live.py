@@ -803,6 +803,46 @@ def _arricchisci(
     )
 
 
+def _scopri_senza_llm(
+    base: str, comune: ComuneNoto, riga: dict[str, Any], bando: Bando
+) -> BandoArricchito:
+    """Proiezione nazionale senza PDF, provider o inferenze sui requisiti."""
+    content = riga.get("content") if isinstance(riga, dict) else None
+    html = content.get("rendered", "") if isinstance(content, dict) else ""
+    pdf_urls, _ = _filtra_pdf_stesso_host(base, _PDF_LINK_RE.findall(html))
+    pdf_urls = list(dict.fromkeys(pdf_urls))
+    body = strip_html(html)
+    raw_hash = _raw_hash(bando.url, html, pdf_urls)
+    return BandoArricchito(
+        opportunity=Opportunity(
+            id=f"bandi_live:{comune.codice_istat}:{raw_hash[:16]}",
+            kind=OpportunityKind.BANDO,
+            targets=[TargetGroup.TUTTI],
+            title=bando.titolo,
+            summary=body[:400] or bando.anteprima,
+            body=body or None,
+            requirements=Requirements(),
+            source=Source(
+                ente=comune.nome,
+                ente_codice_istat=comune.codice_istat,
+                connector="bandi_live",
+                url=bando.url,
+                fetched_at=datetime.now(timezone.utc),
+                raw_hash=raw_hash,
+            ),
+            confidence=Confidence.INFERRED,
+            extraction_notes=["Scoperta deterministica: requisiti e importi non estratti."],
+            pdfs_linked=len(pdf_urls),
+            pdfs_opened=0,
+            pdfs_skipped=[],
+            chars_processed=len(body),
+        ),
+        scadenza=None,
+        scadenza_verificata=False,
+        documenti=_documenti_da_pdf(base, pdf_urls),
+    )
+
+
 def _arricchisci_scoperto(
     comune: ComuneNoto,
     scoperto: BandoScoperto,
@@ -917,7 +957,11 @@ def _ordina_per_tipo(bandi: list[BandoArricchito]) -> list[BandoArricchito]:
 
 
 def bandi_arricchiti(
-    codice_istat: str | None, *, usa_cache: bool = True, timeout: float = 10.0
+    codice_istat: str | None,
+    *,
+    usa_cache: bool = True,
+    timeout: float = 10.0,
+    estrai_requisiti: bool = True,
 ) -> BandiLiveEsito:
     """Bandi di un comune, scoperti dal vivo su tre gradini REST (cpt, pages,
     alberatura) e arricchiti con requisiti quote-gated. Funzione SYNC (sonda
@@ -939,7 +983,7 @@ def bandi_arricchiti(
             bandi=[],
         )
 
-    if usa_cache:
+    if usa_cache and estrai_requisiti:
         cached = _da_cache(comune.codice_istat)
         if cached is not None:
             return cached
@@ -963,7 +1007,8 @@ def bandi_arricchiti(
             comune, "non_coperto", None,
             piattaforma_at=piattaforma_at, connettore_at=connettore_at,
         )
-        _in_cache(esito)
+        if estrai_requisiti:
+            _in_cache(esito)
         return esito
 
     rest_gradino: Literal["cpt", "pages"] | None = None
@@ -991,7 +1036,7 @@ def bandi_arricchiti(
                 if (bando := _bando_da_riga(base, riga)) is not None
             ]
 
-            if coppie:
+            if coppie and estrai_requisiti:
                 _prune_cache(comune.codice_istat)
                 extractor = RequirementsExtractor(
                     CACHE_DIR / comune.codice_istat / "estrazioni",
@@ -1001,6 +1046,11 @@ def bandi_arricchiti(
                 rest_bandi = [
                     _arricchisci(client, base, comune, riga, bando, extractor)
                     for riga, bando in coppie[:MAX_BANDI_ARRICCHITI]
+                ]
+            elif coppie:
+                rest_bandi = [
+                    _scopri_senza_llm(base, comune, riga, bando)
+                    for riga, bando in coppie
                 ]
 
     def _prova_alberatura() -> None:
@@ -1045,7 +1095,8 @@ def bandi_arricchiti(
             piattaforma_at=piattaforma_at,
             connettore_at=connettore_at,
         )
-        _in_cache(esito)
+        if estrai_requisiti:
+            _in_cache(esito)
         return esito
 
     # cpt/pages non hanno prodotto bandi — coperto a zero (D-B7) o muto del
@@ -1076,7 +1127,8 @@ def bandi_arricchiti(
             piattaforma_at=piattaforma_at,
             connettore_at=connettore_at,
         )
-        _in_cache(esito)
+        if estrai_requisiti:
+            _in_cache(esito)
         return esito
 
     if rest_ha_risposto:
@@ -1087,7 +1139,8 @@ def bandi_arricchiti(
             comune, "coperto_senza_bandi", rest_gradino,
             piattaforma_at=piattaforma_at, connettore_at=connettore_at,
         )
-        _in_cache(esito)
+        if estrai_requisiti:
+            _in_cache(esito)
         return esito
 
     if scoperti is not None:
@@ -1097,7 +1150,8 @@ def bandi_arricchiti(
             comune, "coperto_senza_bandi", "alberatura",
             piattaforma_at=piattaforma_at, connettore_at=connettore_at,
         )
-        _in_cache(esito)
+        if estrai_requisiti:
+            _in_cache(esito)
         return esito
 
     # Nessuno dei tre gradini ha risposto: portale non leggibile ORA (blip di

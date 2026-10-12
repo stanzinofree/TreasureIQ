@@ -38,9 +38,10 @@ def test_store_ignores_corrupt_or_stale_snapshot(tmp_path: Path) -> None:
 
 
 def test_produce_persists_non_covered_result_without_network(tmp_path: Path, monkeypatch) -> None:
-    def fake_bandi(codice_istat: str, *, usa_cache: bool) -> BandiLiveEsito:
+    def fake_bandi(codice_istat: str, *, usa_cache: bool, estrai_requisiti: bool) -> BandiLiveEsito:
         assert codice_istat == "058003"
-        assert usa_cache is True
+        assert usa_cache is False
+        assert estrai_requisiti is False
         return BandiLiveEsito(
             codice_istat=codice_istat,
             comune_nome="Albano Laziale",

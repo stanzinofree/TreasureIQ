@@ -1,13 +1,4 @@
-"""Test sulla dimensione "freschezza" del Data Readiness Score.
-
-Il difetto che questi test bloccano: la prima versione di `_score_freshness`
-guardava `opens_at` (la data di pubblicazione) su *tutti* i record, quindi un
-catalogo di servizi permanenti — Albano Laziale non ha un solo record con
-scadenza — veniva giudicato "stantio" per non avere date, anche se un
-servizio permanente (scuolabus, mensa) non ha nulla da scadere. Il criterio
-corretto guarda `deadline`: solo le misure a scadenza entrano nel rapporto, i
-servizi permanenti ne restano fuori, e un bando scaduto continua a pesare.
-"""
+"""Test sulla dimensione "freschezza" del Data Readiness Score."""
 
 from __future__ import annotations
 
@@ -20,7 +11,7 @@ from treasureiq.readiness import WEIGHTS, _score_freshness
 from treasureiq.schema import Opportunity
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-SEED_PATH = REPO_ROOT / "data" / "seed" / "albano_058003.json"
+SEED_PATH = REPO_ROOT / "data" / "seed" / "fontenuova_058122.json"
 
 
 def _carica_seed() -> list[Opportunity]:
@@ -29,12 +20,12 @@ def _carica_seed() -> list[Opportunity]:
 
 
 def test_catalogo_permanente_non_e_penalizzato():
-    """I 42 record di Albano non hanno un solo `deadline`: sono servizi
+    """I record del seed non hanno un solo `deadline`: sono servizi
     permanenti, non bandi. Il vecchio criterio (basato su `opens_at`) li
     avrebbe giudicati stantii; quello nuovo deve riconoscere che qui non
     c'è nulla che possa scadere e assegnare il peso pieno."""
     record = _carica_seed()
-    assert all(r.deadline is None for r in record), "fixture attesa: nessuna scadenza in Albano"
+    assert all(r.deadline is None for r in record), "fixture attesa: nessuna scadenza"
 
     punteggio = _score_freshness(record)
 

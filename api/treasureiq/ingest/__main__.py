@@ -37,17 +37,8 @@ PAGES_MAX_CANDIDATES = 15
 #: needed to bring it into the demo, provided a connector can read it.
 SOURCES = [
     {
-        "codice_istat": "058003",
-        "ente": "Comune di Albano Laziale",
-        "base_url": "https://comune.albanolaziale.rm.it",
-        "seed": "albano_058003.json",
-        "connector": "wp_rest",
-    },
-    {
-        # Comparator (D-18). Of the 119 comuni in the province of Rome, 20 expose
-        # a working /servizi API; Fonte Nuova ranks 1st with 34, Albano 2nd with
-        # 32, and the two are close in size (~35k vs ~41k residents). Two measured
-        # comuni make the recovery-cost metric comparative instead of absolute.
+        # Servizi pubblicati via API, inclusi nel campione curato assieme a
+        # comuni di piattaforme e territori diversi.
         "codice_istat": "058122",
         "ente": "Comune di Fonte Nuova",
         "base_url": "https://comune.fontenuova.rm.it",

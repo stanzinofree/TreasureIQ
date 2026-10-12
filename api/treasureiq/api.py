@@ -249,23 +249,15 @@ async def _lifespan(_app: FastAPI):
 
 #: Comuni whose seed snapshots ship with the repository.
 COMUNI = {
-    "058003": {
-        "nome": "Albano Laziale",
-        "ente": "Comune di Albano Laziale",
-        "seed": "albano_058003.json",
-        # Measured 2026-08-02 via dati.gov.it CKAN package_search. Zero is the
-        # finding, not a placeholder.
-        "datasets_on_dati_gov": 0,
-    },
     "058122": {
         "nome": "Fonte Nuova",
         "ente": "Comune di Fonte Nuova",
         "seed": "fontenuova_058122.json",
-        # Measured the same day, the same way, as Albano's zero above:
+        # Measured on the same day with the same query:
         #   package_search?q=holder_name:"Comune di Fonte Nuova" -> 5
-        # The comparator therefore discriminates on this dimension rather than
-        # mirroring Albano — it exposes more services AND publishes nationally,
-        # yet fewer of its records yield a recoverable requirement.
+        # The comparator therefore discriminates on this dimension: it exposes
+        # more services and publishes nationally, yet fewer of its records
+        # yield a recoverable requirement.
         "datasets_on_dati_gov": 5,
     },
     # Ariccia had a snapshot on disk and no entry here, so fifteen records

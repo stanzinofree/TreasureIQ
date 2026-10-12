@@ -774,10 +774,6 @@ def raffina_wordpress(*, firma: Firma, tipi_noti: list[str], rest_base: str | No
 _DA_IMPRONTA: tuple[tuple[str, Piattaforma], ...] = (
     ("server=hgate", Piattaforma.HGATE),
     ("argomenti|content|extension", Piattaforma.OPENPA),
-    # Dopo OpenPA di proposito: entrambe hanno `argomenti` fra le directory, e
-    # a distinguerle e' cio' che segue. Invertirle darebbe a OpenPA comuni che
-    # non sono suoi.
-    ("argomenti|bootstrap-italia", Piattaforma.AGENDA_SMART),
     (".imaging", Piattaforma.MAGNOLIA),
     ("dam|home", Piattaforma.MAGNOLIA),
     ("comunibootstrapitalia", Piattaforma.COMUNIBOOTSTRAPITALIA),
@@ -797,6 +793,7 @@ _REGIONALI: tuple[tuple[str, str, Piattaforma], ...] = (
 #: ed è la coincidenza dei tre a fare la firma.
 _COMBINATE: tuple[tuple[tuple[str, ...], Piattaforma], ...] = (
     (("microsoft-iis", "aspx", "bootstrap-italia"), Piattaforma.PAGEOBJECT),
+    (("mycity_session", "bootstrap-italia"), Piattaforma.AGENDA_SMART),
 )
 
 #: `node_modules` è una directory di build, non un fornitore: da sola non

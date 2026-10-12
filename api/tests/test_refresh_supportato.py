@@ -24,6 +24,9 @@ SUPPORTATE = [
     "comunibootstrapitalia",
     "comweb",
     "openpa",
+    "drupal",
+    "magnolia",
+    "agenda_smart",
 ]
 
 # Platforms with NO reader: refresh is a no-op that never updates freshness.
@@ -35,9 +38,6 @@ NON_SUPPORTATE = [
     "flexcmp",
     "isweb",
     "citypal",
-    "agenda_smart",
-    "magnolia",
-    "drupal",
     "joomla",
     "ignota",
     None,

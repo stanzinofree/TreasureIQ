@@ -182,6 +182,7 @@ def test_da_impronta_riconosce_le_famiglie_dai_segnali_grezzi():
         ("asset=argomenti|content|extension|novita", None, Piattaforma.OPENPA),
         ("cookie=csrf; asset=.imaging|.resources|dam|home", None, Piattaforma.MAGNOLIA),
         ("asset=css|js|portals", None, Piattaforma.DOTNETNUKE),
+        ("cookie=mycity_session; asset=bootstrap-italia", None, Piattaforma.AGENDA_SMART),
     ]
     for impronta, regione, atteso in casi:
         firma = da_impronta(impronta=impronta, regione=regione)
@@ -317,18 +318,16 @@ def test_collisione_vince_la_classe_forte_anche_se_scansionata_dopo():
     assert esito.scattate[1].piattaforma is Piattaforma.WORDPRESS_GENERICO
 
 
-def test_agenda_smart_non_ruba_i_comuni_di_openpa():
-    """Le due famiglie hanno entrambe `argomenti` fra le directory: a
-    distinguerle e' cio' che segue. L'ordine delle regole non e' un dettaglio
-    di stile — invertirle darebbe a OpenPA comuni che non sono suoi."""
+def test_agenda_smart_richiede_cookie_mycity_oltre_agli_asset():
     from treasureiq.ingest.piattaforma import da_impronta
 
     assert (
         da_impronta(impronta="asset=argomenti|content|extension|novita").piattaforma
         is Piattaforma.OPENPA
     )
+    assert da_impronta(impronta="asset=argomenti|bootstrap-italia|css|js") is None
     assert (
-        da_impronta(impronta="asset=argomenti|bootstrap-italia|css|js").piattaforma
+        da_impronta(impronta="cookie=mycity_session; asset=bootstrap-italia|css|js").piattaforma
         is Piattaforma.AGENDA_SMART
     )
 

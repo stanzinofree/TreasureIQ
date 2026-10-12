@@ -1,17 +1,49 @@
 """Regression tests for explicit profile-field removal in the match engine."""
 
-import json
 from decimal import Decimal
-from pathlib import Path
 
 import pytest
 
 from treasureiq.match.engine import CriterionState, Verdict, evaluate
 from treasureiq.schema import CitizenProfile, Opportunity
 
-SEED_PATH = Path(__file__).resolve().parents[2] / "data" / "seed" / "albano_058003.json"
-SEED = [Opportunity.model_validate(item) for item in json.loads(SEED_PATH.read_text("utf-8"))]
-BASE_PROFILE = CitizenProfile(comune_istat="058003", comune_nome="Albano Laziale", eta=30, isee=Decimal("15000"), nucleo_familiare=4)
+BASE_PROFILE = CitizenProfile(comune_istat="000001", comune_nome="Comune di prova", eta=30, isee=Decimal("15000"), nucleo_familiare=4)
+SEED = [
+    Opportunity.model_validate(
+        {
+            "id": "fixture:000001:isee",
+            "title": "Contributo ISEE",
+            "kind": "contributo_economico",
+            "requirements": {"isee_max": "20000.00"},
+            "source": {
+                "ente": "Comune di prova",
+                "ente_codice_istat": "000001",
+                "connector": "fixture",
+                "url": "https://comune.test/isee",
+                "fetched_at": "2026-01-01T00:00:00Z",
+                "raw_hash": "isee",
+            },
+            "confidence": "extracted",
+        }
+    ),
+    Opportunity.model_validate(
+        {
+            "id": "fixture:000001:eta",
+            "title": "Contributo età",
+            "kind": "contributo_economico",
+            "requirements": {"eta_min": 18},
+            "source": {
+                "ente": "Comune di prova",
+                "ente_codice_istat": "000001",
+                "connector": "fixture",
+                "url": "https://comune.test/eta",
+                "fetched_at": "2026-01-01T00:00:00Z",
+                "raw_hash": "eta",
+            },
+            "confidence": "extracted",
+        }
+    ),
+]
 
 
 def _first_with(**field_values) -> Opportunity:

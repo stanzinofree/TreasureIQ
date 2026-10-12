@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import pytest
 
-from treasureiq.sonda_live import _tel_valido, risolvi_comune
+from treasureiq.sonda_live import _tel_valido, comune_per_codice, risolvi_comune
 
 
 def nome_di(hint: str) -> str | None:
@@ -83,6 +83,19 @@ def test_il_comune_riconosciuto_porta_con_se_il_proprio_sito():
     assert comune is not None
     assert comune.codice_istat == "058003"
     assert comune.sito
+
+
+@pytest.mark.parametrize(
+    ("codice_istat", "sito"),
+    [
+        ("022246", "www.comune.sellagiudicarie.tn.it"),
+        ("074014", "www.comune.sanmichelesalentino.br.it"),
+    ],
+)
+def test_portali_openpa_riportano_l_host_canonico(codice_istat, sito):
+    comune = comune_per_codice(codice_istat)
+    assert comune is not None
+    assert comune.sito == sito
 
 
 # --- _tel_valido: sintassi telefono italiano ---------------------------------

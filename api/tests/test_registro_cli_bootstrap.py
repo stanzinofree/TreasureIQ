@@ -71,6 +71,16 @@ def test_dry_run_non_esegue_fetch(tmp_path, _stub):
     assert _stub == []  # no fetch at all
 
 
+def test_bootstrap_accetta_piattaforma_drupal():
+    args = registro_cli._build_parser().parse_args(["bootstrap", "--piattaforma", "drupal"])
+    assert args.piattaforma == "drupal"
+
+
+def test_bootstrap_accetta_piattaforma_magnolia():
+    args = registro_cli._build_parser().parse_args(["bootstrap", "--piattaforma", "magnolia"])
+    assert args.piattaforma == "magnolia"
+
+
 def test_canary_seleziona_dieci_ignora_limit(tmp_path, _stub):
     cat = _scena(tmp_path)
     rc = registro_cli.cmd_bootstrap(_args(cat, canary=True, limit=3))

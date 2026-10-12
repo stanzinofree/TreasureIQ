@@ -75,6 +75,9 @@ _LEGGIBILI = {
     # openpa.py), rotte AgID + argomenti confermate su comuni reali.
     "comweb",
     "openpa",
+    "drupal",
+    "magnolia",
+    "agenda_smart",
 }
 
 
@@ -141,6 +144,10 @@ def _scansiona_uno(istat: str) -> tuple[str, str]:
         esito = leggi_connettore(istat, usa_cache=False, rilancia_errori=True)
     except (httpx.ConnectError, httpx.ConnectTimeout) as exc:
         return "rete_non_raggiungibile", f"{istat} {nome} — rete non raggiungibile: {exc}"
+    except httpx.HTTPStatusError as exc:
+        if exc.response.status_code >= 500:
+            return "rete_non_raggiungibile", f"{istat} {nome} — rete non raggiungibile: {exc}"
+        return "errore", f"{istat} {nome} — errore: {exc}"
     except Exception as exc:  # noqa: BLE001 — un comune che eccepisce non ferma il batch
         return "errore", f"{istat} {nome} — errore: {exc}"
     if esito is None:

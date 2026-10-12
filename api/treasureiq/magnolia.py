@@ -83,6 +83,11 @@ _TAG = re.compile(r"<[^>]+>")
 #: ancora servizio canonica: cattura l'intera <a data-element="service-link"...>...</a>
 _ANCHOR = re.compile(r'<a\b[^>]*data-element="service-link"[^>]*>.*?</a>', re.I | re.S)
 _HREF = re.compile(r'href=["\']([^"\']+)', re.I)
+_TITOLO_UFFICIO = re.compile(
+    r'<h[1-6]\b[^>]*\bclass=["\'][^"\']*\bcard-title\b[^"\']*["\'][^>]*>(.*?)</h[1-6]>',
+    re.I | re.S,
+)
+_PERCORSO_UFFICIO = re.compile(r"^/home/amministrazione/uffici/Ufficio-\d+\.html$", re.I)
 
 
 # --------------------------------------------------------------------------- #
@@ -189,6 +194,60 @@ def _fetch(fetch, url: str, host_atteso: str, timeout: float):
     if res is None:
         return None
     return res[1], res[2]
+
+
+def _uffici_da_html(pagina: str, base: str, host_comune: str, letto_il: str):
+    """Card Magnolia con titolo e dettaglio interno, nell'ordine del portale."""
+    from treasureiq.connettore import UfficioConnettore
+
+    uffici = []
+    visti: set[str] = set()
+    titoli = list(_TITOLO_UFFICIO.finditer(pagina))
+    for indice, titolo in enumerate(titoli):
+        nome = _pulisci(titolo.group(1))
+        limite = titoli[indice + 1].start() if indice + 1 < len(titoli) else len(pagina)
+        if not nome:
+            continue
+        for href in _HREF.finditer(pagina[titolo.end():limite]):
+            url = urljoin(base, unescape(href.group(1)).strip())
+            if _host_di(url) != host_comune or not _PERCORSO_UFFICIO.match(urlsplit(url).path):
+                continue
+            if url not in visti:
+                visti.add(url)
+                uffici.append(UfficioConnettore(nome=nome, url=url, source_typed=False, letto_il=letto_il))
+            break
+    return uffici
+
+
+def leggi_magnolia(comune, sonda, *, fetch=fetch_guardato):
+    """Legge l'indice uffici Magnolia server-rendered."""
+    from datetime import datetime, timezone
+
+    from treasureiq.connettore import EsitoConnettore
+    from treasureiq.mappa_connettore import _base_con_schema
+
+    letto_il = datetime.now(timezone.utc).isoformat()
+    base = _base_con_schema(comune.sito)
+    if base is None:
+        return EsitoConnettore(
+            codice_istat=comune.codice_istat, piattaforma=Piattaforma.MAGNOLIA.value, letto_il=letto_il
+        )
+    host_comune = _host_di(base)
+    indice = urljoin(_root(base), "home/amministrazione/uffici.html")
+    letta = _fetch(fetch, indice, host_comune, 8.0)
+    if letta is None:
+        return EsitoConnettore(
+            codice_istat=comune.codice_istat, piattaforma=Piattaforma.MAGNOLIA.value, letto_il=letto_il
+        )
+    sonda.richieste += 1
+    sonda.raggiungibile = True
+    pagina, url_finale = letta
+    return EsitoConnettore(
+        codice_istat=comune.codice_istat,
+        piattaforma=Piattaforma.MAGNOLIA.value,
+        letto_il=letto_il,
+        uffici=_uffici_da_html(pagina.decode("utf-8", "replace"), url_finale, host_comune, letto_il),
+    )
 
 
 def _sonda_categoria(fetch, root: str, host: str, code: str, timeout: float):

@@ -26,7 +26,7 @@ from pydantic import BaseModel, Field
 
 from treasureiq.ingest.censimento import _Sonda, scopri_pagina_at
 from treasureiq.ingest.piattaforma import Piattaforma
-from treasureiq.mappa_connettore import _base_con_schema
+from treasureiq.mappa_connettore import _base_con_schema, mappa_connettore
 from treasureiq.sonda_live import LIVE_DIR, comune_per_codice
 
 logger = logging.getLogger(__name__)
@@ -191,7 +191,7 @@ def _da_store(codice_istat: str) -> EsitoConnettore | None:
     try:
         eta = datetime.now(timezone.utc) - datetime.fromisoformat(esito.letto_il)
     except Exception:  # noqa: BLE001 — store illeggibile è store assente
-        logger.warning("store connettore illeggibile: %s", percorso)
+        logger.warning("store connettore illeggibile: %s", codice_istat)
         return None
     return esito if eta < timedelta(hours=TTL_ORE) else None
 
@@ -278,6 +278,9 @@ PIATTAFORME_REFRESH: frozenset[str] = frozenset(
         Piattaforma.COMUNIBOOTSTRAPITALIA.value,
         Piattaforma.COMWEB.value,
         Piattaforma.OPENPA.value,
+        Piattaforma.DRUPAL.value,
+        Piattaforma.MAGNOLIA.value,
+        Piattaforma.AGENDA_SMART.value,
     }
 )
 
@@ -336,6 +339,15 @@ def refresh_dati_connettore(
             elif piattaforma == Piattaforma.OPENPA.value:
                 from treasureiq.openpa import leggi_openpa
                 esito = leggi_openpa(comune, sonda)
+            elif piattaforma == Piattaforma.DRUPAL.value:
+                from treasureiq.drupal import leggi_drupal
+                esito = leggi_drupal(comune, sonda)
+            elif piattaforma == Piattaforma.MAGNOLIA.value:
+                from treasureiq.magnolia import leggi_magnolia
+                esito = leggi_magnolia(comune, sonda)
+            elif piattaforma == Piattaforma.AGENDA_SMART.value:
+                from treasureiq.agenda_smart import leggi_agenda_smart
+                esito = leggi_agenda_smart(comune, sonda)
             else:
                 logger.info("refresh dati non supportato per piattaforma %s", piattaforma)
                 return precedente
@@ -434,6 +446,8 @@ def leggi_connettore(
     try:
         with _Sonda(timeout=timeout) as sonda:
             risposta = sonda.risposta(base)
+            if getattr(risposta, "status_code", 200) >= 500:
+                risposta.raise_for_status()
             from treasureiq.catalog.checks import source_identity_check
             from treasureiq.registro import recapiti_comune
 
@@ -468,6 +482,29 @@ def leggi_connettore(
                 source_id=codice_istat,
                 entrypoint_url=base,
             )
+            if firma.piattaforma == Piattaforma.IGNOTA:
+                # Il censimento riconosce OpenPA e Magnolia non brandizzati dalla
+                # stessa impronta: riusarla evita un falso vuoto nel dispatch.
+                from treasureiq.ingest.piattaforma import da_impronta, impronta_grezza
+
+                fallback = da_impronta(
+                    impronta=impronta_grezza(headers=dict(risposta.headers), html=risposta.text),
+                    regione=comune.regione,
+                )
+                if fallback and fallback.piattaforma == Piattaforma.OPENPA:
+                    firma = fallback
+                elif fallback and fallback.piattaforma in {
+                    Piattaforma.AGENDA_SMART,
+                    Piattaforma.MAGNOLIA,
+                }:
+                    # Un CPT uffici è una prova più forte degli asset di tema,
+                    # condivisi anche da alcune home WordPress.
+                    try:
+                        mappa = mappa_connettore(codice_istat)
+                    except Exception:  # noqa: BLE001 — probe solo di precedenza
+                        mappa = None
+                    if not (mappa and mappa.uffici.esposto and mappa.uffici.rest_base):
+                        firma = fallback
             if firma.piattaforma == Piattaforma.MUNICIPIUM:
                 try:
                     from treasureiq.municipium import leggi_municipium
@@ -502,6 +539,18 @@ def leggi_connettore(
                         logger.info("connettore PeopleWeb non ancora disponibile")
                         return None
                     esito = leggi_peopleweb(comune, sonda)
+            elif firma.piattaforma == Piattaforma.DRUPAL:
+                from treasureiq.drupal import leggi_drupal
+
+                esito = leggi_drupal(comune, sonda)
+            elif firma.piattaforma == Piattaforma.MAGNOLIA:
+                from treasureiq.magnolia import leggi_magnolia
+
+                esito = leggi_magnolia(comune, sonda)
+            elif firma.piattaforma == Piattaforma.AGENDA_SMART:
+                from treasureiq.agenda_smart import leggi_agenda_smart
+
+                esito = leggi_agenda_smart(comune, sonda)
             elif firma.piattaforma in (
                 Piattaforma.WP_DESIGN_COMUNI,
                 Piattaforma.WORDPRESS_GENERICO,
@@ -527,6 +576,15 @@ def leggi_connettore(
                     logger.info("connettore OpenPA non ancora disponibile")
                     return None
                 esito = leggi_openpa(comune, sonda)
+            elif firma.piattaforma == Piattaforma.IGNOTA:
+                # Alcune home WordPress non espongono più una firma nel markup,
+                # ma il CPT uffici resta una prova strutturale sufficiente.
+                mappa = mappa_connettore(codice_istat)
+                if not (mappa and mappa.uffici.esposto and mappa.uffici.rest_base):
+                    return None
+                from treasureiq.wordpress_agid import leggi_wordpress_agid
+
+                esito = leggi_wordpress_agid(comune, sonda)
             else:
                 return None
     except Exception:  # noqa: BLE001 — portale muto: esito assente, mai un crash

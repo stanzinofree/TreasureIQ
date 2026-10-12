@@ -67,6 +67,8 @@ services:
       # and does not require Ollama. Set this only for routes that still use
       # provider-backed extraction.
       TREASUREIQ_LLM_PROVIDER: ${TREASUREIQ_LLM_PROVIDER:-ollama}
+      TREASUREIQ_OLLAMA_MODEL_EXTRACT: ${TREASUREIQ_OLLAMA_MODEL_EXTRACT:-qwen3:4b}
+      TREASUREIQ_OLLAMA_MODEL_CHAT: ${TREASUREIQ_OLLAMA_MODEL_CHAT:-qwen3:4b}
       # Optional endpoint for the compatibility provider; it is not needed by
       # the normal deterministic chat path.
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}

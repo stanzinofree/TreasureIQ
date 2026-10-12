@@ -47,7 +47,7 @@ logger = logging.getLogger(__name__)
 OutputModelT = TypeVar("OutputModelT", bound=BaseModel)
 
 DEFAULT_OLLAMA_BASE_URL = "http://localhost:11434"
-DEFAULT_OLLAMA_MODEL_EXTRACT = "qwen3:14b"
+DEFAULT_OLLAMA_MODEL_EXTRACT = "qwen3:4b"
 DEFAULT_OLLAMA_MODEL_CHAT = "qwen3:4b"
 
 ANTHROPIC_MODEL = "claude-opus-5"

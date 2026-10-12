@@ -36,6 +36,8 @@ from urllib.parse import urlsplit
 
 import httpx
 
+from treasureiq.ingest.comuni_istat import norm
+
 logger = logging.getLogger(__name__)
 
 CKAN_PACKAGE = "https://indicepa.gov.it/ipa-dati/api/3/action/package_show?id=amministrazioni"
@@ -108,10 +110,9 @@ def _host(url: str | None) -> str | None:
 def arricchisci_comuni(comuni: list[dict], righe: list[dict]) -> tuple[int, int]:
     """Scrive `codice_ipa` su ogni comune che si riesce ad agganciare.
 
-    L'aggancio primario è l'host del sito istituzionale, perché il campo
-    `sito` dei nostri comuni viene da questo stesso registro: è la chiave che
-    li lega davvero. Il ripiego su nome e provincia serve ai comuni che hanno
-    cambiato dominio da quando il file è stato costruito.
+    L'identità è la riga IPA ``Comune di …`` con stesso nome normalizzato e
+    stessa provincia. Un host non è una chiave: unioni e piattaforme ospitate
+    lo condividono fra enti diversi.
 
     Il codice viene salvato in **maiuscolo**: il registro lo distribuisce
     minuscolo (`c_a138`), e i portali MyPortal a quella forma rispondono `200`
@@ -122,35 +123,27 @@ def arricchisci_comuni(comuni: list[dict], righe: list[dict]) -> tuple[int, int]
     valle un codice assente e un codice vuoto si comportano diversamente, e
     solo il primo dice la verità.
     """
-    per_host: dict[str, set[str]] = {}
     per_nome: dict[tuple[str, str], set[str]] = {}
     for riga in righe:
+        if not (riga.get("des_amm") or "").strip().lower().startswith(_PREFISSO_COMUNE):
+            continue
         codice = (riga.get("cod_amm") or "").strip().upper()
         if not codice:
             continue
-        host = _host(riga.get("sito_istituzionale"))
-        if host:
-            per_host.setdefault(host, set()).add(codice)
         chiave = (
-            (riga.get("Comune") or "").strip().casefold(),
-            (riga.get("Provincia") or "").strip().casefold(),
+            norm(riga.get("Comune") or ""),
+            (riga.get("Provincia") or "").strip().upper(),
         )
         if chiave[0]:
             per_nome.setdefault(chiave, set()).add(codice)
 
     agganciati = 0
     for comune in comuni:
-        codice: str | None = None
-        candidati_host = per_host.get(_host(comune.get("sito")) or "", set())
-        if len(candidati_host) == 1:
-            codice = next(iter(candidati_host))
-        if codice is None:
-            candidati_nome = per_nome.get(
-                (comune.get("nome", "").strip().casefold(), comune.get("provincia", "").strip().casefold()),
-                set(),
-            )
-            if len(candidati_nome) == 1:
-                codice = next(iter(candidati_nome))
+        candidati_nome = per_nome.get(
+            (norm(comune.get("nome", "")), (comune.get("provincia") or "").strip().upper()),
+            set(),
+        )
+        codice = next(iter(candidati_nome)) if len(candidati_nome) == 1 else None
         if codice is not None:
             comune["codice_ipa"] = codice
             agganciati += 1

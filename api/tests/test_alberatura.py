@@ -30,6 +30,7 @@ from treasureiq.alberatura import (
     _estrai_openweb,
     _estrai_openpa_at,
     _estrai_urbi,
+    _estrai_parsec,
     _estrai_siscom_dnn,
     _parser_at,
     _in_cache,
@@ -407,6 +408,23 @@ def test_parser_urbi_estrae_schede_locali_senza_inventare_scadenze() -> None:
     assert trovati[0].vendor == "urbi"
     assert trovati[0].bando.data == ""
     assert trovati[0].bando.url.startswith("https://cloud.urbi.it/")
+
+
+def test_parser_parsec_legge_link_pdf_dal_markup_js() -> None:
+    ramo = RamoAT(
+        "Bandi di concorso",
+        "https://trasparenza.parsec326.it/en/web/comune/bandi-di-concorso",
+        "concorso",
+    )
+    pagina = b'''<tr class="ui-datatable-even"><td><span id="A:form:elencoPubblicazioni:0:_t30">Avviso selezione istruttore</span></td><td><a onclick="window.open(\\'/repo/docs/D1/1/bando.pdf\\',\\'doc\\')">PDF</a></td></tr>'''
+    sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
+
+    trovati = _estrai_parsec(sonda, "https://example.test", ramo)
+
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "parsec"
+    assert trovati[0].bando.data == ""
+    assert trovati[0].bando.url == "https://trasparenza.parsec326.it/repo/docs/D1/1/bando.pdf"
 
 
 def test_parser_hgate_estrai_tre_liste_concorso_e_registry_versionato() -> None:

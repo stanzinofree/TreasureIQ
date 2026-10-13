@@ -88,7 +88,7 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa", "epal", "jcity", "openweb", "urbi"]
+    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa", "epal", "jcity", "openweb", "urbi", "parsec"]
     parser_version: str = "1.0.0"
 
 
@@ -850,6 +850,44 @@ def _estrai_urbi(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto]
     return trovati[:MAX_RIGHE_HALLEY]
 
 
+_PARSEC_RIGA_RE = re.compile(
+    r'<tr\b[^>]*\bui-datatable-(?:odd|even)\b[^>]*>(?P<corpo>.*?)</tr>', re.I | re.S
+)
+_PARSEC_TITOLO_RE = re.compile(
+    r'<span\b[^>]*\bid=["\'][^"\']*:_t30["\'][^>]*>(?P<testo>.*?)</span>', re.I | re.S
+)
+_PARSEC_PDF_RE = re.compile(r"window\.open\((?:\\)?['\"](?P<href>/repo/docs/[^'\"\\]+)", re.I)
+
+
+def _estrai_parsec(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """Legge titoli e PDF del listing Parsec/Liferay, senza eseguire JavaScript."""
+    try:
+        risposta = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if risposta.status_code != 200:
+        return None
+    host = urlparse(ramo.url).hostname.lower() if urlparse(ramo.url).hostname else ""
+    trovati: list[BandoScoperto] = []
+    for riga in _PARSEC_RIGA_RE.finditer(_decodifica(risposta)):
+        titolo = _PARSEC_TITOLO_RE.search(riga.group("corpo"))
+        pdf = _PARSEC_PDF_RE.search(riga.group("corpo"))
+        if titolo is None or pdf is None:
+            continue
+        testo = _testo_html(titolo.group("testo"))
+        url = urljoin(ramo.url, html.unescape(pdf.group("href")))
+        if not testo or urlparse(url).hostname.lower() != host:
+            continue
+        trovati.append(
+            BandoScoperto(
+                bando=Bando(titolo=testo, url=url, data="", anteprima=None),
+                tipo=ramo.tipo,
+                vendor="parsec",
+            )
+        )
+    return trovati[:MAX_RIGHE_HALLEY]
+
+
 _DATA_ITALIANA_RE = re.compile(r"\b(\d{2})/(\d{2})/(\d{4})\b")
 _RIGA_ASMENET_RE = re.compile(r"<tr\b[^>]*>(.*?)</tr>", re.I | re.S)
 _CELLA_ASMENET_RE = re.compile(r"<td\b[^>]*>(.*?)</td>", re.I | re.S)
@@ -1143,6 +1181,14 @@ def _estrai_hgate(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto
 
 
 _PARSER_AT: tuple[ParserAT, ...] = (
+    ParserAT(
+        nome="parsec",
+        versione="1.0.0",
+        riconosce=lambda ramo: (
+            ramo.tipo == "concorso" and "trasparenza.parsec326.it" in urlparse(ramo.url).netloc.lower()
+        ),
+        estrai=_estrai_parsec,
+    ),
     ParserAT(
         nome="urbi",
         versione="1.0.0",

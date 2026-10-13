@@ -19,7 +19,10 @@ from treasureiq.alberatura import (
     _da_cache,
     _decodifica,
     _estrai_wp,
+    _estrai_asmenet,
     _estrai_bootstrap_italia,
+    _estrai_dgegovpa,
+    _parser_at,
     _in_cache,
     _rami_da_pagina,
     _rami_wp,
@@ -123,6 +126,15 @@ def test_rami_da_pagina_benevento_trova_i_due_rami_giusti() -> None:
     assert per_tipo["agevolazione"].url.endswith("/categoria/118")
 
 
+def test_rami_da_pagina_risolve_href_relativo_senza_slash() -> None:
+    rami = _rami_da_pagina(
+        "https://dgegovpa.it/Torricella/AmministrazioneTrasparente/AmministrazioneTrasparente",
+        '<a href="BandiConcorso.aspx">Bandi di concorso</a>',
+    )
+
+    assert rami[0].url == "https://dgegovpa.it/Torricella/AmministrazioneTrasparente/BandiConcorso.aspx"
+
+
 def test_bandi_da_listing_halley_decodifica_gli_accenti() -> None:
     pagina = _leggi_bytes("benevento_listing_concorsi.html").decode("windows-1252")
     trovati = _bandi_da_listing_halley(pagina, "web.comune.benevento.it", "concorso")
@@ -178,6 +190,37 @@ def test_bootstrap_italia_empty_listing_is_covered_not_unknown() -> None:
 
     assert bandi == []
     assert covered is True
+
+
+def test_parser_asmenet_estrai_tabella_con_allegato_stesso_host() -> None:
+    ramo = RamoAT("Bandi di concorso", "https://trasparenza.example.asmenet.it/index.php?action=index&p=281", "concorso")
+    pagina = b'''<table><tr><td>02/09/2025</td><td></td><td>Bandi di concorso</td>
+    <td><p>Concorso pubblico istruttore</p></td><td><a href="index.php?event=vediallegato&id=1">Bando.pdf</a></td></tr></table>
+    <p class="ogg_table">Bandi di concorso</p>'''
+    sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
+
+    trovati = _estrai_asmenet(sonda, "https://example.test", ramo)
+
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "asmenet"
+    assert trovati[0].bando.titolo == "Concorso pubblico istruttore"
+    assert trovati[0].bando.data == "2025-09-02"
+    assert trovati[0].bando.url.startswith("https://trasparenza.example.asmenet.it/")
+
+
+def test_parser_dgegovpa_estrai_dettaglio_e_registry_versionato() -> None:
+    ramo = RamoAT("Bandi di concorso", "https://dgegovpa.it/Comune/AmministrazioneTrasparente/BandiConcorso", "concorso")
+    pagina = b'''<h1>Bandi di concorso</h1><a href="BandiConcorso.aspx?dettaglio=148">
+    Avviso pubblico di mobilita volontaria</a>'''
+    sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
+
+    trovati = _estrai_dgegovpa(sonda, "https://example.test", ramo)
+    parser = _parser_at(ramo)
+
+    assert parser is not None and (parser.nome, parser.versione) == ("dgegovpa", "1.0.0")
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "dgegovpa"
+    assert trovati[0].bando.url.endswith("BandiConcorso.aspx?dettaglio=148")
 
 
 def test_decodifica_charset_dichiarato() -> None:

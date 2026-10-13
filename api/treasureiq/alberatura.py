@@ -31,8 +31,8 @@ import unicodedata
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Literal
-from urllib.parse import urlparse, urlsplit
+from typing import Callable, Literal
+from urllib.parse import urljoin, urlparse, urlsplit
 
 import httpx
 from pydantic import BaseModel
@@ -49,6 +49,7 @@ from treasureiq.mappa_connettore import (
     _rest_base_tassonomia_per_tipo,
 )
 from treasureiq.sonda_live import LIVE_DIR, comune_per_codice
+from treasureiq.storico import portale_del_comune
 
 logger = logging.getLogger(__name__)
 
@@ -69,6 +70,7 @@ TTL_ORE_RAMI = 14 * 24
 #: Cap byte sulla pagina AT già catalogata (`registro.endpoints.at`), stesso
 #: ordine di grandezza di `bandi_hgate.MAX_BYTES` (=4_000_000).
 MAX_BYTES_AT = 4_000_000
+STORICO_DB = Path(__file__).resolve().parent.parent.parent / "data" / "storico.db"
 
 
 @dataclass
@@ -86,7 +88,22 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley", "bootstrap_italia"]
+    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa"]
+    parser_version: str = "1.0.0"
+
+
+@dataclass(frozen=True)
+class ParserAT:
+    """Una voce del registry locale dei parser AT versionati.
+
+    ``None`` significa che la pagina non prova una lettura affidabile; una
+    lista vuota e' riservata a una sezione AT riconosciuta e davvero vuota.
+    """
+
+    nome: str
+    versione: str
+    riconosce: Callable[[RamoAT], bool]
+    estrai: Callable[[_Sonda, str, RamoAT], list[BandoScoperto] | None]
 
 
 class _CacheAlberatura(BaseModel):
@@ -109,6 +126,7 @@ class _CacheRami(BaseModel):
     senza conversioni a mano, il contratto verso `_estrai_ramo` resta
     identico dopo un giro disco."""
 
+    versione: Literal[3]
     verificato_il: str
     rami: list[RamoAT]
 
@@ -206,7 +224,7 @@ def _rami_da_pagina(base: str, pagina: str) -> list[RamoAT]:
         tipo = _tipo_da_slug(_slug_da_url(href))
         if tipo is not None and tipo not in trovati:
             trovati[tipo] = RamoAT(
-                etichetta=testo or href, url=_normalizza_link(base, href), tipo=tipo
+                etichetta=testo or href, url=urljoin(base, html.unescape(href)), tipo=tipo
             )
 
     for href, testo in ancore:
@@ -214,7 +232,9 @@ def _rami_da_pagina(base: str, pagina: str) -> list[RamoAT]:
             break
         tipo = _tipo_da_testo(testo)
         if tipo is not None and tipo not in trovati:
-            trovati[tipo] = RamoAT(etichetta=testo, url=_normalizza_link(base, href), tipo=tipo)
+            trovati[tipo] = RamoAT(
+                etichetta=testo, url=urljoin(base, html.unescape(href)), tipo=tipo
+            )
 
     return list(trovati.values())
 
@@ -344,7 +364,7 @@ def _rami_in_cache(codice_istat: str, rami: list[RamoAT]) -> None:
     fissarsi su disco (stessa regola di `_in_cache`, [[predicato-gating-
     cieco-a-nuovo-campo]])."""
     percorso = _percorso_rami(codice_istat)
-    esito = _CacheRami(verificato_il=datetime.now(timezone.utc).isoformat(), rami=rami)
+    esito = _CacheRami(versione=3, verificato_il=datetime.now(timezone.utc).isoformat(), rami=rami)
     try:
         percorso.parent.mkdir(parents=True, exist_ok=True)
         provvisorio = percorso.with_suffix(".tmp")
@@ -371,31 +391,47 @@ def _rami_da_registro(codice_istat: str, *, timeout: float) -> list[RamoAT] | No
     schema+host della pagina EFFETTIVAMENTE raggiunta (`url_finale` da
     `fetch_guardato`, dopo eventuali redirect), non `comune.sito`: la pagina
     AT può vivere su un SaaS fuori dal dominio del comune."""
+    at_urls: list[str] = []
     try:
         from treasureiq.registro import leggi_registro
 
         record = leggi_registro(codice_istat)
     except Exception:  # noqa: BLE001 — registro muto: nessun seme, mai un crash
+        record = None
+    if record is not None:
+        if record.endpoints.at:
+            at_urls.append(record.endpoints.at)
+            try:
+                catalogo_at = (portale_del_comune(STORICO_DB, codice_istat) or {}).get("at_url")
+            except Exception:  # noqa: BLE001
+                catalogo_at = None
+            if catalogo_at and catalogo_at not in at_urls:
+                at_urls.append(catalogo_at)
+    if record is None:
+        # Il registro runtime contiene solo gli enti già ingestiti; il census
+        # nazionale è la fonte read-only per avviare il primo parser AT.
+        try:
+            catalogo_at = (portale_del_comune(STORICO_DB, codice_istat) or {}).get("at_url")
+        except Exception:  # noqa: BLE001 — catalogo nazionale non disponibile
+            catalogo_at = None
+        if catalogo_at:
+            at_urls.append(catalogo_at)
+    if not at_urls:
         return None
-    if record is None or not record.endpoints.at:
-        return None
-
-    at_url = record.endpoints.at
-    host = urlsplit(at_url).hostname
-    host_atteso = host.lower().removeprefix("www.") if host else None
-
-    esito = fetch_guardato(
-        at_url, timeout=timeout, max_bytes=MAX_BYTES_AT, host_atteso=host_atteso,
-    )
-    if esito is None:
-        return None
-    intestazioni, contenuto, url_finale = esito
-
-    pagina = _decodifica_bytes(intestazioni.get("content-type", "") or "", contenuto)
-    finale = urlsplit(url_finale)
-    base = f"{finale.scheme}://{finale.netloc}"
-    rami = _rami_da_pagina(base, pagina)
-    return rami or None
+    for at_url in at_urls:
+        host = urlsplit(at_url).hostname
+        host_atteso = host.lower().removeprefix("www.") if host else None
+        esito = fetch_guardato(
+            at_url, timeout=timeout, max_bytes=MAX_BYTES_AT, host_atteso=host_atteso,
+        )
+        if esito is None:
+            continue
+        intestazioni, contenuto, url_finale = esito
+        pagina = _decodifica_bytes(intestazioni.get("content-type", "") or "", contenuto)
+        rami = _rami_da_pagina(url_finale, pagina)
+        if rami:
+            return rami
+    return None
 
 
 def scopri_rami(codice_istat: str, *, timeout: float = 8.0) -> list[RamoAT] | None:
@@ -539,18 +575,126 @@ def _estrai_bootstrap_italia(sonda: _Sonda, ramo: RamoAT) -> tuple[list[BandoSco
     return [], True
 
 
+_DATA_ITALIANA_RE = re.compile(r"\b(\d{2})/(\d{2})/(\d{4})\b")
+_RIGA_ASMENET_RE = re.compile(r"<tr\b[^>]*>(.*?)</tr>", re.I | re.S)
+_CELLA_ASMENET_RE = re.compile(r"<td\b[^>]*>(.*?)</td>", re.I | re.S)
+_ALLEGATO_ASMENET_RE = re.compile(
+    r"href\s*=\s*['\"]([^'\"]*event=vediallegato[^'\"]*)['\"]", re.I
+)
+
+
+def _testo_html(testo: str) -> str:
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", testo))).strip()
+
+
+def _estrai_asmenet(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """Legge il listing tabellare Asmenet senza aprire gli allegati."""
+    try:
+        risposta = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if risposta.status_code != 200:
+        return None
+    pagina = _decodifica(risposta)
+    if "asmenet.it" not in urlparse(ramo.url).netloc.lower() or "ogg_table" not in pagina:
+        return None
+    host = urlparse(ramo.url).netloc.lower()
+    trovati: list[BandoScoperto] = []
+    for riga in _RIGA_ASMENET_RE.findall(pagina):
+        celle = _CELLA_ASMENET_RE.findall(riga)
+        if len(celle) < 4:
+            continue
+        titolo = _testo_html(celle[3])
+        allegato = _ALLEGATO_ASMENET_RE.search(riga)
+        if not titolo or allegato is None:
+            continue
+        url = urljoin(ramo.url, html.unescape(allegato.group(1)))
+        if urlparse(url).netloc.lower() != host:
+            continue
+        data = _DATA_ITALIANA_RE.search(_testo_html(celle[0]))
+        data_iso = ""
+        if data:
+            data_iso = f"{data.group(3)}-{data.group(2)}-{data.group(1)}"
+        trovati.append(
+            BandoScoperto(
+                bando=Bando(titolo=titolo, url=url, data=data_iso, anteprima=None),
+                tipo=ramo.tipo,
+                vendor="asmenet",
+            )
+        )
+    return trovati[:MAX_RIGHE_HALLEY]
+
+
+def _estrai_dgegovpa(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """Legge i dettagli pubblicati nelle pagine BandiConcorso di dgegovpa."""
+    try:
+        risposta = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if risposta.status_code != 200:
+        return None
+    pagina = _decodifica(risposta)
+    if "dgegovpa.it" not in urlparse(ramo.url).netloc.lower() or "Bandi di concorso" not in pagina:
+        return None
+    trovati: list[BandoScoperto] = []
+    for href, testo in _ancore(pagina):
+        if "bandiconcorso.aspx?dettaglio=" not in href.lower():
+            continue
+        titolo = _testo_html(testo)
+        if not titolo:
+            continue
+        trovati.append(
+            BandoScoperto(
+                bando=Bando(
+                    titolo=titolo,
+                    url=urljoin(ramo.url, href),
+                    data="",
+                    anteprima=None,
+                ),
+                tipo=ramo.tipo,
+                vendor="dgegovpa",
+            )
+        )
+    return trovati[:MAX_RIGHE_HALLEY]
+
+
+_PARSER_AT: tuple[ParserAT, ...] = (
+    ParserAT(
+        nome="asmenet",
+        versione="1.0.0",
+        riconosce=lambda ramo: "asmenet.it" in urlparse(ramo.url).netloc.lower(),
+        estrai=_estrai_asmenet,
+    ),
+    ParserAT(
+        nome="dgegovpa",
+        versione="1.0.0",
+        riconosce=lambda ramo: (
+            ramo.tipo == "concorso" and "dgegovpa.it" in urlparse(ramo.url).netloc.lower()
+        ),
+        estrai=_estrai_dgegovpa,
+    ),
+)
+
+
+def _parser_at(ramo: RamoAT) -> ParserAT | None:
+    return next((parser for parser in _PARSER_AT if parser.riconosce(ramo)), None)
+
+
 def _ramo_gestito(ramo: RamoAT) -> bool:
     """`True` se `ramo.url` porta la firma di un vendor con estrattore reale
     (wp o halley). Un ramo scoperto ma di vendor non gestito (openweb,
     PeopleWeb, Plone...) non è "coperto senza bandi": è non estraibile — la
     distinzione che fa `estrai_bandi` per non restituire `[]` (A4)."""
-    return "/wp-json/wp/v2/" in ramo.url or "/zf/index.php/" in ramo.url
+    return _parser_at(ramo) is not None or "/wp-json/wp/v2/" in ramo.url or "/zf/index.php/" in ramo.url
 
 
-def _estrai_ramo(sonda: _Sonda, base: str, ramo: RamoAT) -> list[BandoScoperto]:
+def _estrai_ramo(sonda: _Sonda, base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
     """Il connettore si sceglie dalla forma di `ramo.url`, mai da un
     controllo separato: chi l'ha prodotto (`_rami_wp`/`_rami_html`) ha già
     incorporato la firma del vendor nell'url stesso."""
+    parser = _parser_at(ramo)
+    if parser is not None:
+        return parser.estrai(sonda, base, ramo)
     if "/wp-json/wp/v2/" in ramo.url:
         return _estrai_wp(sonda, base, ramo)
     if "/zf/index.php/" in ramo.url:
@@ -621,8 +765,11 @@ def estrai_bandi(codice_istat: str, *, timeout: float = 8.0) -> list[BandoScoper
     with _Sonda(timeout=timeout) as sonda:
         for ramo in rami:
             if _ramo_gestito(ramo):
+                estratti = _estrai_ramo(sonda, base, ramo)
+                if estratti is None:
+                    continue
                 coperto = True
-                risultati.extend(_estrai_ramo(sonda, base, ramo))
+                risultati.extend(estratti)
             else:
                 bootstrap, gestito = _estrai_bootstrap_italia(sonda, ramo)
                 coperto = coperto or gestito

@@ -88,7 +88,7 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa"]
+    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa", "epal"]
     parser_version: str = "1.0.0"
 
 
@@ -604,6 +604,44 @@ def _estrai_openpa_at(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScop
     return [] if "nessun risultato ottenuto" in pagina.lower() else None
 
 
+_EPAL_RIGA_RE = re.compile(r"<tr\b[^>]*>(?P<corpo>.*?)</tr>", re.I | re.S)
+_EPAL_SCHEDA_RE = re.compile(
+    r'<a\b[^>]*href=["\'](?P<href>[^"\']*/L190/sezione/show/[^"\']*)["\'][^>]*>(?P<testo>.*?)</a>',
+    re.I | re.S,
+)
+
+
+def _estrai_epal(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """Legge le righe della sezione ePal L190 per i bandi di concorso."""
+    try:
+        risposta = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if risposta.status_code != 200:
+        return None
+    pagina = _decodifica(risposta)
+    if "<table" not in pagina.lower():
+        return None
+    host = urlparse(ramo.url).hostname.lower() if urlparse(ramo.url).hostname else ""
+    trovati: list[BandoScoperto] = []
+    for riga in _EPAL_RIGA_RE.finditer(pagina):
+        scheda = _EPAL_SCHEDA_RE.search(riga.group("corpo"))
+        if scheda is None:
+            continue
+        titolo = _testo_html(scheda.group("testo"))
+        url = urljoin(ramo.url, html.unescape(scheda.group("href")))
+        if not titolo or urlparse(url).hostname.lower() != host:
+            continue
+        trovati.append(
+            BandoScoperto(
+                bando=Bando(titolo=titolo, url=url, data="", anteprima=None),
+                tipo=ramo.tipo,
+                vendor="epal",
+            )
+        )
+    return trovati[:MAX_RIGHE_HALLEY]
+
+
 _DATA_ITALIANA_RE = re.compile(r"\b(\d{2})/(\d{2})/(\d{4})\b")
 _RIGA_ASMENET_RE = re.compile(r"<tr\b[^>]*>(.*?)</tr>", re.I | re.S)
 _CELLA_ASMENET_RE = re.compile(r"<td\b[^>]*>(.*?)</td>", re.I | re.S)
@@ -897,6 +935,17 @@ def _estrai_hgate(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto
 
 
 _PARSER_AT: tuple[ParserAT, ...] = (
+    ParserAT(
+        nome="epal",
+        versione="1.0.0",
+        riconosce=lambda ramo: (
+            ramo.tipo == "concorso"
+            and "e-pal.it" in urlparse(ramo.url).netloc.lower()
+            and urlparse(ramo.url).path.lower().startswith("/l190/")
+            and "idsezione=13" in ramo.url.lower()
+        ),
+        estrai=_estrai_epal,
+    ),
     ParserAT(
         nome="openpa",
         versione="1.0.0",

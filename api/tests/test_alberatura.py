@@ -22,6 +22,7 @@ from treasureiq.alberatura import (
     _estrai_asmenet,
     _estrai_bootstrap_italia,
     _estrai_dgegovpa,
+    _estrai_epal,
     _estrai_hgate,
     _estrai_peopleweb,
     _estrai_hypersic,
@@ -293,6 +294,22 @@ def test_parser_openpa_estrae_schede_e_conosce_vuoto_esplicito() -> None:
     vuota = b'<link href="/extension/openpa_bootstrapitalia/style.css">Nessun risultato ottenuto'
     sonda_vuota = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, vuota)})
     assert _estrai_openpa_at(sonda_vuota, "https://example.test", ramo) == []
+
+
+def test_parser_epal_estrae_schede_dalla_tabella() -> None:
+    ramo = RamoAT(
+        "Bandi di concorso",
+        "https://comune.e-pal.it/L190/?idSezione=13&id=&sort=&activePage=&search=",
+        "concorso",
+    )
+    pagina = b'''<table><tr class="info"><td><a href="/L190/sezione/show/172797?idSezione=13">Concorso istruttore</a></td></tr><tr><td><a href="/L190/sezione/download/172803?idSezione=13">Bando.pdf</a></td></tr></table>'''
+    sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
+
+    trovati = _estrai_epal(sonda, "https://example.test", ramo)
+
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "epal"
+    assert trovati[0].bando.url.endswith("/L190/sezione/show/172797?idSezione=13")
 
 
 def test_parser_hgate_estrai_tre_liste_concorso_e_registry_versionato() -> None:

@@ -25,6 +25,7 @@ from treasureiq.alberatura import (
     _estrai_hgate,
     _estrai_peopleweb,
     _estrai_hypersic,
+    _estrai_openpa_at,
     _estrai_siscom_dnn,
     _parser_at,
     _in_cache,
@@ -273,6 +274,25 @@ def test_parser_hypersic_prima_legge_landing_e_poi_la_card() -> None:
     assert trovati is not None and len(trovati) == 1
     assert trovati[0].vendor == "hypersic"
     assert trovati[0].bando.data == "2025-04-14"
+
+
+def test_parser_openpa_estrae_schede_e_conosce_vuoto_esplicito() -> None:
+    ramo = RamoAT(
+        "Bandi di concorso",
+        "https://www.comune.example.it/Amministrazione-Trasparente/Bandi-di-concorso",
+        "concorso",
+    )
+    pagina = b'''<link href="/extension/openpa_bootstrapitalia/style.css"><a class="list-item icon-left d-inline-block font-sans-serif" href="/Amministrazione-Trasparente/Bandi-di-concorso/Concorso-istruttore"><span>Concorso istruttore</span></a>'''
+    sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
+
+    trovati = _estrai_openpa_at(sonda, "https://example.test", ramo)
+
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "openpa"
+    assert trovati[0].bando.url.endswith("/Concorso-istruttore")
+    vuota = b'<link href="/extension/openpa_bootstrapitalia/style.css">Nessun risultato ottenuto'
+    sonda_vuota = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, vuota)})
+    assert _estrai_openpa_at(sonda_vuota, "https://example.test", ramo) == []
 
 
 def test_parser_hgate_estrai_tre_liste_concorso_e_registry_versionato() -> None:

@@ -88,7 +88,7 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic"]
+    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa"]
     parser_version: str = "1.0.0"
 
 
@@ -568,6 +568,42 @@ def _estrai_bootstrap_italia(sonda: _Sonda, ramo: RamoAT) -> tuple[list[BandoSco
     return [], True
 
 
+_OPENPA_AT_LINK_RE = re.compile(
+    r'<a\b(?=[^>]*\bclass=["\'][^"\']*\bicon-left\b[^"\']*\bfont-sans-serif\b[^"\']*["\'])[^>]*\bhref=["\'](?P<href>[^"\']+)["\'][^>]*>(?P<testo>.*?)</a>',
+    re.I | re.S,
+)
+
+
+def _estrai_openpa_at(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """Legge le schede OpenPA/OpenContent della sezione AT, senza aprirle."""
+    try:
+        risposta = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if risposta.status_code != 200:
+        return None
+    pagina = _decodifica(risposta)
+    if "openpa_bootstrapitalia" not in pagina.lower():
+        return None
+    host = urlparse(ramo.url).hostname.lower() if urlparse(ramo.url).hostname else ""
+    trovati: list[BandoScoperto] = []
+    for link in _OPENPA_AT_LINK_RE.finditer(pagina):
+        titolo = _testo_html(link.group("testo"))
+        url = urljoin(ramo.url, html.unescape(link.group("href")))
+        if not titolo or urlparse(url).hostname.lower() != host:
+            continue
+        trovati.append(
+            BandoScoperto(
+                bando=Bando(titolo=titolo, url=url, data="", anteprima=None),
+                tipo=ramo.tipo,
+                vendor="openpa",
+            )
+        )
+    if trovati:
+        return trovati[:MAX_RIGHE_HALLEY]
+    return [] if "nessun risultato ottenuto" in pagina.lower() else None
+
+
 _DATA_ITALIANA_RE = re.compile(r"\b(\d{2})/(\d{2})/(\d{4})\b")
 _RIGA_ASMENET_RE = re.compile(r"<tr\b[^>]*>(.*?)</tr>", re.I | re.S)
 _CELLA_ASMENET_RE = re.compile(r"<td\b[^>]*>(.*?)</td>", re.I | re.S)
@@ -861,6 +897,17 @@ def _estrai_hgate(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto
 
 
 _PARSER_AT: tuple[ParserAT, ...] = (
+    ParserAT(
+        nome="openpa",
+        versione="1.0.0",
+        riconosce=lambda ramo: (
+            ramo.tipo == "concorso"
+            and urlparse(ramo.url).path.lower().endswith(
+                "/amministrazione-trasparente/bandi-di-concorso"
+            )
+        ),
+        estrai=_estrai_openpa_at,
+    ),
     ParserAT(
         nome="asmenet",
         versione="1.0.0",

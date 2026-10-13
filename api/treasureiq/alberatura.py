@@ -88,7 +88,7 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa", "epal", "jcity", "openweb", "urbi", "parsec", "trasparenzapa"]
+    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa", "epal", "jcity", "openweb", "urbi", "parsec", "trasparenzapa", "contrasparenza"]
     parser_version: str = "1.0.0"
 
 
@@ -930,6 +930,42 @@ def _estrai_trasparenzapa(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[Bando
     return trovati[:MAX_RIGHE_HALLEY]
 
 
+_CONTRASPARENZA_LEGACY_RE = re.compile(
+    r'<h2\b[^>]*\bpos-title\b[^>]*>\s*<a\b[^>]*\bhref=["\'](?P<href>[^"\']+)["\'][^>]*>(?P<testo>.*?)</a>',
+    re.I | re.S,
+)
+_CONTRASPARENZA_LINKLIST_RE = re.compile(
+    r'<a\b[^>]*\bclass=["\'][^"\']*\bu-padding-left-s\b[^"\']*["\'][^>]*\bhref=["\'](?P<href>[^"\']+)["\'][^>]*>\s*(?:<b\b[^>]*>)?(?P<testo>.*?)(?:</b>)?\s*</a>',
+    re.I | re.S,
+)
+
+
+def _estrai_contrasparenza(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """Legge i link ai dettagli dei bandi Contrasparenza, senza scadenze inferite."""
+    try:
+        risposta = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if risposta.status_code != 200:
+        return None
+    host = urlparse(ramo.url).hostname.lower() if urlparse(ramo.url).hostname else ""
+    trovati: list[BandoScoperto] = []
+    for pattern in (_CONTRASPARENZA_LEGACY_RE, _CONTRASPARENZA_LINKLIST_RE):
+        for link in pattern.finditer(_decodifica(risposta)):
+            testo = _testo_html(link.group("testo"))
+            url = urljoin(ramo.url, html.unescape(link.group("href")))
+            if not testo or urlparse(url).hostname.lower() != host:
+                continue
+            trovati.append(
+                BandoScoperto(
+                    bando=Bando(titolo=testo, url=url, data="", anteprima=None),
+                    tipo=ramo.tipo,
+                    vendor="contrasparenza",
+                )
+            )
+    return trovati[:MAX_RIGHE_HALLEY]
+
+
 _DATA_ITALIANA_RE = re.compile(r"\b(\d{2})/(\d{2})/(\d{4})\b")
 _RIGA_ASMENET_RE = re.compile(r"<tr\b[^>]*>(.*?)</tr>", re.I | re.S)
 _CELLA_ASMENET_RE = re.compile(r"<td\b[^>]*>(.*?)</td>", re.I | re.S)
@@ -1223,6 +1259,14 @@ def _estrai_hgate(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto
 
 
 _PARSER_AT: tuple[ParserAT, ...] = (
+    ParserAT(
+        nome="contrasparenza",
+        versione="1.0.0",
+        riconosce=lambda ramo: (
+            ramo.tipo == "concorso" and "contrasparenza.it" in urlparse(ramo.url).netloc.lower()
+        ),
+        estrai=_estrai_contrasparenza,
+    ),
     ParserAT(
         nome="trasparenzapa",
         versione="1.0.0",

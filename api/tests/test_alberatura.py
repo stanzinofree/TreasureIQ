@@ -31,6 +31,7 @@ from treasureiq.alberatura import (
     _estrai_openpa_at,
     _estrai_urbi,
     _estrai_parsec,
+    _estrai_contrasparenza,
     _estrai_trasparenzapa,
     _estrai_siscom_dnn,
     _parser_at,
@@ -451,6 +452,32 @@ def test_parser_trasparenzapa_usa_solo_pdf_interno_senza_scadenza() -> None:
     assert trovati[0].vendor == "trasparenzapa"
     assert trovati[0].bando.data == ""
     assert trovati[0].bando.url == "https://www.trasparenzapa.it/Allegati/E034/bando.pdf"
+
+
+@pytest.mark.parametrize(
+    ("url", "pagina"),
+    [
+        (
+            "https://archivio.example.contrasparenza.it/files/bandi.html",
+            b'''<h2 class="pos-title"><a href="../files/bando.html">Concorso istruttore</a></h2>''',
+        ),
+        (
+            "https://comune.contrasparenza.it/trasparenza/generale/36/bandi-di-concorso",
+            b'''<ul class="Linklist"><li><a class="u-padding-left-s" href="/trasparenza/contenuto/1/bando"><b>Concorso istruttore</b></a></li></ul>''',
+        ),
+    ],
+)
+def test_parser_contrasparenza_legge_i_due_layout(url: str, pagina: bytes) -> None:
+    ramo = RamoAT("Bandi di concorso", url, "concorso")
+    sonda = _SondaFinta(risposta_per_url={url: _RispostaFinta(200, pagina)})
+
+    trovati = _estrai_contrasparenza(sonda, "https://example.test", ramo)
+    parser = _parser_at(ramo)
+
+    assert parser is not None and (parser.nome, parser.versione) == ("contrasparenza", "1.0.0")
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "contrasparenza"
+    assert trovati[0].bando.data == ""
 
 
 def test_parser_hgate_estrai_tre_liste_concorso_e_registry_versionato() -> None:

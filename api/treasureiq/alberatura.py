@@ -88,7 +88,7 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa", "epal", "jcity", "openweb"]
+    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa", "epal", "jcity", "openweb", "urbi"]
     parser_version: str = "1.0.0"
 
 
@@ -249,6 +249,8 @@ def _decodifica_bytes(content_type: str, contenuto: bytes) -> str:
     via `fetch_guardato` (headers + bytes grezzi, non una `Response`)."""
     trovato = re.search(r"charset=([\w-]+)", content_type, re.I)
     charset = trovato.group(1) if trovato else "iso-8859-1"
+    if not trovato and re.search(br'<meta\b[^>]*\bcharset\s*=\s*["\']?utf-8\b', contenuto[:4096], re.I):
+        charset = "utf-8"
     try:
         return contenuto.decode(charset, errors="replace")
     except LookupError:
@@ -257,8 +259,8 @@ def _decodifica_bytes(content_type: str, contenuto: bytes) -> str:
 
 def _decodifica(risposta: httpx.Response) -> str:
     """Decodifica il corpo secondo il charset dichiarato in Content-Type,
-    ripiego ISO-8859-1 se assente o sconosciuto. I portali Halley dichiarano
-    windows-1252/ISO-8859-1: un decode UTF-8 a forza corromperebbe gli
+    ripiego ISO-8859-1 se assente o sconosciuto, salvo un meta UTF-8. I portali
+    Halley dichiarano windows-1252/ISO-8859-1: un decode UTF-8 a forza corromperebbe gli
     accenti («mobilità» -> «mobilitÃ »), esattamente ciò che questa funzione
     esiste per evitare."""
     content_type = risposta.headers.get("content-type", "") or ""
@@ -807,6 +809,47 @@ def _estrai_openweb(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoper
     return trovati[:MAX_RIGHE_HALLEY]
 
 
+_URBI_BLOCCO_RE = re.compile(
+    r'<div\b[^>]*\bid=["\']idContenitore\d+["\'][^>]*>(?P<corpo>.*?)</div><!-- d-flex -->',
+    re.I | re.S,
+)
+_URBI_TITOLO_RE = re.compile(r"<h4\b[^>]*>(?P<testo>.*?)</h4>", re.I | re.S)
+_URBI_AZIONE_RE = re.compile(
+    r'data-w3cbt-button-onclick-params=["\'](?P<href>[^"\']+)["\']', re.I
+)
+
+
+def _estrai_urbi(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """Legge le schede concorso pubblicate nella pagina AT Urbi."""
+    try:
+        risposta = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if risposta.status_code != 200:
+        return None
+    host = urlparse(ramo.url).hostname.lower() if urlparse(ramo.url).hostname else ""
+    trovati: list[BandoScoperto] = []
+    for blocco in _URBI_BLOCCO_RE.finditer(_decodifica(risposta)):
+        titolo = _URBI_TITOLO_RE.search(blocco.group("corpo"))
+        azione = _URBI_AZIONE_RE.search(blocco.group("corpo"))
+        if titolo is None or azione is None:
+            continue
+        testo = _testo_html(titolo.group("testo"))
+        if not testo or _normalizza_testo(testo).startswith(("non sussiste", "link alla sotto sezione")):
+            continue
+        url = urljoin(ramo.url, html.unescape(azione.group("href")))
+        if urlparse(url).hostname.lower() != host:
+            continue
+        trovati.append(
+            BandoScoperto(
+                bando=Bando(titolo=testo, url=url, data="", anteprima=None),
+                tipo=ramo.tipo,
+                vendor="urbi",
+            )
+        )
+    return trovati[:MAX_RIGHE_HALLEY]
+
+
 _DATA_ITALIANA_RE = re.compile(r"\b(\d{2})/(\d{2})/(\d{4})\b")
 _RIGA_ASMENET_RE = re.compile(r"<tr\b[^>]*>(.*?)</tr>", re.I | re.S)
 _CELLA_ASMENET_RE = re.compile(r"<td\b[^>]*>(.*?)</td>", re.I | re.S)
@@ -1100,6 +1143,16 @@ def _estrai_hgate(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto
 
 
 _PARSER_AT: tuple[ParserAT, ...] = (
+    ParserAT(
+        nome="urbi",
+        versione="1.0.0",
+        riconosce=lambda ramo: (
+            ramo.tipo == "concorso"
+            and "urbi.it" in urlparse(ramo.url).netloc.lower()
+            and "/ur1UR033.sto" in urlparse(ramo.url).path
+        ),
+        estrai=_estrai_urbi,
+    ),
     ParserAT(
         nome="openweb",
         versione="1.0.0",

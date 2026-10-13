@@ -29,6 +29,7 @@ from treasureiq.alberatura import (
     _estrai_jcity,
     _estrai_openweb,
     _estrai_openpa_at,
+    _estrai_urbi,
     _estrai_siscom_dnn,
     _parser_at,
     _in_cache,
@@ -391,6 +392,23 @@ def test_parser_openweb_segue_il_registro_concorsi() -> None:
     assert trovati[0].bando.data == "2025-04-30"
 
 
+def test_parser_urbi_estrae_schede_locali_senza_inventare_scadenze() -> None:
+    ramo = RamoAT(
+        "Bandi di concorso",
+        "https://cloud.urbi.it/urbi/progs/urp/ur1UR033.sto?DB_NAME=n200016&NodoSel=23",
+        "concorso",
+    )
+    pagina = b'''<div id="idContenitore1"><div><h4>Non sussiste la casistica</h4><button data-w3cbt-button-onclick-params="fecore01.sto?NDFH=1">Accedi</button></div></div><!-- d-flex --><div id="idContenitore2"><div><h4>Concorso istruttore</h4><button data-w3cbt-button-onclick-params="fecore01.sto?NDFH=2">Accedi</button></div></div><!-- d-flex --><div id="idContenitore3"><div><h4>Link alla sotto sezione concorsi</h4><button data-w3cbt-button-onclick-params="https://www.inpa.gov.it/bando">Accedi</button></div></div><!-- d-flex -->'''
+    sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
+
+    trovati = _estrai_urbi(sonda, "https://example.test", ramo)
+
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "urbi"
+    assert trovati[0].bando.data == ""
+    assert trovati[0].bando.url.startswith("https://cloud.urbi.it/")
+
+
 def test_parser_hgate_estrai_tre_liste_concorso_e_registry_versionato() -> None:
     ramo = RamoAT(
         "Bandi di concorso",
@@ -455,6 +473,11 @@ def test_decodifica_charset_dichiarato() -> None:
 def test_decodifica_ripiega_su_iso_8859_1_senza_charset() -> None:
     risposta = _RispostaFinta(200, "città".encode("iso-8859-1"), headers={})
     assert _decodifica(risposta) == "città"
+
+
+def test_decodifica_meta_utf8_senza_charset_nell_header() -> None:
+    risposta = _RispostaFinta(200, '<meta charset="utf-8">unità'.encode(), headers={})
+    assert _decodifica(risposta) == '<meta charset="utf-8">unità'
 
 
 # --- Gradino WP REST (Figline) -------------------------------------------

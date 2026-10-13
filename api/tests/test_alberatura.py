@@ -271,6 +271,27 @@ def test_parser_hgate_estrai_tre_liste_concorso_e_registry_versionato() -> None:
     assert trovati[0].bando.url.startswith("https://www.comune.example.it/")
 
 
+def test_parser_hgate_segue_la_paginazione_dichiarata() -> None:
+    ramo = RamoAT("Bandi di concorso", "https://www.comune.example.it/EG0/EGSCHTST48.HBL?en=eg1", "concorso")
+    aperti = "https://www.comune.example.it/EG0/EGSCHTST49.HBL?en=eg1&MESSA=PUBBLICA"
+    pagina_due = "https://www.comune.example.it/EG0/EGSCHTST49.HBL?en=eg1&MESSA=PAGSUCC=2"
+    landing = f'<h1 id="titolo_social">Bandi di concorso</h1><a href="{aperti}">Bandi di concorso aperti</a>'.encode()
+    prima = b'''<h1>Bandi di concorso</h1><div class="lista-aggiuntivo"><a href="scheda_bando_di_concorso_1.html">Primo bando</a></div>
+    <ul aria-label="Pagina 1 di 2"><a onclick="LEGGE('en=eg1&MESSA=PAGSUCC=' + (Number(1) + 1))"></a></ul>'''
+    seconda = b'''<h1>Bandi di concorso</h1><div class="lista-aggiuntivo"><a href="scheda_bando_di_concorso_2.html">Secondo bando</a></div>
+    <ul aria-label="Pagina 2 di 2"></ul>'''
+    sonda = _SondaFinta(risposta_per_url={
+        ramo.url: _RispostaFinta(200, landing),
+        aperti: _RispostaFinta(200, prima),
+        pagina_due: _RispostaFinta(200, seconda),
+    })
+
+    trovati = _estrai_hgate(sonda, "https://example.test", ramo)
+
+    assert trovati is not None
+    assert [b.bando.titolo for b in trovati] == ["Primo bando", "Secondo bando"]
+
+
 def test_decodifica_charset_dichiarato() -> None:
     risposta = _RispostaFinta(
         200, "mobilità".encode("windows-1252"), headers={"content-type": "text/html; charset=ISO-8859-1"}

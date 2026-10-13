@@ -691,6 +691,13 @@ _HGATE_SCHEDA_RE = re.compile(
     r"(?P<titolo>.*?)</a>",
     re.I | re.S,
 )
+_HGATE_PAGINA_RE = re.compile(r"Pagina\s+(?P<corrente>\d+)\s+di\s+(?P<totale>\d+)", re.I)
+_HGATE_SUCCESSIVA_RE = re.compile(
+    r"LEGGE\(\s*'(?P<query>[^']*MESSA=PAGSUCC=)'\s*\+\s*"
+    r"\(Number\((?P<corrente>\d+)\)\s*\+\s*1\)\s*\)",
+    re.I,
+)
+MAX_PAGINE_HGATE = 20
 
 
 def _decodifica_hgate(risposta: httpx.Response) -> str:
@@ -727,28 +734,48 @@ def _estrai_hgate(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto
 
     trovati: list[BandoScoperto] = []
     for sezione in sezioni:
-        try:
-            risposta = sonda.risposta(sezione)
-        except Exception:  # noqa: BLE001
-            return None
-        if risposta.status_code != 200:
-            return None
-        pagina = _decodifica_hgate(risposta)
-        if "lista-aggiuntivo" not in pagina or "Bandi di concorso" not in pagina:
-            return None
-        for corrispondenza in _HGATE_SCHEDA_RE.finditer(pagina):
-            url = urljoin(sezione, html.unescape(corrispondenza.group("href")))
-            if urlparse(url).netloc.lower() != host:
-                continue
-            titolo = _testo_html(corrispondenza.group("titolo"))
-            if titolo:
-                trovati.append(
-                    BandoScoperto(
-                        bando=Bando(titolo=titolo, url=url, data="", anteprima=None),
-                        tipo=ramo.tipo,
-                        vendor="hgate",
+        pagina_url = sezione
+        viste: set[str] = set()
+        while pagina_url:
+            if pagina_url in viste or len(viste) >= MAX_PAGINE_HGATE:
+                return None
+            viste.add(pagina_url)
+            try:
+                risposta = sonda.risposta(pagina_url)
+            except Exception:  # noqa: BLE001
+                return None
+            if risposta.status_code != 200:
+                return None
+            pagina = _decodifica_hgate(risposta)
+            if "lista-aggiuntivo" not in pagina or "Bandi di concorso" not in pagina:
+                return None
+            for corrispondenza in _HGATE_SCHEDA_RE.finditer(pagina):
+                url = urljoin(pagina_url, html.unescape(corrispondenza.group("href")))
+                if urlparse(url).netloc.lower() != host:
+                    continue
+                titolo = _testo_html(corrispondenza.group("titolo"))
+                if titolo:
+                    trovati.append(
+                        BandoScoperto(
+                            bando=Bando(titolo=titolo, url=url, data="", anteprima=None),
+                            tipo=ramo.tipo,
+                            vendor="hgate",
+                        )
                     )
-                )
+            paginazione = _HGATE_PAGINA_RE.search(pagina)
+            if paginazione is None or int(paginazione.group("corrente")) >= int(paginazione.group("totale")):
+                break
+            if int(paginazione.group("totale")) > MAX_PAGINE_HGATE:
+                return None
+            successiva = _HGATE_SUCCESSIVA_RE.search(pagina)
+            if successiva is None or int(successiva.group("corrente")) != int(paginazione.group("corrente")):
+                return None
+            pagina_url = (
+                pagina_url.split("?", 1)[0]
+                + "?"
+                + html.unescape(successiva.group("query"))
+                + str(int(paginazione.group("corrente")) + 1)
+            )
     return trovati[:MAX_RIGHE_HALLEY]
 
 

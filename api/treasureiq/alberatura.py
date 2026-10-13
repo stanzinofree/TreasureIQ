@@ -1244,7 +1244,6 @@ _PARSER_AT: tuple[ParserAT, ...] = (
         versione="1.0.0",
         riconosce=lambda ramo: (
             ramo.tipo == "concorso"
-            and "urbi.it" in urlparse(ramo.url).netloc.lower()
             and "/ur1UR033.sto" in urlparse(ramo.url).path
         ),
         estrai=_estrai_urbi,

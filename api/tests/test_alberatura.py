@@ -404,7 +404,15 @@ def test_parser_urbi_estrae_schede_locali_senza_inventare_scadenze() -> None:
     sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
 
     trovati = _estrai_urbi(sonda, "https://example.test", ramo)
+    parser = _parser_at(
+        RamoAT(
+            "Bandi di concorso",
+            "https://servizionline.comune.example.it/urbi/progs/urp/ur1UR033.sto?DB_NAME=x&NodoSel=23",
+            "concorso",
+        )
+    )
 
+    assert parser is not None and (parser.nome, parser.versione) == ("urbi", "1.0.0")
     assert trovati is not None and len(trovati) == 1
     assert trovati[0].vendor == "urbi"
     assert trovati[0].bando.data == ""

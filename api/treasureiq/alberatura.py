@@ -638,8 +638,8 @@ def _estrai_openpa_at(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScop
                 continue
             if urlparse(url).hostname.lower() != host:
                 continue
-            pubblicato = metadata.get("published")
-            data = pubblicato[:10] if isinstance(pubblicato, str) else ""
+            scadenza = lingua.get("data_di_scadenza_delle_iscrizioni")
+            data = scadenza[:10] if isinstance(scadenza, str) else ""
             trovati.append(
                 BandoScoperto(
                     bando=Bando(titolo=titolo, url=url, data=data, anteprima=None),

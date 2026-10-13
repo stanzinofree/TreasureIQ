@@ -306,16 +306,20 @@ def test_parser_openpa_usa_api_pubblicata_e_segue_la_pagina_successiva() -> None
     api = "https://www.comune.example.it/api/opendata/v2/content/search/tag"
     seconda = f"{api}+offset+1"
     pagina = b'<link href="/extension/openpa_bootstrapitalia/style.css"><a href="/api/opendata/v2/content/search/tag">Scarica i dati in formato JSON</a>'
-    hit = lambda numero: {
+    hit = lambda numero, scadenza=None: {
         "metadata": {
             "link": f"https://www.comune.example.it/api/opendata/v2/content/read/{numero}",
-            "published": "2025-04-14T00:00:00+02:00",
         },
-        "data": {"ita-IT": {"name": f"Concorso {numero}"}},
+        "data": {
+            "ita-IT": {
+                "name": f"Concorso {numero}",
+                **({"data_di_scadenza_delle_iscrizioni": scadenza} if scadenza else {}),
+            }
+        },
     }
     sonda = _SondaFinta(
         json_per_url={
-            api: {"searchHits": [hit(1)], "nextPageQuery": seconda},
+            api: {"searchHits": [hit(1, "2025-04-30T00:00:00+02:00")], "nextPageQuery": seconda},
             seconda: {"searchHits": [hit(2)]},
         },
         risposta_per_url={ramo.url: _RispostaFinta(200, pagina)},
@@ -324,7 +328,8 @@ def test_parser_openpa_usa_api_pubblicata_e_segue_la_pagina_successiva() -> None
     trovati = _estrai_openpa_at(sonda, "https://example.test", ramo)
 
     assert trovati is not None and [b.bando.titolo for b in trovati] == ["Concorso 1", "Concorso 2"]
-    assert trovati[0].bando.data == "2025-04-14"
+    assert trovati[0].bando.data == "2025-04-30"
+    assert trovati[1].bando.data == ""
 
 
 def test_parser_epal_estrae_schede_dalla_tabella() -> None:

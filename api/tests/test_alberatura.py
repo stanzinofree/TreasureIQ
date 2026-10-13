@@ -26,6 +26,7 @@ from treasureiq.alberatura import (
     _estrai_hgate,
     _estrai_peopleweb,
     _estrai_hypersic,
+    _estrai_jcity,
     _estrai_openpa_at,
     _estrai_siscom_dnn,
     _parser_at,
@@ -310,6 +311,27 @@ def test_parser_epal_estrae_schede_dalla_tabella() -> None:
     assert trovati is not None and len(trovati) == 1
     assert trovati[0].vendor == "epal"
     assert trovati[0].bando.url.endswith("/L190/sezione/show/172797?idSezione=13")
+
+
+def test_parser_jcity_segue_la_rotta_e_filtra_i_bandi() -> None:
+    ramo = RamoAT(
+        "Bandi di concorso",
+        "https://comune.trasparenza-valutazione-merito.it/web/trasparenza/dettaglio-trasparenza",
+        "concorso",
+    )
+    listing = "https://comune.trasparenza-valutazione-merito.it/web/trasparenza/papca-g/-/papca/igrid/1"
+    landing = b'<a data-resource="Bandi di concorso" data-mainurl="/web/trasparenza/papca-g/-/papca/igrid/1">Bandi</a>'
+    pagina = b'''<tr class="master-detail-list-line"><td class="categoria">BANDI DI CONCORSO</td><td class="oggetto text">Concorso istruttore</td><td>14/04/2025</td><td><a href="/web/trasparenza/papca-g/-/papca/display/1">Dettaglio</a></td></tr>'''
+    sonda = _SondaFinta(risposta_per_url={
+        ramo.url: _RispostaFinta(200, landing),
+        listing: _RispostaFinta(200, pagina),
+    })
+
+    trovati = _estrai_jcity(sonda, "https://example.test", ramo)
+
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "jcity"
+    assert trovati[0].bando.data == "2025-04-14"
 
 
 def test_parser_hgate_estrai_tre_liste_concorso_e_registry_versionato() -> None:

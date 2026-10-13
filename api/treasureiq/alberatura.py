@@ -88,7 +88,7 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa", "epal"]
+    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa", "epal", "jcity"]
     parser_version: str = "1.0.0"
 
 
@@ -642,6 +642,63 @@ def _estrai_epal(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto]
     return trovati[:MAX_RIGHE_HALLEY]
 
 
+_JCITY_ROTTa_RE = re.compile(
+    r'<a\b(?=[^>]*data-resource=["\']Bandi di concorso["\'])(?=[^>]*data-mainurl=["\'](?P<href>[^"\']*/papca/igrid/[^"\']*)["\'])[^>]*>',
+    re.I,
+)
+_JCITY_RIGA_RE = re.compile(r"<tr\b[^>]*master-detail-list-line[^>]*>(?P<corpo>.*?)</tr>", re.I | re.S)
+_JCITY_OGGETTO_RE = re.compile(r'<td\b[^>]*class=["\'][^"\']*\boggetto\b[^"\']*["\'][^>]*>(?P<testo>.*?)</td>', re.I | re.S)
+_JCITY_DETTAGLIO_RE = re.compile(r'<a\b[^>]*href=["\'](?P<href>[^"\']*/papca/display/[^"\']*)["\']', re.I)
+
+
+def _estrai_jcity(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """Legge il listing JCity/Maggioli raggiunto dalla landing AT."""
+    try:
+        landing = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if landing.status_code != 200:
+        return None
+    pagina_landing = _decodifica(landing)
+    rotta = _JCITY_ROTTa_RE.search(pagina_landing)
+    if rotta is None:
+        return None
+    listing_url = urljoin(ramo.url, html.unescape(rotta.group("href")))
+    host = urlparse(ramo.url).hostname.lower() if urlparse(ramo.url).hostname else ""
+    if urlparse(listing_url).hostname.lower() != host:
+        return None
+    try:
+        risposta = sonda.risposta(listing_url)
+    except Exception:  # noqa: BLE001
+        return None
+    if risposta.status_code != 200:
+        return None
+    pagina = _decodifica(risposta)
+    trovati: list[BandoScoperto] = []
+    for riga in _JCITY_RIGA_RE.finditer(pagina):
+        corpo = riga.group("corpo")
+        if "concors" not in _normalizza_testo(corpo):
+            continue
+        oggetto = _JCITY_OGGETTO_RE.search(corpo)
+        dettaglio = _JCITY_DETTAGLIO_RE.search(corpo)
+        if oggetto is None or dettaglio is None:
+            continue
+        titolo = _testo_html(oggetto.group("testo"))
+        url = urljoin(listing_url, html.unescape(dettaglio.group("href")))
+        if not titolo or urlparse(url).hostname.lower() != host:
+            continue
+        data = _DATA_ITALIANA_RE.search(_testo_html(corpo))
+        data_iso = f"{data.group(3)}-{data.group(2)}-{data.group(1)}" if data else ""
+        trovati.append(
+            BandoScoperto(
+                bando=Bando(titolo=titolo, url=url, data=data_iso, anteprima=None),
+                tipo=ramo.tipo,
+                vendor="jcity",
+            )
+        )
+    return trovati[:MAX_RIGHE_HALLEY]
+
+
 _DATA_ITALIANA_RE = re.compile(r"\b(\d{2})/(\d{2})/(\d{4})\b")
 _RIGA_ASMENET_RE = re.compile(r"<tr\b[^>]*>(.*?)</tr>", re.I | re.S)
 _CELLA_ASMENET_RE = re.compile(r"<td\b[^>]*>(.*?)</td>", re.I | re.S)
@@ -935,6 +992,15 @@ def _estrai_hgate(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto
 
 
 _PARSER_AT: tuple[ParserAT, ...] = (
+    ParserAT(
+        nome="jcity",
+        versione="1.0.0",
+        riconosce=lambda ramo: (
+            ramo.tipo == "concorso"
+            and "trasparenza-valutazione-merito.it" in urlparse(ramo.url).netloc.lower()
+        ),
+        estrai=_estrai_jcity,
+    ),
     ParserAT(
         nome="epal",
         versione="1.0.0",

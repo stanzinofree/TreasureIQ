@@ -24,6 +24,7 @@ from treasureiq.alberatura import (
     _estrai_dgegovpa,
     _estrai_hgate,
     _estrai_peopleweb,
+    _estrai_hypersic,
     _estrai_siscom_dnn,
     _parser_at,
     _in_cache,
@@ -259,6 +260,19 @@ def test_parser_siscom_dnn_estrae_scheda_locale_e_non_confondere_delega() -> Non
     delega = pagina + b" I concorsi per l'assunzione sono banditi dall'Unione Montana"
     sonda_delega = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, delega)})
     assert _estrai_siscom_dnn(sonda_delega, "https://example.test", ramo) is None
+
+
+def test_parser_hypersic_prima_legge_landing_e_poi_la_card() -> None:
+    ramo = RamoAT("Bandi di concorso", "https://portal.hypersicapp.net/cms/portale/trasparenza/trasparenzaamministrativadocs.aspx?CP=52", "concorso")
+    landing = "https://portal.hypersicapp.net/cms/portale/trasparenza/trasparenzaamministrativa.aspx"
+    pagina = b'''<h1 id="pagTitle">Bandi di concorso</h1><li class="my-3"><div class="text-dark fs-6"><p>Concorso istruttore</p></div><span>Pubblicato il 14/04/2025</span><a href="trasparenzaamministrativadettaglio.aspx?CP=52&CDOC=272">Vai alla scheda</a></li><li class="my-3"><div class="text-dark fs-6">Nessun documento da pubblicare</div><a href="trasparenzaamministrativadettaglio.aspx?CP=52&CDOC=273">Vai alla scheda</a></li>'''
+    sonda = _SondaFinta(risposta_per_url={landing: _RispostaFinta(200, b"ok"), ramo.url: _RispostaFinta(200, pagina)})
+
+    trovati = _estrai_hypersic(sonda, "https://example.test", ramo)
+
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "hypersic"
+    assert trovati[0].bando.data == "2025-04-14"
 
 
 def test_parser_hgate_estrai_tre_liste_concorso_e_registry_versionato() -> None:

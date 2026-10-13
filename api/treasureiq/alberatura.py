@@ -88,7 +88,7 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn"]
+    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic"]
     parser_version: str = "1.0.0"
 
 
@@ -724,6 +724,48 @@ def _estrai_siscom_dnn(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoSco
     return trovati[:MAX_RIGHE_HALLEY]
 
 
+_HYPERSIC_RIGA_RE = re.compile(r'<li class="my-3">(?P<corpo>.*?)</li>', re.I | re.S)
+_HYPERSIC_TESTO_RE = re.compile(r'<div class="text-dark fs-6">(?P<testo>.*?)</div>', re.I | re.S)
+_HYPERSIC_DETT_RE = re.compile(r'href=[\'\"](?P<href>[^\'\"]*trasparenzaamministrativadettaglio\.aspx[^\'\"]*)', re.I)
+_HYPERSIC_DATA_RE = re.compile(r"Pubblicato\s+il\s+(\d{2})/(\d{2})/(\d{4})", re.I)
+
+
+def _estrai_hypersic(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """HyperSIC richiede il cookie della landing prima del listing AT."""
+    landing = urljoin(ramo.url, "trasparenzaamministrativa.aspx")
+    try:
+        if sonda.risposta(landing).status_code != 200:
+            return None
+        risposta = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if risposta.status_code != 200:
+        return None
+    pagina = _decodifica(risposta)
+    if '<h1 id="pagTitle">Bandi di concorso</h1>' not in pagina:
+        return None
+    host = urlparse(ramo.url).hostname.lower() if urlparse(ramo.url).hostname else ""
+    trovati: list[BandoScoperto] = []
+    for riga in _HYPERSIC_RIGA_RE.finditer(pagina):
+        corpo = riga.group("corpo")
+        dettaglio = _HYPERSIC_DETT_RE.search(corpo)
+        testo = _HYPERSIC_TESTO_RE.search(corpo)
+        if dettaglio is None or testo is None:
+            continue
+        titolo = _testo_html(testo.group("testo"))
+        url = urljoin(ramo.url, html.unescape(dettaglio.group("href")))
+        if (
+            not titolo
+            or "nessun documento da pubblicare" in _normalizza_testo(titolo)
+            or urlparse(url).hostname.lower() != host
+        ):
+            continue
+        data = _HYPERSIC_DATA_RE.search(_testo_html(corpo))
+        data_iso = f"{data.group(3)}-{data.group(2)}-{data.group(1)}" if data else ""
+        trovati.append(BandoScoperto(bando=Bando(titolo=titolo, url=url, data=data_iso, anteprima=None), tipo=ramo.tipo, vendor="hypersic"))
+    return trovati[:MAX_RIGHE_HALLEY]
+
+
 _HGATE_SEZIONE_RE = re.compile(r"/EG0/EGSCHTST(?:49|50|51)\.HBL", re.I)
 _HGATE_SCHEDA_RE = re.compile(
     r'<a\b[^>]*href=[\'\"](?P<href>[^\'\"]*scheda_bando_di_concorso[^\'\"]*)[\'\"][^>]*>'
@@ -847,6 +889,15 @@ _PARSER_AT: tuple[ParserAT, ...] = (
             and "iddettaglio=" in ramo.url.lower()
         ),
         estrai=_estrai_siscom_dnn,
+    ),
+    ParserAT(
+        nome="hypersic",
+        versione="1.0.0",
+        riconosce=lambda ramo: (
+            "hypersicapp.net" in urlparse(ramo.url).netloc.lower()
+            and "trasparenzaamministrativadocs.aspx?cp=" in ramo.url.lower()
+        ),
+        estrai=_estrai_hypersic,
     ),
     ParserAT(
         nome="hgate",

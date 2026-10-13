@@ -31,6 +31,7 @@ from treasureiq.alberatura import (
     _estrai_openpa_at,
     _estrai_urbi,
     _estrai_parsec,
+    _estrai_trasparenzapa,
     _estrai_siscom_dnn,
     _parser_at,
     _in_cache,
@@ -425,6 +426,23 @@ def test_parser_parsec_legge_link_pdf_dal_markup_js() -> None:
     assert trovati[0].vendor == "parsec"
     assert trovati[0].bando.data == ""
     assert trovati[0].bando.url == "https://trasparenza.parsec326.it/repo/docs/D1/1/bando.pdf"
+
+
+def test_parser_trasparenzapa_usa_solo_pdf_interno_senza_scadenza() -> None:
+    ramo = RamoAT(
+        "Bandi di concorso",
+        "https://www.trasparenzapa.it/ente/ammintraspaTipo0.aspx?comune=E034",
+        "concorso",
+    )
+    pagina = b'''<tr id="x_DXDataRow0"><td><b>Oggetto:</b></td><td>Concorso istruttore</td><td><a id="x_lnkDocumento_0" href="/Allegati/E034/bando.pdf">PDF</a></td></tr><tr id="x_DXDataRow1"><td><b>Oggetto:</b></td><td>Link esterno</td><td><a id="x_lnkDocumento_0" href="https://example.test/bando.pdf">PDF</a></td></tr>'''
+    sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
+
+    trovati = _estrai_trasparenzapa(sonda, "https://example.test", ramo)
+
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "trasparenzapa"
+    assert trovati[0].bando.data == ""
+    assert trovati[0].bando.url == "https://www.trasparenzapa.it/Allegati/E034/bando.pdf"
 
 
 def test_parser_hgate_estrai_tre_liste_concorso_e_registry_versionato() -> None:

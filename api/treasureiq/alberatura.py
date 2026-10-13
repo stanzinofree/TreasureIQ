@@ -399,24 +399,16 @@ def _rami_da_registro(codice_istat: str, *, timeout: float) -> list[RamoAT] | No
         record = leggi_registro(codice_istat)
     except Exception:  # noqa: BLE001 — registro muto: nessun seme, mai un crash
         record = None
-    if record is not None:
-        if record.endpoints.at:
-            at_urls.append(record.endpoints.at)
-            try:
-                catalogo_at = (portale_del_comune(STORICO_DB, codice_istat) or {}).get("at_url")
-            except Exception:  # noqa: BLE001
-                catalogo_at = None
-            if catalogo_at and catalogo_at not in at_urls:
-                at_urls.append(catalogo_at)
-    if record is None:
-        # Il registro runtime contiene solo gli enti già ingestiti; il census
-        # nazionale è la fonte read-only per avviare il primo parser AT.
-        try:
-            catalogo_at = (portale_del_comune(STORICO_DB, codice_istat) or {}).get("at_url")
-        except Exception:  # noqa: BLE001 — catalogo nazionale non disponibile
-            catalogo_at = None
-        if catalogo_at:
-            at_urls.append(catalogo_at)
+    if record is not None and record.endpoints.at:
+        at_urls.append(record.endpoints.at)
+    # Il registro runtime può esistere ma non avere ancora l'endpoint AT;
+    # il census nazionale resta il fallback read-only in entrambi i casi.
+    try:
+        catalogo_at = (portale_del_comune(STORICO_DB, codice_istat) or {}).get("at_url")
+    except Exception:  # noqa: BLE001 — catalogo nazionale non disponibile
+        catalogo_at = None
+    if catalogo_at and catalogo_at not in at_urls:
+        at_urls.append(catalogo_at)
     if not at_urls:
         return None
     for at_url in at_urls:

@@ -458,6 +458,34 @@ def test_scopri_rami_semina_da_endpoints_at(
     assert (tmp_path / "062009" / "rami.json").exists()
 
 
+def test_scopri_rami_registro_parziale_ripiega_sul_catalogo(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """Un registro già creato ma senza AT non deve nascondere il census."""
+    import treasureiq.alberatura as alberatura_mod
+
+    monkeypatch.setattr(alberatura_mod, "CACHE_DIR", tmp_path)
+    monkeypatch.setattr(
+        "treasureiq.registro.leggi_registro",
+        lambda codice: SimpleNamespace(endpoints=SimpleNamespace(at=None)),
+    )
+    monkeypatch.setattr(alberatura_mod, "portale_del_comune", lambda *_: {"at_url": _AT_URL_FUORI_HOST})
+    monkeypatch.setattr(alberatura_mod, "_rami_wp", _rifiuta_chiamata)
+    monkeypatch.setattr(alberatura_mod, "_rami_html", _rifiuta_chiamata)
+    pagina = _leggi_bytes("benevento_menu_at.html")
+
+    def _fetch_guardato_finto(url: str, **_kwargs: object):
+        assert url == _AT_URL_FUORI_HOST
+        return httpx.Headers({"content-type": "text/html; charset=windows-1252"}), pagina, url
+
+    monkeypatch.setattr(alberatura_mod, "fetch_guardato", _fetch_guardato_finto)
+
+    rami = scopri_rami("062009")
+
+    assert rami is not None
+    assert {ramo.tipo for ramo in rami} == {"concorso", "agevolazione"}
+
+
 def test_scopri_rami_endpoints_at_assente_usa_catena_originale(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -476,6 +504,7 @@ def test_scopri_rami_endpoints_at_assente_usa_catena_originale(
         "treasureiq.registro.leggi_registro",
         lambda codice: SimpleNamespace(endpoints=SimpleNamespace(at=None)),
     )
+    monkeypatch.setattr(alberatura_mod, "portale_del_comune", lambda *_: None)
     monkeypatch.setattr(alberatura_mod, "fetch_guardato", _rifiuta_chiamata)
     monkeypatch.setattr(alberatura_mod, "_rami_wp", lambda sonda, base: [ramo_wp])
     monkeypatch.setattr(alberatura_mod, "_rami_html", _rifiuta_chiamata)
@@ -526,6 +555,7 @@ def test_scopri_rami_json_corrotto_riscopre(monkeypatch: pytest.MonkeyPatch, tmp
         "treasureiq.registro.leggi_registro",
         lambda codice: SimpleNamespace(endpoints=SimpleNamespace(at=None)),
     )
+    monkeypatch.setattr(alberatura_mod, "portale_del_comune", lambda *_: None)
     monkeypatch.setattr(alberatura_mod, "_rami_wp", lambda sonda, base: [ramo_wp])
     monkeypatch.setattr(alberatura_mod, "_rami_html", _rifiuta_chiamata)
 
@@ -552,6 +582,7 @@ def test_scopri_rami_esito_vuoto_non_si_cachea(
         "treasureiq.registro.leggi_registro",
         lambda codice: SimpleNamespace(endpoints=SimpleNamespace(at=None)),
     )
+    monkeypatch.setattr(alberatura_mod, "portale_del_comune", lambda *_: None)
     monkeypatch.setattr(alberatura_mod, "_rami_wp", lambda sonda, base: None)
     monkeypatch.setattr(alberatura_mod, "_rami_html", lambda sonda, base: None)
 

@@ -45,6 +45,7 @@ from treasureiq.catalog.data_contracts import (
 CoverageStatus = Literal[
     "coperto_con_bandi",
     "coperto_senza_bandi",
+    "wordpress_vivo_at_non_verificata",
     "non_coperto",
     "comune_ignoto",
 ]
@@ -167,8 +168,8 @@ def _access_mode(coverage: CoverageStatus) -> AccessMode:
     UNAVAILABLE when the comune could not be read or recognised.
 
     The distinction matters: ``coperto_senza_bandi`` is a source we read and
-    found empty — not a coverage gap. Collapsing it into UNAVAILABLE would make
-    "no notice published" look like "we cannot read this comune" (Codex review).
+    found empty — not a coverage gap. A live WordPress endpoint without a
+    verified AT remains unavailable, never an inferred empty source.
     """
     if coverage in ("coperto_con_bandi", "coperto_senza_bandi"):
         return AccessMode.MEDIATED

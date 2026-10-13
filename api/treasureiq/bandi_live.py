@@ -141,7 +141,13 @@ class BandiLiveEsito(BaseModel):
 
     codice_istat: str
     comune_nome: str
-    esito: Literal["coperto_con_bandi", "coperto_senza_bandi", "non_coperto", "comune_ignoto"]
+    esito: Literal[
+        "coperto_con_bandi",
+        "coperto_senza_bandi",
+        "wordpress_vivo_at_non_verificata",
+        "non_coperto",
+        "comune_ignoto",
+    ]
     #: Quale gradino REST ha coperto il comune. `None` su `non_coperto` (nessuno
     #: dei tre) e su `comune_ignoto` (non si è nemmeno sondato). `alberatura`
     #: (KAPI 8) è il terzo gradino, tentato solo quando cpt/pages non coprono.
@@ -322,6 +328,10 @@ def _da_cache(codice_istat: str) -> BandiLiveEsito | None:
         eta = datetime.now(timezone.utc) - datetime.fromisoformat(esito.verificato_il)
     except Exception:  # noqa: BLE001 — una cache illeggibile è una cache assente
         logger.warning("listing bandi-live illeggibile: %s", percorso)
+        return None
+    if esito.esito == "coperto_senza_bandi" and esito.gradino in ("cpt", "pages"):
+        # Cache precedenti alla separazione WordPress/AT: non possono provare
+        # che la sezione AT sia stata letta, quindi si rifanno dal vivo.
         return None
     return esito if eta.total_seconds() < TTL_ORE * 3600 else None
 
@@ -1099,8 +1109,8 @@ def bandi_arricchiti(
             _in_cache(esito)
         return esito
 
-    # cpt/pages non hanno prodotto bandi — coperto a zero (D-B7) o muto del
-    # tutto. `scoperti` è già stato tentato sopra (`_prova_alberatura`,
+    # cpt/pages non hanno prodotto bandi — WordPress può essere vivo senza
+    # essere la vera AT. `scoperti` è già stato tentato sopra (`_prova_alberatura`,
     # gated dal dispatch + dalla rete di sicurezza): non solo quando
     # cpt/pages non coprono, ma anche come fonte aggiuntiva quando coprono a
     # vuoto — Benevento è il caso reale: il WordPress in apice risponde
@@ -1131,21 +1141,9 @@ def bandi_arricchiti(
             _in_cache(esito)
         return esito
 
-    if rest_ha_risposto:
-        # cpt/pages hanno coperto a zero e alberatura non aggiunge nulla
-        # (rami assenti o zero bandi): il verdetto onesto resta quello che
-        # ha davvero risposto, cacheabile (D-B7 — copertura confermata).
-        esito = _esito_vuoto(
-            comune, "coperto_senza_bandi", rest_gradino,
-            piattaforma_at=piattaforma_at, connettore_at=connettore_at,
-        )
-        if estrai_requisiti:
-            _in_cache(esito)
-        return esito
-
     if scoperti is not None:
-        # alberatura ha coperto (rami letti) ma zero bandi, e cpt/pages non
-        # hanno coperto affatto: comunque una copertura confermata.
+        # alberatura ha letto almeno un ramo AT gestito ma senza bandi: questa
+        # è l'unica prova sufficiente per dichiarare la sezione AT vuota.
         esito = _esito_vuoto(
             comune, "coperto_senza_bandi", "alberatura",
             piattaforma_at=piattaforma_at, connettore_at=connettore_at,
@@ -1153,6 +1151,15 @@ def bandi_arricchiti(
         if estrai_requisiti:
             _in_cache(esito)
         return esito
+
+    if rest_ha_risposto:
+        # L'API WordPress del sito istituzionale è viva, ma nessun parser ha
+        # verificato l'AT: non trasformare questa osservazione in "nessun
+        # bando". Il runner la manda in review con i rami AT raggiungibili.
+        return _esito_vuoto(
+            comune, "wordpress_vivo_at_non_verificata", rest_gradino,
+            piattaforma_at=piattaforma_at, connettore_at=connettore_at,
+        )
 
     # Nessuno dei tre gradini ha risposto: portale non leggibile ORA (blip di
     # rete o davvero assente) — non possiamo sostenerlo per TTL_ORE, quindi

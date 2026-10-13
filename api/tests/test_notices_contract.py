@@ -185,6 +185,16 @@ def test_batch_non_coperto_is_unavailable_not_supported():
     assert batch.status is DataStatus.NOT_SUPPORTED
 
 
+def test_batch_wordpress_vivo_at_non_verificata_is_unavailable_not_supported():
+    snap = snapshot_da_bandi_live(
+        _esito(esito="wordpress_vivo_at_non_verificata", bandi=[], gradino="pages")
+    )
+    batch = notices_batch(snap, _request())
+
+    assert batch.access_mode is AccessMode.UNAVAILABLE
+    assert batch.status is DataStatus.NOT_SUPPORTED
+
+
 def test_batch_comune_ignoto_is_unavailable_not_supported():
     snap = snapshot_da_bandi_live(_esito(esito="comune_ignoto", bandi=[], gradino=None))
     batch = notices_batch(snap, _request())

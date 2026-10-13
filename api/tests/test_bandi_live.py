@@ -298,7 +298,7 @@ def test_rung1_miss_rung2_hit_gradino_pages(monkeypatch):
 # --- 3. rung2 solo falsi positivi -> filtro segnale li scarta ----------------
 
 
-def test_rung2_falsi_positivi_scartati_coperto_senza_bandi(monkeypatch):
+def test_rung2_falsi_positivi_scartati_wordpress_vivo_at_non_verificata(monkeypatch):
     _monkeypatch_comune(monkeypatch, COMUNE_TEST)
     _monkeypatch_sonda(
         monkeypatch,
@@ -311,7 +311,7 @@ def test_rung2_falsi_positivi_scartati_coperto_senza_bandi(monkeypatch):
 
     esito = bandi_live.bandi_arricchiti("058003", usa_cache=False)
 
-    assert esito.esito == "coperto_senza_bandi"
+    assert esito.esito == "wordpress_vivo_at_non_verificata"
     assert esito.gradino == "pages"
     assert esito.bandi == []
 

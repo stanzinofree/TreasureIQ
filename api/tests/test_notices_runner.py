@@ -40,3 +40,43 @@ def test_runner_queues_reachable_unhandled_source_for_review(tmp_path: Path) -> 
     assert report["review"] == 1
     review = json.loads((tmp_path / "review.json").read_text("utf-8"))
     assert review["001001"]["reason"] == "rami_at_non_supportati"
+
+
+def test_runner_queues_wordpress_without_verified_at_for_review(tmp_path: Path) -> None:
+    store = NoticeStore(tmp_path / "notices")
+    checkpoint = tmp_path / "checkpoint.json"
+
+    report = run(
+        ["001001"],
+        store=store,
+        checkpoint=checkpoint,
+        producer=lambda code: NoticeSnapshot(
+            source_id=code, coverage_status="wordpress_vivo_at_non_verificata"
+        ),
+        reviewer=lambda _code: [{"label": "Bandi", "url": "https://example.test/at", "type": "concorso"}],
+    )
+
+    assert report["coverage"] == {"wordpress_vivo_at_non_verificata": 1}
+    review = json.loads((tmp_path / "review.json").read_text("utf-8"))
+    assert review["001001"]["reason"] == "wordpress_vivo_at_non_verificata"
+
+
+def test_runner_keeps_wordpress_without_discovered_at_in_review(tmp_path: Path) -> None:
+    store = NoticeStore(tmp_path / "notices")
+    checkpoint = tmp_path / "checkpoint.json"
+
+    run(
+        ["001001"],
+        store=store,
+        checkpoint=checkpoint,
+        producer=lambda code: NoticeSnapshot(
+            source_id=code, coverage_status="wordpress_vivo_at_non_verificata"
+        ),
+        reviewer=lambda _code: None,
+    )
+
+    review = json.loads((tmp_path / "review.json").read_text("utf-8"))
+    assert review["001001"] == {
+        "reason": "wordpress_vivo_at_non_verificata",
+        "rami": [],
+    }

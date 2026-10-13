@@ -696,6 +696,7 @@ export interface BandiLiveEsito {
   esito:
     | "coperto_con_bandi"
     | "coperto_senza_bandi"
+    | "wordpress_vivo_at_non_verificata"
     | "non_coperto"
     | "comune_ignoto";
   gradino: "cpt" | "pages" | "alberatura" | null;

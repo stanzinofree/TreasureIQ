@@ -52,7 +52,12 @@ def run(
             store.save(snapshot)
             completed.add(code)
             errors.pop(code, None)
-            if snapshot.coverage_status == "non_coperto":
+            if snapshot.coverage_status == "wordpress_vivo_at_non_verificata":
+                reviews[code] = {
+                    "reason": "wordpress_vivo_at_non_verificata",
+                    "rami": inspect(code) or [],
+                }
+            elif snapshot.coverage_status == "non_coperto":
                 rami = inspect(code)
                 if rami:
                     reviews[code] = {"reason": "rami_at_non_supportati", "rami": rami}

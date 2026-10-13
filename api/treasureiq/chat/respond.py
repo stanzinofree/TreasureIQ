@@ -4639,15 +4639,22 @@ async def _risposta_bandi(
             "il comune scelto e riprova."
         )
         data_gap = "comune_sconosciuto"
-    elif esito.esito == "non_coperto":
+    elif esito.esito in ("non_coperto", "wordpress_vivo_at_non_verificata"):
         # Testo advocacy: il frontend lo aggancia a `ChiediApertura`, non e'
         # un rifiuto ma un invito a chiedere l'apertura dei dati al comune.
-        reply = (
-            f"Il portale di {esito.comune_nome} non pubblica ancora i bandi in "
-            "un formato che riesco a leggere in automatico. Non e' un dato "
-            "negato, e' un'apertura che manca: puoi chiedere al comune di "
-            "pubblicarli in un formato leggibile."
-        )
+        if esito.esito == "wordpress_vivo_at_non_verificata":
+            reply = (
+                f"Il sito di {esito.comune_nome} risponde, ma non ho ancora "
+                "verificato la sua sezione Amministrazione Trasparente: non "
+                "posso quindi dire che non ci siano bandi pubblicati."
+            )
+        else:
+            reply = (
+                f"Il portale di {esito.comune_nome} non pubblica ancora i bandi in "
+                "un formato che riesco a leggere in automatico. Non e' un dato "
+                "negato, e' un'apertura che manca: puoi chiedere al comune di "
+                "pubblicarli in un formato leggibile."
+            )
         data_gap = "comune_non_indirizzabile"
     elif esito.esito == "coperto_senza_bandi":
         reply = (
@@ -5317,7 +5324,11 @@ async def _forse_aggiungi_bandi_live(
             exc_info=True,
         )
         return risposta
-    if esito.esito in ("coperto_con_bandi", "coperto_senza_bandi"):
+    if esito.esito in (
+        "coperto_con_bandi",
+        "coperto_senza_bandi",
+        "wordpress_vivo_at_non_verificata",
+    ):
         return replace(risposta, bandi_live=esito)
     return risposta
 

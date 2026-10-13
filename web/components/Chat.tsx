@@ -729,12 +729,13 @@ function BandiLive({ esito }: { esito: BandiLiveEsito }) {
   // `comune_ignoto`: nessuna sonda tentata, nessun guscio da mostrare (D-B7).
   if (esito.esito === "comune_ignoto") return null;
 
-  if (esito.esito === "non_coperto") {
+  if (esito.esito === "non_coperto" || esito.esito === "wordpress_vivo_at_non_verificata") {
     return (
       <div className="bandi-comune">
         <p className="bandi-comune__caveat">
-          Non sono riuscito a leggere i bandi di {esito.comune_nome} dal vivo: il portale non espone
-          Amministrazione Trasparente né pagine bandi in una forma che riesco a leggere.
+          {esito.esito === "wordpress_vivo_at_non_verificata"
+            ? `Il sito di ${esito.comune_nome} risponde, ma Amministrazione Trasparente non è stata ancora verificata.`
+            : `Non sono riuscito a leggere i bandi di ${esito.comune_nome} dal vivo: il portale non espone Amministrazione Trasparente né pagine bandi in una forma che riesco a leggere.`}
         </p>
         <Segnalazione codiceIstat={esito.codice_istat} ente={esito.comune_nome} office={null} />
       </div>

@@ -355,7 +355,7 @@ def test_parser_jcity_segue_la_rotta_e_filtra_i_bandi() -> None:
         "concorso",
     )
     listing = "https://comune.trasparenza-valutazione-merito.it/web/trasparenza/papca-g/-/papca/igrid/1"
-    landing = b'<a data-resource="Bandi di concorso" data-mainurl="/web/trasparenza/papca-g/-/papca/igrid/1">Bandi</a>'
+    landing = b'<a data-resource="Bandi di concorso - Bandi di concorso" data-mainurl="/web/trasparenza/papca-g/-/papca/igrid/1">Bandi</a>'
     pagina = b'''<tr class="master-detail-list-line"><td class="categoria">BANDI DI CONCORSO</td><td class="oggetto text">Concorso istruttore</td><td>14/04/2025</td><td><a href="/web/trasparenza/papca-g/-/papca/display/1">Dettaglio</a></td></tr>'''
     sonda = _SondaFinta(risposta_per_url={
         ramo.url: _RispostaFinta(200, landing),

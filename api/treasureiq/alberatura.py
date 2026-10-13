@@ -88,7 +88,7 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa", "epal", "jcity"]
+    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn", "hypersic", "openpa", "epal", "jcity", "openweb"]
     parser_version: str = "1.0.0"
 
 
@@ -753,6 +753,60 @@ def _estrai_jcity(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto
     return trovati[:MAX_RIGHE_HALLEY]
 
 
+_OPENWEB_REGISTRO_RE = re.compile(
+    r'<a\b[^>]*href=["\'](?P<href>[^"\']*/openweb/pratiche/registri\.php\?[^"\']*\bsezione=concorsi[^"\']*)["\']',
+    re.I,
+)
+_OPENWEB_RIGA_RE = re.compile(r'<tr\b[^>]*\bpaginated_element\b[^>]*>(?P<corpo>.*?)</tr>', re.I | re.S)
+_OPENWEB_CELLA_RE = re.compile(r"<td\b[^>]*>(?P<testo>.*?)</td>", re.I | re.S)
+_OPENWEB_DETTAGLIO_RE = re.compile(
+    r'<a\b[^>]*href=["\'](?P<href>[^"\']*/openweb/pratiche/bando_trasparenza\.php\?[^"\']*\bsezione=concorsi[^"\']*)["\']',
+    re.I,
+)
+
+
+def _estrai_openweb(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """Legge il registro concorsi OpenWeb dichiarato dalla pagina AT."""
+    try:
+        landing = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if landing.status_code != 200:
+        return None
+    registro = _OPENWEB_REGISTRO_RE.search(_decodifica(landing))
+    if registro is None:
+        return None
+    listing_url = urljoin(ramo.url, html.unescape(registro.group("href")))
+    host = urlparse(ramo.url).hostname.lower() if urlparse(ramo.url).hostname else ""
+    if urlparse(listing_url).hostname.lower() != host:
+        return None
+    try:
+        risposta = sonda.risposta(listing_url)
+    except Exception:  # noqa: BLE001
+        return None
+    if risposta.status_code != 200:
+        return None
+    trovati: list[BandoScoperto] = []
+    for riga in _OPENWEB_RIGA_RE.finditer(_decodifica(risposta)):
+        celle = [_testo_html(cella.group("testo")) for cella in _OPENWEB_CELLA_RE.finditer(riga.group("corpo"))]
+        dettaglio = _OPENWEB_DETTAGLIO_RE.search(riga.group("corpo"))
+        if len(celle) < 5 or dettaglio is None or not celle[2]:
+            continue
+        url = urljoin(listing_url, html.unescape(dettaglio.group("href")))
+        if urlparse(url).hostname.lower() != host:
+            continue
+        fine = _DATA_ITALIANA_RE.search(celle[4])
+        data = f"{fine.group(3)}-{fine.group(2)}-{fine.group(1)}" if fine else ""
+        trovati.append(
+            BandoScoperto(
+                bando=Bando(titolo=celle[2], url=url, data=data, anteprima=None),
+                tipo=ramo.tipo,
+                vendor="openweb",
+            )
+        )
+    return trovati[:MAX_RIGHE_HALLEY]
+
+
 _DATA_ITALIANA_RE = re.compile(r"\b(\d{2})/(\d{2})/(\d{4})\b")
 _RIGA_ASMENET_RE = re.compile(r"<tr\b[^>]*>(.*?)</tr>", re.I | re.S)
 _CELLA_ASMENET_RE = re.compile(r"<td\b[^>]*>(.*?)</td>", re.I | re.S)
@@ -1046,6 +1100,14 @@ def _estrai_hgate(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto
 
 
 _PARSER_AT: tuple[ParserAT, ...] = (
+    ParserAT(
+        nome="openweb",
+        versione="1.0.0",
+        riconosce=lambda ramo: (
+            ramo.tipo == "concorso" and "/openweb/trasparenza/" in urlparse(ramo.url).path.lower()
+        ),
+        estrai=_estrai_openweb,
+    ),
     ParserAT(
         nome="jcity",
         versione="1.0.0",

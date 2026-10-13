@@ -27,6 +27,7 @@ from treasureiq.alberatura import (
     _estrai_peopleweb,
     _estrai_hypersic,
     _estrai_jcity,
+    _estrai_openweb,
     _estrai_openpa_at,
     _estrai_siscom_dnn,
     _parser_at,
@@ -367,6 +368,27 @@ def test_parser_jcity_segue_la_rotta_e_filtra_i_bandi() -> None:
     assert trovati is not None and len(trovati) == 1
     assert trovati[0].vendor == "jcity"
     assert trovati[0].bando.data == "2025-04-14"
+
+
+def test_parser_openweb_segue_il_registro_concorsi() -> None:
+    ramo = RamoAT(
+        "Bandi di concorso",
+        "https://comune.soluzionipa.it/openweb/trasparenza/pagina.php?id=28",
+        "concorso",
+    )
+    listing = "https://comune.soluzionipa.it/openweb/pratiche/registri.php?sezione=concorsi"
+    landing = b'<a href="/openweb/pratiche/registri.php?sezione=concorsi">Bandi di concorso</a>'
+    pagina = b'''<tr class="paginated_element"><td><a href="/openweb/pratiche/bando_trasparenza.php?sezione=concorsi&id=1">Dettagli bando</a></td><td>Bando concluso</td><td>Concorso istruttore</td><td>14/04/2025</td><td>30/04/2025</td></tr>'''
+    sonda = _SondaFinta(risposta_per_url={
+        ramo.url: _RispostaFinta(200, landing),
+        listing: _RispostaFinta(200, pagina),
+    })
+
+    trovati = _estrai_openweb(sonda, "https://example.test", ramo)
+
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "openweb"
+    assert trovati[0].bando.data == "2025-04-30"
 
 
 def test_parser_hgate_estrai_tre_liste_concorso_e_registry_versionato() -> None:

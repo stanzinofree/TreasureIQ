@@ -80,3 +80,33 @@ def test_runner_keeps_wordpress_without_discovered_at_in_review(tmp_path: Path) 
         "reason": "wordpress_vivo_at_non_verificata",
         "rami": [],
     }
+
+
+def test_runner_stops_above_non_coperto_threshold_after_minimum(tmp_path: Path) -> None:
+    store = NoticeStore(tmp_path / "notices")
+    checkpoint = tmp_path / "checkpoint.json"
+    seen: list[str] = []
+
+    def producer(code: str) -> NoticeSnapshot:
+        seen.append(code)
+        status = "non_coperto" if code in {"000001", "000002"} else "coperto_senza_bandi"
+        return NoticeSnapshot(source_id=code, coverage_status=status)
+
+    report = run(
+        [f"{number:06d}" for number in range(1, 13)],
+        store=store,
+        checkpoint=checkpoint,
+        producer=producer,
+        reviewer=lambda _code: [],
+        min_completed=10,
+        max_non_coperto_rate=0.10,
+    )
+
+    assert len(seen) == 10
+    assert report["halted"] == {
+        "reason": "non_coperto_rate",
+        "completed": 10,
+        "non_coperto": 2,
+        "rate": 0.2,
+    }
+    assert json.loads(checkpoint.read_text("utf-8"))["halted"] == report["halted"]

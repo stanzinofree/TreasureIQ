@@ -22,6 +22,7 @@ from treasureiq.alberatura import (
     _estrai_asmenet,
     _estrai_bootstrap_italia,
     _estrai_dgegovpa,
+    _estrai_hgate,
     _estrai_peopleweb,
     _parser_at,
     _in_cache,
@@ -234,6 +235,39 @@ def test_parser_peopleweb_estrai_card_concorso() -> None:
     assert trovati is not None and len(trovati) == 1
     assert trovati[0].vendor == "peopleweb"
     assert trovati[0].bando.titolo != ramo.etichetta
+    assert trovati[0].bando.url.startswith("https://www.comune.example.it/")
+
+
+def test_parser_hgate_estrai_tre_liste_concorso_e_registry_versionato() -> None:
+    ramo = RamoAT(
+        "Bandi di concorso",
+        "https://www.comune.example.it/EG0/EGSCHTST48.HBL?en=eg1&MESSA=PUBBLICA&SRL=5",
+        "concorso",
+    )
+    aperti = "https://www.comune.example.it/EG0/EGSCHTST49.HBL?en=eg1&MESSA=PUBBLICA"
+    corso = "https://www.comune.example.it/EG0/EGSCHTST50.HBL?en=eg1&MESSA=PUBBLICA"
+    conclusi = "https://www.comune.example.it/EG0/EGSCHTST51.HBL?en=eg1&MESSA=PUBBLICA"
+    landing = f'''<h1 id="titolo_social">Bandi di concorso</h1>
+    <a href="{aperti}">Bandi di concorso aperti</a>
+    <a href="{corso}">Bandi di concorso in corso</a>
+    <a href="{conclusi}">Bandi di concorso conclusi</a>'''.encode()
+    lista = '''<meta charset="utf-8"><h1>Bandi di concorso aperti</h1><div class="lista-aggiuntivo">
+    <a href="/amministrazione/trasparenza/bandi_di_concorso/scheda_bando_di_concorso_4.html">Concorso pubblico mobilità</a></div>'''.encode()
+    vuota = b'<h1>Bandi di concorso</h1><div class="lista-aggiuntivo">Nessun elemento estratto</div>'
+    sonda = _SondaFinta(risposta_per_url={
+        ramo.url: _RispostaFinta(200, landing),
+        aperti: _RispostaFinta(200, lista),
+        corso: _RispostaFinta(200, vuota),
+        conclusi: _RispostaFinta(200, vuota),
+    })
+
+    trovati = _estrai_hgate(sonda, "https://example.test", ramo)
+    parser = _parser_at(ramo)
+
+    assert parser is not None and (parser.nome, parser.versione) == ("hgate", "1.0.0")
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "hgate"
+    assert trovati[0].bando.titolo == "Concorso pubblico mobilità"
     assert trovati[0].bando.url.startswith("https://www.comune.example.it/")
 
 

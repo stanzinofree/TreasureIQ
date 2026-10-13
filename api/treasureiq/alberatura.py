@@ -88,7 +88,7 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb"]
+    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate"]
     parser_version: str = "1.0.0"
 
 
@@ -693,6 +693,73 @@ def _estrai_peopleweb(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScop
     return trovati[:MAX_RIGHE_HALLEY]
 
 
+_HGATE_SEZIONE_RE = re.compile(r"/EG0/EGSCHTST(?:49|50|51)\.HBL", re.I)
+_HGATE_SCHEDA_RE = re.compile(
+    r'<a\b[^>]*href=[\'\"](?P<href>[^\'\"]*scheda_bando_di_concorso[^\'\"]*)[\'\"][^>]*>'
+    r"(?P<titolo>.*?)</a>",
+    re.I | re.S,
+)
+
+
+def _decodifica_hgate(risposta: httpx.Response) -> str:
+    """HGate moderno dichiara UTF-8 nel markup, spesso non nell'header."""
+    if b'charset="utf-8"' in risposta.content[:2048].lower():
+        return risposta.content.decode("utf-8", errors="replace")
+    return _decodifica(risposta)
+
+
+def _estrai_hgate(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """Legge le tre liste concorsi HGate già linkate dalla landing AT."""
+    try:
+        landing = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if landing.status_code != 200:
+        return None
+    pagina_landing = _decodifica_hgate(landing)
+    if 'id="titolo_social">Bandi di concorso' not in pagina_landing:
+        return None
+    host = urlparse(ramo.url).netloc.lower()
+    sezioni: list[str] = []
+    for href, testo in _ancore(pagina_landing):
+        url = urljoin(ramo.url, href)
+        if (
+            _HGATE_SEZIONE_RE.search(urlparse(url).path)
+            and _normalizza_testo(testo).startswith("bandi di concorso")
+            and urlparse(url).netloc.lower() == host
+            and url not in sezioni
+        ):
+            sezioni.append(url)
+    if not sezioni:
+        return None
+
+    trovati: list[BandoScoperto] = []
+    for sezione in sezioni:
+        try:
+            risposta = sonda.risposta(sezione)
+        except Exception:  # noqa: BLE001
+            return None
+        if risposta.status_code != 200:
+            return None
+        pagina = _decodifica_hgate(risposta)
+        if "lista-aggiuntivo" not in pagina or "Bandi di concorso" not in pagina:
+            return None
+        for corrispondenza in _HGATE_SCHEDA_RE.finditer(pagina):
+            url = urljoin(sezione, html.unescape(corrispondenza.group("href")))
+            if urlparse(url).netloc.lower() != host:
+                continue
+            titolo = _testo_html(corrispondenza.group("titolo"))
+            if titolo:
+                trovati.append(
+                    BandoScoperto(
+                        bando=Bando(titolo=titolo, url=url, data="", anteprima=None),
+                        tipo=ramo.tipo,
+                        vendor="hgate",
+                    )
+                )
+    return trovati[:MAX_RIGHE_HALLEY]
+
+
 _PARSER_AT: tuple[ParserAT, ...] = (
     ParserAT(
         nome="asmenet",
@@ -713,6 +780,15 @@ _PARSER_AT: tuple[ParserAT, ...] = (
         versione="1.0.0",
         riconosce=lambda ramo: "/amministrazione-trasparente-dett/" in ramo.url,
         estrai=_estrai_peopleweb,
+    ),
+    ParserAT(
+        nome="hgate",
+        versione="1.0.0",
+        riconosce=lambda ramo: (
+            ramo.tipo == "concorso"
+            and "/EG0/EGSCHTST48.HBL" in urlparse(ramo.url).path.upper()
+        ),
+        estrai=_estrai_hgate,
     ),
 )
 

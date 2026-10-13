@@ -550,14 +550,13 @@ def _estrai_halley(sonda: _Sonda, ramo: RamoAT) -> list[BandoScoperto]:
 
 
 _BOOTSTRAP_EMPTY_RE = re.compile(r"nessun\s+(?:bando|avviso).*?(?:pubblicazione|presente)", re.I | re.S)
+_BOOTSTRAP_RIGA_RE = re.compile(r"<tr\b[^>]*>(?P<corpo>.*?)</tr>", re.I | re.S)
+_BOOTSTRAP_TEMPO_RE = re.compile(r'<time\b[^>]*\bdatetime=["\'](?P<data>\d{4}-\d{2}-\d{2})["\']', re.I)
+_BOOTSTRAP_LINK_RE = re.compile(r'<a\b[^>]*\bhref=["\'](?P<href>[^"\']+)["\'][^>]*>(?P<testo>.*?)</a>', re.I | re.S)
 
 
 def _estrai_bootstrap_italia(sonda: _Sonda, ramo: RamoAT) -> tuple[list[BandoScoperto], bool]:
-    """Recognise an explicit empty Bootstrap Italia listing.
-
-    A non-empty page is deliberately left unsupported: returning an empty list
-    there would turn unknown content into "no notice published".
-    """
+    """Legge il listing Bootstrap Italia con intestazioni esplicite di scadenza."""
     try:
         risposta = sonda.risposta(ramo.url)
     except Exception:  # noqa: BLE001
@@ -565,9 +564,31 @@ def _estrai_bootstrap_italia(sonda: _Sonda, ramo: RamoAT) -> tuple[list[BandoSco
     if risposta.status_code != 200:
         return [], False
     pagina = _decodifica(risposta)
-    if "bootstrap-italia" not in pagina or not _BOOTSTRAP_EMPTY_RE.search(pagina):
+    if "bootstrap-italia" not in pagina:
         return [], False
-    return [], True
+    if _BOOTSTRAP_EMPTY_RE.search(pagina):
+        return [], True
+    if not re.search(r"<th\b[^>]*>\s*Scadenza\s*</th>", pagina, re.I):
+        return [], False
+    host = urlparse(ramo.url).hostname.lower() if urlparse(ramo.url).hostname else ""
+    trovati: list[BandoScoperto] = []
+    for riga in _BOOTSTRAP_RIGA_RE.finditer(pagina):
+        tempi = _BOOTSTRAP_TEMPO_RE.findall(riga.group("corpo"))
+        link = _BOOTSTRAP_LINK_RE.search(riga.group("corpo"))
+        if len(tempi) < 2 or link is None:
+            continue
+        titolo = _testo_html(link.group("testo"))
+        url = urljoin(ramo.url, html.unescape(link.group("href")))
+        if not titolo or urlparse(url).hostname.lower() != host:
+            continue
+        trovati.append(
+            BandoScoperto(
+                bando=Bando(titolo=titolo, url=url, data=tempi[-1], anteprima=None),
+                tipo=ramo.tipo,
+                vendor="bootstrap_italia",
+            )
+        )
+    return trovati[:MAX_RIGHE_HALLEY], bool(trovati)
 
 
 _OPENPA_AT_LINK_RE = re.compile(

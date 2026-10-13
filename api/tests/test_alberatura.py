@@ -204,6 +204,20 @@ def test_bootstrap_italia_empty_listing_is_covered_not_unknown() -> None:
     assert covered is True
 
 
+def test_bootstrap_italia_legge_tabella_con_scadenza_verificata() -> None:
+    ramo = RamoAT("Bandi di concorso", "https://example.test/bandi", "concorso")
+    pagina = b'''<link href="/bootstrap-italia.css"><table><thead><tr><th>Data</th><th>Scadenza</th><th>Oggetto</th></tr></thead><tbody><tr><td><time datetime="2026-01-01">01/01/2026</time></td><td><time datetime="2026-01-31">31/01/2026</time></td><td><a href="/bandi/istruttore">Concorso istruttore</a></td></tr></tbody></table>'''
+    sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
+
+    bandi, covered = _estrai_bootstrap_italia(sonda, ramo)
+
+    assert covered is True
+    assert len(bandi) == 1
+    assert bandi[0].vendor == "bootstrap_italia"
+    assert bandi[0].bando.data == "2026-01-31"
+    assert bandi[0].bando.url == "https://example.test/bandi/istruttore"
+
+
 def test_parser_asmenet_estrai_tabella_con_allegato_stesso_host() -> None:
     ramo = RamoAT("Bandi di concorso", "https://trasparenza.example.asmenet.it/index.php?action=index&p=281", "concorso")
     pagina = b'''<table><tr><td>02/09/2025</td><td></td><td>Bandi di concorso</td>

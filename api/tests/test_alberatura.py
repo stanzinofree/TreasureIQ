@@ -218,6 +218,32 @@ def test_bootstrap_italia_legge_tabella_con_scadenza_verificata() -> None:
     assert bandi[0].bando.url == "https://example.test/bandi/istruttore"
 
 
+def test_bootstrap_italia_recupera_la_rotta_scambiata_per_openpa(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    import treasureiq.alberatura as alberatura_mod
+
+    ramo = RamoAT(
+        "Bandi di concorso",
+        "https://example.test/it-it/amministrazione-trasparente/bandi-di-concorso",
+        "concorso",
+    )
+    comune = ComuneNoto(
+        codice_istat="000001", nome="Esempio", provincia="EE", regione="Test", sito="https://example.test"
+    )
+    pagina = b'<link href="/bootstrap-italia.css"><p>Nessun bando di concorso in pubblicazione</p>'
+    monkeypatch.setattr(alberatura_mod, "CACHE_DIR", tmp_path)
+    monkeypatch.setattr(alberatura_mod, "scopri_rami", lambda *_args, **_kwargs: [ramo])
+    monkeypatch.setattr(alberatura_mod, "comune_per_codice", lambda *_args: comune)
+    monkeypatch.setattr(
+        alberatura_mod._Sonda,
+        "risposta",
+        lambda _self, url: _RispostaFinta(200, pagina, url=url),
+    )
+
+    assert estrai_bandi("000001") == []
+
+
 def test_parser_asmenet_estrai_tabella_con_allegato_stesso_host() -> None:
     ramo = RamoAT("Bandi di concorso", "https://trasparenza.example.asmenet.it/index.php?action=index&p=281", "concorso")
     pagina = b'''<table><tr><td>02/09/2025</td><td></td><td>Bandi di concorso</td>

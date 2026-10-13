@@ -1492,7 +1492,10 @@ def estrai_bandi(codice_istat: str, *, timeout: float = 8.0) -> list[BandoScoper
             if _ramo_gestito(ramo):
                 estratti = _estrai_ramo(sonda, base, ramo)
                 if estratti is None:
-                    continue
+                    bootstrap, gestito = _estrai_bootstrap_italia(sonda, ramo)
+                    if not gestito:
+                        continue
+                    estratti = bootstrap
                 coperto = True
                 risultati.extend(estratti)
             else:

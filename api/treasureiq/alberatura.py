@@ -112,6 +112,7 @@ class _CacheAlberatura(BaseModel):
     corrotta è cache assente, MAI si cachano gli esiti negativi (nessuna
     istanza si crea quando `bandi` è vuoto o i rami sono `None`)."""
 
+    versione: Literal[2]
     verificato_il: str
     bandi: list[BandoScoperto]
 
@@ -675,9 +676,12 @@ def _estrai_peopleweb(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScop
         titolo = _testo_html(testo)
         if not re.search(r"/amministrazione-trasparente-dett/\d+/", path):
             continue
-        if _normalizza_testo(titolo) == _normalizza_testo(ramo.etichetta):
+        titolo_normalizzato = _normalizza_testo(titolo)
+        if titolo_normalizzato == _normalizza_testo(ramo.etichetta):
             continue
-        if not re.search(r"\b(?:bando|avviso|concorso)\b", _normalizza_testo(titolo)):
+        if titolo_normalizzato.startswith("bandi di concorso "):
+            continue
+        if not re.search(r"\b(?:bando|avviso|concorso)\b", titolo_normalizzato):
             continue
         trovati.append(
             BandoScoperto(
@@ -764,7 +768,7 @@ def _in_cache(codice_istat: str, bandi: list[BandoScoperto]) -> None:
     nuova, mai una lista a metà. Chiamata SOLO con `bandi` non vuota — un
     esito negativo non deve mai fissarsi su disco."""
     percorso = _percorso_cache(codice_istat)
-    esito = _CacheAlberatura(verificato_il=datetime.now(timezone.utc).isoformat(), bandi=bandi)
+    esito = _CacheAlberatura(versione=2, verificato_il=datetime.now(timezone.utc).isoformat(), bandi=bandi)
     try:
         percorso.parent.mkdir(parents=True, exist_ok=True)
         provvisorio = percorso.with_suffix(".tmp")

@@ -226,7 +226,7 @@ def test_parser_dgegovpa_estrai_dettaglio_e_registry_versionato() -> None:
 
 def test_parser_peopleweb_estrai_card_concorso() -> None:
     ramo = RamoAT("Bandi di concorso", "https://www.comune.example.it/servizi/amministrazione-trasparente-dett/50/Bandi/interni_5", "concorso")
-    pagina = b'''<h1>Bandi di concorso</h1><div class="card card-teaser"><h5><a href="/servizi/amministrazione-trasparente-dett/1114/Concorso-pubblico/#">Concorso pubblico istruttore</a></h5></div>'''
+    pagina = b'''<h1>Bandi di concorso</h1><a href="/servizi/amministrazione-trasparente-dett/50/Bandi/interni_5">Bandi di concorso scaduti</a><div class="card card-teaser"><h5><a href="/servizi/amministrazione-trasparente-dett/1114/Concorso-pubblico/#">Concorso pubblico istruttore</a></h5></div>'''
     sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
 
     trovati = _estrai_peopleweb(sonda, "https://example.test", ramo)

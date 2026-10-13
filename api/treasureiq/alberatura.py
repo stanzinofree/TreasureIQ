@@ -572,6 +572,10 @@ _OPENPA_AT_LINK_RE = re.compile(
     r'<a\b(?=[^>]*\bclass=["\'][^"\']*\bicon-left\b[^"\']*\bfont-sans-serif\b[^"\']*["\'])[^>]*\bhref=["\'](?P<href>[^"\']+)["\'][^>]*>(?P<testo>.*?)</a>',
     re.I | re.S,
 )
+_OPENPA_AT_API_RE = re.compile(
+    r'<a\b[^>]*href=["\'](?P<href>[^"\']*/api/opendata/v2/content/search/[^"\']+)["\'][^>]*>\s*Scarica\s+i\s+dati\s+in\s+formato\s+JSON\s*</a>',
+    re.I | re.S,
+)
 
 
 def _estrai_openpa_at(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
@@ -601,7 +605,57 @@ def _estrai_openpa_at(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScop
         )
     if trovati:
         return trovati[:MAX_RIGHE_HALLEY]
-    return [] if "nessun risultato ottenuto" in pagina.lower() else None
+    endpoint = _OPENPA_AT_API_RE.search(pagina)
+    if endpoint is None:
+        return [] if "nessun risultato ottenuto" in pagina.lower() else None
+    api_url = urljoin(ramo.url, html.unescape(endpoint.group("href")))
+    if urlparse(api_url).hostname.lower() != host:
+        return None
+    viste: set[str] = set()
+    for _ in range(3):
+        if api_url in viste:
+            return None
+        viste.add(api_url)
+        try:
+            payload = sonda.json(api_url)
+        except Exception:  # noqa: BLE001
+            return None
+        if not isinstance(payload, dict) or not isinstance(payload.get("searchHits"), list):
+            return None
+        for hit in payload["searchHits"]:
+            if not isinstance(hit, dict):
+                continue
+            metadata = hit.get("metadata")
+            dati = hit.get("data")
+            if not isinstance(metadata, dict) or not isinstance(dati, dict):
+                continue
+            lingua = dati.get("ita-IT")
+            if not isinstance(lingua, dict):
+                continue
+            titolo = lingua.get("name")
+            url = metadata.get("link")
+            if not isinstance(titolo, str) or not isinstance(url, str):
+                continue
+            if urlparse(url).hostname.lower() != host:
+                continue
+            pubblicato = metadata.get("published")
+            data = pubblicato[:10] if isinstance(pubblicato, str) else ""
+            trovati.append(
+                BandoScoperto(
+                    bando=Bando(titolo=titolo, url=url, data=data, anteprima=None),
+                    tipo=ramo.tipo,
+                    vendor="openpa",
+                )
+            )
+            if len(trovati) >= MAX_RIGHE_HALLEY:
+                return trovati
+        prossimo = payload.get("nextPageQuery")
+        if not isinstance(prossimo, str):
+            return trovati
+        api_url = urljoin(api_url, prossimo)
+        if urlparse(api_url).hostname.lower() != host:
+            return None
+    return trovati
 
 
 _EPAL_RIGA_RE = re.compile(r"<tr\b[^>]*>(?P<corpo>.*?)</tr>", re.I | re.S)

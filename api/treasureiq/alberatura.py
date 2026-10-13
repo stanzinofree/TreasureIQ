@@ -88,7 +88,7 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa"]
+    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb"]
     parser_version: str = "1.0.0"
 
 
@@ -658,6 +658,37 @@ def _estrai_dgegovpa(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScope
     return trovati[:MAX_RIGHE_HALLEY]
 
 
+def _estrai_peopleweb(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """Legge le card della sezione concorsi PeopleWeb, senza aprire dettagli."""
+    try:
+        risposta = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if risposta.status_code != 200:
+        return None
+    pagina = _decodifica(risposta)
+    if "card-teaser" not in pagina or "Bandi di concorso" not in pagina:
+        return None
+    trovati: list[BandoScoperto] = []
+    for href, testo in _ancore(pagina):
+        path = urlparse(href).path.lower()
+        titolo = _testo_html(testo)
+        if not re.search(r"/amministrazione-trasparente-dett/\d+/", path):
+            continue
+        if _normalizza_testo(titolo) == _normalizza_testo(ramo.etichetta):
+            continue
+        if not re.search(r"\b(?:bando|avviso|concorso)\b", _normalizza_testo(titolo)):
+            continue
+        trovati.append(
+            BandoScoperto(
+                bando=Bando(titolo=titolo, url=urljoin(ramo.url, href), data="", anteprima=None),
+                tipo=ramo.tipo,
+                vendor="peopleweb",
+            )
+        )
+    return trovati[:MAX_RIGHE_HALLEY]
+
+
 _PARSER_AT: tuple[ParserAT, ...] = (
     ParserAT(
         nome="asmenet",
@@ -672,6 +703,12 @@ _PARSER_AT: tuple[ParserAT, ...] = (
             ramo.tipo == "concorso" and "dgegovpa.it" in urlparse(ramo.url).netloc.lower()
         ),
         estrai=_estrai_dgegovpa,
+    ),
+    ParserAT(
+        nome="peopleweb",
+        versione="1.0.0",
+        riconosce=lambda ramo: "/amministrazione-trasparente-dett/" in ramo.url,
+        estrai=_estrai_peopleweb,
     ),
 )
 

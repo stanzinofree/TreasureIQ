@@ -22,6 +22,7 @@ from treasureiq.alberatura import (
     _estrai_asmenet,
     _estrai_bootstrap_italia,
     _estrai_dgegovpa,
+    _estrai_peopleweb,
     _parser_at,
     _in_cache,
     _rami_da_pagina,
@@ -221,6 +222,19 @@ def test_parser_dgegovpa_estrai_dettaglio_e_registry_versionato() -> None:
     assert trovati is not None and len(trovati) == 1
     assert trovati[0].vendor == "dgegovpa"
     assert trovati[0].bando.url.endswith("BandiConcorso.aspx?dettaglio=148")
+
+
+def test_parser_peopleweb_estrai_card_concorso() -> None:
+    ramo = RamoAT("Bandi di concorso", "https://www.comune.example.it/servizi/amministrazione-trasparente-dett/50/Bandi/interni_5", "concorso")
+    pagina = b'''<h1>Bandi di concorso</h1><div class="card card-teaser"><h5><a href="/servizi/amministrazione-trasparente-dett/1114/Concorso-pubblico/#">Concorso pubblico istruttore</a></h5></div>'''
+    sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
+
+    trovati = _estrai_peopleweb(sonda, "https://example.test", ramo)
+
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "peopleweb"
+    assert trovati[0].bando.titolo != ramo.etichetta
+    assert trovati[0].bando.url.startswith("https://www.comune.example.it/")
 
 
 def test_decodifica_charset_dichiarato() -> None:

@@ -300,7 +300,7 @@ def test_parser_openpa_estrae_schede_e_conosce_vuoto_esplicito() -> None:
 def test_parser_epal_estrae_schede_dalla_tabella() -> None:
     ramo = RamoAT(
         "Bandi di concorso",
-        "https://comune.e-pal.it/L190/?idSezione=13&id=&sort=&activePage=&search=",
+        "https://comune.e-pal.it/L190/?idSezione=5&id=&sort=&activePage=&search=",
         "concorso",
     )
     pagina = b'''<table><tr class="info"><td><a href="/L190/sezione/show/172797?idSezione=13">Concorso istruttore</a></td></tr><tr><td><a href="/L190/sezione/download/172803?idSezione=13">Bando.pdf</a></td></tr></table>'''
@@ -319,9 +319,9 @@ def test_parser_jcity_segue_la_rotta_e_filtra_i_bandi() -> None:
         "https://comune.trasparenza-valutazione-merito.it/web/trasparenza/dettaglio-trasparenza",
         "concorso",
     )
-    listing = "https://comune.trasparenza-valutazione-merito.it/web/trasparenza/papca-g/-/papca/igrid/1"
-    landing = b'<a data-resource="Bandi di concorso" data-mainurl="/web/trasparenza/papca-g/-/papca/igrid/1">Bandi</a>'
-    pagina = b'''<tr class="master-detail-list-line"><td class="categoria">BANDI DI CONCORSO</td><td class="oggetto text">Concorso istruttore</td><td>14/04/2025</td><td><a href="/web/trasparenza/papca-g/-/papca/display/1">Dettaglio</a></td></tr>'''
+    listing = "https://comune.trasparenza-valutazione-merito.it/web/trasparenza/pas/-/pas/igrid/1"
+    landing = b'<a data-resource="Bandi di concorso" data-mainurl="/web/trasparenza/pas/-/pas/igrid/1">Bandi</a>'
+    pagina = b'''<tr class="master-detail-list-line"><td class="categoria">BANDI DI CONCORSO</td><td class="oggetto text">Concorso istruttore</td><td>14/04/2025</td><td><a href="/web/trasparenza/pas/-/pas/display/1">Dettaglio</a></td></tr>'''
     sonda = _SondaFinta(risposta_per_url={
         ramo.url: _RispostaFinta(200, landing),
         listing: _RispostaFinta(200, pagina),

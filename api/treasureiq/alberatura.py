@@ -642,13 +642,13 @@ def _estrai_epal(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto]
     return trovati[:MAX_RIGHE_HALLEY]
 
 
-_JCITY_ROTTa_RE = re.compile(
-    r'<a\b(?=[^>]*data-resource=["\']Bandi di concorso["\'])(?=[^>]*data-mainurl=["\'](?P<href>[^"\']*/papca/igrid/[^"\']*)["\'])[^>]*>',
+_JCITY_ROTTA_RE = re.compile(
+    r'<a\b(?=[^>]*data-resource=["\']Bandi di concorso["\'])(?=[^>]*data-mainurl=["\'](?P<href>[^"\']*/(?:papca|pas)/-/(?:papca|pas)/igrid/[^"\']*)["\'])[^>]*>',
     re.I,
 )
 _JCITY_RIGA_RE = re.compile(r"<tr\b[^>]*master-detail-list-line[^>]*>(?P<corpo>.*?)</tr>", re.I | re.S)
 _JCITY_OGGETTO_RE = re.compile(r'<td\b[^>]*class=["\'][^"\']*\boggetto\b[^"\']*["\'][^>]*>(?P<testo>.*?)</td>', re.I | re.S)
-_JCITY_DETTAGLIO_RE = re.compile(r'<a\b[^>]*href=["\'](?P<href>[^"\']*/papca/display/[^"\']*)["\']', re.I)
+_JCITY_DETTAGLIO_RE = re.compile(r'<a\b[^>]*href=["\'](?P<href>[^"\']*/(?:papca|pas)/-/(?:papca|pas)/display/[^"\']*)["\']', re.I)
 
 
 def _estrai_jcity(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
@@ -660,7 +660,7 @@ def _estrai_jcity(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto
     if landing.status_code != 200:
         return None
     pagina_landing = _decodifica(landing)
-    rotta = _JCITY_ROTTa_RE.search(pagina_landing)
+    rotta = _JCITY_ROTTA_RE.search(pagina_landing)
     if rotta is None:
         return None
     listing_url = urljoin(ramo.url, html.unescape(rotta.group("href")))
@@ -1008,7 +1008,6 @@ _PARSER_AT: tuple[ParserAT, ...] = (
             ramo.tipo == "concorso"
             and "e-pal.it" in urlparse(ramo.url).netloc.lower()
             and urlparse(ramo.url).path.lower().startswith("/l190/")
-            and "idsezione=13" in ramo.url.lower()
         ),
         estrai=_estrai_epal,
     ),

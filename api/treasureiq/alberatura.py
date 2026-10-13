@@ -697,12 +697,12 @@ def _estrai_epal(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto]
 
 
 _JCITY_ROTTA_RE = re.compile(
-    r'<a\b(?=[^>]*data-resource=["\']Bandi di concorso["\'])(?=[^>]*data-mainurl=["\'](?P<href>[^"\']*/(?:papca|pas)/-/(?:papca|pas)/igrid/[^"\']*)["\'])[^>]*>',
+    r'<a\b(?=[^>]*data-resource=["\']Bandi di concorso["\'])(?=[^>]*data-mainurl=["\'](?P<href>[^"\']*/(?:papca(?:-g)?|pas)/-/(?:papca|pas)/igrid/[^"\']*)["\'])[^>]*>',
     re.I,
 )
 _JCITY_RIGA_RE = re.compile(r"<tr\b[^>]*master-detail-list-line[^>]*>(?P<corpo>.*?)</tr>", re.I | re.S)
 _JCITY_OGGETTO_RE = re.compile(r'<td\b[^>]*class=["\'][^"\']*\boggetto\b[^"\']*["\'][^>]*>(?P<testo>.*?)</td>', re.I | re.S)
-_JCITY_DETTAGLIO_RE = re.compile(r'<a\b[^>]*href=["\'](?P<href>[^"\']*/(?:papca|pas)/-/(?:papca|pas)/display/[^"\']*)["\']', re.I)
+_JCITY_DETTAGLIO_RE = re.compile(r'<a\b[^>]*href=["\'](?P<href>[^"\']*/(?:papca(?:-g)?|pas)/-/(?:papca|pas)/display/[^"\']*)["\']', re.I)
 
 
 def _estrai_jcity(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:

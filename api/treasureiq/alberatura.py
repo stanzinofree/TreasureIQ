@@ -88,7 +88,7 @@ class BandoScoperto(BaseModel):
 
     bando: Bando
     tipo: Literal["agevolazione", "concorso"]
-    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate"]
+    vendor: Literal["wp", "halley", "bootstrap_italia", "asmenet", "dgegovpa", "peopleweb", "hgate", "siscom_dnn"]
     parser_version: str = "1.0.0"
 
 
@@ -685,6 +685,45 @@ def _estrai_peopleweb(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScop
     return trovati[:MAX_RIGHE_HALLEY]
 
 
+_SISCOM_DNN_BANDO_RE = re.compile(
+    r'<a\b(?=[^>]*\bSiscomTitolo\b)(?=[^>]*\bhref=[\'\"](?P<href>[^\'\"]+))[^>]*>(?P<titolo>.*?)</a>',
+    re.I | re.S,
+)
+_SISCOM_DNN_DELEGA_RE = re.compile(r"concorsi.*?\bbanditi\s+dall", re.I | re.S)
+
+
+def _estrai_siscom_dnn(sonda: _Sonda, _base: str, ramo: RamoAT) -> list[BandoScoperto] | None:
+    """Legge le schede locali Siscom/DotNetNuke, lasciando le deleghe in review."""
+    try:
+        risposta = sonda.risposta(ramo.url)
+    except Exception:  # noqa: BLE001
+        return None
+    if risposta.status_code != 200:
+        return None
+    pagina = _decodifica(risposta)
+    if "SiscomVociMenu_LabelTitolo3" not in pagina or "BANDI DI CONCORSO" not in pagina.upper():
+        return None
+    if _SISCOM_DNN_DELEGA_RE.search(_testo_html(pagina)):
+        return None
+    host = urlparse(ramo.url).hostname.lower() if urlparse(ramo.url).hostname else ""
+    trovati: list[BandoScoperto] = []
+    for corrispondenza in _SISCOM_DNN_BANDO_RE.finditer(pagina):
+        titolo = _testo_html(corrispondenza.group("titolo"))
+        if not titolo or _normalizza_testo(titolo) == _normalizza_testo(ramo.etichetta):
+            continue
+        url = urljoin(ramo.url, html.unescape(corrispondenza.group("href")))
+        if urlparse(url).hostname.lower() != host:
+            continue
+        trovati.append(
+            BandoScoperto(
+                bando=Bando(titolo=titolo, url=url, data="", anteprima=None),
+                tipo=ramo.tipo,
+                vendor="siscom_dnn",
+            )
+        )
+    return trovati[:MAX_RIGHE_HALLEY]
+
+
 _HGATE_SEZIONE_RE = re.compile(r"/EG0/EGSCHTST(?:49|50|51)\.HBL", re.I)
 _HGATE_SCHEDA_RE = re.compile(
     r'<a\b[^>]*href=[\'\"](?P<href>[^\'\"]*scheda_bando_di_concorso[^\'\"]*)[\'\"][^>]*>'
@@ -799,6 +838,15 @@ _PARSER_AT: tuple[ParserAT, ...] = (
         versione="1.0.0",
         riconosce=lambda ramo: "/amministrazione-trasparente-dett/" in ramo.url,
         estrai=_estrai_peopleweb,
+    ),
+    ParserAT(
+        nome="siscom_dnn",
+        versione="1.0.0",
+        riconosce=lambda ramo: (
+            "servizipubblicaamministrazione.it" in urlparse(ramo.url).netloc.lower()
+            and "iddettaglio=" in ramo.url.lower()
+        ),
+        estrai=_estrai_siscom_dnn,
     ),
     ParserAT(
         nome="hgate",

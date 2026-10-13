@@ -24,6 +24,7 @@ from treasureiq.alberatura import (
     _estrai_dgegovpa,
     _estrai_hgate,
     _estrai_peopleweb,
+    _estrai_siscom_dnn,
     _parser_at,
     _in_cache,
     _rami_da_pagina,
@@ -236,6 +237,28 @@ def test_parser_peopleweb_estrai_card_concorso() -> None:
     assert trovati[0].vendor == "peopleweb"
     assert trovati[0].bando.titolo != ramo.etichetta
     assert trovati[0].bando.url.startswith("https://www.comune.example.it/")
+
+
+def test_parser_siscom_dnn_estrae_scheda_locale_e_non_confondere_delega() -> None:
+    ramo = RamoAT(
+        "Bandi di concorso",
+        "https://www.servizipubblicaamministrazione.it/cms/trasparenza/Home/Menu/tabid/20842/Default.aspx?IDDettaglio=1&Portale=2",
+        "concorso",
+    )
+    pagina = b'''<span id="dnn_ctr_SiscomVociMenu_LabelTitolo3">BANDI DI CONCORSO</span>
+    <a class="SiscomTitolo" href="Default.aspx?IDDettaglio=2&Portale=2">Bandi di concorso</a>
+    <a class="SiscomTitolo" href="Default.aspx?IDDettaglio=3&Portale=2">Bando istruttore amministrativo</a>'''
+    sonda = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, pagina)})
+
+    trovati = _estrai_siscom_dnn(sonda, "https://example.test", ramo)
+
+    assert trovati is not None and len(trovati) == 1
+    assert trovati[0].vendor == "siscom_dnn"
+    assert trovati[0].bando.titolo == "Bando istruttore amministrativo"
+
+    delega = pagina + b" I concorsi per l'assunzione sono banditi dall'Unione Montana"
+    sonda_delega = _SondaFinta(risposta_per_url={ramo.url: _RispostaFinta(200, delega)})
+    assert _estrai_siscom_dnn(sonda_delega, "https://example.test", ramo) is None
 
 
 def test_parser_hgate_estrai_tre_liste_concorso_e_registry_versionato() -> None:

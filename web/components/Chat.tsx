@@ -1530,6 +1530,17 @@ export default function Chat() {
 
   return (
     <section className="chat" aria-label="Conversazione con TreasureIQ">
+      <header className="chat__persona-header">
+        <TiqPersona size={56} animated />
+        <div>
+          <p className="chat__persona-name">
+            TIQ <span>presente</span>
+          </p>
+          <p className="chat__persona-copy">
+            Ti aiuto a trovare bandi, servizi e informazioni pubblicate dagli enti.
+          </p>
+        </div>
+      </header>
       <div className="locate">
         <button
           type="button"

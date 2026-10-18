@@ -639,6 +639,49 @@ a {
   gap: var(--ma-6);
 }
 
+/* TIQ remains visible as the conversation's host, rather than appearing only
+   during the opening animation or inside an individual answer. The compact
+   card borrows the warmth of a messenger header without turning the chat into
+   a floating widget: this is the primary product surface. */
+.chat__persona-header {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-3);
+  padding: var(--ma-3) var(--ma-4);
+  border: 1px solid var(--sumi);
+  border-radius: 16px;
+  background: var(--paper-raised);
+}
+
+.chat__persona-name {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-2);
+  margin: 0;
+  color: var(--sumi);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.chat__persona-name span {
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--sumi);
+  border-radius: 9999px;
+  background: var(--color-mint-splash, #99ffcc);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.chat__persona-copy {
+  margin: 0.2rem 0 0;
+  color: var(--sumi-soft);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
 .chat__log {
   gap: var(--ma-6);
   padding-inline: var(--ma-4);

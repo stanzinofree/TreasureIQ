@@ -5,10 +5,9 @@
  * the chat asks for only when it would change the answer (D-09), not the
  * price of admission.
  *
- * Two columns: a narrow panel holding what the service knows and an index of
- * what it found, and the conversation itself taking the rest. The chat is the
- * product, so it holds the width, the height and every verdict — the panel
- * only ever points back into it.
+ * The conversation is the product: it holds the width, height and every
+ * verdict. Context about a comune and sources lives next to the answer that
+ * uses it or in the contextual menu, rather than in a permanent rail.
  *
  * The hero collapses once the conversation starts. That is done in CSS, with
  * `:has()` on the transcript, rather than by lifting Chat's message state up
@@ -16,12 +15,11 @@
  * there is no second copy of "has the conversation begun" to keep in sync.
  *
  * `ProfiloProvider`, `RisultatiProvider` and `ScanProvider` are the only
- * client boundaries. `ScanProvider` holds the comune's live-scan status so the
- * chat and the panel show one shared indicator (band + «Ricarica»), not two.
+ * client boundaries. `ScanProvider` holds the comune's live-scan status for
+ * the conversation's in-flow indicators.
  */
 
 import Chat from "@/components/Chat";
-import Pannello from "@/components/Pannello";
 import TiqIntro from "@/components/TiqIntro";
 import { ProfiloProvider } from "@/lib/profilo";
 import { RisultatiProvider } from "@/lib/risultati";
@@ -34,9 +32,7 @@ export default function Home() {
         <ScanProvider>
           <TiqIntro />
           <div className="workspace">
-            <Pannello />
-
-          <div className="workspace__main">
+            <div className="workspace__main">
             {/* Not "al tuo comune": the answers already draw on the national
                 layer as much as the municipal one — the bonus sociale bollette
                 is a state measure, and its card says so. The comune is the
@@ -67,7 +63,7 @@ export default function Home() {
             </section>
 
             <Chat />
-          </div>
+            </div>
           </div>
         </ScanProvider>
       </RisultatiProvider>

@@ -1807,6 +1807,7 @@ def _compose_informazione_reply(
     ente_nome: str,
     document: DocumentAnswer | None,
     web_results: list[WebResultAnswer],
+    service_key: ServiceKey | None = None,
 ) -> str:
     """La frase di apertura, e nient'altro.
 
@@ -1836,6 +1837,12 @@ def _compose_informazione_reply(
         return (
             f"{ente_nome}: non ho trovato una fonte istituzionale su questo argomento. "
             "Queste pagine vengono da una ricerca sul web e non le ho verificate."
+        )
+    if service_key is ServiceKey.CAMBIO_RESIDENZA:
+        return (
+            f"Nel {ente_nome}, non trovo una procedura o un "
+            "modulo pubblicato nel portale. Ti mostro l'URP: può indicarti il "
+            "canale per presentare la dichiarazione di residenza."
         )
     return (
         f"{ente_nome} non ha pubblicato niente su questo argomento in una forma che "
@@ -2120,6 +2127,7 @@ async def _build_informazione_answer(
         ente_nome=ente.ente,
         document=document,
         web_results=web_results,
+        service_key=riconosci_service_key(parole),
     )
     stato, prove = _prove_e_stato(
         document=document,

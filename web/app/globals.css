@@ -7200,27 +7200,27 @@ body {
 /* Product identity: 70s/80s editorial pop. Semantic state colours above keep
    their meaning; these tokens only repaint the shared interface. */
 :root {
-  --paper: #f5f4f0;
+  --paper: #ffffff;
   --paper-raised: #ffffff;
-  --paper-sunken: #eef8f3;
-  --sumi: #160042;
-  --sumi-soft: #333333;
-  --sumi-faint: #666666;
-  --kasumi: #dddfe2;
-  --ai: #26153f;
-  --ai-deep: #160042;
-  --ai-line: #26153f;
-  --ai-wash: #f3edff;
-  --ai-vivid: #99ffcc;
-  --ai-vivid-deep: #160042;
-  --lime: #99ffcc;
-  --lime-ink: #160042;
-  --cta: #99ffcc;
-  --cta-deep: #7be8b8;
-  --cta-ink: #000000;
-  --yamabuki: #ffcc99;
-  --yamabuki-deep: #6b3c00;
-  --yamabuki-wash: #fff0e2;
+  --paper-sunken: #f3f5ff;
+  --sumi: #141429;
+  --sumi-soft: #54546b;
+  --sumi-faint: #77778c;
+  --kasumi: #d7dcf4;
+  --ai: #216bff;
+  --ai-deep: #1247c7;
+  --ai-line: #216bff;
+  --ai-wash: #e9efff;
+  --ai-vivid: #c6ff00;
+  --ai-vivid-deep: #337000;
+  --lime: #c6ff00;
+  --lime-ink: #337000;
+  --cta: #c6ff00;
+  --cta-deep: #aee600;
+  --cta-ink: #141429;
+  --yamabuki: #ff1fb8;
+  --yamabuki-deep: #a40069;
+  --yamabuki-wash: #ffe5f5;
   --font-display: Georgia, "Times New Roman", serif;
   --ink-shadow: transparent;
 }
@@ -7282,9 +7282,9 @@ body {
 .tiq-persona {
   display: block;
   flex: 0 0 auto;
-  border: 1px solid var(--sumi);
-  border-radius: 50%;
-  background: #e9efff;
+  border: 0;
+  border-radius: 10px;
+  background-color: transparent;
   background-image: url("/sprite_tiq.png");
   background-position: 0 0;
   background-repeat: no-repeat;

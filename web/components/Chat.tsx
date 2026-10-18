@@ -1669,6 +1669,14 @@ export default function Chat() {
                 })} · ripristinata dalla conversazione
               </p>
             )}
+            {m.role === "assistant" && m.reply?.profilo_capito?.comune_istat && (
+              <details className="bubble__menu">
+                <summary aria-label="Azioni per questa risposta">•••</summary>
+                <a href={`/comune/${m.reply.profilo_capito.comune_istat}`}>
+                  Esplora i dati del comune
+                </a>
+              </details>
+            )}
             {/* Sul rail INFORMAZIONE la sintesi è la prima riga della scheda,
                 non un paragrafo sciolto sopra di essa: `RispostaCivica` la
                 rende insieme allo stato, così le due cose che qualificano

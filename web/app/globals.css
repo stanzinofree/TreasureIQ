@@ -7153,3 +7153,71 @@ body {
     max-width: 92%;
   }
 }
+
+/* Product identity: 70s/80s editorial pop. Semantic state colours above keep
+   their meaning; these tokens only repaint the shared interface. */
+:root {
+  --paper: #fff5dc;
+  --paper-raised: #fffdf4;
+  --paper-sunken: #f4e6c5;
+  --sumi: #20204f;
+  --sumi-soft: #50507a;
+  --sumi-faint: #77779a;
+  --kasumi: #d6c49d;
+  --ai: #6729b8;
+  --ai-deep: #4e198f;
+  --ai-line: #6729b8;
+  --ai-wash: #eee4ff;
+  --ai-vivid: #35d0be;
+  --ai-vivid-deep: #087e76;
+  --lime: #c8f23b;
+  --lime-ink: #496610;
+  --cta: #ff7161;
+  --cta-deep: #e75647;
+  --cta-ink: #20204f;
+  --yamabuki: #ffc94a;
+  --yamabuki-deep: #805400;
+  --yamabuki-wash: #fff0bf;
+  --ink-shadow: rgba(32, 32, 79, 0.18);
+}
+
+.bubble__menu {
+  position: absolute;
+  top: var(--ma-3);
+  right: var(--ma-3);
+  z-index: 2;
+}
+
+.bubble__menu summary {
+  width: 2rem;
+  padding: 0.15rem 0.35rem 0.3rem;
+  border: 1.5px solid var(--sumi);
+  border-radius: 999px;
+  background: var(--paper-raised);
+  color: var(--sumi);
+  cursor: pointer;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  list-style: none;
+  text-align: center;
+}
+
+.bubble__menu summary::-webkit-details-marker { display: none; }
+
+.bubble__menu a {
+  display: block;
+  width: max-content;
+  margin-top: 0.4rem;
+  padding: 0.55rem 0.7rem;
+  border: 1.5px solid var(--sumi);
+  border-radius: 0.5rem;
+  background: var(--paper-raised);
+  box-shadow: 3px 3px 0 var(--sumi);
+  color: var(--sumi);
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.bubble__menu a:hover,
+.bubble__menu a:focus-visible { background: var(--lime); }

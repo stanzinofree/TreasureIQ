@@ -30,15 +30,15 @@
   /* --- Surface: a very faint byakuroku green-grey, fresher than the warm
      cream of v2. L* stays high so dark text keeps AA — vibrancy lives in the
      accents and the hero, never by dimming the paper under body text. --- */
-  --paper: #fcfaf5;      /* warm paper: friendly, not institutional */
+  --paper: #ffffff;      /* optic white: energetic, clean and legible */
   --paper-raised: #ffffff;
-  --paper-sunken: #eef4e9;
+  --paper-sunken: #f3f5ff;
 
   /* --- Ink: brand navy. 15.23:1 on the paper above, so body text is never
      the thing that has to be argued about. --- */
-  --sumi: #1a3300;
-  --sumi-soft: #405d32;
-  --sumi-faint: #71806b;
+  --sumi: #141429;
+  --sumi-soft: #54546b;
+  --sumi-faint: #77778c;
 
   /* --- Accents, from the brand board, tiered by what each can legally do.
      Measured on #f2f4f7 rather than assumed:
@@ -53,12 +53,12 @@
      So teal and yellow never carry text and never draw a line: they are
      surfaces with dark ink laid on them. Deepened partners exist for the
      moments those meanings need to be written rather than filled. --- */
-  --ai-vivid: #2ed3b7;   /* brand teal — fills only, navy on top: 8.89:1 */
-  --ai-vivid-deep: #156558; /* same hue, darkened so it can be TEXT: 6.28:1 on --paper (AA) */
-  --ai-line: #5a2ca0;    /* violet — borders, icons, focus ring */
-  --ai: #5a2ca0;         /* violet — links and active navigation */
-  --ai-deep: #421b7d;    /* violet deepened for small text */
-  --ai-wash: #f3e8ff;
+  --ai-vivid: #c6ff00;   /* acid lime — fills only, ink on top */
+  --ai-vivid-deep: #337000; /* lime's readable partner */
+  --ai-line: #216bff;    /* electric blue — borders, icons, focus ring */
+  --ai: #216bff;         /* electric blue — links and active navigation */
+  --ai-deep: #1247c7;    /* electric blue deepened for small text */
+  --ai-wash: #e9efff;
   --shu: #d92d20;        /* blocking states, and the seal */
   --shu-deep: #a52016;
   --shu-wash: #fde7e5;
@@ -69,7 +69,7 @@
   --yamabuki-deep: #8a6206; /* deepened so the same meaning can be written */
   --yamabuki-wash: #fef4d6;
 
-  --kasumi: #d8d8ca;    /* warm pencil line */
+  --kasumi: #d7dcf4;    /* cool, light line */
 
   /* --- Type --- */
   /* Brand pairing: Poppins for headings, Inter for text. The CSS variables
@@ -6798,12 +6798,12 @@ a {
 /* Earlier layers still reference the playful tokens; point them at the
    sober palette instead of leaving them undefined. */
 :root {
-  --accent-violet: var(--sumi);
+  --accent-violet: #ff1fb8;
   --accent-violet-wash: var(--paper-sunken);
-  --accent-coral: var(--shu);
-  --accent-yellow: var(--yamabuki);
-  --accent-teal: var(--ai-vivid-deep);
-  --ink-shadow: rgba(26, 51, 0, 0.08);
+  --accent-coral: #ff1fb8;
+  --accent-yellow: var(--ai-vivid);
+  --accent-teal: var(--ai);
+  --ink-shadow: rgba(20, 20, 41, 0.08);
 }
 
 body {
@@ -7279,12 +7279,12 @@ body {
   font-family: var(--font-display);
 }
 
-.tiq-persona { flex: 0 0 auto; overflow: visible; }
-.tiq-persona__face { fill: #7bbbff; stroke: var(--sumi); stroke-width: 4; }
-.tiq-persona__phones { fill: none; stroke: #ff99cc; stroke-linecap: round; stroke-width: 12; }
-.tiq-persona__pad { fill: #ff99cc; stroke: var(--sumi); stroke-width: 4; }
-.tiq-persona__eye { fill: var(--sumi); }
-.tiq-persona__smile { fill: none; stroke: var(--sumi); stroke-linecap: round; stroke-width: 5; }
-.tiq-persona__cheek { fill: #ffcc99; }
+.tiq-persona {
+  flex: 0 0 auto;
+  border: 1px solid var(--sumi);
+  border-radius: 50%;
+  background: #e9efff;
+  object-fit: cover;
+}
 .tiq-intro strong { font-size: 2.25rem; letter-spacing: -0.05em; }
 .tiq-intro span { font-family: var(--font-body); font-size: 0.9rem; }

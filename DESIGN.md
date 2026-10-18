@@ -1,11 +1,11 @@
 ---
 colors:
-  canvas: "#FFFEF8"
+  canvas: "#FFFFFF"
   surface: "#FFFFFF"
-  ink: "#234314"
-  muted: "#657460"
-  accent: "#26CBB7"
-  accent-strong: "#1B7D66"
+  ink: "#141429"
+  muted: "#54546B"
+  accent: "#C6FF00"
+  accent-strong: "#216BFF"
   evidence: "#A87500"
   border: "#D9DED2"
   focus: "#6539A6"
@@ -17,19 +17,21 @@ radius: ["8px", "14px", "20px"]
 spacing: ["4px", "8px", "12px", "16px", "24px", "32px"]
 ---
 
-# TreasureIQ — chat pop con evidenze esplorabili
+# TreasureIQ — chat electro-pop con evidenze esplorabili
 
 ## 1. Tema e atmosfera
 
-Un prodotto personale, pop e generoso: la chat resta il luogo in cui si
+Un prodotto personale, luminoso e generoso: la chat resta il luogo in cui si
 capisce la risposta; dati, fonte e azioni si aprono solo quando servono.
-Crema, mint, sky, peach e bubblegum richiamano l'editoria anni 70/80,
-senza usare il colore per falsare lo stato di un dato.
+Bianco ottico, lime acido, fucsia e blu elettrico danno l'energia di un
+assistente del futuro, senza usare il colore per falsare lo stato di un dato.
 
 ## 2. Palette e ruoli
 
-- `canvas` è `#f5f4f0`, `surface` è bianco e i bordi sono plum `#160042`.
-- `accent` mint `#99ffcc` è la sola CTA; sky, peach e bubblegum sono decorativi.
+- `canvas` e `surface` sono bianchi; l'inchiostro quasi-nero `#141429` tiene
+  la lettura nitida.
+- `accent` lime `#C6FF00` è la CTA; blu elettrico `#216BFF` è link e focus,
+  fucsia `#FF1FB8` è un accento decorativo, mai un verdetto.
 - `evidence` distingue fonte, stato e avvertenze dalla risposta.
 - `focus` è sempre visibile da tastiera e non coincide col colore semantico.
 
@@ -51,9 +53,11 @@ monospazio è riservato a etichette tecniche brevi, non al contenuto civico.
 - Link esterni dichiarano il portale di destinazione e aprono in nuova scheda.
 - Ogni controllo è raggiungibile da tastiera, ha focus visibile e stato
   `aria-expanded`/`aria-controls` quando espande contenuto.
-- TIQ è una presenza virtuale: volto sky-blue, cuffie bubblegum, occhi e sorriso.
-  Il volto identifica le risposte, mentre l'animazione di apertura è breve e
-  decorativa; non suggerisce capacità che il prodotto non possiede.
+- TIQ è una presenza virtuale: volto di porcellana luminosa, visore blu
+  elettrico, cuffie fucsia e una spia lime. È professionale ma affettuosa,
+  non una mascotte infantile. Il volto identifica le risposte, mentre
+  l'animazione di apertura è breve e decorativa; non suggerisce capacità che
+  il prodotto non possiede.
 
 ## 5. Layout
 
@@ -63,7 +67,7 @@ Su mobile il riepilogo si sposta dietro un'azione nella testata della chat.
 
 ## 6. Profondità ed elevazione
 
-Profondità grafica: superfici crema/bianco e bordi sottili, senza ombre,
+Profondità grafica: superfici bianche e bordi sottili, senza ombre,
 gradienti o vetro. Menu contestuale e disclosure usano una superficie bianca.
 
 ## 7. Do e don't

@@ -376,7 +376,7 @@ function PagineWeb({ results }: { results: InfoWebResult[] }) {
   );
 }
 
-/** Bandi e avvisi letti adesso da amministrazione trasparente del comune
+/** Bandi e avvisi da amministrazione trasparente del comune
  *  (`criteri-e-modalita`). Indipendente dalla mappa servizi (D-B6): niente
  *  intent-gating, si carica al mount come la sonda connettore. Nessun
  *  verdetto di apertura (D-B4) — solo data e caveat di verifica. */
@@ -466,7 +466,7 @@ function BandiComune({ istat, caricaAlMount = true }: { istat: string; caricaAlM
           + .bandi-comune__caveat ad-hoc. */}
       <Provenienza
         origine="live"
-        etichetta="Letti ora dal portale"
+        etichetta="Dal portale del comune"
         nota="Non un verdetto: controlla sul sito del comune se il bando è ancora aperto."
       />
       <h3 className="bandi-comune__titolo-card">
@@ -1830,16 +1830,7 @@ export default function Chat() {
                     pannello di sinistra (MappaServizi), agganciata al comune di
                     profilo, per tenere la chat pulita. */}
 
-                {/* Amministrazione Trasparente è una superficie distinta dai
-                    dati ordinari. Il catalogo decide se ha senso interrogare
-                    il relativo connettore: la chat non deduce più questo gate
-                    dalla presenza del vecchio oggetto `connettore`. */}
-                {m.reply.source_access.some(
-                  (source) =>
-                    source.surface === "transparency" &&
-                    source.access_mode !== "unavailable",
-                ) &&
-                  m.reply.profilo_capito?.comune_istat && (
+                {m.reply.profilo_capito?.comune_istat && (
                     <BandiComune
                       istat={m.reply.profilo_capito.comune_istat}
                       caricaAlMount={!m.restoredAt}

@@ -1,8 +1,37 @@
 {
  "codice_istat": "058003",
  "piattaforma": "wordpress_agid",
- "letto_il": "2026-08-11T21:23:08.568846+00:00",
- "aree_amministrative": [],
+ "letto_il": "2026-10-16T20:26:24.961772+00:00",
+ "aree_amministrative": [
+  {
+   "nome": "Segreteria Generale",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/segreteria-generale/"
+  },
+  {
+   "nome": "SETTORE II – Corpo di Polizia Locale",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/corpo-di-polizia-locale/"
+  },
+  {
+   "nome": "SETTORE V – Lavori Pubblici, Manutenzione, Patrimonio",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/settore-v-lavori-pubblici-manutenzione-patrimonio/"
+  },
+  {
+   "nome": "SETTORE IV – Urbanistica – Edilizia – Attività Produttive – Ambiente",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/settore-iv-urbanistica-edilizia-attivita-produttive-ambiente/"
+  },
+  {
+   "nome": "SETTORE III – Politiche educative, Sociali e Culturali – Demografici",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/settore-iii-politiche-educative-sociali-e-culturali-demografici/"
+  },
+  {
+   "nome": "SETTORE I – Economico, Finanziario, Risorse Umane",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/settore-i-economico-finanziario-risorse-umane/"
+  },
+  {
+   "nome": "Avvocatura",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/avvocatura/"
+  }
+ ],
  "uffici": [
   {
    "nome": "Giunta Comunale",
@@ -12,7 +41,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio del Sindaco",
@@ -22,7 +54,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Consiglio Comunale",
@@ -32,7 +67,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Protocollo",
@@ -42,17 +80,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
-  },
-  {
-   "nome": "Segreteria Generale",
-   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/segreteria-generale/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "U.R.P. – Ufficio Relazioni con il Pubblico",
@@ -62,7 +93,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Segreteria Generale Servizio II – Protocollo – U.R.P. – Messi – Comunicazione istituzionale",
@@ -72,7 +106,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio di staff del Sindaco",
@@ -82,7 +119,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Anagrafe e Leva",
@@ -92,17 +132,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
-  },
-  {
-   "nome": "SETTORE II – Corpo di Polizia Locale",
-   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/corpo-di-polizia-locale/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Politiche Energetiche",
@@ -112,7 +145,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Pubblica Incolumità",
@@ -122,7 +158,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio III – Patrimonio – Condono edilizio",
@@ -132,7 +171,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio II – Manutenzioni",
@@ -142,7 +184,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio I – Lavori Pubblici",
@@ -152,17 +197,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
-  },
-  {
-   "nome": "SETTORE V – Lavori Pubblici, Manutenzione, Patrimonio",
-   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/settore-v-lavori-pubblici-manutenzione-patrimonio/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio II –  S.U.E. – Cimitero",
@@ -172,7 +210,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio III – Attività produttive",
@@ -182,7 +223,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio IV – Ambiente",
@@ -192,7 +236,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio Condono e Vigilanza edilizia",
@@ -202,7 +249,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio Edilizia",
@@ -212,7 +262,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio I – Urbanistica",
@@ -222,17 +275,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
-  },
-  {
-   "nome": "SETTORE IV – Urbanistica – Edilizia – Attività Produttive – Ambiente",
-   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/settore-iv-urbanistica-edilizia-attivita-produttive-ambiente/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Biblioteche",
@@ -242,7 +288,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio TPL (Trasporto Pubblico Locale)",
@@ -252,7 +301,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio III – Politiche Culturali",
@@ -262,7 +314,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio II – Politiche Sociali",
@@ -272,7 +327,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio I – Politiche Educative – Tutela – Trasporti",
@@ -282,17 +340,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
-  },
-  {
-   "nome": "SETTORE III – Politiche educative, Sociali e Culturali – Demografici",
-   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/settore-iii-politiche-educative-sociali-e-culturali-demografici/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Politiche Europee",
@@ -302,7 +353,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Contratti",
@@ -312,7 +366,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio I – Organi Istituzionali e Segreteria Generale",
@@ -322,7 +379,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio Tributi",
@@ -332,7 +392,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio I – Finanziario",
@@ -342,7 +405,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Stato Civile, Elettorale, Statistica",
@@ -352,7 +418,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Uffici Messi Notificatori",
@@ -362,7 +431,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Risorse Umane",
@@ -372,27 +444,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
-  },
-  {
-   "nome": "SETTORE I – Economico, Finanziario, Risorse Umane",
-   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/settore-i-economico-finanziario-risorse-umane/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
-  },
-  {
-   "nome": "Avvocatura",
-   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/avvocatura/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio IV – Demografici",
@@ -402,7 +457,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Informatizzazione – I.C.T.",
@@ -412,14 +470,72 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+   "letto_il": "2026-10-16T20:26:25.773267+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   }
  ],
  "amministrazione_trasparente": {
   "indice_url": "https://www.comune.albanolaziale.rm.it/amministrazione-trasparente/",
-  "piattaforma_at": "ignota",
+  "piattaforma_at": "urbi",
+  "piattaforma_at_prova": "rotta URBI AT: ur1UR033.sto",
   "bandi_attivi": [],
   "pdf_presenti": false
  },
- "endpoints": null
+ "endpoints": null,
+ "fonte_hash": "acd66641fa33bfa642ac62d9c83f2ef280f7e7777ecc215aed66f01724617b54",
+ "fonte_etag": null,
+ "fonte_last_modified": null,
+ "controllato_il": "2026-10-16T20:26:28.632627+00:00",
+ "riconoscimento": {
+  "source_id": "058003",
+  "surface": "ordinary_data",
+  "platform_id": "wordpress_generico",
+  "connector_id": "wordpress_agid_base",
+  "connector_version": "1.0.0",
+  "fingerprint_version": "1.0",
+  "fingerprint": null,
+  "recognition_score": 1.0,
+  "coverage_score": 1.0,
+  "source_health": true,
+  "failure_reason": null,
+  "confidence": "high",
+  "evidence": [
+   {
+    "key": "connector_map",
+    "description": "mappa WordPress disponibile",
+    "matched": true,
+    "weight": 0.35,
+    "observed": null,
+    "expected": null
+   },
+   {
+    "key": "base_schema",
+    "description": "URL BASE con schema HTTP",
+    "matched": true,
+    "weight": 0.15,
+    "observed": "https://www.comune.albanolaziale.rm.it",
+    "expected": null
+   },
+   {
+    "key": "rest_offices_declared",
+    "description": "REST uffici dichiarato",
+    "matched": true,
+    "weight": 0.25,
+    "observed": "unita_organizzative",
+    "expected": null
+   },
+   {
+    "key": "at_surface",
+    "description": "superficie AT confermata",
+    "matched": true,
+    "weight": 0.25,
+    "observed": null,
+    "expected": null
+   }
+  ],
+  "checked_at": "2026-10-16T20:26:28.628194Z",
+  "action": "keep"
+ }
 }

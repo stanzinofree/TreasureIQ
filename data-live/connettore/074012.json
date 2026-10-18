@@ -1,29 +1,38 @@
 {
  "codice_istat": "074012",
  "piattaforma": "wordpress_agid",
- "letto_il": "2026-08-11T03:36:10.901158+00:00",
- "aree_amministrative": [],
+ "letto_il": "2026-10-17T07:49:07.309551+00:00",
+ "aree_amministrative": [
+  {
+   "nome": "Polizia locale e Sicurezza urbana",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/polizia-locale-e-sicurezza-urbana/"
+  },
+  {
+   "nome": "Lavori pubblici ed Opere pubbliche",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/lavori-pubblici-ed-opere-pubbliche/"
+  },
+  {
+   "nome": "Pianificazione e gestione del territorio – Suap",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/pianificazione-e-gestione-del-territorio-suap/"
+  },
+  {
+   "nome": "Servizi finanziari – Tributi – Risorse umane",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/servizi-finanziari-tributi-risorse-umane/"
+  },
+  {
+   "nome": "Ambiente, Igiene urbana, Patrimonio disponibile e Programmi di finanziamento",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/ambiente-igiene-urbana-patrimonio-disponibile-e-programmi-di-finanziamento/"
+  },
+  {
+   "nome": "Affari legali e Contratti",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/affari-legali-e-contratti/"
+  },
+  {
+   "nome": "Affari generali e Istituzionali",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/affari-generali-e-istituzionali/"
+  }
+ ],
  "uffici": [
-  {
-   "nome": "Amministrazione Commissariale",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/amministrazione-commissariale/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Garante per i diritti delle persone con disabilità.",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/garante-per-i-diritti-delle-persone-con-disabilita/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
   {
    "nome": "Anagrafe Sportello cambi di residenza",
    "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/anagrafe-sportello-cambi-di-residenza/",
@@ -32,7 +41,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Anagrafe Sportello CIE",
@@ -42,7 +54,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Tributi-Canone unico patrimoniale",
@@ -52,7 +67,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Tributi-Imposta di soggiorno",
@@ -62,7 +80,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "CUG (Comitato unico di garanzia)",
@@ -72,57 +93,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "GAL Alto Salento 2020",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/gal-alto-salento-2020/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Apulia Film Commission",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/apulia-film-commission/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Consorzio “CIISAF”",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/consorzio-ciisaf/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Consorzio Teatro Pubblico Pugliese",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/consorzio-teatro-pubblico-pugliese/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Consorzio ASI – Brindisi",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/consorzio-asi-brindisi/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Economato",
@@ -132,7 +106,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Urp",
@@ -142,7 +119,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Urbanistica",
@@ -152,7 +132,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Cultura, Turismo e Sport",
@@ -162,7 +145,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Tributi",
@@ -172,7 +158,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Suap",
@@ -182,7 +171,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Stato civile",
@@ -192,7 +184,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizi Sociali",
@@ -202,7 +197,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Segreteria Sindaco",
@@ -212,7 +210,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Segreteria generale",
@@ -222,7 +223,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ragioneria",
@@ -232,7 +236,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Pubblica Istruzione",
@@ -242,7 +249,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Protocollo",
@@ -252,7 +262,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Programmi di finanziamento",
@@ -262,7 +275,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Personale",
@@ -272,7 +288,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Patrimonio",
@@ -282,7 +301,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Paesaggio",
@@ -292,7 +314,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Messi",
@@ -302,7 +327,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Legale e contenzioso",
@@ -312,7 +340,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Igiene Urbana",
@@ -322,7 +353,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Elettorale",
@@ -332,7 +366,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Demanio marittimo",
@@ -342,7 +379,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "CED – Sistemi informativi",
@@ -352,7 +392,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Biblioteca Comunale",
@@ -362,7 +405,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Appalti e contratti",
@@ -372,7 +418,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Anagrafe",
@@ -382,7 +431,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ambiente",
@@ -392,162 +444,72 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Polizia locale e Sicurezza urbana",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/polizia-locale-e-sicurezza-urbana/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Lavori pubblici ed Opere pubbliche",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/lavori-pubblici-ed-opere-pubbliche/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Pianificazione e gestione del territorio – Suap",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/pianificazione-e-gestione-del-territorio-suap/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Servizi finanziari – Tributi – Risorse umane",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/servizi-finanziari-tributi-risorse-umane/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Ambiente, Igiene urbana, Patrimonio disponibile e Programmi di finanziamento",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/ambiente-igiene-urbana-patrimonio-disponibile-e-programmi-di-finanziamento/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Affari legali e Contratti",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/affari-legali-e-contratti/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Affari generali e Istituzionali",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/affari-generali-e-istituzionali/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "VI COMMISSIONE Servizi Finanziari – Tributi – Demanio e Patrimonio",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/vi-commissione-servizi-finanziari-tributi-demanio-e-patrimonio/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "V COMMISSIONE Igiene, Ambiente ed Ecologia – Sanità – Servizi Sociali – Lavoro",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/v-commissione-igiene-ambiente-ed-ecologia-sanita-servizi-sociali-lavoro/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "IV COMMISSIONE Pubblica Istruzione – Cultura – Sport e Tempo Libero – Turismo",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/iv-commissione-pubblica-istruzione-cultura-sport-e-tempo-libero-turismo/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "III COMMISSIONE Lavori Pubblici – Urbanistica e Assetto del territorio",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/iii-commissione-lavori-pubblici-urbanistica-e-assetto-del-territorio/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "II COMMISSIONE Contenzioso – Appalti e Contratti – Polizia Locale – Trasporto Pubblico – Agricoltura – Annona – Attività Produttive",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/ii-commissione-contenzioso-appalti-e-contratti-polizia-locale-trasporto-pubblico-agricoltura-annona-attivita-produttive/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "I COMMISSIONE Affari Generali – Personale",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/i-commissione-affari-generali-personale/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Parco Regionale Dune Costiere",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/parco-regionale-dune-costiere/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
-  },
-  {
-   "nome": "Istituzione Museo",
-   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/istituzione-museo/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+   "letto_il": "2026-10-17T07:49:12.488510+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   }
  ],
  "amministrazione_trasparente": {
   "indice_url": "https://www.comune.ostuni.br.it/amministrazione-trasparente/",
+  "piattaforma_at": "isweb",
+  "piattaforma_at_prova": "generator: IsWeb, il cms per siti accessibili di ISWEB",
   "bandi_attivi": [],
   "pdf_presenti": false
+ },
+ "endpoints": null,
+ "fonte_hash": "a61f3ad4b45931fb34752e04e6b1f5568b6009152fa89fc342653eaa9487d990",
+ "fonte_etag": null,
+ "fonte_last_modified": "Fri, 16 Oct 2026 20:51:34 GMT",
+ "controllato_il": "2026-10-17T07:49:13.084962+00:00",
+ "riconoscimento": {
+  "source_id": "074012",
+  "surface": "ordinary_data",
+  "platform_id": "wordpress_generico",
+  "connector_id": "wordpress_agid_base",
+  "connector_version": "1.0.0",
+  "fingerprint_version": "1.0",
+  "fingerprint": null,
+  "recognition_score": 1.0,
+  "coverage_score": 1.0,
+  "source_health": true,
+  "failure_reason": null,
+  "confidence": "high",
+  "evidence": [
+   {
+    "key": "connector_map",
+    "description": "mappa WordPress disponibile",
+    "matched": true,
+    "weight": 0.35,
+    "observed": null,
+    "expected": null
+   },
+   {
+    "key": "base_schema",
+    "description": "URL BASE con schema HTTP",
+    "matched": true,
+    "weight": 0.15,
+    "observed": "https://www.comune.ostuni.br.it",
+    "expected": null
+   },
+   {
+    "key": "rest_offices_declared",
+    "description": "REST uffici dichiarato",
+    "matched": true,
+    "weight": 0.25,
+    "observed": "unita_organizzative",
+    "expected": null
+   },
+   {
+    "key": "at_surface",
+    "description": "superficie AT confermata",
+    "matched": true,
+    "weight": 0.25,
+    "observed": null,
+    "expected": null
+   }
+  ],
+  "checked_at": "2026-10-17T07:49:13.081227Z",
+  "action": "keep"
  }
 }

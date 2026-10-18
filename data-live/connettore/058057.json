@@ -1,12 +1,8 @@
 {
  "codice_istat": "058057",
  "piattaforma": "egov",
- "letto_il": "2026-08-11T06:24:38.831884+00:00",
+ "letto_il": "2026-10-16T20:30:31.722378+00:00",
  "aree_amministrative": [
-  {
-   "nome": "Istruzione",
-   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=17"
-  },
   {
    "nome": "Assistenza sociale",
    "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=10"
@@ -65,7 +61,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Assicurazioni e Sinistri",
@@ -75,7 +74,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Avvocatura ufficio",
@@ -85,7 +87,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Cerimoniale",
@@ -95,7 +100,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Comando di Polizia Locale",
@@ -105,7 +113,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Controllo successivo sugli atti",
@@ -115,7 +126,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Coordinamento PEC (Piano emergenza comunale)",
@@ -125,7 +139,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Datore di lavoro D. Lgs. n.81/2008",
@@ -135,7 +152,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Economato",
@@ -145,7 +165,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Efficientamento energetico impianti pubblici",
@@ -155,7 +178,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Entrate tributarie e extra-tributarie",
@@ -165,7 +191,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Gare ed appalti",
@@ -175,7 +204,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Gestione e manutenzione della pubblica Illuminazione e degli impianti semaforici",
@@ -185,7 +217,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Gestione giuridica ed economica del personale",
@@ -195,7 +230,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Governance delle Società in house",
@@ -205,7 +243,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ispettori ambientali",
@@ -215,7 +256,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Lavori pubblici",
@@ -225,7 +269,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Manutenzione ordinaria e straordinaria Immobili comunali",
@@ -235,7 +282,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Manutenzione Strade",
@@ -245,7 +295,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Messi",
@@ -255,7 +308,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Organi Istituzionali",
@@ -265,7 +321,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Parco auto",
@@ -275,7 +334,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "PIAO",
@@ -285,7 +347,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "PNRR - Risorse Sovracomunali",
@@ -295,7 +360,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Politiche degli animali",
@@ -305,7 +373,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Privacy",
@@ -315,7 +386,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Programmazione e gestione bilancio",
@@ -325,7 +399,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Protocollo",
@@ -335,7 +412,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Pubblica istruzione",
@@ -345,7 +425,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ragioneria e Contabilità",
@@ -355,7 +438,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Rapporti con OIV",
@@ -365,7 +451,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Segretario Generale",
@@ -375,7 +464,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Segreteria del Sindaco",
@@ -385,7 +477,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizi Cimiteriali",
@@ -395,7 +490,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizi di Accoglienza",
@@ -405,7 +503,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizi Sociali e Distretto sociosanitario RM 6.3",
@@ -415,7 +516,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio Demografico (Anagrafe, Stato civile, Elettorale, Statistica)",
@@ -425,7 +529,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio Idrico Integrato",
@@ -435,7 +542,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Sosta a pagamento (Gestione e contratto)",
@@ -445,7 +555,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Sport e affidamento impianti sportivi",
@@ -455,7 +568,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Staff del Sindaco",
@@ -465,7 +581,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "SUAP",
@@ -475,7 +594,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "SUE - Sportello Unico Edilizia",
@@ -485,7 +607,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Tecnologie I.T.",
@@ -495,7 +620,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "TPL e TPS",
@@ -505,7 +633,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Tutela delle acque",
@@ -515,7 +646,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Affari generali",
@@ -525,7 +659,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Biblioteche",
@@ -535,7 +672,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Comunicazione",
@@ -545,7 +685,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Contenzioso",
@@ -555,7 +698,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Contratti",
@@ -565,7 +711,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Cultura",
@@ -575,7 +724,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Mitreo",
@@ -585,7 +737,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Musei",
@@ -595,7 +750,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Relazioni con il Pubblico - URP",
@@ -605,7 +763,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Urbanistica",
@@ -615,7 +776,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Valorizzazione e gestione del patrimonio dell'Ente",
@@ -625,7 +789,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Verde pubblico",
@@ -635,12 +802,23 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+   "letto_il": "2026-10-16T20:30:35.113568+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   }
  ],
  "amministrazione_trasparente": {
   "indice_url": "https://www.comune.marino.rm.it/amministrazione/trasparenza/trasparenza.html",
+  "piattaforma_at": "hgate",
+  "piattaforma_at_prova": "server: HGATE",
   "bandi_attivi": [],
   "pdf_presenti": false
- }
+ },
+ "endpoints": null,
+ "fonte_hash": "9ebc6916d6c5db7e0ca2098f83e886e77e653936636efc18c8743fc0e9445809",
+ "fonte_etag": "\"a5a27de55755f6f3910df1e6b6d26a7e\"",
+ "fonte_last_modified": null,
+ "controllato_il": "2026-10-16T20:30:35.147279+00:00",
+ "riconoscimento": null
 }

@@ -1,119 +1,62 @@
 {
  "codice_istat": "074010",
  "piattaforma": "wordpress_agid",
- "letto_il": "2026-08-11T03:35:52.855738+00:00",
- "aree_amministrative": [],
+ "letto_il": "2026-10-17T07:12:43.563440+00:00",
+ "aree_amministrative": [
+  {
+   "nome": "Direzione scientifica museo e biblioteca",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/direzione-scientifica-museo-e-biblioteca/"
+  },
+  {
+   "nome": "Avvocatura civica",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/avvocatura-civica/"
+  },
+  {
+   "nome": "Area X",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/servizi-sociali-pubblica-istruzione/"
+  },
+  {
+   "nome": "Area IX",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/polizia-locale/"
+  },
+  {
+   "nome": "Area VIII",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/innovazione-tecnologica-sistemi-informativi-e-telematici/"
+  },
+  {
+   "nome": "Area VII",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/servizi-finanziari-e-tributi/"
+  },
+  {
+   "nome": "Area VI",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/servizi-al-territorio/"
+  },
+  {
+   "nome": "Area V",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/sviluppo-economico/"
+  },
+  {
+   "nome": "Area IV",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/urbanistica-pianificazione-territoriale-edilizia-privata-ambiente/"
+  },
+  {
+   "nome": "Area III",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/lavori-pubblici-gestione-e-coordinamento-pnrr-progettazione-strategica/"
+  },
+  {
+   "nome": "Area II",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/cultura-e-turismo/"
+  },
+  {
+   "nome": "Area I",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/affari-generali-segreteria-risorse-umane/"
+  },
+  {
+   "nome": "Segretario Generale",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/segretario-generale-2/"
+  }
+ ],
  "uffici": [
-  {
-   "nome": "Commissione Comunale per le pari opportunità, per le politiche di genere e i diritti civili",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/commissione-comunale-per-le-pari-opportunita-per-le-politiche-di-genere-e-i-diritti-civili/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Commissione Consiliare Speciale “Piano Nazionale di Ripresa e Resilienza”",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/commissione-consiliare-speciale-piano-nazionale-di-ripresa-e-resilienza/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "IV Commissione",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/iv-commissione/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "III Commissione",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/iii-commissione/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "II Commissione",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ii-commissione/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "I Commissione",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/i-commissione/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Commissione Garanzia e Controllo",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/commissione-garanzia-e-controllo/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Commissione Affari Istituzionali",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/commissione-affari-istituzionali/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Consiglio Comunale",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/consiglio-comunale/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Giunta comunale",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/giunta-comunale/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Presidente Consiglio",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/presidente-consiglio/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
   {
    "nome": "Sindaco",
    "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/sindaco/",
@@ -122,7 +65,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Commissario Straordinario",
@@ -132,7 +78,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Sportello del terzo settore",
@@ -142,27 +91,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Direzione scientifica museo e biblioteca",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/direzione-scientifica-museo-e-biblioteca/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "AUSER",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/auser/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Direzione scientifica Museo e Biblioteca",
@@ -172,127 +104,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Avvocatura civica",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/avvocatura-civica/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Area X",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/servizi-sociali-pubblica-istruzione/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Area IX",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/polizia-locale/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Area VIII",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/innovazione-tecnologica-sistemi-informativi-e-telematici/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Area VII",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/servizi-finanziari-e-tributi/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Area VI",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/servizi-al-territorio/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Area V",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/sviluppo-economico/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Area IV",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/urbanistica-pianificazione-territoriale-edilizia-privata-ambiente/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Area III",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/lavori-pubblici-gestione-e-coordinamento-pnrr-progettazione-strategica/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Area II",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/cultura-e-turismo/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Area I",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/affari-generali-segreteria-risorse-umane/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
-  },
-  {
-   "nome": "Segretario Generale",
-   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/segretario-generale-2/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Avvocatura civica",
@@ -302,7 +117,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Segretario Generale",
@@ -312,7 +130,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio tributi",
@@ -322,7 +143,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Agricoltura",
@@ -332,7 +156,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio privacy",
@@ -342,7 +169,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio sport",
@@ -352,7 +182,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Demografici, stato civile, statistica ed elettorale",
@@ -362,7 +195,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio affari generali ed istituzionali",
@@ -372,7 +208,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio gestione area parchi archeologici",
@@ -382,7 +221,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Turismo",
@@ -392,7 +234,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio percorsi di legalità",
@@ -402,7 +247,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio verbali, servizi amministrativi, infortunistica e contenzioso",
@@ -412,7 +260,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Viabilità",
@@ -422,7 +273,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio gestione comitati di quartiere – Partecipazione attiva",
@@ -432,7 +286,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio di Piano",
@@ -442,7 +299,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio controlli interni – anticorruzione",
@@ -452,7 +312,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio economato-provveditorato",
@@ -462,7 +325,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Europa",
@@ -472,7 +338,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio centro storico",
@@ -482,7 +351,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio gestione utenze",
@@ -492,7 +364,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio progetti edilizi",
@@ -502,7 +377,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio spettacolo – eventi",
@@ -512,7 +390,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Risorse Umane",
@@ -522,7 +403,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Protezione Civile",
@@ -532,7 +416,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio patrimonio",
@@ -542,7 +429,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio servizi a rete",
@@ -552,7 +442,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio manutenzioni",
@@ -562,7 +455,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio messi",
@@ -572,7 +468,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Autorizzazione Unica Ambientale",
@@ -582,7 +481,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio attuazione politiche sanitarie",
@@ -592,7 +494,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio per la transizione al digitale",
@@ -602,7 +507,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Notifiche",
@@ -612,7 +520,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio bilancio e programmazione",
@@ -622,7 +533,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Servizi Cimiteriali",
@@ -632,7 +546,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Segreteria",
@@ -642,7 +559,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Stato Civile",
@@ -652,7 +572,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Sportello del contribuente ufficio pubbliche affissioni",
@@ -662,7 +585,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio relazioni con il pubblico",
@@ -672,7 +598,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Servizi Sociali",
@@ -682,7 +611,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio gare e contratti",
@@ -692,7 +624,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Lavori Pubblici",
@@ -702,7 +637,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio edilizia privata",
@@ -712,7 +650,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio contenzioso",
@@ -722,7 +663,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Elettorale",
@@ -732,7 +676,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio servizi scolastici",
@@ -742,7 +689,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Cultura – Beni monumentali",
@@ -752,7 +702,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Attività Produttive SUAP",
@@ -762,7 +715,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio ecologia, ambiente e verde pubblico",
@@ -772,7 +728,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio di staff",
@@ -782,7 +741,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Politiche Infanzia – Asilo Nido – Politiche Giovanili",
@@ -792,7 +754,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio paesaggio",
@@ -802,7 +767,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Archivio Storico",
@@ -812,7 +780,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio pianificazione territoriale",
@@ -822,7 +793,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Randagismo",
@@ -832,7 +806,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Protocollo",
@@ -842,12 +819,72 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+   "letto_il": "2026-10-17T07:12:48.987012+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   }
  ],
  "amministrazione_trasparente": {
   "indice_url": "https://www.comune.mesagne.br.it/amministrazione-trasparente/",
+  "piattaforma_at": "liferay",
+  "piattaforma_at_prova": "liferay-portal: Liferay Portal Community Edition 6.1.2 CE (Paton / Build 6102 / August 2, 2013)",
   "bandi_attivi": [],
   "pdf_presenti": false
+ },
+ "endpoints": null,
+ "fonte_hash": "5c6e17267150d5fc1d0b1380d78621057ec72bad5f654f325fc0369a0fe1c208",
+ "fonte_etag": null,
+ "fonte_last_modified": null,
+ "controllato_il": "2026-10-17T07:12:49.773531+00:00",
+ "riconoscimento": {
+  "source_id": "074010",
+  "surface": "ordinary_data",
+  "platform_id": "wordpress_generico",
+  "connector_id": "wordpress_agid_base",
+  "connector_version": "1.0.0",
+  "fingerprint_version": "1.0",
+  "fingerprint": null,
+  "recognition_score": 1.0,
+  "coverage_score": 1.0,
+  "source_health": true,
+  "failure_reason": null,
+  "confidence": "high",
+  "evidence": [
+   {
+    "key": "connector_map",
+    "description": "mappa WordPress disponibile",
+    "matched": true,
+    "weight": 0.35,
+    "observed": null,
+    "expected": null
+   },
+   {
+    "key": "base_schema",
+    "description": "URL BASE con schema HTTP",
+    "matched": true,
+    "weight": 0.15,
+    "observed": "https://www.comune.mesagne.br.it",
+    "expected": null
+   },
+   {
+    "key": "rest_offices_declared",
+    "description": "REST uffici dichiarato",
+    "matched": true,
+    "weight": 0.25,
+    "observed": "unita_organizzative",
+    "expected": null
+   },
+   {
+    "key": "at_surface",
+    "description": "superficie AT confermata",
+    "matched": true,
+    "weight": 0.25,
+    "observed": null,
+    "expected": null
+   }
+  ],
+  "checked_at": "2026-10-17T07:12:49.771728Z",
+  "action": "keep"
  }
 }

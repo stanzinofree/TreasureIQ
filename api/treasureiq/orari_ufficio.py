@@ -74,7 +74,9 @@ GIORNI_VALIDITA = 6
 #: 8 = elenco persone Drupal e Magnolia.
 #: 9 = responsabile singolare solo dove la scheda lo indica senza ambiguità.
 #: 10 = ruolo Magnolia dalla sezione esplicita con lo stesso link persona.
-VERSIONE_ESTRATTORI = 10
+#: 11 = responsabile dalla sezione dedicata (id responsabile/manager) per
+#:      OpenWeb e WordPress AgID, che prima restava sempre vuoto.
+VERSIONE_ESTRATTORI = 11
 
 #: Tetto sui byte scaricati dalla pagina dell'ufficio (guardia, non un dato).
 MAX_BYTES_PAGINA = 2_000_000

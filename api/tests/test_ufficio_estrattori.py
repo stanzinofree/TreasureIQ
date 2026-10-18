@@ -70,6 +70,116 @@ def test_openweb_due_responsabili_non_ne_sceglie_uno() -> None:
     assert estrai_responsabile(pagina, piattaforma="openweb") is None
 
 
+# Dedicated "Responsabile" section (`id="responsabile"` / `id="manager"`):
+# trimmed from real pages, one per DOM variant seen across the family. The
+# section heading already says the role, so no "responsabile" keyword is
+# needed on the person.
+
+
+def test_openweb_sezione_manager_testo_semplice() -> None:
+    # Montepulciano 052015, Servizi Demografici: plain text, no person link.
+    pagina = (
+        '<section class="it-page-section mb-30"><h2 class="mb-3" id="manager">Responsabile</h2>'
+        '<div class="richtext-wrapper lora"> Loredana Banini </div></section>'
+        '<section class="it-page-section mb-30"><h2 class="mb-3" id="contacts">Contatti</h2>'
+        '<div class="card"><h3 class="card-title h5"><a href="/punti">Servizi Demografici</a></h3></div></section>'
+    )
+    resp = estrai_responsabile(pagina, piattaforma="openweb")
+    assert resp is not None
+    assert (resp.nome, resp.ruolo) == ("Loredana Banini", None)
+
+
+def test_openweb_sezione_responsabile_card_title_con_ruolo() -> None:
+    # Barga 046003: card-teaser with a.card-title + small role.
+    pagina = (
+        '<section id="responsabile"><h2 class="title-xlarge mb-2">Responsabile</h2>'
+        '<div class="card card-teaser"><div class="card-body p-3">'
+        '<a class="card-title h6" href="https://www.comune.barga.lu.it/persona_pubblica/mariateresa-di-natale/"'
+        ' aria-label="Vai alla pagina di: Mariateresa Di Natale"> Mariateresa Di Natale </a>'
+        '<small class="m-0"> Responsabile Area Amministrativa Cultura </small></div></div></section>'
+    )
+    resp = estrai_responsabile(pagina, piattaforma="openweb")
+    assert resp is not None
+    assert (resp.nome, resp.ruolo) == ("Mariateresa Di Natale", "Responsabile Area Amministrativa Cultura")
+
+
+def test_openweb_sezione_responsabile_chip() -> None:
+    # Pedavena 025036: <article> with a chip-label, heading in h6/small/b.
+    pagina = (
+        '<article id="responsabile" class="it-page-section anchor-offset">'
+        '<h6><small><b>Responsabile</b></small></h6><ul class="d-flex"><li>'
+        '<a class="chip chip-simple" href="https://comune.pedavena.bl.it/persona_pubblica/elena-moretton/">'
+        '<span class="chip-label">Elena Moretton</span></a></li></ul></article>'
+        '<article id="tipo-organizzazione"><h6>Tipo</h6></article>'
+    )
+    resp = estrai_responsabile(pagina, piattaforma="openweb")
+    assert resp is not None
+    assert resp.nome == "Elena Moretton"
+
+
+def test_openweb_sezione_responsabile_titolo_con_link() -> None:
+    # Sant'Ippolito 041058: name is the link inside an h4.
+    pagina = (
+        '<section id="responsabile" class="it-page-section mb-4">'
+        '<h3 class="my-2">Responsabile</h3><div class="richtext-wrapper lora"><div class="card-body">'
+        '<h4 class="titillium"><a href="https://comune.santippolito.pu.it/persona_pubblica/paola-carpineti/">'
+        'Paola Carpineti</a></h4> Responsabile ufficio tributi </div></div></section>'
+    )
+    resp = estrai_responsabile(pagina, piattaforma="openweb")
+    assert resp is not None
+    assert resp.nome == "Paola Carpineti"
+
+
+def test_openweb_sezione_responsabile_p_card_title() -> None:
+    # Casamarciano 063018: id on the heading, name in p.card-title.
+    pagina = (
+        '<h4 id="responsabile">Responsabile</h4><div class="row"><div class="card-body">'
+        '<a href="https://www.comune.casamarciano.na.it/amministrazione/uffici/ufficio-protocollo/antonietta-buonaguro">'
+        '<p class="card-title h5 no-bold"> Antonietta Buonaguro </p></a>'
+        '<a class="read-more" href="#"><span class="text">Vai alla Pagina</span></a></div></div>'
+        '<h4 id="persone">Persone</h4>'
+    )
+    resp = estrai_responsabile(pagina, piattaforma="openweb")
+    assert resp is not None
+    assert resp.nome == "Antonietta Buonaguro"
+
+
+def test_openweb_sezione_responsabile_vuota_o_non_nome_resta_none() -> None:
+    vuota = '<section id="responsabile"><h2>Responsabile</h2><div class="richtext-wrapper"></div></section>'
+    frase = (
+        '<section id="manager"><h2>Responsabile</h2><div class="richtext-wrapper">'
+        'Per informazioni rivolgersi al numero 0578 712303</div></section>'
+    )
+    assert estrai_responsabile(vuota, piattaforma="openweb") is None
+    assert estrai_responsabile(frase, piattaforma="openweb") is None
+
+
+def test_openweb_sezione_con_due_responsabili_non_ne_sceglie_uno() -> None:
+    pagina = (
+        '<section id="responsabile"><h2>Responsabile</h2>'
+        '<span class="chip-label">Mario Rossi</span><span class="chip-label">Anna Bianchi</span></section>'
+    )
+    assert estrai_responsabile(pagina, piattaforma="openweb") is None
+
+
+def test_wordpress_agid_usa_la_stessa_sezione_dedicata() -> None:
+    # Ospitale di Cadore 025035, Ufficio Tecnico (WordPress Design Comuni).
+    pagina = (
+        '<section id="responsabile"><h3>Responsabile</h3><div class="card-body">'
+        '<a class="card-title" href="https://www.comune.ospitaledicadore.bl.it/persona_pubblica/paolo-de-lorenzi/">'
+        'Paolo De Lorenzi</a><small>Responsabile dell\u2019Area Tecnica</small></div></section>'
+    )
+    resp = estrai_responsabile(pagina, piattaforma="wordpress_agid")
+    assert resp is not None
+    assert (resp.nome, resp.ruolo) == ("Paolo De Lorenzi", "Responsabile dell\u2019Area Tecnica")
+
+
+def test_openweb_link_di_navigazione_non_e_una_sezione() -> None:
+    # The in-page nav links `href="#responsabile"`: only an `id=` opens the section.
+    pagina = '<a class="nav-link" href="#responsabile"><span>Responsabile</span></a><p>Mario Rossi</p>'
+    assert estrai_responsabile(pagina, piattaforma="openweb") is None
+
+
 def test_responsabile_peopleweb_openweb_net_solo_nome() -> None:
     # Vendor OpenWeb.NET: la card espone il nome, non un ruolo strutturato.
     resp = estrai_responsabile(_pagina("peopleweb_airasca"), piattaforma="peopleweb")

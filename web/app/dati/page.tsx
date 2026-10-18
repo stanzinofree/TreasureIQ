@@ -14,10 +14,8 @@
  * Two statistics registers live below the score panel (B16, spec D-17/D-18),
  * and they are never mixed:
  *
- *   - Across entities (N=4 + Regione Lazio) — a plain table, not a bar race.
- *     With three of the four comuni at zero, a leaderboard would read as
- *     padding, and padding is fatal for a project whose whole claim is
- *     honesty about data. So this is a table with a diagnosis column.
+ *   - Across entities (N=2) — only the deliberately matched Albano/Fonte
+ *     Nuova pair. Other observations remain documented cases, not a ranking.
  *   - Within Albano (N≈50 records) — here a chart is honest, because the
  *     sample actually supports a distribution: cost per opportunity, the
  *     L1/L2/L3 recovery split, which bandi cost the most to open.
@@ -66,35 +64,6 @@ function Dimension({ dimension }: { dimension: Readiness["dimensions"][number] }
     </div>
   );
 }
-
-/** Comuni without a reachable service API at all, so there was nothing for
- * ingestion to score them from. Measured 2026-08-02 by direct probe (see
- * `.kapi/spec.md`, "Verified facts") — not exposed by any of the four
- * endpoints this page calls, so it is cited here as evidence with its
- * measurement date rather than presented as a live figure. The score is
- * genuinely zero, not merely unmeasured: each was actually checked. */
-const ZERO_COMUNI: {
-  ente: string;
-  codice_istat: string;
-  diagnosis: string;
-}[] = [
-  // Ariccia is no longer here. Its API really is dead — 410 on /wp-json, by
-  // deliberate configuration — but a bespoke HTML connector was written for it
-  // and recovered fifteen records, so listing it as zero would now contradict
-  // the cost table further down this same page. What its case actually shows
-  // is the point of the whole exercise: the data was there, and reaching it
-  // without an API costs nearly double per record.
-  {
-    ente: "Comune di Genzano di Roma",
-    codice_istat: "058043",
-    diagnosis: "Drupal + Halley Informatica; nessun endpoint /wp-json (404). Stesso fornitore di Ciampino, che espone altrettanto nulla — è un limite di piattaforma, non solo di questo comune.",
-  },
-  {
-    ente: "Comune di Marino",
-    codice_istat: "058057",
-    diagnosis: "Il sito risponde 200 su ogni percorso, incluse le rotte API, ma è un redirect via JavaScript verso un altro dominio: dietro quel 200 non c'è nessun dato reale. Un monitoraggio ingenuo lo classificherebbe sano.",
-  },
-];
 
 const EVIDENCE_MEASURED_AT = "2 agosto 2026";
 
@@ -166,13 +135,9 @@ export default async function DataQuality() {
   }
   const integrationFor = (istat: string) =>
     integrationReports.find((i) => i.codice_istat === istat);
-  // D-21's comparative benchmark (F-1): how many comuni in Italia publish
-  // the waste calendar as open data, pulled from the measured field rather
-  // than hardcoded, so it stays reproducible if the probe is re-run.
-  const benchmark342 = integrationReports.find((i) => i.benchmark_342 != null)?.benchmark_342;
-
   const albano = reports.find((r) => r.codice_istat === "058003") ?? null;
   const fonteNuova = reports.find((r) => r.codice_istat === "058122") ?? null;
+  const casiConfrontabili = [albano, fonteNuova].filter((r): r is Readiness => r !== null);
 
   if (reports.length === 0) {
     return (
@@ -189,13 +154,14 @@ export default async function DataQuality() {
   return (
     <div className="stack">
       <section>
-        <p className="eyebrow">Pagella sulla qualità dei dati</p>
+        <p className="eyebrow">Casi misurati sulla qualità dei dati</p>
         <h1>{albano?.ente ?? "Comune di Albano Laziale"}</h1>
         <p className="lede">
           Quanto i dati pubblicati da questo comune sono utilizzabili da un
           motore come TreasureIQ. Il punteggio è calcolato solo da ciò che
           l&apos;ingestion ha effettivamente recuperato: nessun valore è
-          assegnato a mano, quindi il confronto fra comuni ha significato.
+          assegnato a mano. Un confronto è mostrato solo quando i casi sono
+          stati misurati con lo stesso perimetro.
         </p>
       </section>
 
@@ -253,20 +219,19 @@ export default async function DataQuality() {
 
       {/* ------------------------------------------------- across entities */}
       <section className="panel">
-        <p className="eyebrow">Confronto fra enti</p>
-        <h2>Non è una classifica — è una tabella, ed è onesta a riguardo</h2>
+        <p className="eyebrow">Confronto controllato</p>
+        <h2>Due comuni confrontabili, non una classifica nazionale</h2>
         <p className="lede">
-          Con tre comuni su quattro a punteggio zero, un grafico a barre
-          farebbe sembrare pieno quello che è vuoto. Qui sotto c&apos;è
-          esattamente quello che è stato misurato, e come — nessuna barra
-          disegnata dove non c&apos;è niente da misurare.
+          Albano Laziale e Fonte Nuova condividono provincia, famiglia di
+          piattaforma e una quantità di servizi simile. Il confronto serve a
+          capire cosa cambia nel dato, non a ordinare enti con misure diverse.
         </p>
 
         <div style={{ overflowX: "auto", marginTop: "var(--ma-6)" }}>
           <table className="data-table">
             <caption className="sr-only">
-              Punteggio di qualità dei dati per ente, e diagnosi quando il
-              punteggio è zero
+              Punteggio di qualità dei dati per i due comuni misurati nello
+              stesso perimetro
             </caption>
             <thead>
               <tr>
@@ -278,104 +243,40 @@ export default async function DataQuality() {
               </tr>
             </thead>
             <tbody>
-              {albano && (
-                <tr>
-                  <th scope="row">{albano.ente}</th>
-                  <td className="data-table__num">{albano.score.toFixed(1)} / 100</td>
-                  <td>{nationalCatalogueEvidence(albano) ?? "—"}</td>
-                  <td>Misurato in diretta — vedi la pagella sopra.</td>
+              {casiConfrontabili.map((caso) => (
+                <tr key={caso.codice_istat}>
+                  <th scope="row">{caso.ente}</th>
+                  <td className="data-table__num">{caso.score.toFixed(1)} / 100</td>
+                  <td>{nationalCatalogueEvidence(caso) ?? "—"}</td>
                   <td>
-                    <AccessCell integration={integrationFor(albano.codice_istat)} />
-                  </td>
-                </tr>
-              )}
-              {fonteNuova && (
-                <tr>
-                  <th scope="row">{fonteNuova.ente}</th>
-                  <td className="data-table__num">{fonteNuova.score.toFixed(1)} / 100</td>
-                  <td>{nationalCatalogueEvidence(fonteNuova) ?? "—"}</td>
-                  <td>
-                    Comparatore scelto (D-18): stessa provincia, stessa
-                    famiglia di piattaforma, più servizi esposti di Albano
-                    (34 contro 32) e presente sul catalogo nazionale — eppure
-                    non è detto che recuperi più requisiti utilizzabili.
+                    {caso.codice_istat === "058003"
+                      ? "Caso base: misurato in diretta nella pagella sopra."
+                      : "Comparatore: stesso perimetro di misura, 34 servizi contro 32."}
                   </td>
                   <td>
-                    <AccessCell integration={integrationFor(fonteNuova.codice_istat)} />
-                  </td>
-                </tr>
-              )}
-              {ZERO_COMUNI.map((z) => (
-                <tr key={z.ente} data-zero="true">
-                  <th scope="row">{z.ente}</th>
-                  <td className="data-table__num">0.0 / 100</td>
-                  <td>nessun dataset su dati.gov.it</td>
-                  <td>{z.diagnosis}</td>
-                  <td>
-                    <AccessCell integration={integrationFor(z.codice_istat)} />
+                    <AccessCell integration={integrationFor(caso.codice_istat)} />
                   </td>
                 </tr>
               ))}
-              <tr data-region="true">
-                <th scope="row">Regione Lazio</th>
-                <td className="data-table__num">non applicabile</td>
-                <td>502 dataset su dati.gov.it</td>
-                <td>
-                  Non un comune: il livello dove la catena di apertura dei
-                  dati smette di rompersi. Sotto il livello regionale, ogni
-                  ente misurato in questa tabella è a zero dataset nazionali.
-                </td>
-                <td className="field__hint">
-                  non applicabile — non è un ente misurato in D-21.
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>
         <p className="field__hint" style={{ marginTop: "var(--ma-4)" }}>
-          Ariccia, Genzano di Roma, Marino e Regione Lazio: misurati il{" "}
-          {EVIDENCE_MEASURED_AT} per probe diretto e ricerca su dati.gov.it
-          (dettagli in <code>.kapi/spec.md</code>), non da uno degli endpoint
-          live di questa pagina — quei tre comuni non hanno mai avuto un&apos;API
-          di servizio raggiungibile da cui ingerire nulla.
-        </p>
-        {benchmark342 != null && (
-          <p className="lede" style={{ marginTop: "var(--ma-4)" }}>
-            Il calendario della raccolta differenziata è già pubblicato come
-            open data da{" "}
-            <strong style={{ fontWeight: 600 }}>{benchmark342} comuni italiani</strong> (dati.gov.it,
-            misurato il {EVIDENCE_MEASURED_AT}). Non è una richiesta impossibile: è
-            ciò che altri comuni fanno già. Nessuno dei cinque enti misurati
-            qui lo pubblica in quella forma — e il costo di integrazione
-            riportato sopra è quello che paga TreasureIQ al loro posto, mai il
-            cittadino.
-          </p>
-        )}
-
-        <p className="lede" style={{ marginTop: "var(--ma-6)" }}>
-          Il quadro peggiora, non migliora, se si allarga lo sguardo: su 119
-          comuni della provincia di Roma (rilevazione IndicePA, 2 agosto
-          2026), solo <strong style={{ fontWeight: 600 }}>20 (16,8%)</strong>{" "}
-          espongono un&apos;API di servizio funzionante. Albano Laziale è{" "}
-          <strong style={{ fontWeight: 600 }}>secondo</strong> di questi 20,
-          con 32 servizi, dietro Fonte Nuova con 34. Non è un comune scelto
-          perché arretrato: è quasi il migliore della provincia, e ancora non
-          riesce a dire a un cittadino se ha diritto a una casa popolare.
+          Altre osservazioni storiche sono documentate nel repository, ma non
+          entrano qui perché non condividono questo stesso perimetro di misura.
         </p>
       </section>
 
       {/* --------------------------------------------------- within Albano */}
       <section className="panel">
-        <p className="eyebrow">Dentro i comuni misurati</p>
-        <h2>Cosa costa davvero aprire un bando</h2>
+        <p className="eyebrow">Costo per TreasureIQ</p>
+        <h2>Come cambia il lavoro per rendere un dato leggibile</h2>
         <p className="lede">
-          Qui il campione regge un grafico: i bandi, avvisi e contributi
-          recuperati da testo libero e allegati PDF, con il tempo di calcolo
-          speso a estrarne i requisiti e il livello della scala di recupero
-          (D-16) su cui ciascuno è atterrato. Il confronto fra i due comuni
-          misurati è la parte interessante: Fonte Nuova non compare con un
-          grafico vuoto, ma con un costo che non esiste, perché pubblica tutto
-          già strutturato.
+          La scala di accesso spiega il costo in generale: un campo tipizzato
+          si legge direttamente; prosa e allegati richiedono estrazione; un
+          connettore dedicato richiede manutenzione. I valori sotto sono casi
+          verificati e datati, incluso Ariccia come esempio di percorso M4 —
+          non prezzi correnti né una classifica di comuni.
         </p>
         <div style={{ marginTop: "var(--ma-6)" }}>
           <RecoveryCostChart reports={recoveryReports} measuredAt={EVIDENCE_MEASURED_AT} />

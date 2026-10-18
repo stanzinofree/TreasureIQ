@@ -166,7 +166,7 @@ export default async function Monitoraggio() {
               <Tessera value={n(copertura.catalogati)} label="catalogati" />
               <Tessera value={n(copertura.eleggibili)} label="eleggibili al refresh" />
             </div>
-            <div className="tabella-scorrevole">
+            <div className="tabella-scorrevole" tabIndex={0} role="region" aria-label="Tabella copertura nazionale, scorrevole">
               <table>
                 <caption>
                   Comuni catalogati per piattaforma. Solo le piattaforme con un
@@ -271,7 +271,7 @@ export default async function Monitoraggio() {
               <Tessera value={n(aderenza.con_copertura)} label="con copertura misurata" />
               <Tessera value={n(aderenza.con_verdetto)} label="con verdetto" />
             </div>
-            <div className="tabella-scorrevole">
+            <div className="tabella-scorrevole" tabIndex={0} role="region" aria-label="Tabella aderenza al modello AgID, scorrevole">
               <table>
                 <caption>
                   Il verdetto esiste solo dove la piattaforma è riconosciuta e il

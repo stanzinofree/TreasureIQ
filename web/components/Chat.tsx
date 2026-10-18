@@ -25,7 +25,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { Seal } from "@/components/Seal";
-import TiqPersona from "@/components/TiqPersona";
+import TiqPersona, { type TiqMood } from "@/components/TiqPersona";
 import EcoProfilo from "@/components/EcoProfilo";
 import ChipFiltri from "@/components/ChipFiltri";
 import Segnalazione from "@/components/Segnalazione";
@@ -192,6 +192,18 @@ interface ChatMessage {
   reply?: ChatOut;
   restoredAt?: string;
 }
+
+/* The header avatar mirrors the conversation: working while a request is in
+   flight, then the outcome of the last answer. Decorative only. */
+function umoreDaConversazione(busy: boolean, error: string | null, messages: ChatMessage[]): TiqMood {
+  if (busy) return "working";
+  if (error) return "error";
+  const ultima = [...messages].reverse().find((m) => m.role === "assistant");
+  if (!ultima?.reply) return "idle";
+  if (ultima.reply.data_gap) return "empty";
+  return ultima.reply.matches.length > 0 ? "found" : "idle";
+}
+
 
 function MatchCard({
   match,
@@ -988,6 +1000,7 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const umoreTiq = umoreDaConversazione(busy, error, messages);
   const [locating, setLocating] = useState(false);
   const [locateNote, setLocateNote] = useState<string | null>(null);
   const { registra, profilo, dimentica } = useProfilo();
@@ -1531,7 +1544,7 @@ export default function Chat() {
   return (
     <section className="chat" aria-label="Conversazione con TreasureIQ">
       <header className="chat__persona-header">
-        <TiqPersona size={56} animated />
+        <TiqPersona size={72} mood={umoreTiq} animated />
         <div>
           <p className="chat__persona-name">
             TIQ <span>presente</span>
@@ -1664,7 +1677,7 @@ export default function Chat() {
                 "Tu"
               ) : (
                 <>
-                  <TiqPersona size={28} />
+                  <TiqPersona size={28} mood="badge" />
                   TIQ
                   {/* Chi risponde, non un marchio in miniatura: senza questa
                       riga «TIQ» è una sigla tecnica accanto a un'icona, e chi
@@ -1983,6 +1996,7 @@ export default function Chat() {
 
         {busy && (
           <p className="chat__hint tiq-typing" aria-hidden="true">
+            <TiqPersona size={36} mood="working" animated />
             {/* Tre punti che rimbalzano (stile Three Dots, CSS puro) accanto
                 al testo che ruota: il moto dà il segnale "sto lavorando" che
                 il solo testo statico non dava. Decorativo → aria-hidden. */}

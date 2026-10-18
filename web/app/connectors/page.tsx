@@ -52,12 +52,12 @@ export default async function ConnectorsPage() {
 
   if (errore) {
     return (
-      <main className="shell pagina">
+      <div className="shell pagina">
         <div className="stack">
           <h1>Connettori</h1>
           <p className="vuoto">L&apos;API non risponde: {errore}</p>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -75,7 +75,7 @@ export default async function ConnectorsPage() {
       );
 
   return (
-    <main className="shell pagina">
+    <div className="shell pagina">
       <div className="stack">
         <p className="occhiello">Le sonde</p>
         <h1>Cosa sappiamo leggere, e fin dove</h1>
@@ -148,6 +148,6 @@ export default async function ConnectorsPage() {
           </p>
         )}
       </div>
-    </main>
+    </div>
   );
 }

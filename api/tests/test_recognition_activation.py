@@ -86,13 +86,13 @@ def test_native_portalegen_owns_service_portal_in_production_registry():
     assert match is not None
     assert match.manifest.plugin_id == "municipium_portalegen_sp"
     assert match.result.platform_id == "municipium_portalegen"
-    # The bridge mis-claims the generic "municipium" at the same score; the
-    # native plugin wins the tie-break and corrects the surface identity.
+    # Since 5eea620 the bridge no longer has a bare \bmunicipium\b host rule
+    # (it mis-claimed AgID themes), so it abstains here: the native plugin is
+    # the only claimant, no tie-break involved.
     bridge = LegacyRecognitionBridge(Surface.SERVICE_PORTAL).recognize(
         _observe(body, surface=Surface.SERVICE_PORTAL)
     )
-    assert bridge.platform_id == "municipium"
-    assert match.result.recognition_score == bridge.recognition_score
+    assert bridge.platform_id is None
 
 
 def test_native_filodiretto_owns_service_portal_in_production_registry():

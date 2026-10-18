@@ -7280,11 +7280,15 @@ body {
 }
 
 .tiq-persona {
+  display: block;
   flex: 0 0 auto;
   border: 1px solid var(--sumi);
   border-radius: 50%;
   background: #e9efff;
-  object-fit: cover;
+  background-image: url("/sprite_tiq.png");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: 600% 400%;
 }
 .tiq-intro strong { font-size: 2.25rem; letter-spacing: -0.05em; }
 .tiq-intro span { font-family: var(--font-body); font-size: 0.9rem; }

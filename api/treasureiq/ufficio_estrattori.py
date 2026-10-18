@@ -121,7 +121,55 @@ def _resp_openpa(pagina: str) -> Responsabile | None:
     return Responsabile(nome=nome, ruolo=ruolo or None)
 
 
+# Dedicated section whose heading is the role itself. Only an `id=` opens it:
+# the in-page nav also links `href="#responsabile"`.
+_SEZIONE_RESPONSABILE = re.compile(r'\bid=["\'](?:responsabile|manager)["\']', re.I)
+_FINE_SEZIONE = re.compile(r'\bid=["\']|</section>|</article>', re.I)
+_NOMI_IN_SEZIONE = (
+    re.compile(r'<span[^>]*chip-label[^>]*>(.*?)</span>', re.I | re.S),
+    re.compile(r'<(\w+)[^>]*\bcard-title\b[^>]*>(.*?)</\1>', re.I | re.S),
+    re.compile(r'<h[3-6]\b[^>]*>\s*<a\b[^>]*>(.*?)</a>\s*</h[3-6]>', re.I | re.S),
+)
+# Plain-text fallback: a short run of capitalised words, nothing that reads
+# like a sentence, a phone number or an address.
+_NOME_TESTUALE = re.compile(r"(?:[A-ZÀ-Ý][\w'.À-ÿ-]*\s+){1,5}[A-ZÀ-Ý][\w'À-ÿ-]*")
+
+
+def _blocco_sezione_responsabile(pagina: str) -> str | None:
+    m = _SEZIONE_RESPONSABILE.search(pagina)
+    if not m:
+        return None
+    blocco = pagina[m.end():m.end() + 4000]
+    # The heading may carry the id itself or sit just inside the section.
+    titolo = re.search(r"</h[1-6]>", blocco, re.I)
+    if titolo and titolo.start() < 300 and "responsabil" in _testo(blocco[:titolo.end()]).lower():
+        blocco = blocco[titolo.end():]
+    fine = _FINE_SEZIONE.search(blocco)
+    return blocco[:fine.start()] if fine else blocco
+
+
+def _resp_sezione_dedicata(pagina: str) -> Responsabile | None:
+    blocco = _blocco_sezione_responsabile(pagina)
+    if not blocco:
+        return None
+    for pattern in _NOMI_IN_SEZIONE:
+        nomi = {_testo(m.group(m.lastindex)) for m in pattern.finditer(blocco)} - {""}
+        if nomi:
+            if len(nomi) != 1:
+                return None
+            mruolo = re.search(r"<small[^>]*>(.*?)</small>", blocco, re.I | re.S)
+            ruolo = _testo(mruolo.group(1)) if mruolo else ""
+            return Responsabile(nome=nomi.pop(), ruolo=ruolo or None)
+    testo = _testo(blocco)
+    if _NOME_TESTUALE.fullmatch(testo):
+        return Responsabile(nome=testo, ruolo=None)
+    return None
+
+
 def _resp_openweb(pagina: str) -> Responsabile | None:
+    dedicata = _resp_sezione_dedicata(pagina)
+    if dedicata:
+        return dedicata
     blocco = _inner(pagina, "persone")
     if not blocco:
         return None
@@ -165,6 +213,9 @@ _RESP_PER_FAMIGLIA = {
     "openpa": _resp_openpa,
     "openweb": _resp_openweb,
     "peopleweb": _resp_peopleweb,
+    # Same Design Comuni theme ("/persona_pubblica/", id="responsabile"):
+    # 6/6 on a 12-page sample, where it had no extractor at all.
+    "wordpress_agid": _resp_sezione_dedicata,
 }
 
 

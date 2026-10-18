@@ -4,6 +4,7 @@ import Link from "next/link";
 import { LogoEsteso } from "@/components/Logo";
 import StatusPill from "@/components/StatusPill";
 import FeedbackHeader from "@/components/FeedbackHeader";
+import ThemeToggle, { THEME_BOOT_SCRIPT } from "@/components/ThemeToggle";
 import "./globals.css";
 
 // Fonts are vendored under app/fonts/ rather than pulled with next/font/google.
@@ -56,7 +57,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="it" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html
+      lang="it"
+      data-theme="light"
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+      </head>
       <body>
         <a className="skip-link" href="#main">
           Vai al contenuto
@@ -90,6 +99,7 @@ export default function RootLayout({
               </details>
             </nav>
             <div className="masthead__right">
+              <ThemeToggle />
               <FeedbackHeader />
             </div>
           </div>

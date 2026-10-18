@@ -29,12 +29,12 @@ export default async function AnalyticsPage() {
 
   if (errore) {
     return (
-      <main className="shell pagina">
+      <div className="shell pagina">
         <div className="stack">
           <h1>Analytics</h1>
           <p className="vuoto">L&apos;API non risponde: {errore}</p>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -93,7 +93,7 @@ export default async function AnalyticsPage() {
 
   if (!censimento.rilevato_il) {
     return (
-      <main className="shell pagina">
+      <div className="shell pagina">
         <div className="stack">
           <h1>Analytics</h1>
           <p className="vuoto">
@@ -101,12 +101,12 @@ export default async function AnalyticsPage() {
             che non ha ancora misurato niente.
           </p>
         </div>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="shell pagina">
+    <div className="shell pagina">
       <div className="stack">
         <p className="occhiello">Censimento dei portali comunali</p>
         <h1>Cosa pubblicano davvero i comuni italiani</h1>
@@ -146,7 +146,7 @@ export default async function AnalyticsPage() {
           è dichiarato, e quella barra misura quanta strada resta.
         </p>
         <GraficoPiattaforme righe={censimento.piattaforme} />
-      <div className="tabella-scorrevole">
+      <div className="tabella-scorrevole" tabIndex={0} role="region" aria-label="Tabella piattaforme e diffusione geografica, scorrevole">
         <table>
           <caption>
             Le stesse piattaforme del grafico, con la loro diffusione geografica.
@@ -215,7 +215,7 @@ export default async function AnalyticsPage() {
             </div>
           </div>
 
-          <div className="tabella-scorrevole">
+          <div className="tabella-scorrevole" tabIndex={0} role="region" aria-label="Tabella piattaforme di amministrazione trasparente, scorrevole">
             <table>
               <caption>
                 Piattaforma di amministrazione trasparente riconosciuta, per
@@ -315,7 +315,7 @@ export default async function AnalyticsPage() {
           tipizzati si misura sui soli box che l&apos;API espone. A denominatore
           unico il fornitore più conforme risulterebbe ultimo.
         </p>
-        <div className="tabella-scorrevole">
+        <div className="tabella-scorrevole" tabIndex={0} role="region" aria-label="Tabella fornitori, scorrevole">
           <table>
             <thead>
               <tr>
@@ -402,7 +402,7 @@ export default async function AnalyticsPage() {
           il diritto è decaduto.
         </p>
         <GraficoSezioni righe={censimento.sezioni_mancanti} />
-        <div className="tabella-scorrevole">
+        <div className="tabella-scorrevole" tabIndex={0} role="region" aria-label="Tabella delle cifre del grafico, scorrevole">
           <table>
             <caption>
               Le stesse cifre in tabella, per chi non legge i colori.
@@ -426,6 +426,6 @@ export default async function AnalyticsPage() {
           </table>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

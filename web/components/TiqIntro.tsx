@@ -15,7 +15,7 @@ export default function TiqIntro() {
     const timer = window.setTimeout(() => {
       sessionStorage.setItem("tiq-intro", "seen");
       setVisible(false);
-    }, motionTokens.duration.intro * 1000);
+    }, motionTokens.duration.intro * 1500);
     return () => window.clearTimeout(timer);
   }, [reduceMotion]);
 
@@ -31,9 +31,10 @@ export default function TiqIntro() {
           exit={{ opacity: 0 }}
           transition={{ duration: motionTokens.duration.fast, ease: motionTokens.easing.smooth }}
         >
-          <TiqPersona size={160} animated />
+          <TiqPersona size={200} mood="found" animated />
           <strong>Ciao, sono TIQ</strong>
           <span>cerco fonti e le metto in ordine per te</span>
+          <span className="tiq-intro__bar" aria-hidden="true" />
         </motion.div>
       )}
     </AnimatePresence>

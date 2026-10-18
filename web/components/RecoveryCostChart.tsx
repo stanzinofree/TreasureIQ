@@ -66,7 +66,7 @@ function ComuneRecoveryBlock({ report }: { report: Recovery }) {
 
   return (
     <section style={{ marginTop: "var(--ma-4)" }}>
-      <h4 className="field__label">{report.ente}</h4>
+      <h3 className="field__label">{report.ente}</h3>
 
       <p className="field__hint">
         {report.typed_records} servizi già tipizzati dal comune — costo di recupero

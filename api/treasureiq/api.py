@@ -51,7 +51,7 @@ from treasureiq.chat.respond import (
     build_chat_answer,
     compute_recovery_stats,
 )
-from treasureiq.connettore import EsitoConnettore
+from treasureiq.connettore import EsitoConnettore, _da_store_raw
 from treasureiq.conversation import ConversationStore
 from treasureiq.costo import SOGLIA_RISCOPERTA, costo_comune
 from treasureiq.extract.corpus import build_corpus, collect_pdf_segments
@@ -2850,7 +2850,15 @@ def bandi_criteri_route(codice_istat: str) -> list[Bando]:
     il portale non espone la sezione, o non ci sono item. Fonte citata, nessun
     verdetto di apertura (D-B4), nessuna cifra toccata dal modello (D-B7).
     """
-    return bandi_criteri(codice_istat) or []
+    trovati = bandi_criteri(codice_istat)
+    if trovati:
+        return trovati
+    esito = _da_store_raw(codice_istat)
+    at = esito.amministrazione_trasparente if esito else None
+    return [
+        Bando(titolo=bando.titolo, url=bando.url, data="")
+        for bando in (at.bandi_attivi if at else [])
+    ]
 
 
 @app.get(

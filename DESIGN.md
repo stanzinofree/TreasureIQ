@@ -17,21 +17,19 @@ radius: ["8px", "14px", "20px"]
 spacing: ["4px", "8px", "12px", "16px", "24px", "32px"]
 ---
 
-# TreasureIQ — chat civica con evidenze esplorabili
+# TreasureIQ — chat pop con evidenze esplorabili
 
 ## 1. Tema e atmosfera
 
 Un prodotto personale, pop e generoso: la chat resta il luogo in cui si
 capisce la risposta; dati, fonte e azioni si aprono solo quando servono.
-Crema, inchiostro blu, lime e corallo richiamano l'editoria anni 70/80,
+Crema, mint, sky, peach e bubblegum richiamano l'editoria anni 70/80,
 senza usare il colore per falsare lo stato di un dato.
 
 ## 2. Palette e ruoli
 
-- `canvas` e `surface` sono crema e avorio, con bordi d'inchiostro e ombre
-  nette e corte.
-- `ink` è blu notte; `muted` è solo metadato.
-- `accent` è lime/corallo per azioni e ritmo, mai affidabilità del dato.
+- `canvas` è `#f5f4f0`, `surface` è bianco e i bordi sono plum `#160042`.
+- `accent` mint `#99ffcc` è la sola CTA; sky, peach e bubblegum sono decorativi.
 - `evidence` distingue fonte, stato e avvertenze dalla risposta.
 - `focus` è sempre visibile da tastiera e non coincide col colore semantico.
 
@@ -62,8 +60,8 @@ Su mobile il riepilogo si sposta dietro un'azione nella testata della chat.
 
 ## 6. Profondità ed elevazione
 
-Profondità grafica: bordo blu notte e ombra offset breve, mai gradienti o vetro.
-Menu contestuale e disclosure usano una superficie avorio distinta, non modali.
+Profondità grafica: superfici crema/bianco e bordi sottili, senza ombre,
+gradienti o vetro. Menu contestuale e disclosure usano una superficie bianca.
 
 ## 7. Do e don't
 

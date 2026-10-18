@@ -22,6 +22,7 @@
 
 import Chat from "@/components/Chat";
 import Pannello from "@/components/Pannello";
+import TiqIntro from "@/components/TiqIntro";
 import { ProfiloProvider } from "@/lib/profilo";
 import { RisultatiProvider } from "@/lib/risultati";
 import { ScanProvider } from "@/lib/scan";
@@ -31,6 +32,7 @@ export default function Home() {
     <ProfiloProvider>
       <RisultatiProvider>
         <ScanProvider>
+          <TiqIntro />
           <div className="workspace">
             <Pannello />
 

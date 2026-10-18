@@ -7157,28 +7157,29 @@ body {
 /* Product identity: 70s/80s editorial pop. Semantic state colours above keep
    their meaning; these tokens only repaint the shared interface. */
 :root {
-  --paper: #fff5dc;
-  --paper-raised: #fffdf4;
-  --paper-sunken: #f4e6c5;
-  --sumi: #20204f;
-  --sumi-soft: #50507a;
-  --sumi-faint: #77779a;
-  --kasumi: #d6c49d;
-  --ai: #6729b8;
-  --ai-deep: #4e198f;
-  --ai-line: #6729b8;
-  --ai-wash: #eee4ff;
-  --ai-vivid: #35d0be;
-  --ai-vivid-deep: #087e76;
-  --lime: #c8f23b;
-  --lime-ink: #496610;
-  --cta: #ff7161;
-  --cta-deep: #e75647;
-  --cta-ink: #20204f;
-  --yamabuki: #ffc94a;
-  --yamabuki-deep: #805400;
-  --yamabuki-wash: #fff0bf;
-  --ink-shadow: rgba(32, 32, 79, 0.18);
+  --paper: #f5f4f0;
+  --paper-raised: #ffffff;
+  --paper-sunken: #eef8f3;
+  --sumi: #160042;
+  --sumi-soft: #333333;
+  --sumi-faint: #666666;
+  --kasumi: #dddfe2;
+  --ai: #26153f;
+  --ai-deep: #160042;
+  --ai-line: #26153f;
+  --ai-wash: #f3edff;
+  --ai-vivid: #99ffcc;
+  --ai-vivid-deep: #160042;
+  --lime: #99ffcc;
+  --lime-ink: #160042;
+  --cta: #99ffcc;
+  --cta-deep: #7be8b8;
+  --cta-ink: #000000;
+  --yamabuki: #ffcc99;
+  --yamabuki-deep: #6b3c00;
+  --yamabuki-wash: #fff0e2;
+  --font-display: Georgia, "Times New Roman", serif;
+  --ink-shadow: transparent;
 }
 
 .bubble__menu {
@@ -7221,3 +7222,23 @@ body {
 
 .bubble__menu a:hover,
 .bubble__menu a:focus-visible { background: var(--lime); }
+
+.tiq-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.25rem;
+  background: var(--paper);
+  color: var(--sumi);
+  font-family: var(--font-display);
+}
+
+.tiq-intro svg { width: 10rem; overflow: visible; }
+.tiq-intro__orbit { fill: none; stroke: var(--ai); stroke-width: 3; stroke-dasharray: 8 8; }
+.tiq-intro__core { fill: var(--ai-vivid); stroke: var(--sumi); stroke-width: 3; }
+.tiq-intro__node { fill: #7bbbff; stroke: var(--sumi); stroke-width: 3; }
+.tiq-intro strong { font-size: 2.25rem; letter-spacing: -0.05em; }
+.tiq-intro span { font-family: var(--font-body); font-size: 0.9rem; }

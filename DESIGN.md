@@ -51,6 +51,9 @@ monospazio è riservato a etichette tecniche brevi, non al contenuto civico.
 - Link esterni dichiarano il portale di destinazione e aprono in nuova scheda.
 - Ogni controllo è raggiungibile da tastiera, ha focus visibile e stato
   `aria-expanded`/`aria-controls` quando espande contenuto.
+- TIQ è una presenza virtuale: volto sky-blue, cuffie bubblegum, occhi e sorriso.
+  Il volto identifica le risposte, mentre l'animazione di apertura è breve e
+  decorativa; non suggerisce capacità che il prodotto non possiede.
 
 ## 5. Layout
 

@@ -25,7 +25,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { Seal } from "@/components/Seal";
-import { Marchio } from "@/components/Logo";
+import TiqPersona from "@/components/TiqPersona";
 import EcoProfilo from "@/components/EcoProfilo";
 import ChipFiltri from "@/components/ChipFiltri";
 import Segnalazione from "@/components/Segnalazione";
@@ -1653,7 +1653,7 @@ export default function Chat() {
                 "Tu"
               ) : (
                 <>
-                  <Marchio size={22} />
+                  <TiqPersona size={28} />
                   TIQ
                   {/* Chi risponde, non un marchio in miniatura: senza questa
                       riga «TIQ» è una sigla tecnica accanto a un'icona, e chi

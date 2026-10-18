@@ -7236,9 +7236,12 @@ body {
   font-family: var(--font-display);
 }
 
-.tiq-intro svg { width: 10rem; overflow: visible; }
-.tiq-intro__orbit { fill: none; stroke: var(--ai); stroke-width: 3; stroke-dasharray: 8 8; }
-.tiq-intro__core { fill: var(--ai-vivid); stroke: var(--sumi); stroke-width: 3; }
-.tiq-intro__node { fill: #7bbbff; stroke: var(--sumi); stroke-width: 3; }
+.tiq-persona { flex: 0 0 auto; overflow: visible; }
+.tiq-persona__face { fill: #7bbbff; stroke: var(--sumi); stroke-width: 4; }
+.tiq-persona__phones { fill: none; stroke: #ff99cc; stroke-linecap: round; stroke-width: 12; }
+.tiq-persona__pad { fill: #ff99cc; stroke: var(--sumi); stroke-width: 4; }
+.tiq-persona__eye { fill: var(--sumi); }
+.tiq-persona__smile { fill: none; stroke: var(--sumi); stroke-linecap: round; stroke-width: 5; }
+.tiq-persona__cheek { fill: #ffcc99; }
 .tiq-intro strong { font-size: 2.25rem; letter-spacing: -0.05em; }
 .tiq-intro span { font-family: var(--font-body); font-size: 0.9rem; }

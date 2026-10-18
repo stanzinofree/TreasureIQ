@@ -1,8 +1,61 @@
 {
  "codice_istat": "062008",
  "piattaforma": "wordpress_agid",
- "letto_il": "2026-08-11T01:46:10.594007+00:00",
- "aree_amministrative": [],
+ "letto_il": "2026-10-16T20:50:12.585292+00:00",
+ "aree_amministrative": [
+  {
+   "nome": "Servizio Programmazione strategica e Politiche di Coesione",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/servizio-programmazione-strategica-e-politiche-di-coesione/"
+  },
+  {
+   "nome": "Servizio di Staff Supporto OSL",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/servizio-di-staff-supporto-osl/"
+  },
+  {
+   "nome": "Polizia Municipale",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/polizia-municipale/"
+  },
+  {
+   "nome": "II Settore: Servizi al Cittadino",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ii-settore-servizi-al-cittadino/"
+  },
+  {
+   "nome": "VII Settore: Cultura – Turismo – Istruzione e Sport",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/vii-settore-cultura-turismo-istruzione-e-sport/"
+  },
+  {
+   "nome": "Transizione al Digitale",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/transizione-al-digitale/"
+  },
+  {
+   "nome": "Avvocatura",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/avvocatura/"
+  },
+  {
+   "nome": "IV Settore Finanze e Tributi",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iv-settore-finanze-e-tributi/"
+  },
+  {
+   "nome": "Segreteria Generale",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/segreteria-generale/"
+  },
+  {
+   "nome": "III Settore Ambiente ed Energia, Mobilità, Servizi Cimiteriali, Patrimonio e Protezione Civile",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iii-settore-ambiente-ed-energia-mobilit-servizi-cimiteriali-patromonio-protezione-civile/"
+  },
+  {
+   "nome": "VI settore – Urbanistica",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/vi-settore-urbanistica/"
+  },
+  {
+   "nome": "V Settore: Lavori Pubblici",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/v-settore-lavori-pubblici/"
+  },
+  {
+   "nome": "I Settore: Affari Generali-Servizi Istituzionali-Attività Produttive",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/i-settore-affari-generali-servizi-istituzionali-attivit-produttive/"
+  }
+ ],
  "uffici": [
   {
    "nome": "Gestione economico finanziaria ed e-procurement",
@@ -12,7 +65,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ruolo e contenzioso",
@@ -22,7 +78,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Personale, formazione e servizi generali",
@@ -32,7 +91,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Comando",
@@ -42,7 +104,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Espropri",
@@ -52,7 +117,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Opere di urbanizzazione secondaria (scuole, impianti sportivi, teatri)",
@@ -62,7 +130,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Resto al Sud",
@@ -72,137 +143,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Organo straordinario di Liquidazione",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/organo-straordinario-di-liquidazione/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Commissione Affari Istituzionali",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-affari-istituzionali/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Commissione Sport-Politiche Giovanili",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-sport-politiche-giovanili/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Commissione Bilancio",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-bilancio/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Commissione Attività Produttive",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-attivit-produttive/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Commissione Ambiente",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-ambiente/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Commissione Pics-Fondi Europei",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-pics-fondi-europei/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Commissione Urbanistica",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-urbanistica/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Commissione Turismo-Traffico-Parcheggi",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-turismo-traffico-parcheggi/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Commissione Lavori Pubblici",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-lavori-pubblici/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Commissione Politiche Sociali",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-politiche-sociali/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Commissione Cultura",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/cultura-valorizzazione-patrimonio-culturale-unesco-manifestazioni-grandi-eventi-biblioteche-rapporti-con-le-comunit-religiose/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Servizio di Staff Supporto OSL",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/servizio-di-staff-supporto-osl/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Protezione Civile",
@@ -212,7 +156,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Amministrativo Avvocatura",
@@ -222,7 +169,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Stampa",
@@ -232,7 +182,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Politiche Giovanili",
@@ -242,7 +195,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Biblioteca",
@@ -252,7 +208,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "URP – Centralino",
@@ -262,7 +221,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Elettorale",
@@ -272,7 +234,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Stato Civile",
@@ -282,7 +247,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Anagrafe",
@@ -292,17 +260,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Polizia Municipale",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/polizia-municipale/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Polizia edilizia, sicurezza urbana ed antidegrado",
@@ -312,7 +273,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Vigilanza commerciale, ambientale ed amministrativa",
@@ -322,7 +286,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Polizia Stradale",
@@ -332,17 +299,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Sindaco",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/sindaco/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Protocollo",
@@ -352,7 +312,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Risorse Umane e Organizzazione",
@@ -362,7 +325,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizi Sociali Comunali",
@@ -372,7 +338,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ambito B1 Ufficio di Piano",
@@ -382,7 +351,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Staff della Direzione II settore",
@@ -392,17 +364,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "II Settore: Servizi al Cittadino",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ii-settore-servizi-al-cittadino/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Cultura",
@@ -412,7 +377,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Sport",
@@ -422,7 +390,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Istruzione e rapporti con Università",
@@ -432,7 +403,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizi Turistici",
@@ -442,7 +416,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Staff della Direzione VII settore",
@@ -452,47 +429,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "VII Settore: Cultura – Turismo – Istruzione e Sport",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/vii-settore-cultura-turismo-istruzione-e-sport/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "ASIA Benevento S.p.A.",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/asia-benevento-spa/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Consiglio Comunale",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/consiglio-comunale/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Giunta",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/giunta/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Sistemi Informativi",
@@ -502,7 +442,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Agenda Digitale",
@@ -512,7 +455,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Sistemi Web",
@@ -522,7 +468,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Acquisti beni e servizi Informatici",
@@ -532,7 +481,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Contenzioso Tributario",
@@ -542,7 +494,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Sinistri ed assicurazioni",
@@ -552,7 +507,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Consulenza legale",
@@ -562,7 +520,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Contenzioso civile penale e amministrativo",
@@ -572,7 +533,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Contratti",
@@ -582,7 +546,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "U.O. Supporto Segreteria Generale",
@@ -592,7 +559,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Controlli Interni",
@@ -602,7 +572,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ufficio Responsabile Prevenzione Corruzione e Trasparenza",
@@ -612,7 +585,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Entrate tributarie",
@@ -622,7 +598,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Rendicontazione",
@@ -632,7 +611,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Supporto finanziario OSL",
@@ -642,7 +624,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Economato",
@@ -652,7 +637,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Entrate",
@@ -662,7 +650,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Spese correnti e gestione IVA",
@@ -672,7 +663,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Spese in conto capitale e gestione indebitamento",
@@ -682,7 +676,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Programmazione Economico-Finanziaria",
@@ -692,7 +689,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Staff della Direzione IV settore",
@@ -702,7 +702,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Gabinetto Sindaco",
@@ -712,47 +715,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Transizione al Digitale",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/transizione-al-digitale/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Avvocatura",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/avvocatura/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "IV Settore Finanze e Tributi",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iv-settore-finanze-e-tributi/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
-  },
-  {
-   "nome": "Segreteria Generale",
-   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/segreteria-generale/",
-   "telefoni": [],
-   "email": [],
-   "pec": [],
-   "orari": null,
-   "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Toponomastica e S.I.T.",
@@ -762,7 +728,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Politiche abitative",
@@ -772,7 +741,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Progettazione Urbana",
@@ -782,7 +754,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Pianificazione",
@@ -792,7 +767,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "S.U.E–Sportello Unico Edilizio",
@@ -802,7 +780,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Staff della Direzione VI Settore",
@@ -812,7 +793,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Traffico e Segnaletica",
@@ -822,7 +806,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Datore di lavoro e sicurezza urbana",
@@ -832,7 +819,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Programmazione e Gestione Finanziamenti regionali, POR",
@@ -842,7 +832,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "S.A.S. – Sportello Autorizzazioni Sismiche",
@@ -852,7 +845,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Opere di urbanizzazione primaria (strade e sottoservizi)",
@@ -862,7 +858,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Impianti immobili comunali",
@@ -872,7 +871,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Tutela dei beni culturali e del paesaggio",
@@ -882,7 +884,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Programmazione e Gestione Finanziamenti comunitari, PNRR e statali",
@@ -892,7 +897,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Staff della Direzione V settore",
@@ -902,7 +910,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Patrimonio",
@@ -912,7 +923,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizi Cimiteriali",
@@ -922,7 +936,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Verde Pubblico e Decoro Urbano",
@@ -932,7 +949,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Energia",
@@ -942,7 +962,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Mobilità",
@@ -952,7 +975,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Ambiente",
@@ -962,7 +988,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Staff della Direzione III Settore",
@@ -972,7 +1001,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizio Notifiche",
@@ -982,7 +1014,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Servizi Sanitari",
@@ -992,7 +1027,10 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   },
   {
    "nome": "Statistica – Toponomastica – Leva",
@@ -1002,12 +1040,111 @@
    "pec": [],
    "orari": null,
    "source_typed": false,
-   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
+  },
+  {
+   "nome": "Attività Produttive",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/attivita-produttive-suap/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
+  },
+  {
+   "nome": "Affari Generali",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/affari-generali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
+  },
+  {
+   "nome": "Staff della Direzione I Settore",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/staff-della-direzione-i-settore/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-10-16T20:50:27.074203+00:00",
+   "indirizzo": null,
+   "responsabile": null,
+   "persone": []
   }
  ],
  "amministrazione_trasparente": {
   "indice_url": "https://www.comune.benevento.it/amministrazione-trasparente/",
+  "piattaforma_at": "halley_trasparenza",
+  "piattaforma_at_prova": "halley zf: var ente = \"c062008\" + /km/design-web-toolkit/",
   "bandi_attivi": [],
   "pdf_presenti": false
+ },
+ "endpoints": null,
+ "fonte_hash": "951b27b187428ad1679b13348a46170e147887e2af36d56242a6ad97212c2e82",
+ "fonte_etag": null,
+ "fonte_last_modified": "Fri, 16 Oct 2026 01:02:17 GMT",
+ "controllato_il": "2026-10-16T20:50:29.507731+00:00",
+ "riconoscimento": {
+  "source_id": "062008",
+  "surface": "ordinary_data",
+  "platform_id": "wordpress_generico",
+  "connector_id": "wordpress_agid_base",
+  "connector_version": "1.0.0",
+  "fingerprint_version": "1.0",
+  "fingerprint": null,
+  "recognition_score": 1.0,
+  "coverage_score": 1.0,
+  "source_health": true,
+  "failure_reason": null,
+  "confidence": "high",
+  "evidence": [
+   {
+    "key": "connector_map",
+    "description": "mappa WordPress disponibile",
+    "matched": true,
+    "weight": 0.35,
+    "observed": null,
+    "expected": null
+   },
+   {
+    "key": "base_schema",
+    "description": "URL BASE con schema HTTP",
+    "matched": true,
+    "weight": 0.15,
+    "observed": "https://www.comune.benevento.it",
+    "expected": null
+   },
+   {
+    "key": "rest_offices_declared",
+    "description": "REST uffici dichiarato",
+    "matched": true,
+    "weight": 0.25,
+    "observed": "unita_organizzative",
+    "expected": null
+   },
+   {
+    "key": "at_surface",
+    "description": "superficie AT confermata",
+    "matched": true,
+    "weight": 0.25,
+    "observed": null,
+    "expected": null
+   }
+  ],
+  "checked_at": "2026-10-16T20:50:29.504146Z",
+  "action": "keep"
  }
 }

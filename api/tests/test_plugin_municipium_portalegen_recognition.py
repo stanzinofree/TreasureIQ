@@ -87,14 +87,14 @@ def test_portalegen_plugin_handles_incomplete_html() -> None:
     assert result.recognition_score == 0.0
 
 
-def test_portalegen_plugin_corrects_the_bridge_misidentification() -> None:
-    # The bridge has no portalegen signature; the word "municipium" in the
-    # theme class trips its \bmunicipium\b host rule, so it mis-claims the
-    # generic BASE platform. The native plugin claims the specific SP identity
-    # at the same score, so the registry tie-break promotes it.
+def test_portalegen_plugin_recognises_what_the_bridge_abstains_on() -> None:
+    # The bridge has no portalegen signature. It used to mis-claim the generic
+    # BASE "municipium" via a bare \bmunicipium\b host rule tripped by the
+    # theme class; 5eea620 dropped that rule, so the bridge now abstains and
+    # the native plugin alone names the specific SP identity.
     observation = _observation(_PORTALEGEN_PAGE)
     native = PLUGIN.recognize(observation)
     legacy = LegacyRecognitionBridge(Surface.SERVICE_PORTAL).recognize(observation)
     assert native.platform_id == "municipium_portalegen"
-    assert legacy.platform_id == "municipium"
-    assert native.recognition_score == legacy.recognition_score
+    assert native.recognition_score > 0
+    assert legacy.platform_id is None

@@ -1830,9 +1830,10 @@ export default function Chat() {
                     pannello di sinistra (MappaServizi), agganciata al comune di
                     profilo, per tenere la chat pulita. */}
 
-                {m.reply.profilo_capito?.comune_istat && (
+                {(m.reply.profilo_capito?.comune_istat ??
+                  (messages.at(-1)?.id === m.id ? profilo.comune?.istat : null)) && (
                     <BandiComune
-                      istat={m.reply.profilo_capito.comune_istat}
+                      istat={m.reply.profilo_capito?.comune_istat ?? profilo.comune!.istat}
                       caricaAlMount={!m.restoredAt}
                     />
                   )}

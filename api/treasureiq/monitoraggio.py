@@ -125,11 +125,26 @@ class AderenzaOut(BaseModel):
     per_piattaforma: list[AderenzaPiattaforma]
 
 
+class AtCanaryOut(BaseModel):
+    """Aggregate-only evidence from the bounded AT discovery ledger."""
+
+    candidati: int
+    completati: int
+    rimanenti: int
+    avanzamento_pct: float
+    errori: int
+    errori_semantici: int
+    domini_in_pausa: int
+    firme_pronte: int
+    aggiornato_il: str | None
+
+
 class MonitoraggioOut(BaseModel):
     demo: DemoCurataOut
     copertura: CoperturaOut
     refresh: RefreshOperativoOut
     aderenza: AderenzaOut
+    at_canary: AtCanaryOut | None = None
     sistemi: list[ComponenteOut]
 
 
@@ -427,6 +442,29 @@ def _aderenza(live_dir: Path, storico_db: Path | None) -> AderenzaOut:
     )
 
 
+def _at_canary(live_dir: Path) -> AtCanaryOut | None:
+    """Read the AT canary ledger without treating a missing run as a failure."""
+    try:
+        dati = json.loads((live_dir / "at-canary.json").read_text("utf-8"))
+        selezione = dati["selezione"]
+        completati = dati["completati"]
+    except (OSError, json.JSONDecodeError, KeyError, TypeError):
+        return None
+    if not isinstance(selezione, list) or not isinstance(completati, list):
+        return None
+    return AtCanaryOut(
+        candidati=len(selezione),
+        completati=len(completati),
+        rimanenti=max(0, len(selezione) - len(completati)),
+        avanzamento_pct=round(100 * len(completati) / len(selezione), 1) if selezione else 0.0,
+        errori=len(dati.get("errori", [])),
+        errori_semantici=len(dati.get("errori_semantici", [])),
+        domini_in_pausa=len(dati.get("pause_dominio", {})),
+        firme_pronte=len(dati.get("pronti_per_promozione", {})),
+        aggiornato_il=dati.get("aggiornato_il"),
+    )
+
+
 def _sistemi(
     demo: DemoCurataOut, copertura: CoperturaOut, refresh: RefreshOperativoOut
 ) -> list[ComponenteOut]:
@@ -476,5 +514,6 @@ def build_monitoraggio(
         copertura=copertura,
         refresh=refresh,
         aderenza=_aderenza(live_dir, storico_db),
+        at_canary=_at_canary(live_dir),
         sistemi=_sistemi(demo, copertura, refresh),
     )

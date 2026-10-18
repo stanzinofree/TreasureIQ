@@ -33,9 +33,12 @@ import time
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlparse
 
+import treasureiq.sonda_live as sonda_live
+from treasureiq import bootstrap as bootstrap_sel
 from treasureiq.catalog import SnapshotStore, persist_shadow_snapshots
-from treasureiq.connettore import leggi_connettore
+from treasureiq.connettore import _da_store_raw, leggi_connettore
 from treasureiq.integration import DATA_DIR, load_enti
 from treasureiq.municipality_registry import (
     FrameInvalidError,
@@ -44,9 +47,7 @@ from treasureiq.municipality_registry import (
     get_registry,
 )
 from treasureiq.registro import LIVE_DIR, _da_store
-import treasureiq.sonda_live as sonda_live
 from treasureiq.sonda_live import comune_per_codice
-from treasureiq import bootstrap as bootstrap_sel
 
 #: Piattaforme che `leggi_connettore` sa davvero leggere oggi. Tenere in
 #: sincrono con i dispatch in connettore.py — aggiungerne una lì senza
@@ -546,6 +547,208 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
     return BOOTSTRAP_ERRORI if errori else BOOTSTRAP_OK
 
 
+# --------------------------------------------------------------------------- #
+# at-canary: bounded, checkpointed discovery of unknown AT fingerprints
+# --------------------------------------------------------------------------- #
+_AT_CANARY_LADDER = (3, 6, 12, 24)
+_AT_IGNOTE = {"ignota", "non_trovata"}
+
+
+def _at_canary_candidati() -> list[dict[str, str]]:
+    """Unknown AT records with a concrete observed marker, ordered stably."""
+    candidati: list[dict[str, str]] = []
+    for percorso in sorted((LIVE_DIR / "connettore").glob("*.json")):
+        esito = _da_store_raw(percorso.stem)
+        at = esito.amministrazione_trasparente if esito else None
+        if not at or (at.piattaforma_at and at.piattaforma_at not in _AT_IGNOTE) or not at.indice_url:
+            continue
+        dominio = urlparse(at.indice_url).netloc.lower()
+        if dominio:
+            candidati.append({"istat": percorso.stem, "dominio": dominio})
+    return candidati
+
+
+def _at_canary_stop_path(checkpoint: Path) -> Path:
+    return checkpoint.with_suffix(".stop")
+
+
+def _at_canary_carica(checkpoint: Path) -> dict:
+    try:
+        dati = json.loads(checkpoint.read_text("utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise _CheckpointInvalido(f"illeggibile o non JSON: {exc}") from exc
+    selezione = dati.get("selezione") if isinstance(dati, dict) else None
+    if not isinstance(selezione, list) or not all(
+        isinstance(c, dict) and isinstance(c.get("istat"), str) and isinstance(c.get("dominio"), str)
+        for c in selezione
+    ):
+        raise _CheckpointInvalido("campo 'selezione' mancante o non valido")
+    return dati
+
+
+def _at_canary_salva(checkpoint: Path, dati: dict) -> None:
+    dati["aggiornato_il"] = datetime.now(timezone.utc).isoformat()
+    checkpoint.parent.mkdir(parents=True, exist_ok=True)
+    provvisorio = checkpoint.with_suffix(checkpoint.suffix + ".tmp")
+    provvisorio.write_text(json.dumps(dati, ensure_ascii=False, indent=2), "utf-8")
+    provvisorio.replace(checkpoint)
+
+
+def _at_canary_bloccato(riga: str) -> bool:
+    basso = riga.lower()
+    return "429" in basso or "host guard" in basso or "ssrf" in basso
+
+
+def _at_canary_errore_rete(riga: str) -> bool:
+    basso = riga.lower()
+    return any(indizio in basso for indizio in (
+        "timed out", "certificate_verify_failed", "ssl:", "server disconnected",
+        "connection", "network is unreachable", "name or service not known",
+    ))
+
+
+def _at_canary_errore_semantico(istat: str, stato: str, riga: str) -> bool:
+    """Only recognition failures and safety blocks consume the YOLO error budget."""
+    if stato == "errore":
+        return not _at_canary_errore_rete(riga)
+    if stato != "ok":
+        return True
+    esito = _da_store_raw(istat)
+    at = esito.amministrazione_trasparente if esito else None
+    return bool(at and at.indice_url and (not at.piattaforma_at or at.piattaforma_at in _AT_IGNOTE))
+
+
+def _at_canary_cluster(dati: dict, istat: str) -> None:
+    esito = _da_store_raw(istat)
+    at = esito.amministrazione_trasparente if esito else None
+    if not at or not at.piattaforma_at_prova:
+        return
+    chiave = f"{at.piattaforma_at or 'ignota'}|{at.piattaforma_at_prova}"
+    cluster = dati.setdefault("cluster", {}).setdefault(chiave, [])
+    if istat not in cluster:
+        cluster.append(istat)
+
+
+def cmd_at_canary(args: argparse.Namespace) -> int:
+    if args.delay < 0 or args.max_runs < 1 or args.max_seconds < 1:
+        print("errore: --delay >= 0, --max-runs e --max-seconds >= 1.", file=sys.stderr)
+        return 2
+    if args.checkpoint.exists():
+        if not args.resume:
+            print(f"errore: checkpoint {args.checkpoint} esiste gia'. Usa --resume.", file=sys.stderr)
+            return 2
+        try:
+            dati = _at_canary_carica(args.checkpoint)
+        except _CheckpointInvalido as exc:
+            print(f"errore: checkpoint AT invalido ({exc}). Nessun fetch eseguito.", file=sys.stderr)
+            return 2
+    elif args.resume:
+        print(f"errore: --resume ma {args.checkpoint} non esiste.", file=sys.stderr)
+        return 2
+    else:
+        dati = {
+            "avviato_il": datetime.now(timezone.utc).isoformat(),
+            "selezione": _at_canary_candidati(), "completati": [], "errori": [],
+            "errori_semantici": [], "pause_dominio": {}, "errori_dominio": {},
+            "cluster": {}, "pronti_per_promozione": {},
+            "rung": 0, "run_eseguiti": 0,
+        }
+
+    completati = set(dati.get("completati", []))
+    errori = set(dati.get("errori", []))
+    errori_semantici = set(dati.get("errori_semantici", []))
+    now = datetime.now(timezone.utc).timestamp()
+    pause = {d: t for d, t in dati.get("pause_dominio", {}).items() if isinstance(t, (int, float)) and t > now}
+    errori_dominio = {
+        d: n for d, n in dati.get("errori_dominio", {}).items()
+        if isinstance(d, str) and isinstance(n, int) and n > 0
+    }
+    for candidato in dati["selezione"]:
+        if candidato["istat"] in errori:
+            errori_dominio.setdefault(candidato["dominio"], 1)
+    disponibili = [c for c in dati["selezione"] if c["istat"] not in completati and c["dominio"] not in pause]
+    if args.dry_run:
+        print(f"AT canary: candidati {len(dati['selezione'])} · disponibili {len(disponibili)} · batch {_AT_CANARY_LADDER[dati.get('rung', 0)]}", file=sys.stderr)
+        for candidato in disponibili[:_AT_CANARY_LADDER[dati.get("rung", 0)]]:
+            print(f"DRY {candidato['istat']} {candidato['dominio']}", file=sys.stderr)
+        return 0
+
+    _at_canary_salva(args.checkpoint, dati)
+    inizio = time.monotonic()
+    run_inquesta_invocazione = 0
+    stop = _at_canary_stop_path(args.checkpoint)
+    while disponibili and run_inquesta_invocazione < args.max_runs and time.monotonic() - inizio < args.max_seconds:
+        if stop.exists():
+            print(f"stop richiesto ({stop}).", file=sys.stderr)
+            return BOOTSTRAP_STOP
+        dimensione = _AT_CANARY_LADDER[max(0, min(dati.get("rung", 0), len(_AT_CANARY_LADDER) - 1))]
+        lotto = disponibili[:dimensione]
+        ok = semantici_run = 0
+        for indice, candidato in enumerate(lotto):
+            if stop.exists():
+                _at_canary_salva(args.checkpoint, dati)
+                print(f"stop richiesto ({stop}).", file=sys.stderr)
+                return BOOTSTRAP_STOP
+            stato, riga = _scansiona_uno(candidato["istat"])
+            print(riga, file=sys.stderr)
+            if stato == "ok":
+                ok += 1
+                completati.add(candidato["istat"])
+                errori.discard(candidato["istat"])
+                errori_semantici.discard(candidato["istat"])
+                errori_dominio.pop(candidato["dominio"], None)
+                _at_canary_cluster(dati, candidato["istat"])
+            elif stato == "errore":
+                errori.add(candidato["istat"])
+                dominio = candidato["dominio"]
+                errori_dominio[dominio] = errori_dominio.get(dominio, 0) + 1
+                if errori_dominio[dominio] >= 2:
+                    pause[dominio] = datetime.now(timezone.utc).timestamp() + 86400
+            else:
+                completati.add(candidato["istat"])
+            semantico = _at_canary_errore_semantico(candidato["istat"], stato, riga)
+            if semantico:
+                semantici_run += 1
+                errori_semantici.add(candidato["istat"])
+            else:
+                errori_semantici.discard(candidato["istat"])
+            if _at_canary_bloccato(riga):
+                pause[candidato["dominio"]] = datetime.now(timezone.utc).timestamp() + 86400
+            # A terminal/session interruption must not replay the preceding
+            # comune: persist the ledger before the optional pacing delay.
+            dati["completati"] = sorted(completati)
+            dati["errori"] = sorted(errori)
+            dati["errori_semantici"] = sorted(errori_semantici)
+            dati["pause_dominio"] = pause
+            dati["errori_dominio"] = errori_dominio
+            _at_canary_salva(args.checkpoint, dati)
+            if args.delay and indice < len(lotto) - 1:
+                time.sleep(args.delay)
+        totale = len(lotto)
+        sano = totale and semantici_run / totale <= 0.10
+        # Promotion is evidence only, never a source-code mutation: three
+        # successful independent samples and a >=90% unblocked batch.
+        if ok / totale >= 0.90:
+            for chiave, campioni in dati["cluster"].items():
+                if not chiave.startswith("ignota|") and len(campioni) >= 3:
+                    dati.setdefault("pronti_per_promozione", {})[chiave] = sorted(campioni)
+        dati["rung"] = min(dati.get("rung", 0) + 1, len(_AT_CANARY_LADDER) - 1) if sano else max(dati.get("rung", 0) - 1, 0)
+        dati["run_eseguiti"] += 1
+        run_inquesta_invocazione += 1
+        dati["completati"] = sorted(completati)
+        dati["errori"] = sorted(errori)
+        dati["errori_semantici"] = sorted(errori_semantici)
+        dati["pause_dominio"] = pause
+        dati["errori_dominio"] = errori_dominio
+        _at_canary_salva(args.checkpoint, dati)
+        print(f"AT canary run {dati['run_eseguiti']}: ok {ok}/{totale} · semantici {semantici_run}/{totale} · {'avanza' if sano else 'recovery'} · prossimo batch {_AT_CANARY_LADDER[dati['rung']]}", file=sys.stderr)
+        if not sano:
+            print("AT canary fermato: errori semantici >10%; riesamina le firme prima del resume.", file=sys.stderr)
+            return BOOTSTRAP_ERRORI
+        disponibili = [c for c in dati["selezione"] if c["istat"] not in completati and c["dominio"] not in pause]
+    return BOOTSTRAP_ERRORI if errori_semantici else BOOTSTRAP_OK
+
+
 def _anagrafe_comuni() -> dict[str, MunicipalityRecord]:
     """Anagrafe ISTAT indicizzata per codice — serve sia a costruire i dict
     comune per `censisci_molti`, sia come lookup provincia/regione/sito per
@@ -789,12 +992,30 @@ def _build_parser() -> argparse.ArgumentParser:
                       help="Path a storico.db per la coda di censimento (default data/storico.db).")
     boot.set_defaults(func=cmd_bootstrap)
 
+    at_canary = sub.add_parser(
+        "at-canary",
+        help="Canary AT automatico e limitato per firme ancora ignote.",
+    )
+    at_canary.add_argument(
+        "--checkpoint", type=Path, default=LIVE_DIR / "at-canary.json",
+        help="Ledger persistente; il gemello .stop ferma tra due comuni.",
+    )
+    at_canary.add_argument("--resume", action="store_true", help="Riprende la selezione congelata.")
+    at_canary.add_argument("--delay", type=float, default=2.0,
+                           help="Secondi fra comuni (default 2).")
+    at_canary.add_argument("--max-runs", type=int, default=4,
+                           help="Batch automatici massimi per invocazione (default 4).")
+    at_canary.add_argument("--max-seconds", type=int, default=1200,
+                           help="Durata massima dell'invocazione (default 1200).")
+    at_canary.add_argument("--dry-run", action="store_true", help="Mostra il primo batch senza fetch.")
+    at_canary.set_defaults(func=cmd_at_canary)
+
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
-    if not argv or argv[0] not in {"scan", "sweep", "list", "bootstrap", "-h", "--help"}:
+    if not argv or argv[0] not in {"scan", "sweep", "list", "bootstrap", "at-canary", "-h", "--help"}:
         argv = ["scan", *argv]
     parser = _build_parser()
     args = parser.parse_args(argv)

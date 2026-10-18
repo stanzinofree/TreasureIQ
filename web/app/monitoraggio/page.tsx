@@ -109,7 +109,7 @@ export default async function Monitoraggio() {
     );
   }
 
-  const { demo, copertura, refresh, aderenza, sistemi } = report;
+  const { demo, copertura, refresh, aderenza, at_canary, sistemi } = report;
   const worker = WORKER_LABEL[refresh.worker_stato];
   const batch = refresh.ultimo_batch;
 
@@ -316,7 +316,29 @@ export default async function Monitoraggio() {
         </section>
         )}
 
-        {/* 5 — Sistemi */}
+        {/* 5 — Discovery AT (absent until its first bounded run) */}
+        {at_canary && (
+          <section className="systems__group">
+            <div className="systems__group-head">
+              <h2>Discovery Amministrazione Trasparente</h2>
+              <span className="systems__group-note">firme osservate su campioni limitati</span>
+            </div>
+            <div className="panel">
+              <div className="tessere">
+                <Tessera value={`${at_canary.avanzamento_pct.toLocaleString("it-IT")}%`} label="avanzamento canary" />
+                <Tessera value={`${n(at_canary.completati)} / ${n(at_canary.candidati)}`} label="comuni letti" />
+                <Tessera value={n(at_canary.firme_pronte)} label="firme da promuovere" />
+                <Tessera value={n(at_canary.errori_semantici)} label="errori semantici" />
+              </div>
+              <p className="status-row__meta">
+                Restano {n(at_canary.rimanenti)} candidati. Errori di rete: {n(at_canary.errori)};
+                domini in pausa: {n(at_canary.domini_in_pausa)}. Ultimo aggiornamento: {formatDate(at_canary.aggiornato_il)}.
+              </p>
+            </div>
+          </section>
+        )}
+
+        {/* 6 — Sistemi */}
         <section className="systems__group">
           <div className="systems__group-head">
             <h2>Sistemi</h2>

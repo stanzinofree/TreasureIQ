@@ -111,6 +111,9 @@ class AmministrazioneTrasparente(BaseModel):
 
     indice_url: str | None = None
     piattaforma_at: str | None = None
+    #: Firma verbatim della classificazione AT: diagnostica per raggruppare
+    #: candidati senza dedurre una piattaforma dal solo URL.
+    piattaforma_at_prova: str | None = None
     bandi_attivi: list[BandoAT] = []
     pdf_presenti: bool = False
 
@@ -621,6 +624,7 @@ def leggi_connettore(
             scoperta = scopri_pagina_at(html_home=risposta.text, base=base)
             if scoperta.piattaforma_at != Piattaforma.NON_TROVATA:
                 esito.amministrazione_trasparente.piattaforma_at = scoperta.piattaforma_at.value
+                esito.amministrazione_trasparente.piattaforma_at_prova = scoperta.piattaforma_at_prova
         except Exception:  # noqa: BLE001 — classificazione AT muta: campo assente, mai un crash
             logger.info("classificazione piattaforma AT non riuscita per %s", codice_istat)
     try:

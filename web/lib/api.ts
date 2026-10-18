@@ -1330,12 +1330,27 @@ export interface Aderenza {
   per_piattaforma: AderenzaPiattaforma[];
 }
 
+/** Bounded discovery of Amministrazione Trasparente fingerprints. */
+export interface AtCanary {
+  candidati: number;
+  completati: number;
+  rimanenti: number;
+  avanzamento_pct: number;
+  errori: number;
+  errori_semantici: number;
+  domini_in_pausa: number;
+  firme_pronte: number;
+  aggiornato_il: string | null;
+}
+
 export interface MonitoraggioOut {
   demo: DemoCurata;
   copertura: Copertura;
   refresh: RefreshOperativo;
   /** Absent when the API predates the adherence synthesis. */
   aderenza?: Aderenza;
+  /** Absent until the first bounded AT discovery run writes its ledger. */
+  at_canary?: AtCanary | null;
   sistemi: SystemComponent[];
 }
 

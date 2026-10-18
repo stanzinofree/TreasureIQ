@@ -46,12 +46,12 @@ def _scena(tmp_path: Path) -> dict[str, Path]:
     catalog = tmp_path / "catalog"
     seed = tmp_path / "seed"
     live = tmp_path / "live"
-    # Coverage: 2 hgate + 1 comweb + 1 WordPress alias eligible; magnolia excluded.
+    # Coverage: 2 hgate + 1 comweb + 1 WordPress alias eligible; unknown excluded.
     _catalog_file(catalog, "001001", "hgate")
     _catalog_file(catalog, "001002", "hgate")
     _catalog_file(catalog, "001003", "comweb")
     _catalog_file(catalog, "001004", "wordpress_agid")
-    _catalog_file(catalog, "001005", "magnolia")
+    _catalog_file(catalog, "001005", "non_refresh")
     # A measurement store subdir must be ignored by the top-level glob.
     _scrivi(catalog / "municipality" / "ignored.json", {"not": "a comune"})
 
@@ -94,7 +94,7 @@ def test_copertura_conteggi_e_eleggibilita(tmp_path: Path) -> None:
     assert per["hgate"].comuni == 2 and per["hgate"].eleggibile
     assert per["comweb"].eleggibile
     assert per["wordpress_agid"].eleggibile
-    assert not per["magnolia"].eleggibile
+    assert not per["non_refresh"].eleggibile
     # Per-platform counts sum to catalogati.
     assert sum(p.comuni for p in r.copertura.per_piattaforma) == r.copertura.catalogati
 
@@ -235,6 +235,24 @@ def test_live_dir_assente_non_rompe(tmp_path: Path) -> None:
     assert r.refresh.inizializzati == 0
     assert r.refresh.fuori_perimetro == 0
     assert r.refresh.mai_inizializzati == r.refresh.eleggibili
+
+
+def test_at_canary_mostra_avanzamento_ed_evidenza_pronta(tmp_path: Path) -> None:
+    paths = _scena(tmp_path)
+    _scrivi(paths["live"] / "at-canary.json", {
+        "selezione": [{"istat": "001001"}, {"istat": "001002"}, {"istat": "001003"}],
+        "completati": ["001001", "001002"],
+        "errori": ["001003"],
+        "errori_semantici": [],
+        "pause_dominio": {"lento.example.it": 1},
+        "pronti_per_promozione": {"comweb|generator": ["001001", "001002", "001003"]},
+        "aggiornato_il": "2026-10-18T08:00:00+00:00",
+    })
+
+    at = _build(paths).at_canary
+    assert at is not None
+    assert (at.candidati, at.completati, at.rimanenti, at.avanzamento_pct) == (3, 2, 1, 66.7)
+    assert (at.errori, at.errori_semantici, at.domini_in_pausa, at.firme_pronte) == (1, 0, 1, 1)
 
 
 # --- adherence synthesis: recognition fused with census coverage -------

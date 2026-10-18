@@ -665,6 +665,15 @@ def scopri_pagina_at(*, html_home: str, base: str) -> EsitoDiscoveryAT:
     esito: ClassificaFirme = classifica_risposta(
         headers=dict(intestazioni), html=html_at, includi_at=True
     )
+    # dgegovpa.it is the verified AT entrypoint. Its ASP.NET WebForms pages
+    # can place every vendor URL beyond the bounded HTML fingerprint window.
+    host = host_senza_www(urlsplit(url).hostname or "")
+    if esito.vincitore.piattaforma is Piattaforma.IGNOTA and host == "dgegovpa.it":
+        return EsitoDiscoveryAT(Piattaforma.DGEGOVPA, url, "host: dgegovpa.it", esito.scattate)
+    if esito.vincitore.piattaforma is Piattaforma.IGNOTA and host.endswith(".contrasparenza.it"):
+        return EsitoDiscoveryAT(
+            Piattaforma.CONTRASPARENZA, url, "host: *.contrasparenza.it", esito.scattate
+        )
     return EsitoDiscoveryAT(
         esito.vincitore.piattaforma, url, esito.vincitore.prova, esito.scattate
     )

@@ -145,6 +145,14 @@ class Piattaforma(str, Enum):
     #: eventuale OpenWeb "base" perché qui è la pagina AT stessa a vivere sul
     #: dominio del fornitore. Mono-campione (Melito).
     SOLUZIONIPA = "soluzionipa"
+    #: Asmenet serve l'AT come applicazione AV2 sul proprio dominio.
+    ASMENET = "asmenet"
+    #: dgegovpa.it ospita la superficie AT ASP.NET WebForms per enti diversi.
+    #: Confermata su Faggiano, Lizzano, Pulsano e Francavilla Fontana.
+    DGEGOVPA = "dgegovpa"
+    #: SaaS AT osservato su Curinga, Falerna e Petrizzi sotto sottodomini
+    #: indipendenti, anche con portali base diversi.
+    CONTRASPARENZA = "contrasparenza"
     #: URBI: superficie AT/servizi online riconoscibile dalla rotta applicativa
     #: `ur1UR033.sto` e dagli asset `/urbi/`. La rotta è più significativa del
     #: solo host perché lo stesso comune può avere più superfici URBI.
@@ -217,12 +225,21 @@ _HOST_PRODOTTO: tuple[tuple[re.Pattern[str], Piattaforma], ...] = (
     #: Superficie AT di OpenWeb ospitata su dominio del fornitore.
     #: Mono-campione (Melito).
     (re.compile(r"soluzionipa\.it", re.I), Piattaforma.SOLUZIONIPA),
+    #: SaaS AT ASP.NET WebForms, confermato su quattro comuni pugliesi.
+    (re.compile(r"dgegovpa\.it", re.I), Piattaforma.DGEGOVPA),
 )
 
 #: Endpoint AT URBI. Richiediamo la rotta applicativa, non la sola parola
 #: "urbi" negli asset Bootstrap, per non classificare per errore una pagina
 #: BASE che incorpora soltanto lo stile del portale servizi.
 _URBI_AT = re.compile(r"ur1UR033\.sto", re.I)
+
+# OpenWeb può vivere sul sottodominio del comune, non solo su soluzionipa.it.
+# Richiediamo il bootstrap del portale e l'app AT insieme, non la sola rotta.
+_OPENWEB_PORTAL = re.compile(r"/openweb/js/portal-php\.js", re.I)
+_OPENWEB_TRASP = re.compile(r"data-app-nome=[\"']trasparenza[\"']", re.I)
+_ASMENET_HOST = re.compile(r"asmenet\.it", re.I)
+_ASMENET_AV2 = re.compile(r"AV2\s+Framework", re.I)
 
 #: Body class del tema `design-comuni-wordpress-theme` sull'archivio
 #: dell'Amministrazione Trasparente. Mono-campione (Neive) ma la stringa è
@@ -232,7 +249,7 @@ _WP_AMM_TRASP = re.compile(r"post-type-archive-amm_trasp", re.I)
 #: Halley "zf": richiediamo entrambi i segnali (dichiarazione ente + asset
 #: kamaleonte) perché presi da soli potrebbero comparire altrove; insieme
 #: sono un fingerprint interno alla piattaforma. Mono-campione (Delebio).
-_HALLEY_ENTE = re.compile(r'var\s+ente\s*=\s*"c\d+"', re.I)
+_HALLEY_ENTE = re.compile(r'var\s+ente\s*=\s*"[a-z0-9_]+"', re.I)
 _HALLEY_KAMALEONTE = re.compile(r"/km/design-web-toolkit/", re.I)
 
 #: e-pal.it non nomina il proprio host nel body: l'unico segnale è il nome
@@ -253,6 +270,11 @@ _PORTALE33 = re.compile(r"\bportale33\b", re.I)
 #: guardano dopo: un percorso può sopravvivere a una migrazione fra CMS. La
 #: prova lo dice a chiare lettere, così chi rilegge sa cosa ha in mano.
 _ASSET: tuple[tuple[re.Pattern[str], Piattaforma], ...] = (
+    # Le pagine AT di ComuniBootstrapItalia dichiarano il modulo civico
+    # OrchardCorePA nei propri asset: è un nome di prodotto, non una rotta comune.
+    (re.compile(r"It\.Csc\.OrchardCorePA", re.I), Piattaforma.COMUNIBOOTSTRAPITALIA),
+    # ComuneWeb è il prodotto Kibernetes che serve le superfici Magnolia AT.
+    (re.compile(r"ComuneWeb\s+by\s+Kibernetes", re.I), Piattaforma.MAGNOLIA),
     # OpenCity/OpenContent (il fornitore dietro il nome «OpenPA»): serve gli
     # asset — logo e immagini — da un proxy di brand (`flyimg.opencityitalia.it`)
     # che incapsula uno storage S3 (`static.opencity.opencontent.it`). È una
@@ -467,6 +489,8 @@ _RANGO_TAVOLA = {
     "halley_trasparenza": 9,
     "portale33": 10,
     "urbi_at": 11,
+    "openweb_trasparenza": 12,
+    "asmenet": 13,
 }
 _EPSILON_RANGO_TAVOLA = 0.1
 
@@ -482,6 +506,8 @@ _FAMIGLIA_AT = frozenset(
         Piattaforma.HYPERSIC,
         Piattaforma.PORTALE33,
         Piattaforma.SOLUZIONIPA,
+        Piattaforma.ASMENET,
+        Piattaforma.DGEGOVPA,
         Piattaforma.URBI,
     }
 )
@@ -643,6 +669,24 @@ def classifica_risposta(
                 Piattaforma.URBI,
                 _score(_SCORE_DEFINITIVO, "urbi_at"),
                 f"rotta URBI AT: {_tronca(trovato_urbi.group(0), 60)}",
+            )
+        )
+
+    if _OPENWEB_PORTAL.search(corpo) and _OPENWEB_TRASP.search(corpo):
+        scattate.append(
+            FirmaScattata(
+                Piattaforma.SOLUZIONIPA,
+                _score(_SCORE_DEFINITIVO, "openweb_trasparenza"),
+                "openweb: portal-php + app trasparenza",
+            )
+        )
+
+    if _ASMENET_HOST.search(corpo) and _ASMENET_AV2.search(testa):
+        scattate.append(
+            FirmaScattata(
+                Piattaforma.ASMENET,
+                _score(_SCORE_DEFINITIVO, "asmenet"),
+                "asmenet: AV2 Framework",
             )
         )
 

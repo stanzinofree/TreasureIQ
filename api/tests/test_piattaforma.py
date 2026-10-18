@@ -68,6 +68,20 @@ def test_wordpress_senza_generator_riconosciuto_dagli_asset():
     assert "wp-content" in (esito.prova or "")
 
 
+@pytest.mark.parametrize(
+    ("html", "attesa"),
+    [
+        ('<link href="/It.Csc.OrchardCorePA.Assets/css/site.css">', Piattaforma.COMUNIBOOTSTRAPITALIA),
+        ('<meta name="description" content="ComuneWeb by Kibernetes">', Piattaforma.MAGNOLIA),
+        ('<script src="/openweb/js/portal-php.js"></script><div data-app-nome="trasparenza">', Piattaforma.SOLUZIONIPA),
+        ('<meta name="generator" content="AV2 Framework"><a href="https://asmenet.it">', Piattaforma.ASMENET),
+    ],
+)
+def test_firme_at_ripetute_classificano_la_piattaforma_esistente(html: str, attesa: Piattaforma):
+    """Tre campioni indipendenti per firma: nessuna classificazione dalla sola URL."""
+    assert firma(html).piattaforma is attesa
+
+
 def test_urbi_at_riconosciuto_dalla_rotta_applicativa():
     """La pagina AT URBI va distinta dalla base WordPress del comune."""
     html = """
@@ -349,6 +363,14 @@ def test_hypersic_riconosciuto_dall_host_degli_asset():
     esito = firma(html)
     assert esito.piattaforma is Piattaforma.HYPERSIC
     assert "hypersicapp.net" in (esito.prova or "").lower()
+
+
+@pytest.mark.parametrize("ente", ["Faggiano", "Lizzanota", "pulsano", "Francavilla"])
+def test_dgegovpa_at_riconosciuto_dal_saas_con_quattro_enti(ente):
+    html = f'<a href="https://dgegovpa.it/{ente}/Albo/Albo.aspx">Albo</a>'
+    esito = classifica_risposta(headers={}, html=html, includi_at=True)
+    assert esito.vincitore.piattaforma is Piattaforma.DGEGOVPA
+    assert "dgegovpa.it" in (esito.vincitore.prova or "")
 
 
 def test_portale33_riconosciuto_dal_meta_layout():

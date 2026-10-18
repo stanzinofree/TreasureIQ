@@ -390,6 +390,15 @@ def test_classifica_risposta_halley_trasparenza():
     assert esito.vincitore.piattaforma == Piattaforma.HALLEY_TRASPARENZA
 
 
+def test_classifica_risposta_halley_trasparenza_con_slug_ente():
+    """Corsano: alcune installazioni Halley usano lo slug dell'ente, non l'ISTAT."""
+    from treasureiq.ingest.piattaforma import Piattaforma, classifica_risposta
+
+    html = '<script>var ente = "corsano";</script><link href="/km/design-web-toolkit/style.css">'
+    esito = classifica_risposta(headers={}, html=html)
+    assert esito.vincitore.piattaforma == Piattaforma.HALLEY_TRASPARENZA
+
+
 def test_classifica_risposta_halley_ente_da_solo_non_basta():
     """`var ente = "c<ISTAT>"` da solo (senza /km/design-web-toolkit/) non è
     prova sufficiente — mitiga il rischio mono-campione: 1 solo segnale può
@@ -484,6 +493,39 @@ def test_scopri_pagina_at_shell_angular_ritorna_non_trovata():
     assert esito.at_url is None
     assert esito.piattaforma_at_prova is None
     assert esito.firme_scattate == []
+
+
+def test_scopri_pagina_at_dgegovpa_usa_host_verificato(monkeypatch):
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest.piattaforma import Piattaforma
+
+    monkeypatch.setattr(
+        censimento,
+        "_fetch_at_guardato",
+        lambda _url: ({}, '<input name="__VIEWSTATE"><a href="/Albo/Albo.aspx">Albo</a>'),
+    )
+    esito = censimento.scopri_pagina_at(
+        html_home=(
+            '<a href="https://dgegovpa.it/faggiano/AmministrazioneTrasparente/'
+            'AmministrazioneTrasparente">Amministrazione trasparente</a>'
+        ),
+        base="https://www.comune.faggiano.ta.it",
+    )
+    assert esito.piattaforma_at is Piattaforma.DGEGOVPA
+    assert esito.piattaforma_at_prova == "host: dgegovpa.it"
+
+
+def test_scopri_pagina_at_contrasparenza_usa_host_verificato(monkeypatch):
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest.piattaforma import Piattaforma
+
+    monkeypatch.setattr(censimento, "_fetch_at_guardato", lambda _url: ({}, "<html>AT</html>"))
+    esito = censimento.scopri_pagina_at(
+        html_home='<a href="https://curinga.contrasparenza.it/trasparenza/">AT</a>',
+        base="https://www.comune.curinga.cz.it",
+    )
+    assert esito.piattaforma_at is Piattaforma.CONTRASPARENZA
+    assert esito.piattaforma_at_prova == "host: *.contrasparenza.it"
 
 
 class _RispostaAtFinta:

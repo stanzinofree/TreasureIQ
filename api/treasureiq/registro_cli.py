@@ -417,8 +417,8 @@ def _bootstrap_salva_checkpoint(
     arruolati: set[str],
     vuoti: set[str],
     errori: list[str],
-    rete_non_raggiungibile: set[str],
     totale_candidati: int,
+    rete_non_raggiungibile: frozenset[str] | set[str] = frozenset(),
 ) -> None:
     payload = {
         "avviato_il": avviato_il,

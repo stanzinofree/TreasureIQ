@@ -488,6 +488,7 @@ def test_categoria_per_topic_include_bandi():
         ("ci sono bandi per la mobilità?", "mobilità"),
         ("ci sono bandi?", None),
         ("bandi", None),
+        ("ci sono bandi aperti nel mio comune?", None),
         ("avviso pubblico per la mobilità", "mobilità"),
         # Connettivo ("della") e stopword ("ci", "sono") tolti: resta solo il
         # tema, non l'intera coda di frase.

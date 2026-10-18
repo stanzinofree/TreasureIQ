@@ -3913,6 +3913,13 @@ _STOPWORD_TEMA = frozenset(
         "mie",
         "nostro",
         "nostra",
+        # Contesto territoriale generico, non un tema: senza un nome di comune
+        # o una scelta esplicita la chat deve chiedere il territorio, non
+        # cercare bandi che corrispondono letteralmente a «comune».
+        "comune",
+        "città",
+        "citta",
+        "paese",
         # filler modali/verbi-domanda: compaiono nella coda dopo «bandi»
         # («bandi a cui posso accedere») senza essere un tema.
         "accedere",

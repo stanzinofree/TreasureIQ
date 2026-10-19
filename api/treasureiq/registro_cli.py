@@ -39,6 +39,7 @@ import httpx
 
 import treasureiq.sonda_live as sonda_live
 from treasureiq import bootstrap as bootstrap_sel
+from treasureiq import bootstrap_esiti
 from treasureiq.catalog import SnapshotStore, persist_shadow_snapshots
 from treasureiq.connettore import _da_store_raw, leggi_connettore
 from treasureiq.integration import DATA_DIR, load_enti
@@ -596,6 +597,7 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
             break
         stato, riga = _scansiona_uno(istat)
         print(riga, file=sys.stderr)
+        bootstrap_esiti.registra(LIVE_DIR, istat, stato, riga)
         if stato == "ok":
             # A record was written: enrolled. The refresh worker will pick it up.
             arruolati.add(istat)

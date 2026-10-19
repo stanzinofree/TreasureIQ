@@ -16,6 +16,8 @@ from dataclasses import dataclass, replace
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from treasureiq import bootstrap as bootstrap_sel
+from treasureiq import bootstrap_esiti
 from treasureiq.catalog import service_cache
 from treasureiq.catalog.confirmation import confirm_inventory
 from treasureiq.catalog.data_contracts import FreshnessPolicy
@@ -32,6 +34,8 @@ from treasureiq.catalog.service_sweep import (
 )
 from treasureiq.connettore import (
     _da_store_raw as _connettore_cache,
+)
+from treasureiq.connettore import (
     refresh_dati_connettore,
     refresh_supportato,
 )
@@ -48,7 +52,12 @@ from treasureiq.mappa_connettore import (
 )
 from treasureiq.mappa_connettore import _da_cache as _mappa_da_cache
 from treasureiq.registro import leggi_registro
-from treasureiq.registro_cli import _comuni_da_censimento
+from treasureiq.registro_cli import (
+    _backoff_rete_attivi,
+    _comuni_da_censimento,
+    _connettore_inizializzati,
+    _scansiona_uno,
+)
 from treasureiq.sonda_live import LIVE_DIR, comune_per_codice
 from treasureiq.storico import apri
 
@@ -138,6 +147,12 @@ class WorkerConfig:
     #: decine di sotto-pagine sullo stesso host e i portali rispondono 429 alla
     #: raffica; questo le distanzia. 0 disattiva il pacing (comportamento legacy).
     pace_dominio_s: float = 0.5
+    #: Refresh mode only: before each refresh batch, read up to ``batch_size``
+    #: census comuni that have no connettore record yet (continuous bootstrap).
+    bootstrap: bool = False
+    #: Census platforms the bootstrap skips for now (e.g. a hosting that blocks
+    #: our IP); their comuni stay "da leggere" until removed from the list.
+    piattaforme_in_pausa: frozenset[str] = frozenset()
 
 
 def config_from_env(
@@ -195,6 +210,12 @@ def config_from_env(
         ),
         pace_dominio_s=max(
             0.0, float(os.environ.get("TREASUREIQ_SWEEP_PACE_S", "0.5"))
+        ),
+        bootstrap=os.environ.get("TREASUREIQ_SWEEP_BOOTSTRAP", "0") == "1",
+        piattaforme_in_pausa=frozenset(
+            p.strip()
+            for p in os.environ.get("TREASUREIQ_SWEEP_BOOTSTRAP_PAUSA", "").split(",")
+            if p.strip()
         ),
     )
 
@@ -429,16 +450,72 @@ def _scrivi_stato_worker(stato: dict) -> None:
         logger.warning("stato worker non scrivibile (%s): %s", percorso, exc)
 
 
-def _heartbeat_refresh() -> None:
-    """Conferma che il worker è vivo anche quando non ci sono batch da fare."""
+def _aggiorna_stato_worker(**campi) -> None:
+    """Merge fields into the status sidecar, keeping the other phases' blocks."""
     try:
         stato = json.loads(_percorso_stato_worker().read_text("utf-8"))
     except (OSError, json.JSONDecodeError):
         stato = {}
     if not isinstance(stato, dict):
         stato = {}
-    stato.update(aggiornato_il=datetime.now(timezone.utc).isoformat(), modo="refresh")
+    stato.update(aggiornato_il=datetime.now(timezone.utc).isoformat(), **campi)
     _scrivi_stato_worker(stato)
+
+
+def _heartbeat_refresh() -> None:
+    """Conferma che il worker è vivo anche quando non ci sono batch da fare."""
+    _aggiorna_stato_worker(modo="refresh")
+
+
+def prossimi_da_inizializzare(config: WorkerConfig) -> list[str]:
+    """Census comuni with a known reader and no connettore record yet, minus
+    those still waiting out a previous vuoto/errore/network outcome."""
+    ora = datetime.now(timezone.utc)
+    esclusi = _backoff_rete_attivi(ora) | bootstrap_esiti.in_attesa(
+        bootstrap_esiti.carica(LIVE_DIR), ora
+    )
+    candidati = bootstrap_sel.seleziona(
+        config.db.parent / "catalog",
+        set(_comuni_da_censimento(config.db)),
+        _connettore_inizializzati(),
+        bootstrap_sel.mappa_censimento(config.db),
+    )
+    return [
+        codice for codice, piattaforma in candidati
+        if codice not in esclusi and piattaforma not in config.piattaforme_in_pausa
+    ][: config.batch_size]
+
+
+def run_bootstrap(config: WorkerConfig, comuni: list[str]) -> None:
+    """Read never-initialised comuni; every outcome lands in the ledger, so a
+    failing comune waits for its retry date instead of stopping the worker."""
+    avviato = datetime.now(timezone.utc)
+    iniziato = time.monotonic()
+    conteggi = dict.fromkeys(bootstrap_esiti.ATTESA_PER_ESITO, 0)
+    for codice in comuni:
+        pacer = (
+            PacerDominio(intervallo_minimo_s=config.pace_dominio_s)
+            if config.pace_dominio_s > 0
+            else None
+        )
+        token = attiva_pacer(pacer)
+        try:
+            esito, riga = _scansiona_uno(codice)
+        finally:
+            ripristina_pacer(token)
+        conteggi[esito] = conteggi.get(esito, 0) + 1
+        bootstrap_esiti.registra(LIVE_DIR, codice, esito, riga)
+        logger.info("bootstrap %s", riga)
+        if config.delay:
+            time.sleep(config.delay)
+    _aggiorna_stato_worker(
+        ultimo_bootstrap={
+            "avviato_il": avviato.isoformat(),
+            "durata_s": round(time.monotonic() - iniziato, 1),
+            "comuni": len(comuni),
+            **conteggi,
+        }
+    )
 
 
 def _metriche_iniziali(totale: int) -> dict:
@@ -715,9 +792,8 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
             if config.delay:
                 time.sleep(config.delay)
         codice_uscita = 1 if errors else 0
-        _scrivi_stato_worker(
-            {
-                "aggiornato_il": datetime.now(timezone.utc).isoformat(),
+        _aggiorna_stato_worker(
+            **{
                 "modo": "refresh",
                 "ultimo_batch": {
                     "avviato_il": avviato.isoformat(),
@@ -761,6 +837,11 @@ def run(config: WorkerConfig) -> int:
     """Ciclo batch→pausa, senza sovrapporre due sweep."""
 
     while True:
+        if config.mode == "refresh" and config.bootstrap and not config.dry_run:
+            nuovi = prossimi_da_inizializzare(config)
+            if nuovi:
+                logger.info("avvio bootstrap: %d comuni (%s)", len(nuovi), ", ".join(nuovi))
+                run_bootstrap(config, nuovi)
         comuni = next_batch(config)
         if not comuni:
             logger.info("nessun comune residuo nel ciclo giornaliero")

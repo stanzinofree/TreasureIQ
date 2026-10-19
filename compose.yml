@@ -141,6 +141,10 @@ services:
       TREASUREIQ_SWEEP_DELAY: ${TREASUREIQ_SWEEP_DELAY:-0}
       TREASUREIQ_SWEEP_ADERENZA: ${TREASUREIQ_SWEEP_ADERENZA:-0}
       TREASUREIQ_SWEEP_PACE_S: ${TREASUREIQ_SWEEP_PACE_S:-0.5}
+      # Continuous Base bootstrap: each cycle also reads census comuni never initialised.
+      TREASUREIQ_SWEEP_BOOTSTRAP: ${TREASUREIQ_SWEEP_BOOTSTRAP:-1}
+      # Comma-separated census platforms the bootstrap skips (e.g. magnolia).
+      TREASUREIQ_SWEEP_BOOTSTRAP_PAUSA: ${TREASUREIQ_SWEEP_BOOTSTRAP_PAUSA:-}
     volumes:
       - ./data:/scrivibile
       - ./data-live:/live

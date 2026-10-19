@@ -1344,7 +1344,47 @@ export interface AtCanary {
   aggiornato_il: string | null;
 }
 
+/** Base (offices) funnel over the whole census: one bucket per comune. */
+export interface BasePiattaforma {
+  piattaforma: string;
+  connettore: boolean;
+  comuni: number;
+  con_uffici: number;
+  senza_uffici: number;
+  vuoti: number;
+  errori: number;
+  da_leggere: number;
+}
+
+export interface BaseProblema {
+  codice_istat: string;
+  esito: "errore" | "rete_non_raggiungibile" | "vuoto" | string;
+  nota: string;
+  il: string | null;
+  prossimo_il: string | null;
+  tentativi: number;
+}
+
+export interface BaseImbuto {
+  universo: number;
+  con_uffici: number;
+  senza_uffici: number;
+  vuoti: number;
+  rete_non_raggiungibile: number;
+  errori: number;
+  da_leggere: number;
+  senza_connettore: number;
+  non_misurati: number;
+  piattaforma_ignota: number;
+  letti_ultime_24h: number;
+  ultimo_bootstrap: Record<string, number | string> | null;
+  per_piattaforma: BasePiattaforma[];
+  ultimi_problemi: BaseProblema[];
+}
+
 export interface MonitoraggioOut {
+  /** Absent when the API predates the Base funnel or the census is missing. */
+  base?: BaseImbuto | null;
   demo: DemoCurata;
   copertura: Copertura;
   refresh: RefreshOperativo;

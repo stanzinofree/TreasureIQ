@@ -222,3 +222,70 @@ def test_refresh_batch_pace_zero_niente_pacer(monkeypatch, tmp_path):
 
     assert sweep_worker.run_batch(config, ["001"]) == 0
     assert visti == [None]
+
+
+def test_esiti_bootstrap_rimandano_per_esito(tmp_path):
+    from datetime import timedelta
+
+    from treasureiq import bootstrap_esiti
+
+    ora = datetime(2026, 10, 19, tzinfo=timezone.utc)
+    bootstrap_esiti.registra(tmp_path, "001", "vuoto", "001 X — vuoto", ora)
+    bootstrap_esiti.registra(tmp_path, "002", "errore", "002 Y — errore", ora)
+    bootstrap_esiti.registra(tmp_path, "003", "ok", "003 Z — ok", ora)
+    bootstrap_esiti.registra(tmp_path, "001", "vuoto", "001 X — vuoto", ora)
+
+    esiti = bootstrap_esiti.carica(tmp_path)
+    assert esiti["001"]["tentativi"] == 2
+    assert esiti["003"]["prossimo_il"] is None
+    assert bootstrap_esiti.in_attesa(esiti, ora) == {"001", "002"}
+    assert bootstrap_esiti.in_attesa(esiti, ora + timedelta(days=2)) == {"001"}
+    assert bootstrap_esiti.in_attesa(esiti, ora + timedelta(days=15)) == set()
+
+
+def test_prossimi_da_inizializzare_salta_store_attese_e_backoff(monkeypatch, tmp_path):
+    from treasureiq import bootstrap_esiti
+
+    monkeypatch.setattr(sweep_worker, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(sweep_worker, "_comuni_da_censimento", lambda db: ["a", "b", "c", "d", "e"])
+    monkeypatch.setattr(sweep_worker, "_connettore_inizializzati", lambda: {"a"})
+    monkeypatch.setattr(sweep_worker, "_backoff_rete_attivi", lambda ora: {"b"})
+    monkeypatch.setattr(
+        sweep_worker.bootstrap_sel, "mappa_censimento",
+        lambda db: dict.fromkeys("abcde", "comweb"),
+    )
+    bootstrap_esiti.registra(tmp_path, "c", "vuoto", "c — vuoto")
+
+    config = sweep_worker.WorkerConfig(db=tmp_path / "storico.db", batch_size=1)
+    assert sweep_worker.prossimi_da_inizializzare(config) == ["d"]
+
+    monkeypatch.setattr(
+        sweep_worker.bootstrap_sel, "mappa_censimento",
+        lambda db: {**dict.fromkeys("abce", "comweb"), "d": "magnolia"},
+    )
+    in_pausa = sweep_worker.WorkerConfig(
+        db=tmp_path / "storico.db", batch_size=1, piattaforme_in_pausa=frozenset({"magnolia"})
+    )
+    assert sweep_worker.prossimi_da_inizializzare(in_pausa) == ["e"]
+
+
+def test_run_con_bootstrap_registra_esiti_e_conserva_refresh(monkeypatch, tmp_path):
+    from treasureiq import bootstrap_esiti
+
+    monkeypatch.setattr(sweep_worker, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(sweep_worker, "prossimi_da_inizializzare", lambda config: ["x", "y"])
+    monkeypatch.setattr(sweep_worker, "next_batch", lambda config: [])
+    esiti = {"x": ("ok", "x — ok"), "y": ("rete_non_raggiungibile", "y — rete")}
+    monkeypatch.setattr(sweep_worker, "_scansiona_uno", lambda codice: esiti[codice])
+    (tmp_path / "_worker_status.json").write_text(json.dumps({"ultimo_batch": {"riusciti": 3}}))
+
+    config = sweep_worker.WorkerConfig(
+        db=tmp_path / "storico.db", mode="refresh", bootstrap=True, once=True
+    )
+    assert sweep_worker.run(config) == 0
+
+    stato = json.loads((tmp_path / "_worker_status.json").read_text())
+    assert stato["ultimo_batch"] == {"riusciti": 3}
+    assert stato["ultimo_bootstrap"]["ok"] == 1
+    assert stato["ultimo_bootstrap"]["rete_non_raggiungibile"] == 1
+    assert bootstrap_esiti.in_attesa(bootstrap_esiti.carica(tmp_path)) == {"y"}

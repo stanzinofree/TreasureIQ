@@ -7878,3 +7878,46 @@ body::after {
     animation: none !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Monitoraggio — Base funnel: one stacked bar, one segment per bucket.
+   --------------------------------------------------------------------------- */
+.imbuto-base {
+  display: flex;
+  height: 1.5rem;
+  margin: 1.25rem 0 0.75rem;
+  border: 2px solid var(--sumi);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: var(--pop-shadow-ink);
+}
+.imbuto-base__seg { min-width: 3px; }
+.imbuto-base__legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  padding: 0;
+  margin: 0 0 1rem;
+  list-style: none;
+  font-size: 0.9rem;
+}
+.imbuto-base__legenda li { display: flex; align-items: center; gap: 0.4rem; }
+.imbuto-base__legenda li > span:last-child { opacity: 0.75; }
+.imbuto-base__chip {
+  width: 0.85rem;
+  height: 0.85rem;
+  border: 2px solid var(--sumi);
+  border-radius: 3px;
+}
+[data-tono="ok"] > .imbuto-base__chip, .imbuto-base__seg[data-tono="ok"] { background: var(--fluo-lime); }
+[data-tono="parziale"] > .imbuto-base__chip, .imbuto-base__seg[data-tono="parziale"] { background: var(--fluo-cyan); }
+[data-tono="vuoto"] > .imbuto-base__chip, .imbuto-base__seg[data-tono="vuoto"] { background: var(--fluo-yellow); }
+[data-tono="errore"] > .imbuto-base__chip, .imbuto-base__seg[data-tono="errore"] { background: var(--fluo-pink); }
+[data-tono="coda"] > .imbuto-base__chip, .imbuto-base__seg[data-tono="coda"] {
+  background: repeating-linear-gradient(135deg, var(--fluo-violet) 0 6px, transparent 6px 10px);
+}
+[data-tono="fuori"] > .imbuto-base__chip, .imbuto-base__seg[data-tono="fuori"] { background: var(--fluo-orange); }
+[data-tono="ignoto"] > .imbuto-base__chip, .imbuto-base__seg[data-tono="ignoto"] {
+  background: color-mix(in srgb, var(--sumi) 22%, transparent);
+}
+.imbuto-base__tag { font-weight: 400; font-size: 0.8em; opacity: 0.7; }

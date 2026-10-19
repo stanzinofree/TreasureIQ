@@ -24,6 +24,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 from treasureiq.connettore import PIATTAFORME_REFRESH
+from treasureiq.storico import apri
 
 # Il catalogo servizi chiama entrambe le varianti WP del censimento "wordpress_agid".
 PIATTAFORME_CATALOGO_REFRESH = PIATTAFORME_REFRESH | {"wordpress_agid"}
@@ -68,22 +69,51 @@ def mappa_eleggibili(catalog_dir: Path) -> dict[str, str]:
     return eleggibili
 
 
+def mappa_censimento(db_path: Path) -> dict[str, str]:
+    """``codice -> piattaforma`` from each comune's latest census snapshot,
+    restricted to platforms a connector can read.
+
+    The service catalog only lists comuni whose SP surface was promoted, so
+    gating Base on it left most readable comuni (3,376 of 7,896 in prod)
+    out of the bootstrap. The census covers every comune. No census file
+    means no extra candidates, not an error: the catalog path still works.
+    """
+    if not db_path.is_file():
+        return {}
+    with apri(db_path) as conn:
+        righe = conn.execute(
+            """SELECT s.codice_istat, s.piattaforma FROM portale_snapshot s
+               JOIN (SELECT codice_istat, MAX(rilevato_il) AS ultimo
+                     FROM portale_snapshot GROUP BY codice_istat) u
+                 ON s.codice_istat = u.codice_istat AND s.rilevato_il = u.ultimo"""
+        ).fetchall()
+    return {codice: plat for codice, plat in righe if plat in PIATTAFORME_REFRESH}
+
+
 def seleziona(
     catalog_dir: Path,
     coda_censimento: set[str],
     gia_inizializzati: set[str],
+    censimento: dict[str, str] | None = None,
 ) -> list[tuple[str, str]]:
     """Ordered ``(codice, piattaforma)`` bootstrap candidates.
 
-    Intersection of catalog-eligible, in-queue and not-yet-initialised, sorted
+    Catalog-eligible comuni in the census queue, plus every comune whose
+    census platform is readable (``censimento``); the catalog's platform
+    wins where both exist. Already-initialised comuni are excluded. Sorted
     by (piattaforma, codice) so the order is stable and reproducible across
     runs — the checkpoint/resume relies on a deterministic sequence.
     """
-    eleggibili = mappa_eleggibili(catalog_dir)
+    dal_catalogo = {
+        codice: plat
+        for codice, plat in mappa_eleggibili(catalog_dir).items()
+        if codice in coda_censimento
+    }
+    eleggibili = {**(censimento or {}), **dal_catalogo}
     candidati = [
         (codice, plat)
         for codice, plat in eleggibili.items()
-        if codice in coda_censimento and codice not in gia_inizializzati
+        if codice not in gia_inizializzati
     ]
     candidati.sort(key=lambda cp: (cp[1], cp[0]))
     return candidati

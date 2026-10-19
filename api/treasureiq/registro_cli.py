@@ -527,7 +527,9 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
         coda = set(_comuni_da_censimento(args.db))
         gia_init = _connettore_inizializzati()
         candidati = [
-            candidato for candidato in bootstrap_sel.seleziona(catalog_dir, coda, gia_init)
+            candidato for candidato in bootstrap_sel.seleziona(
+                catalog_dir, coda, gia_init, bootstrap_sel.mappa_censimento(args.db)
+            )
             if candidato[0] not in _backoff_rete_attivi()
         ]
         if args.piattaforma:
@@ -549,7 +551,7 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
     ]
     da_fare_run = da_fare[:args.max_per_run]
 
-    plat_map = bootstrap_sel.mappa_eleggibili(catalog_dir)
+    plat_map = {**bootstrap_sel.mappa_censimento(args.db), **bootstrap_sel.mappa_eleggibili(catalog_dir)}
     conteggio_piattaforme = Counter(plat_map.get(c, "?") for c in selezione)
     print(
         f"bootstrap: candidati totali {totale_candidati} · selezione {len(selezione)} · "

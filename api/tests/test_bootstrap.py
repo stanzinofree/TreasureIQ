@@ -7,6 +7,7 @@ in what order, and how the canary stratifies across platforms.
 from __future__ import annotations
 
 import json
+import sqlite3
 from pathlib import Path
 
 from treasureiq import bootstrap
@@ -97,3 +98,34 @@ def test_lotto_rispetta_limit(tmp_path: Path) -> None:
     cand = bootstrap.seleziona(cat, set(bootstrap.mappa_eleggibili(cat)), set())
     assert len(bootstrap.lotto(cand, 4)) == 4
     assert len(bootstrap.lotto(cand, None)) == 18
+
+
+def _censimento(tmp_path: Path, righe: list[tuple[str, str, str]]) -> Path:
+    db = tmp_path / "storico.db"
+    with sqlite3.connect(db) as conn:
+        conn.execute("CREATE TABLE portale_snapshot (rilevato_il TEXT, codice_istat TEXT, piattaforma TEXT)")
+        conn.executemany("INSERT INTO portale_snapshot VALUES (?, ?, ?)", righe)
+    return db
+
+
+def test_mappa_censimento_usa_l_ultimo_snapshot_e_solo_piattaforme_leggibili(tmp_path: Path) -> None:
+    db = _censimento(tmp_path, [
+        ("2026-01-01", "100001", "ignota"),
+        ("2026-02-01", "100001", "municipium"),   # latest wins
+        ("2026-02-01", "100002", "joomla"),       # no connector
+        ("2026-02-01", "100003", "openweb"),
+    ])
+    assert bootstrap.mappa_censimento(db) == {"100001": "municipium", "100003": "openweb"}
+
+
+def test_mappa_censimento_senza_db_non_aggiunge_nulla(tmp_path: Path) -> None:
+    assert bootstrap.mappa_censimento(tmp_path / "assente.db") == {}
+
+
+def test_seleziona_include_i_comuni_noti_solo_dal_censimento(tmp_path: Path) -> None:
+    cat = tmp_path / "catalog"
+    _catalog(cat, "990001", "wordpress_agid")
+    censimento = {"990001": "wp_design_comuni", "200001": "municipium", "200002": "comweb"}
+    scelti = bootstrap.seleziona(cat, {"990001"}, {"200002"}, censimento)
+    # Catalog platform wins where both exist; initialised comuni stay out.
+    assert scelti == [("200001", "municipium"), ("990001", "wordpress_agid")]

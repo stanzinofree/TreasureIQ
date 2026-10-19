@@ -259,6 +259,15 @@ def test_prossimi_da_inizializzare_salta_store_attese_e_backoff(monkeypatch, tmp
     config = sweep_worker.WorkerConfig(db=tmp_path / "storico.db", batch_size=1)
     assert sweep_worker.prossimi_da_inizializzare(config) == ["d"]
 
+    monkeypatch.setattr(
+        sweep_worker.bootstrap_sel, "mappa_censimento",
+        lambda db: {**dict.fromkeys("abce", "comweb"), "d": "magnolia"},
+    )
+    in_pausa = sweep_worker.WorkerConfig(
+        db=tmp_path / "storico.db", batch_size=1, piattaforme_in_pausa=frozenset({"magnolia"})
+    )
+    assert sweep_worker.prossimi_da_inizializzare(in_pausa) == ["e"]
+
 
 def test_run_con_bootstrap_registra_esiti_e_conserva_refresh(monkeypatch, tmp_path):
     from treasureiq import bootstrap_esiti

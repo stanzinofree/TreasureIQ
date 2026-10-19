@@ -150,6 +150,9 @@ class WorkerConfig:
     #: Refresh mode only: before each refresh batch, read up to ``batch_size``
     #: census comuni that have no connettore record yet (continuous bootstrap).
     bootstrap: bool = False
+    #: Census platforms the bootstrap skips for now (e.g. a hosting that blocks
+    #: our IP); their comuni stay "da leggere" until removed from the list.
+    piattaforme_in_pausa: frozenset[str] = frozenset()
 
 
 def config_from_env(
@@ -209,6 +212,11 @@ def config_from_env(
             0.0, float(os.environ.get("TREASUREIQ_SWEEP_PACE_S", "0.5"))
         ),
         bootstrap=os.environ.get("TREASUREIQ_SWEEP_BOOTSTRAP", "0") == "1",
+        piattaforme_in_pausa=frozenset(
+            p.strip()
+            for p in os.environ.get("TREASUREIQ_SWEEP_BOOTSTRAP_PAUSA", "").split(",")
+            if p.strip()
+        ),
     )
 
 
@@ -472,7 +480,10 @@ def prossimi_da_inizializzare(config: WorkerConfig) -> list[str]:
         _connettore_inizializzati(),
         bootstrap_sel.mappa_censimento(config.db),
     )
-    return [codice for codice, _ in candidati if codice not in esclusi][: config.batch_size]
+    return [
+        codice for codice, piattaforma in candidati
+        if codice not in esclusi and piattaforma not in config.piattaforme_in_pausa
+    ][: config.batch_size]
 
 
 def run_bootstrap(config: WorkerConfig, comuni: list[str]) -> None:

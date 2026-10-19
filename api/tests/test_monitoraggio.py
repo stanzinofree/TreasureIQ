@@ -371,3 +371,40 @@ def test_aderenza_verdetto_solo_su_modello_intero_e_riconosciuti_veri(tmp_path) 
     assert (comweb.con_copertura, comweb.su_modello_intero, comweb.su_schema_esposto) == (2, 1, 1)
     assert (comweb.con_verdetto, comweb.verdetto_medio) == (1, 0.8)
     assert out.con_verdetto == 1
+
+
+def test_base_un_bucket_per_comune_e_problemi_dal_registro(tmp_path) -> None:
+    from treasureiq import bootstrap_esiti
+    from treasureiq import monitoraggio as mod
+    from treasureiq.storico import apri
+
+    live = tmp_path / "live"
+    (live / "connettore").mkdir(parents=True)
+    (live / "connettore" / "000001.json").write_text(json.dumps({"uffici": [{}, {}]}), "utf-8")
+    (live / "connettore" / "000002.json").write_text(json.dumps({"uffici": []}), "utf-8")
+    bootstrap_esiti.registra(live, "000003", "vuoto", "000003 C — vuoto")
+    bootstrap_esiti.registra(live, "000004", "rete_non_raggiungibile", "000004 D — rete")
+
+    db = tmp_path / "storico.db"
+    with apri(db, scrittura=True) as conn:
+        for codice, piattaforma in [
+            ("000001", "comweb"), ("000002", "comweb"), ("000003", "comweb"),
+            ("000004", "comweb"), ("000005", "comweb"), ("000006", "joomla"),
+            ("000007", "ignota"), ("000008", "non_misurata"),
+        ]:
+            conn.execute(
+                "INSERT INTO portale_snapshot (rilevato_il, codice_istat, nome, indirizzabilita, "
+                "recuperabilita, piattaforma) VALUES (?,?,?,?,?,?)",
+                ("2026-08-20T00:00:00", codice, codice, "api_uffici", "ok", piattaforma),
+            )
+        conn.commit()
+
+    out = mod._base(live, db)
+
+    assert out.universo == 8
+    assert (out.con_uffici, out.senza_uffici, out.vuoti, out.rete_non_raggiungibile) == (1, 1, 1, 1)
+    assert (out.da_leggere, out.senza_connettore) == (1, 1)
+    assert (out.piattaforma_ignota, out.non_misurati, out.letti_ultime_24h) == (1, 1, 2)
+    comweb = out.per_piattaforma[0]
+    assert (comweb.piattaforma, comweb.connettore, comweb.comuni, comweb.errori) == ("comweb", True, 5, 1)
+    assert [p.codice_istat for p in out.ultimi_problemi] == ["000004", "000003"]

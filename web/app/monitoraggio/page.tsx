@@ -18,12 +18,15 @@
  *   - Aderenza al modello AgID — platform recognition fused with the coverage
  *     the census measured. A verdict only on a whole-model measurement of the
  *     same family; exposed-schema coverage is shown but never a verdict.
+ *   - Base — the offices funnel over the whole census: one bucket per comune,
+ *     the continuous bootstrap's last batch and the comuni waiting for a retry.
  *   - Sistemi — component health from real signals only; the refresh worker's
  *     state comes from its own sidecar, never from how fresh the seed is.
  */
 
 import {
   monitoraggio,
+  type BaseImbuto,
   type MonitoraggioOut,
   type RefreshOperativo,
   type SystemComponent,
@@ -80,6 +83,170 @@ function ComponentRow({ component }: { component: SystemComponent }) {
   );
 }
 
+const ESITO_LABEL: Record<string, string> = {
+  errore: "errore",
+  rete_non_raggiungibile: "IP bloccato / irraggiungibile",
+  vuoto: "letto, nessun ufficio",
+};
+
+/** Funnel buckets in reading order; `tono` picks the segment colour in CSS. */
+function segmentiBase(base: BaseImbuto) {
+  return [
+    { chiave: "con_uffici", label: "con uffici", valore: base.con_uffici, tono: "ok" },
+    { chiave: "senza_uffici", label: "record senza uffici", valore: base.senza_uffici, tono: "parziale" },
+    { chiave: "vuoti", label: "letti, vuoti", valore: base.vuoti, tono: "vuoto" },
+    {
+      chiave: "errori",
+      label: "errori e IP bloccati",
+      valore: base.errori + base.rete_non_raggiungibile,
+      tono: "errore",
+    },
+    { chiave: "da_leggere", label: "da leggere", valore: base.da_leggere, tono: "coda" },
+    { chiave: "senza_connettore", label: "senza connettore", valore: base.senza_connettore, tono: "fuori" },
+    {
+      chiave: "ignoti",
+      label: "non misurati o piattaforma ignota",
+      valore: base.non_misurati + base.piattaforma_ignota,
+      tono: "ignoto",
+    },
+  ];
+}
+
+function pct(parte: number, totale: number): string {
+  return totale ? `${((parte / totale) * 100).toLocaleString("it-IT", { maximumFractionDigits: 1 })}%` : "—";
+}
+
+function SezioneBase({ base }: { base: BaseImbuto }) {
+  const segmenti = segmentiBase(base);
+  const boot = base.ultimo_bootstrap;
+  return (
+    <section className="systems__group">
+      <div className="systems__group-head">
+        <h2>Base: uffici dei comuni</h2>
+        <span className="systems__group-note">
+          un comune, una casella: l&apos;avanzamento del bootstrap continuo
+        </span>
+      </div>
+      <div className="panel">
+        <div className="tessere">
+          <Tessera value={pct(base.con_uffici, base.universo)} label="comuni con uffici" />
+          <Tessera value={n(base.da_leggere)} label="ancora da leggere" />
+          <Tessera value={n(base.letti_ultime_24h)} label="letti nelle ultime 24 ore" />
+          <Tessera value={n(base.errori + base.rete_non_raggiungibile)} label="in attesa di ritentativo" />
+        </div>
+
+        <div className="imbuto-base" aria-hidden="true">
+          {segmenti.map((s) =>
+            s.valore > 0 ? (
+              <span
+                key={s.chiave}
+                className="imbuto-base__seg"
+                data-tono={s.tono}
+                style={{ flexGrow: s.valore }}
+                title={`${s.label}: ${n(s.valore)}`}
+              />
+            ) : null,
+          )}
+        </div>
+        <ul className="imbuto-base__legenda">
+          {segmenti.map((s) => (
+            <li key={s.chiave} data-tono={s.tono}>
+              <span className="imbuto-base__chip" aria-hidden="true" />
+              <b>{n(s.valore)}</b> {s.label} <span>({pct(s.valore, base.universo)})</span>
+            </li>
+          ))}
+        </ul>
+        <p className="status-row__meta">
+          Su {n(base.universo)} comuni del censimento.{" "}
+          {boot ? (
+            <>
+              Ultimo lotto di bootstrap: {n(Number(boot.comuni))} comuni in{" "}
+              {Number(boot.durata_s).toLocaleString("it-IT")}s · ok {n(Number(boot.ok))}, vuoti{" "}
+              {n(Number(boot.vuoto))}, errori {n(Number(boot.errore))}, irraggiungibili{" "}
+              {n(Number(boot.rete_non_raggiungibile))} · {formatDate(String(boot.avviato_il))}.
+            </>
+          ) : (
+            "Il worker non ha ancora registrato un lotto di bootstrap."
+          )}
+        </p>
+
+        <div className="tabella-scorrevole" tabIndex={0} role="region" aria-label="Tabella Base per piattaforma, scorrevole">
+          <table>
+            <caption>
+              Comuni per piattaforma del censimento. «Da leggere» sono i comuni
+              che il worker leggerà nei prossimi cicli; le piattaforme senza
+              connettore aspettano un lettore dedicato.
+            </caption>
+            <thead>
+              <tr>
+                <th>Piattaforma</th>
+                <th>Comuni</th>
+                <th>Con uffici</th>
+                <th>Resa</th>
+                <th>Vuoti</th>
+                <th>Errori</th>
+                <th>Da leggere</th>
+              </tr>
+            </thead>
+            <tbody>
+              {base.per_piattaforma.map((p) => {
+                const letti = p.con_uffici + p.senza_uffici + p.vuoti;
+                return (
+                  <tr key={p.piattaforma}>
+                    <th scope="row">
+                      {p.piattaforma}
+                      {!p.connettore && <span className="imbuto-base__tag"> senza connettore</span>}
+                    </th>
+                    <td className="data-table__num">{n(p.comuni)}</td>
+                    <td className="data-table__num">{n(p.con_uffici)}</td>
+                    <td className="data-table__num">{p.connettore ? pct(p.con_uffici, letti) : "—"}</td>
+                    <td className="data-table__num">{n(p.vuoti)}</td>
+                    <td className="data-table__num">{n(p.errori)}</td>
+                    <td className="data-table__num">{n(p.da_leggere)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        {base.ultimi_problemi.length > 0 && (
+          <div className="tabella-scorrevole" tabIndex={0} role="region" aria-label="Tabella ultimi problemi Base, scorrevole">
+            <table>
+              <caption>
+                Ultimi comuni senza uffici dopo la lettura: il worker li ritenta
+                da solo alla data indicata.
+              </caption>
+              <thead>
+                <tr>
+                  <th>Comune</th>
+                  <th>Esito</th>
+                  <th>Quando</th>
+                  <th>Ritenta</th>
+                  <th>Tentativi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {base.ultimi_problemi.map((p) => (
+                  <tr key={p.codice_istat} data-esito={p.esito}>
+                    <th scope="row" title={p.nota}>
+                      {p.nota.split(" — ")[0] || p.codice_istat}
+                    </th>
+                    <td>{ESITO_LABEL[p.esito] ?? p.esito}</td>
+                    <td>{formatDate(p.il)}</td>
+                    <td>{formatDate(p.prossimo_il)}</td>
+                    <td className="data-table__num">{n(p.tentativi)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 function Tessera({ value, label }: { value: string; label: string }) {
   return (
     <div className="tessera">
@@ -109,7 +276,7 @@ export default async function Monitoraggio() {
     );
   }
 
-  const { demo, copertura, refresh, aderenza, at_canary, sistemi } = report;
+  const { demo, copertura, refresh, aderenza, at_canary, base, sistemi } = report;
   const worker = WORKER_LABEL[refresh.worker_stato];
   const batch = refresh.ultimo_batch;
 
@@ -129,6 +296,9 @@ export default async function Monitoraggio() {
       </section>
 
       <div className="systems">
+        {/* 0 — Base funnel (absent from an older API or without a census) */}
+        {base && <SezioneBase base={base} />}
+
         {/* 1 — Demo curata */}
         <section className="systems__group">
           <div className="systems__group-head">

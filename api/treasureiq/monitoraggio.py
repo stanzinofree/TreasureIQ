@@ -140,12 +140,52 @@ class AtCanaryOut(BaseModel):
     aggiornato_il: str | None
 
 
+class BasePiattaforma(BaseModel):
+    piattaforma: str
+    connettore: bool  # a Base reader exists for this census platform
+    comuni: int
+    con_uffici: int
+    senza_uffici: int  # read, record written, no offices in it
+    vuoti: int
+    errori: int  # errore + rete non raggiungibile
+    da_leggere: int
+
+
+class BaseErrore(BaseModel):
+    codice_istat: str
+    esito: str  # "errore" | "rete_non_raggiungibile" | "vuoto"
+    nota: str
+    il: str | None
+    prossimo_il: str | None
+    tentativi: int
+
+
+class BaseOut(BaseModel):
+    """Base (offices) funnel over the whole census, one bucket per comune."""
+
+    universo: int
+    con_uffici: int
+    senza_uffici: int
+    vuoti: int
+    rete_non_raggiungibile: int
+    errori: int
+    da_leggere: int
+    senza_connettore: int  # known platform, no Base reader yet
+    non_misurati: int  # census could not measure the site
+    piattaforma_ignota: int
+    letti_ultime_24h: int
+    ultimo_bootstrap: dict | None
+    per_piattaforma: list[BasePiattaforma]
+    ultimi_problemi: list[BaseErrore]
+
+
 class MonitoraggioOut(BaseModel):
     demo: DemoCurataOut
     copertura: CoperturaOut
     refresh: RefreshOperativoOut
     aderenza: AderenzaOut
     at_canary: AtCanaryOut | None = None
+    base: BaseOut | None = None
     sistemi: list[ComponenteOut]
 
 
@@ -515,6 +555,129 @@ def _sistemi(
     ]
 
 
+def _uffici_per_record(live_dir: Path) -> dict[str, int]:
+    """Office count of every connettore record (0 when the record has none)."""
+    conn_dir = live_dir / "connettore"
+    if not conn_dir.exists():
+        return {}
+    # Records are written by atomic rename, which bumps the directory mtime:
+    # it is a sound cache key for "nothing changed since the last parse".
+    return dict(_uffici_cache(str(conn_dir), conn_dir.stat().st_mtime_ns))
+
+
+@lru_cache(maxsize=1)
+def _uffici_cache(conn_dir_str: str, _mtime_ns: int) -> tuple[tuple[str, int], ...]:
+    conn_dir = Path(conn_dir_str)
+    conteggi: dict[str, int] = {}
+    for percorso in conn_dir.glob("*.json"):
+        try:
+            uffici = json.loads(percorso.read_text("utf-8")).get("uffici")
+        except (OSError, json.JSONDecodeError, AttributeError):
+            uffici = None
+        conteggi[percorso.stem] = len(uffici) if isinstance(uffici, list) else 0
+    return tuple(conteggi.items())
+
+
+def _bucket_base(
+    codice: str, plat: str, uffici: dict[str, int], esiti: dict[str, dict]
+) -> str:
+    """The one funnel bucket a comune falls in; a record always wins."""
+    from treasureiq.bootstrap import PIATTAFORME_REFRESH
+
+    if codice in uffici:
+        return "con_uffici" if uffici[codice] else "senza_uffici"
+    esito = (esiti.get(codice) or {}).get("esito")
+    if esito in {"vuoto", "rete_non_raggiungibile", "errore"}:
+        return {"vuoto": "vuoti", "errore": "errori"}.get(esito, esito)
+    if plat in PIATTAFORME_REFRESH:
+        return "da_leggere"
+    if plat == "ignota":
+        return "piattaforma_ignota"
+    if plat in {"non_misurata", ""}:
+        return "non_misurati"
+    return "senza_connettore"
+
+
+def _base(live_dir: Path, storico_db: Path | None) -> BaseOut | None:
+    from treasureiq import bootstrap_esiti
+    from treasureiq.bootstrap import PIATTAFORME_REFRESH
+
+    if storico_db is None or not storico_db.exists():
+        return None
+    from treasureiq.storico import apri
+
+    try:
+        with apri(storico_db) as conn:
+            censimento = dict(conn.execute(
+                "SELECT p.codice_istat, COALESCE(p.piattaforma, '') FROM portale_snapshot p "
+                "JOIN (SELECT codice_istat, MAX(rilevato_il) AS r FROM portale_snapshot "
+                "GROUP BY codice_istat) u ON p.codice_istat = u.codice_istat AND p.rilevato_il = u.r"
+            ).fetchall())
+    except Exception:  # noqa: BLE001 — a broken census must not take the dashboard down
+        logger.warning("monitoraggio: storico.db illeggibile per l'imbuto Base")
+        return None
+    uffici = _uffici_per_record(live_dir)
+    esiti = bootstrap_esiti.carica(live_dir)
+
+    totali: Counter[str] = Counter()
+    per_plat: dict[str, Counter[str]] = {}
+    for codice, plat in censimento.items():
+        bucket = _bucket_base(codice, plat, uffici, esiti)
+        totali[bucket] += 1
+        per_plat.setdefault(plat or "non_misurata", Counter())[bucket] += 1
+
+    ora = datetime.now(timezone.utc)
+    letti_24h = sum(
+        1 for voce in esiti.values()
+        if (il := _parse_iso(voce.get("il"))) and (ora - il).total_seconds() <= 86400
+    )
+    problemi = sorted(
+        ((c, v) for c, v in esiti.items() if v.get("esito") != "ok" and c not in uffici),
+        key=lambda cv: cv[1].get("il") or "", reverse=True,
+    )[:50]
+    sidecar_path = live_dir / "_worker_status.json"
+    try:
+        ultimo_bootstrap = json.loads(sidecar_path.read_text("utf-8")).get("ultimo_bootstrap")
+    except (OSError, json.JSONDecodeError, AttributeError):
+        ultimo_bootstrap = None
+
+    return BaseOut(
+        universo=len(censimento),
+        **{k: totali[k] for k in (
+            "con_uffici", "senza_uffici", "vuoti", "rete_non_raggiungibile", "errori",
+            "da_leggere", "senza_connettore",
+        )},
+        non_misurati=totali["non_misurati"],
+        piattaforma_ignota=totali["piattaforma_ignota"],
+        letti_ultime_24h=letti_24h,
+        ultimo_bootstrap=ultimo_bootstrap if isinstance(ultimo_bootstrap, dict) else None,
+        per_piattaforma=sorted(
+            (
+                BasePiattaforma(
+                    piattaforma=plat,
+                    connettore=plat in PIATTAFORME_REFRESH,
+                    comuni=sum(c.values()),
+                    con_uffici=c["con_uffici"],
+                    senza_uffici=c["senza_uffici"],
+                    vuoti=c["vuoti"],
+                    errori=c["errori"] + c["rete_non_raggiungibile"],
+                    da_leggere=c["da_leggere"],
+                )
+                for plat, c in per_plat.items()
+            ),
+            key=lambda p: (not p.connettore, -p.comuni),
+        ),
+        ultimi_problemi=[
+            BaseErrore(
+                codice_istat=c, esito=str(v.get("esito")), nota=str(v.get("nota") or ""),
+                il=v.get("il"), prossimo_il=v.get("prossimo_il"),
+                tentativi=int(v.get("tentativi") or 0),
+            )
+            for c, v in problemi
+        ],
+    )
+
+
 def build_monitoraggio(
     *,
     catalog_dir: Path,
@@ -534,5 +697,6 @@ def build_monitoraggio(
         refresh=refresh,
         aderenza=_aderenza(live_dir, storico_db),
         at_canary=_at_canary(live_dir),
+        base=_base(live_dir, storico_db),
         sistemi=_sistemi(demo, copertura, refresh),
     )
